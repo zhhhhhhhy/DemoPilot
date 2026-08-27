@@ -1,172 +1,338 @@
+<div align="center">
+
 # DemoPilot
 
-DemoPilot 是一个面向售前团队的 **Agent Team Demo 制造器**：销售输入客户、场景、受众与必须展示的能力，团队经过需求增强、Manager 拆解、洞察、并行产品/体验设计/评审标准准备、Contract Agent 冻结共享交互协议、构建、产物验证和 Reviewer 独立评审，最后交付可交互页面、方案规格、销售讲解词、评审报告与 ZIP 包。
+### 把一段客户需求，变成一套可以讲、可以点、可以交付的销售 Demo
 
-## 已实现的闭环
+由 9 个协作节点完成需求增强、产品设计、交互契约、代码生成、浏览器验证与独立评审。
 
-1. 销售在 Vue 控制台填写客户 Brief 或套用行业模板。
-2. FastAPI 创建任务并持久化每个 Agent 的状态和结果。
-3. Manager 设定目标、任务依赖、验收条件与调用预算。
-4. 产品和体验 Agent 并行工作，Builder 等待二者完成后再构建。
-5. Builder 每一版完整文件都会先经过确定性预检，只有文件范围、安全、契约选择器、控件类型、断言文本和基础数据契约通过后，Runner 才允许落盘并启动 Chromium。
-6. 每次工具调用在真实成功或失败后生成 receipt，记录路径、耗时、结果和 SHA-256，不接受模型自报完成。
-7. Reviewer 在构建前把客户需求转成固定权重的评审量表；本地产物验证器与无头 Chromium 随后检查最终文件、按钮、导航、控制台错误并保存截图证据。
-8. Reviewer 只读取需求、最终项目和验证证据，不修改文件、不接受 Builder 自报完成；它逐项记录需求覆盖、真实交互、模拟能力、问题证据、根因、修复要求与复验方法，再由 Manager 决定通过或返工。
-9. 可选人工审批会在写文件前暂停；任务支持取消、检查点恢复、服务重启恢复和 SSE 实时事件流。
-10. 返工受最大轮次与最大模型调用数限制，避免失控循环。
-11. 销售在控制台预览并下载完整交付包，最终由人工复核后对外使用。
-12. 自动评测中心可用固定跨行业用例批量运行同一套 Agent Team，汇总成功率、质量分、浏览器通过率、功能覆盖率和调用成本，并和同 Provider 的上一版本比较。
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Vue](https://img.shields.io/badge/Vue-3-42B883?logo=vuedotjs&logoColor=white)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![uv](https://img.shields.io/badge/managed%20with-uv-DE5FE9)](https://docs.astral.sh/uv/)
+[![DeepSeek](https://img.shields.io/badge/Provider-DeepSeek-4D6BFE)](https://www.deepseek.com/)
 
-## 技术栈
+[快速开始](#快速开始) · [核心能力](#核心能力) · [运行架构](#运行架构) · [评测证据](#评测证据) · [API](#api) · [项目边界](#项目边界)
 
-- 前端：Vue 3、TypeScript、Vite，苹果风格响应式界面
-- 后端：Python 3.11+、FastAPI、Pydantic
-- Python 包管理：uv
-- 内核：Manager 驱动的 Pipeline、并行阶段、任务沙箱、生命周期 Hook、审批、调用凭证、检查点恢复、SSE、Chromium 质量门禁与受限返工
-- Provider：默认 Mock（离线、确定性）；可选 DeepSeek、AIHubMix、ZJU 或 Anthropic 官方 `claude-agent-sdk-python`
-- 存储：本地 JSON 任务记录与文件制品，后续可替换 PostgreSQL/S3
+</div>
 
-## 快速启动
+## 为什么是 DemoPilot
 
-首次安装：
+普通的一次性代码生成容易把“页面看起来完成了”误当成“需求真的实现了”。DemoPilot 把生成过程改造成一条可验证的 Agent Team 流水线：Builder 负责构建，但不能自己定义验收标准，也不能用自报结果证明完成；Contract Agent、Runner 与 Reviewer 分别冻结交互协议、执行真实浏览器验证、给出独立结论。
+
+| 一次性生成 | DemoPilot |
+| --- | --- |
+| Prompt 直接变代码 | 先增强 Brief，再拆解、设计、冻结契约后构建 |
+| 生成者同时解释自己是否完成 | Builder、Runner、Reviewer 职责与权限隔离 |
+| 测试选择器可能跟着页面一起“编出来” | Harness 分配并冻结 `#contract-*` 选择器与协议 SHA-256 |
+| 失败后整段重做 | 精确记录证据、根因、修复指令与复验方法，定向返工 |
+| 成功依赖一次演示 | 固定用例、版本对比、A/B 晋级门持续回归 |
+| 产物来源不清楚 | 每次真实工具调用记录路径、耗时、结果与 SHA-256 |
+
+> [!IMPORTANT]
+> DemoPilot 生成的是**纯展示型售前 Demo**。业务数据为本地虚构样例，不连接 ERP、WMS、CRM、客户数据库或生产环境，也不会自动发布或发送给客户。
+
+## 核心能力
+
+- **9 节点 Agent Team**：Brief、Manager、Discovery、Product、Experience、Contract、Builder、Runner、Reviewer 分工协作。
+- **共享交互契约**：每项 must-have 被转换为稳定操作路径、选择器与可见断言，返工期间不得修改验收标准。
+- **Builder 确定性预检**：每一版代码在落盘前检查文件范围、安全、HTML 结构、契约选择器、控件类型、断言文本和数据契约。
+- **真实浏览器验证**：Playwright + Chromium 执行页面加载、导航、按钮点击、状态变化与控制台错误检查，并保存截图证据。
+- **独立 Reviewer**：只读取需求、最终项目和运行证据，不修改文件，也不接受 Builder 自报完成。
+- **受控执行 Harness**：任务级沙箱、生命周期 Hook、审批、取消/恢复、最大调用数、最大返工轮次和 SSE 实时事件流。
+- **自动评测中心**：20 条固定跨行业用例，跟踪成功率、质量分、浏览器通过率、功能覆盖率、调用数和耗时。
+- **Skill A/B 晋级**：六个小型工程 Skill 只有通过同 Provider、同用例、同停止条件的 A/B 门槛后，才进入正式 Harness。
+
+## 运行架构
+
+```mermaid
+flowchart LR
+    A[销售 Brief] --> B[Brief Agent<br/>需求增强]
+    B --> C[Manager<br/>计划 / 预算 / 依赖]
+    C --> D[Discovery<br/>问题与价值假设]
+    D --> E1[Product<br/>功能与演示主线]
+    D --> E2[Experience<br/>Apple 风格体验]
+    D --> E3[Reviewer<br/>预先冻结评审量表]
+    E1 --> F[Contract Agent<br/>共享交互协议]
+    E2 --> F
+    E3 --> F
+    F --> G[Builder<br/>HTML / CSS / JS]
+    G --> H{确定性预检}
+    H -- 失败 --> G
+    H -- 通过 --> I[Runner<br/>沙箱落盘 + Chromium]
+    I --> J[Reviewer<br/>独立评审]
+    J -- 要求返工 --> G
+    J -- 通过 --> K[Demo + 规格 + 讲解词<br/>QA 报告 + ZIP]
+```
+
+### 关键设计
+
+1. **验收标准先于代码**：Product、Experience 与 Reviewer 完成后，Contract Agent 生成业务操作路径，Harness 再分配稳定选择器并冻结协议。
+2. **客观门禁先于主观评审**：文件缺失、危险代码、契约违约等问题由预检硬阻断；视觉审美、文案质量和销售说服力由 Reviewer 与销售人工判断。
+3. **证据先于结论**：只有文件真实落盘、校验和生成、浏览器交互完成后才创建 receipt；模型文本不能替代运行证据。
+4. **失败可恢复**：运行状态、Agent 输出、审批和评测批次持久化到本地 JSON；任务可取消，并从检查点恢复。
+
+## 快速开始
+
+### 前置条件
+
+- Python 3.11+
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
+- Node.js 20+ 与 npm
+
+### 1. 获取项目
 
 ```powershell
-cd D:\作品集\DemoPilot\backend
+git clone https://github.com/zhhhhhhhy/DemoPolit.git
+cd DemoPolit
+Copy-Item .env.example .env
+```
+
+### 2. 安装依赖
+
+```powershell
+cd backend
 uv sync --extra dev
 uv run playwright install chromium
 
-cd D:\作品集\DemoPilot\frontend
+cd ../frontend
 npm.cmd install
+cd ..
 ```
 
-分别启动：
+### 3. 配置 Provider
+
+DeepSeek 是真实开发的默认 Provider。把下面配置加入项目根目录 `.env`：
+
+```dotenv
+DEEPSEEK_API_KEY=your_deepseek_api_key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-v4-flash
+```
+
+没有 API Key 也可以启动项目，并在界面中选择 **Mock** 完成确定性的离线全流程回归。Mock 会明确标记为 `controlled_template_fallback`，不会冒充真实模型生成。
+
+可选 Provider 还支持同样格式的 `AIHUBMIX_*` 与 `ZJU_*` 配置。Claude 默认禁用；如需启用，只使用 Anthropic 官方 SDK，详见[可选：Claude 官方 SDK](#可选claude-官方-sdk)。
+
+### 4. 启动
+
+```powershell
+.\start.ps1
+```
+
+打开：
+
+- Web 控制台：<http://127.0.0.1:5173>
+- API 健康检查：<http://127.0.0.1:8091/api/health>
+- OpenAPI 文档：<http://127.0.0.1:8091/docs>
+
+也可以分别启动两个服务：
 
 ```powershell
 # 终端 1
-cd D:\作品集\DemoPilot\backend
+cd backend
 uv run uvicorn --env-file ../.env --app-dir src demopilot.main:app --reload --host 127.0.0.1 --port 8091
 
 # 终端 2
-cd D:\作品集\DemoPilot\frontend
+cd frontend
 npm.cmd run dev
 ```
 
-打开 <http://127.0.0.1:5173>。也可以在完成安装后直接运行 `start.ps1`。
+## 使用方式
 
-## 接入官方 Claude Agent SDK
+1. 填写客户名称、行业、演示对象、客户场景和必须出现的能力。
+2. 选择 DeepSeek 进行真实生成，或选择 Mock 进行离线回归。
+3. 需要时开启“生成文件前人工批准”；团队会在首次写入产物前暂停。
+4. 在 Agent Team 时间线中查看每个节点、工具凭证、预检失败和返工轨迹。
+5. 预览最终 Demo，检查独立 Reviewer 报告，下载完整 ZIP 交付包。
 
-本项目不包含、也不依赖任何泄露或未经授权的 Claude Code 源码。真实 Claude 模式使用 Anthropic 官方 MIT 许可 Python SDK，并将模型执行能力限制为结构化规划：默认禁用 Bash、Read、Write、Edit 与网络工具。
+最终交付包包含：
+
+```text
+demo/
+├── index.html
+├── styles.css
+└── app.js
+demo-spec.md
+sales-script.md
+qa-report.md
+manifest.json
+```
+
+## 评测证据
+
+### 工程验证
+
+当前仓库快照已完成以下本地验证：
+
+| 检查项 | 结果 |
+| --- | --- |
+| Backend Ruff | 通过 |
+| Backend pytest | 35 tests passed |
+| Frontend ESLint | 通过 |
+| Frontend Vitest | 3 tests passed |
+| Frontend production build | 通过 |
+
+复现命令：
 
 ```powershell
-cd D:\作品集\DemoPilot\backend
+cd backend
+uv run ruff check .
+uv run pytest --basetemp=.pytest-tmp
+
+cd ../frontend
+npm.cmd run lint
+npm.cmd run test:run
+npm.cmd run build
+```
+
+### 真实 DeepSeek 复杂任务
+
+运行 `a50e398debcb` 使用真实 DeepSeek 完成复杂零售 Demo：前三个 Builder 版本因缺失冻结契约选择器被预检提前阻断，第 3 次修订进入 Chromium 与 Reviewer 阶段，最终浏览器通过、Reviewer 100 分、质量门通过，共 12 次模型调用、3 次修订。
+
+这证明了“真实 Provider → Agent Team → 预检 → 产物落盘 → Chromium → Reviewer → 返工”的链路可运行；它不代表模型在所有行业和需求上都能达到相同质量。
+
+### Builder 预检探索性 A/B
+
+| 指标 | 关闭预检 | 开启预检 | 变化 |
+| --- | ---: | ---: | ---: |
+| 最终成功率 | 0% | 33.3% | +33.3pp |
+| 平均质量分 | 19.00 | 32.42 | +13.42 |
+| 平均模型调用 | 17.00 | 12.67 | -4.33 |
+| 平均耗时 | 285.81s | 181.50s | -104.31s |
+| 记录的功能覆盖率 | 100% | 33.3% | -66.7pp |
+
+这是 3 条用例的小样本探索，不是统计证明。开启预检的两个失败用例在产物生成前就被阻断，因此现有评测器没有最终产物可计算覆盖率。当前结论仅限于：预检减少了无效浏览器/Reviewer 工作，并给出初步的最终质量正向信号；尚未证明首轮质量稳定提升。
+
+完整实验记录：
+
+- [Builder 确定性预检报告](BUILDER_PREFLIGHT_REPORT.md)
+- [共享交互契约报告](SHARED_CONTRACT_REPORT.md)
+- [工程 Skill A/B 报告](SKILL_AB_REPORT.md)
+
+## 自动评测中心
+
+评测中心内置 20 条固定用例，覆盖运营、销售、客服、制造、零售、金融、人力、物流、教育、医疗、能源、物业、法务、营销、采购、安全、项目管理、知识库、电商和经营驾驶舱。
+
+- **Mock**：支持 5 / 10 / 20 条离线回归。
+- **真实 Provider**：DeepSeek、AIHubMix、ZJU 一次最多 3 条并强制串行，限制误触发成本。
+- **可追溯结果**：保存 Demo 任务 ID、输入摘要、来源模式、验证结果、浏览器证据、调用数、返工次数和耗时。
+- **版本比较**：对比相同 Provider 的上一版本，并输出 Markdown 报告。
+- **Skill 晋级**：`baseline`、`candidate`、`approved` 三种配置支持首轮质量 A/B；未通过门槛的候选不会进入正式 Harness。
+
+## API
+
+### Demo 运行
+
+| Method | Endpoint | 说明 |
+| --- | --- | --- |
+| `POST` | `/api/runs` | 创建 Demo 任务 |
+| `GET` | `/api/runs/{id}` | 获取完整任务快照 |
+| `GET` | `/api/runs/{id}/events` | SSE 推送进度、审批和工具凭证 |
+| `POST` | `/api/runs/{id}/approvals/{approval_id}` | 提交 `approve` / `decline` |
+| `POST` | `/api/runs/{id}/cancel` | 取消任务并保留已有证据 |
+| `POST` | `/api/runs/{id}/resume` | 从持久化检查点恢复 |
+| `GET` | `/api/runs/{id}/files/{path}` | 读取或下载交付文件 |
+
+### 自动评测
+
+| Method | Endpoint | 说明 |
+| --- | --- | --- |
+| `GET` | `/api/evaluation-cases` | 获取固定评测集 |
+| `POST` | `/api/evaluations` | 创建批量评测 |
+| `GET` | `/api/evaluations` | 获取评测历史 |
+| `GET` | `/api/evaluations/{id}` | 获取批次明细 |
+| `GET` | `/api/evaluations/{id}/events` | SSE 推送批次进度 |
+| `POST` | `/api/evaluations/{id}/cancel` | 取消批次 |
+| `GET` | `/api/evaluations/{id}/report` | 下载 Markdown 报告 |
+
+## 项目结构
+
+```text
+DemoPilot/
+├── backend/
+│   ├── src/demopilot/
+│   │   ├── providers/          # DeepSeek / Mock / 可选 Provider
+│   │   ├── skills/             # 六个小型工程 Skill
+│   │   ├── orchestrator.py     # Agent Team 编排与返工循环
+│   │   ├── interaction_contract.py
+│   │   ├── builder_preflight.py
+│   │   ├── browser_qa.py
+│   │   ├── reviewer.py
+│   │   └── evaluator.py
+│   ├── tests/
+│   └── pyproject.toml
+├── frontend/
+│   ├── src/components/
+│   └── package.json
+├── scripts/                    # Skill 校验与 A/B 工具
+├── .env.example
+└── start.ps1
+```
+
+## 配置
+
+| 环境变量 | 默认值 | 用途 |
+| --- | --- | --- |
+| `DEMOPILOT_MAX_AGENT_CALLS` | `18` | 单任务最大模型调用数 |
+| `DEMOPILOT_MAX_REVISIONS` | `4` | 最大返工轮次 |
+| `DEMOPILOT_MAX_PARALLEL_AGENTS` | `2` | 最大并行 Agent 数 |
+| `DEMOPILOT_ENABLE_CLAUDE` | `false` | 是否启用 Claude 官方 SDK |
+| `DEEPSEEK_API_KEY` | 空 | DeepSeek API 密钥 |
+| `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | DeepSeek API 地址 |
+| `DEEPSEEK_MODEL` | `deepseek-v4-flash` | DeepSeek 模型名 |
+| `VITE_API_BASE` | 空 | 前端 API 地址；开发代理模式保持为空 |
+
+> [!CAUTION]
+> 不要提交 `.env`、API Key、`.data` 运行记录或客户信息。项目已通过 `.gitignore` 排除这些内容，但提交前仍应人工检查 `git status`。
+
+## 可选：Claude 官方 SDK
+
+本项目不包含、也不依赖任何泄露或未经授权的 Claude Code 源码。Claude 模式只使用 Anthropic 官方 Python SDK，并将执行能力限制为结构化规划；默认禁用 Bash、Read、Write、Edit 与网络工具。
+
+```powershell
+cd backend
 uv sync --extra dev --extra claude
 $env:DEMOPILOT_ENABLE_CLAUDE = "true"
 uv run uvicorn --env-file ../.env --app-dir src demopilot.main:app --host 127.0.0.1 --port 8091
 ```
 
-还需要有效的 Claude Code/Anthropic 登录。未配置时继续使用 Mock 模式即可完整演示产品流程。
+## 项目边界
 
-## Agent Team 运行参数
+- Mock 是确定性的受控基线，不代表真实大模型效果。
+- 20 条固定用例用于工程回归，不是客户真实数据集；3 条 DeepSeek A/B 不能代表模型总体质量。
+- Builder 只生成 `index.html`、`styles.css`、`app.js`，沙箱不开放 Bash、任意文件读写、包安装或外部网络。
+- Chromium E2E 证明受控页面在当前环境可加载和点击，不等于完成跨浏览器、无障碍、性能、部署或生产验收。
+- 本地 JSON 适合单机 MVP；多实例与多租户部署仍需要数据库、对象存储、任务队列、权限与租户隔离。
+- 最终 Demo 必须由销售复核业务正确性、视觉质量与客户表达，不会自动对外发布。
 
-新建任务默认由 DeepSeek 驱动完整 Agent Team；Mock 仅用于离线回归，AIHubMix 和 ZJU 保留为手动备用。真实模型的地址、密钥和模型名从项目根目录 `.env` 读取。支持 `DEEPSEEK_*`、`AIHUBMIX_*`、`ZJU_*` 三组配置。以下参数可控制团队成本和循环边界：
+## Roadmap
 
-```text
-DEMOPILOT_MAX_AGENT_CALLS=18
-DEMOPILOT_MAX_REVISIONS=4
-DEMOPILOT_MAX_PARALLEL_AGENTS=2
-```
+- [x] 9 节点 Agent Team 与受限返工循环
+- [x] Contract Agent 与 Harness 冻结交互协议
+- [x] Builder 确定性预检与 Chromium 质量门
+- [x] 独立 Reviewer 与证据化 QA 报告
+- [x] 20 用例自动评测中心与 Skill A/B 晋级
+- [ ] PostgreSQL / 对象存储 / 任务队列适配
+- [ ] 多租户、RBAC 与审计后台
+- [ ] 跨浏览器、无障碍与性能基线
+- [ ] 容器化部署与 CI 回归
 
-只有在新建 Demo 时由用户显式选择真实 Provider 才会产生外部模型调用。控制台默认勾选“生成文件前需要人工批准”：Brief、Manager、Discovery、Product、Experience 和 Builder 可以先工作，Runner 在首次写入文件前暂停。
+## Contributing
 
-## 受控执行 API
+欢迎提交 Issue、评测用例、失败样本和 Pull Request。建议在 PR 中说明：
 
-- `GET /api/runs/{id}/events`：SSE 推送完整任务快照、审批状态和工具凭证。
-- `POST /api/runs/{id}/approvals/{approval_id}`：提交 `approve` 或 `decline`。
-- `POST /api/runs/{id}/cancel`：取消运行，保留已有输出、事件与 receipt。
-- `POST /api/runs/{id}/resume`：从已持久化的 Agent 输出和检查点恢复失败/取消任务，不重复已完成模型调用。
+1. 要解决的真实失败是什么；
+2. 修改影响哪些 Agent、契约或门禁；
+3. 如何复现以及新增了哪些自动化证据；
+4. 是否改变 Provider 成本、安全边界或产物格式。
 
-Builder 可以返回真实的 `demo/index.html`、`demo/styles.css`、`demo/app.js` 文件内容。若 Provider 未提供完整三文件，系统会明确记录 `controlled_template_fallback`，不会把模板冒充为模型生成；若提供完整文件，则记录 `agent_generated_files` 并执行相同的安全与浏览器验证。
+新增工程 Skill 请先放入 `candidate` 配置，并通过同 Provider、同用例、同首轮停止条件的 A/B 晋级门；不要直接加入 `approved`。
 
-## Agent Team 内置 Reviewer
+## Acknowledgements
 
-Reviewer 是 Team 内成员，但与 Builder 保持 Prompt、职责和权限隔离。它分两阶段运行：
+- [Anthropic Claude Agent SDK for Python](https://github.com/anthropics/claude-agent-sdk-python)：可选的官方 Claude Provider。
+- [OpenHands Software Agent SDK](https://github.com/OpenHands/software-agent-sdk)：公开的 Agent 沙箱与执行器设计参考。
 
-1. 与产品和体验设计阶段一起，根据原始需求形成 `review_rubric`，固定检查需求覆盖、交互、产物、安全、演示清晰度与来源追踪，并设置不可被模型降低的硬门禁。
-2. Runner 生成验证器、manifest 和 Chromium 证据后，Reviewer 对照“需求 + 最终项目 + 运行证据”输出 `reviewer_iteration_n`；每个问题必须包含证据、根因、修复指令和复验方法。
-
-验证器问题会强制覆盖模型的主观结论：只要产物、must-have、固定交互、安全或来源门禁失败，即使 Reviewer 声称通过，系统仍会进入返工。最终 `qa-report.md` 保留兼容文件名，但内容已升级为 Reviewer 独立评审报告，并明确区分真实交互、样例数据模拟能力、既定演示边界和真正未解决项。不接 ERP/WMS/CRM、数据库、客户真实数据或生产环境属于纯展示型 Demo 的正确完成范围，不记为缺陷或开放项。
-
-## Contract Agent 与内部共享交互协议
-
-产品、体验设计和评审标准完成后，Contract Agent 会把每项 must-have 转成业务操作路径；Harness 再统一分配稳定 `#contract-*` 选择器并冻结协议 SHA-256。Builder 只能实现协议，Runner 忽略 Builder 自报的测试并执行同一协议，Reviewer 根据协议违约和 Chromium 证据决定返工。协议每个 Demo 只生成一次，返工不得修改验收标准。
-
-该机制解决的是多 Agent 共享同一幻觉：以前 Builder 可能同时编造页面和测试选择器；现在缺失元素会被精确报告并进入自主返工。真实 DeepSeek 测试证明采购高难用例能在两轮自主返工后达到 95 分并通过浏览器质量门，但三个用例的首轮成功率仍为 33.3%，因此不宣称它已经提升首轮总体质量。详细证据见 `SHARED_CONTRACT_REPORT.md`。
-
-## Builder 确定性预检门
-
-Builder 初版和每个 Reviewer 修订版都会在写文件前运行同一预检。硬门只检查可客观判定的内容：三个文件及大小预算、危险代码、HTML 基础结构、模拟边界、冻结契约选择器与控件类型、精确成功反馈、核心事件声明、三幕故事、must-have 数据和客户主色。视觉审美、文案质量和销售说服力不属于硬门，仍由 Reviewer 评分并由销售人工确认。
-
-失败结果会保存为 `builder_preflight_iteration_n`，包含稳定错误码、失败类别、精确选择器和修复说明；预检失败不会写入产物，也不会启动 Chromium 或调用最终 Reviewer。Contract v1.1 会把 Contract Agent 的描述性断言规范化为短、原子、可见的文本，减少“业务结果正确但长句无法逐字匹配”的脆弱失败。真实 DeepSeek 复杂零售案例 `a50e398debcb` 在前三版缺失契约选择器时均被提前阻断，第 3 次修订通过预检后才进入 Chromium 与 Reviewer 阶段，最终浏览器通过、Reviewer 100 分、质量门通过，共 12 次模型调用。详细证据见 `BUILDER_PREFLIGHT_REPORT.md`。
-
-评测 API 另有 `builder_preflight_enabled` 开关，只用于隔离 A/B 对照，普通 Demo 始终启用预检。2026-08-27 的一次 3 用例 DeepSeek 探索性 A/B 中，开启预检的最终成功率从 0% 升至 33.3%，平均调用从 17.0 降至 12.67，平均耗时从 285.81 秒降至 181.50 秒；但两个用例在产物生成前失败，使现有评测器记录的功能覆盖率从 100% 降至 33.3%。因此该结果只支持“安全与失败成本改善、最终质量有初步正向信号”，不构成首轮质量或总体质量的正式统计证明。
-
-## 自动评测中心
-
-控制台的“自动评测”区域内置 20 条固定用例，覆盖运营、销售、客服、制造、零售、金融、人力、物流、教育、医疗、能源、物业、法务、营销、采购、安全、项目管理、知识库、电商与经营驾驶舱。每条用例都带有难度、必须能力和行业标签，便于重复运行和版本比较。
-
-- Mock 模式支持一次运行 5、10 或 20 条，适合离线全量回归；其 `controlled_template_fallback` 是明确标注的受控基线，不计作真实模型生成。
-- DeepSeek、AIHubMix 和 ZJU 属于真实外部调用，一次最多 3 条并强制串行，避免误触发高成本批量任务。
-- 每个结果都保存原始 Demo 任务 ID、产物验证、Chromium 点击证据、功能覆盖、来源模式、调用数、返工次数、耗时和输入摘要。
-- 验收门禁可配置成功率、平均分、浏览器通过率、功能覆盖率和平均调用数；完成后生成 Markdown 报告并显示相同 Provider 的版本差异。
-- 批次与单个 Demo 运行均写入 `.data`，服务重启后可恢复未完成批次；运行中的批次可以取消。
-
-相关 API：
-
-- `GET /api/evaluation-cases`：读取固定评测集。
-- `POST /api/evaluations`：创建批量评测。
-- `GET /api/evaluations`、`GET /api/evaluations/{id}`：读取历史与明细。
-- `GET /api/evaluations/{id}/events`：SSE 实时进度。
-- `POST /api/evaluations/{id}/cancel`：取消批次。
-- `GET /api/evaluations/{id}/report`：下载 Markdown 报告。
-
-## 工程 Skill 与 A/B 晋级门
-
-Harness 采用“小型、单一职责、按阶段渐进加载”的工程 Skill，而不是把大段通用提示词塞进每次调用。当前六个 Skill 分别负责需求规格化、Vue Demo 工程、Apple 风格界面、模拟业务数据、浏览器验收和定向修复。每次调用会记录所加载 Skill 的名称、版本、文件 SHA-256 与整个配置包 SHA-256，便于复现和审计。
-
-Skill 分为三个配置：`baseline` 不加载 Skill，`candidate` 用于实验，`approved` 才是普通 Demo 任务默认加载的正式配置。候选配置必须在相同 Provider、相同用例和首轮停止条件下与基线 A/B；首轮成功率提高，或成功率持平且平均分至少提高 2 分，同时浏览器通过率、功能覆盖率和调用次数不退化，才允许晋级。评测中心可以选择配置并显示晋级结论。
-
-```powershell
-cd D:\作品集\DemoPilot
-python scripts\validate_skills.py
-python scripts\run_skill_ab.py --base-url http://127.0.0.1:8091
-```
-
-本次 DeepSeek A/B 使用三个高难固定用例。基线首轮成功率为 0%、平均分 30.0；获批候选为 33.3%、55.3，浏览器通过率从 0% 提升至 33.3%，功能覆盖率从 66.7% 提升至 100%，平均调用数保持 8。另一次更强约束候选回落到 0%、26.0，已拒绝并回滚。当前 `approved` 精确对应通过 A/B 的配置包：`ccc27684bd2be1718a0dd26c69757d2c1529f6a195e0211444cb5a276c660d7d`。
-
-## 验证
-
-```powershell
-cd D:\作品集\DemoPilot\backend
-uv run ruff check .
-uv run pytest --basetemp=.pytest-tmp
-
-cd D:\作品集\DemoPilot\frontend
-npm.cmd run build
-```
-
-## 当前边界
-
-- Mock Provider 是受控演示基线，不代表真实大模型效果。
-- 20 条固定用例可用于回归，但不是客户真实数据集；3 条 DeepSeek 试跑只能证明链路可用，不能代表模型总体质量。
-- Builder 只可生成三份静态 Web 文件；沙箱不开放 Bash、任意读写、包安装或外部网络，这是一项刻意的安全边界。
-- Chromium E2E 证明受控页面在当前本机可加载和点击，不代表跨浏览器、部署环境、无障碍或真实客户数据集成已经验收。
-- 生成页面使用样例数据，不代表已接入客户生产数据。
-- 本地 JSON 适合 MVP；多实例部署需要数据库、对象存储、任务队列与租户隔离。
-- 真实交付仍需销售人工复核，不会自动发布或发送给客户。
-
-## 合法内核参考
-
-- [Anthropic Claude Agent SDK for Python](https://github.com/anthropics/claude-agent-sdk-python)（MIT）
-- [OpenHands Software Agent SDK](https://github.com/OpenHands/software-agent-sdk)（MIT，可作为后续沙箱执行器）
-
-项目仅参考公开可描述的 Agent 工作流思想，未复制、打包或依赖第三方复原版 Claude Code 源码。
+DemoPilot 只吸收公开可描述的 Agent 工作流与工程方法，未复制、打包或依赖第三方复原版 Claude Code 源码。
