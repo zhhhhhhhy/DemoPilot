@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "baseline": [],
+    "candidate": [
+      "requirement-to-demo-spec",
+      "vue-demo-engineering",
+      "apple-ui-demo-design",
+      "mock-business-data",
+      "playwright-demo-acceptance",
+      "targeted-demo-repair"
+    ],
+    "approved": [
+      "requirement-to-demo-spec",
+      "vue-demo-engineering",
+      "apple-ui-demo-design",
+      "mock-business-data",
+      "playwright-demo-acceptance",
+      "targeted-demo-repair"
+    ]
+  },
+  "skills": {
+    "requirement-to-demo-spec": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["brief", "discovery", "product", "contract", "reviewer:rubric"]
+    },
+    "vue-demo-engineering": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["builder"]
+    },
+    "apple-ui-demo-design": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["experience", "builder", "reviewer:rubric"]
+    },
+    "mock-business-data": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["product", "contract", "builder", "reviewer:final"]
+    },
+    "playwright-demo-acceptance": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["contract", "reviewer:rubric", "builder", "reviewer:final"]
+    },
+    "targeted-demo-repair": {
+      "version": "0.1.0",
+      "mode": "all",
+      "stages": ["builder"]
+    }
+  }
+}

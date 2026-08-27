@@ -1,0 +1,15 @@
+.data/
+work/
+.ruff_cache/
+.pytest_cache/
+.pytest-tmp/
+backend/.pytest-*/
+backend/.venv/
+backend/dist/
+backend/*.egg-info/
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+__pycache__/
+*.py[cod]
+.env
