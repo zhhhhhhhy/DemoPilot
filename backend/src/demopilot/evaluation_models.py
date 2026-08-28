@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field, model_validator
 
 from .models import ProviderName, utc_now
 
+Complexity = Literal["simple", "complex"]
+
 
 class EvaluationCase(BaseModel):
     id: str
@@ -18,6 +20,7 @@ class EvaluationCase(BaseModel):
     brand_tone: str = "简洁、可信、现代"
     primary_color: str = "#0071e3"
     difficulty: Literal["basic", "standard", "edge"] = "standard"
+    complexity: Complexity = "simple"
     tags: list[str] = Field(default_factory=list)
 
 
@@ -33,6 +36,7 @@ class EvaluationRequest(BaseModel):
     provider: ProviderName = "mock"
     case_ids: list[str] = Field(default_factory=list, max_length=30)
     case_limit: int = Field(default=5, ge=1, le=30)
+    complexity: Literal["all", "simple", "complex"] = "all"
     concurrency: int = Field(default=2, ge=1, le=3)
     version_label: str = Field(default="local", min_length=1, max_length=60)
     baseline_id: str | None = None
@@ -53,6 +57,7 @@ class EvaluationRequest(BaseModel):
 class EvaluationCaseResult(BaseModel):
     case_id: str
     case_name: str
+    complexity: Complexity | None = None
     run_id: str | None = None
     status: Literal["pending", "running", "passed", "failed", "cancelled"] = "pending"
     passed: bool = False
@@ -89,6 +94,18 @@ class EvaluationCaseResult(BaseModel):
     completed_at: datetime | None = None
 
 
+class ComplexityMetrics(BaseModel):
+    total_cases: int = 0
+    completed_cases: int = 0
+    passed_cases: int = 0
+    success_rate: float = 0
+    first_pass_success_rate: float = 0
+    average_score: float = 0
+    browser_pass_rate: float = 0
+    feature_coverage_rate: float = 0
+    revision_rate: float = 0
+
+
 class EvaluationMetrics(BaseModel):
     total_cases: int = 0
     completed_cases: int = 0
@@ -106,6 +123,7 @@ class EvaluationMetrics(BaseModel):
     average_agent_calls: float = 0
     average_duration_seconds: float = 0
     failure_categories: dict[str, int] = Field(default_factory=dict)
+    complexity_breakdown: dict[Complexity, ComplexityMetrics] = Field(default_factory=dict)
 
 
 class AcceptanceGate(BaseModel):

@@ -46,6 +46,7 @@ def builtin_evaluation_cases() -> list[EvaluationCase]:
             audience=item[4],
             must_haves=item[5],
             difficulty=item[6],
+            complexity="complex" if item[6] == "edge" else "simple",
             tags=item[7],
             primary_color=colors[index % len(colors)],
         )

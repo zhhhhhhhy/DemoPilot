@@ -12,6 +12,7 @@ from . import __version__
 from .evaluation_cases import builtin_evaluation_cases
 from .evaluation_models import (
     AcceptanceGate,
+    ComplexityMetrics,
     EvaluationCase,
     EvaluationCaseResult,
     EvaluationMetrics,
@@ -186,6 +187,7 @@ def evaluate_demo_run(case: EvaluationCase, run: DemoRun) -> EvaluationCaseResul
     return EvaluationCaseResult(
         case_id=case.id,
         case_name=case.name,
+        complexity=case.complexity,
         run_id=run.id,
         status="passed" if passed else ("cancelled" if run.status == RunStatus.CANCELLED else "failed"),
         passed=passed,
@@ -225,6 +227,53 @@ def aggregate_metrics(results: list[EvaluationCaseResult]) -> EvaluationMetrics:
     def average(selector) -> float:
         return round(sum(selector(item) for item in completed) / count, 2) if count else 0
 
+    def cohort_metrics(cohort: list[EvaluationCaseResult]) -> ComplexityMetrics:
+        cohort_completed = [
+            item for item in cohort if item.status in {"passed", "failed", "cancelled"}
+        ]
+        cohort_count = len(cohort_completed)
+
+        def cohort_ratio(predicate) -> float:
+            return (
+                round(
+                    sum(1 for item in cohort_completed if predicate(item)) / cohort_count,
+                    4,
+                )
+                if cohort_count
+                else 0
+            )
+
+        return ComplexityMetrics(
+            total_cases=len(cohort),
+            completed_cases=cohort_count,
+            passed_cases=sum(1 for item in cohort_completed if item.passed),
+            success_rate=cohort_ratio(lambda item: item.passed),
+            first_pass_success_rate=cohort_ratio(lambda item: item.first_pass_passed),
+            average_score=(
+                round(sum(item.score for item in cohort_completed) / cohort_count, 2)
+                if cohort_count
+                else 0
+            ),
+            browser_pass_rate=cohort_ratio(lambda item: item.browser_status == "passed"),
+            feature_coverage_rate=(
+                round(
+                    sum(item.feature_coverage for item in cohort_completed) / cohort_count,
+                    4,
+                )
+                if cohort_count
+                else 0
+            ),
+            revision_rate=cohort_ratio(lambda item: item.revision_count > 0),
+        )
+
+    complexity_breakdown = {
+        complexity: cohort_metrics(
+            [item for item in results if item.complexity == complexity]
+        )
+        for complexity in ("simple", "complex")
+        if any(item.complexity == complexity for item in results)
+    }
+
     return EvaluationMetrics(
         total_cases=total,
         completed_cases=count,
@@ -246,6 +295,7 @@ def aggregate_metrics(results: list[EvaluationCaseResult]) -> EvaluationMetrics:
         average_agent_calls=average(lambda item: item.agent_calls),
         average_duration_seconds=average(lambda item: item.duration_seconds),
         failure_categories=dict(sorted(failures.items())),
+        complexity_breakdown=complexity_breakdown,
     )
 
 
@@ -371,6 +421,7 @@ def _report(evaluation: EvaluationRun) -> str:
         f"- Provider：`{evaluation.request.provider}`",
         f"- 版本：`{__version__}`",
         f"- Skill Profile：`{evaluation.request.skill_profile}`",
+        f"- 需求范围：`{evaluation.request.complexity}`",
         f"- 结论：`{evaluation.verdict}`",
         f"- 用例：{metrics.passed_cases}/{metrics.total_cases} 通过",
         f"- 成功率：{metrics.success_rate:.1%}",
@@ -388,10 +439,17 @@ def _report(evaluation: EvaluationRun) -> str:
             f"- {'PASS' if gate.passed else 'FAIL'} · {gate.name}：{gate.actual} {gate.operator} {gate.threshold}"
             for gate in evaluation.gates
         ],
-        "",
-        "## 失败与未解决项",
-        "",
     ]
+    if metrics.complexity_breakdown:
+        lines.extend(["", "## 难度分组", ""])
+        for complexity, group in metrics.complexity_breakdown.items():
+            label = "简单要求" if complexity == "simple" else "复杂要求"
+            lines.append(
+                f"- {label}：{group.passed_cases}/{group.total_cases} 通过 · "
+                f"成功率 {group.success_rate:.1%} · 平均分 {group.average_score:.1f} · "
+                f"返工率 {group.revision_rate:.1%}"
+            )
+    lines.extend(["", "## 失败与未解决项", ""])
     if failed:
         for item in failed:
             detail = "；".join(item.issues[:3]) or "未提供具体错误"
@@ -571,7 +629,9 @@ class EvaluationManager:
                 self.store.get(evaluation.request.baseline_id)
                 if evaluation.request.baseline_id
                 else self.store.latest_baseline(
-                    evaluation.request.provider, exclude_id=evaluation.id
+                    evaluation.request.provider,
+                    evaluation.request.complexity,
+                    exclude_id=evaluation.id,
                 )
             )
             evaluation.comparison = _comparison(evaluation, baseline)

@@ -56,7 +56,7 @@ class EvaluationStore:
         return sorted(evaluations, key=lambda item: item.created_at, reverse=True)
 
     def latest_baseline(
-        self, provider: str, *, exclude_id: str
+        self, provider: str, complexity: str, *, exclude_id: str
     ) -> EvaluationRun | None:
         return next(
             (
@@ -65,6 +65,7 @@ class EvaluationStore:
                 if item.id != exclude_id
                 and item.status == "completed"
                 and item.request.provider == provider
+                and item.request.complexity == complexity
             ),
             None,
         )

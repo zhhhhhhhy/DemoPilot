@@ -101,6 +101,7 @@ export interface EvaluationCase {
   brand_tone: string
   primary_color: string
   difficulty: 'basic' | 'standard' | 'edge'
+  complexity: 'simple' | 'complex'
   tags: string[]
 }
 
@@ -116,6 +117,7 @@ export interface EvaluationRequest {
   provider: ProviderName
   case_ids: string[]
   case_limit: number
+  complexity: 'all' | 'simple' | 'complex'
   concurrency: number
   version_label: string
   baseline_id: string | null
@@ -128,6 +130,7 @@ export interface EvaluationRequest {
 export interface EvaluationCaseResult {
   case_id: string
   case_name: string
+  complexity: 'simple' | 'complex' | null
   run_id: string | null
   status: 'pending' | 'running' | 'passed' | 'failed' | 'cancelled'
   passed: boolean
@@ -167,6 +170,19 @@ export interface EvaluationMetrics {
   average_agent_calls: number
   average_duration_seconds: number
   failure_categories: Record<string, number>
+  complexity_breakdown: Partial<Record<'simple' | 'complex', ComplexityMetrics>>
+}
+
+export interface ComplexityMetrics {
+  total_cases: number
+  completed_cases: number
+  passed_cases: number
+  success_rate: number
+  first_pass_success_rate: number
+  average_score: number
+  browser_pass_rate: number
+  feature_coverage_rate: number
+  revision_rate: number
 }
 
 export interface AcceptanceGate {

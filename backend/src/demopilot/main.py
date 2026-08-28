@@ -138,14 +138,33 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             )
         all_cases = builtin_evaluation_cases()
         case_map = {item.id: item for item in all_cases}
+        eligible_cases = [
+            item
+            for item in all_cases
+            if payload.complexity == "all" or item.complexity == payload.complexity
+        ]
         selected_ids = list(dict.fromkeys(payload.case_ids)) if payload.case_ids else [
-            item.id for item in all_cases[: payload.case_limit]
+            item.id for item in eligible_cases[: payload.case_limit]
         ]
         unknown = [case_id for case_id in selected_ids if case_id not in case_map]
         if unknown:
             raise HTTPException(
                 status_code=400,
                 detail="Unknown evaluation cases: " + ", ".join(unknown),
+            )
+        mismatched = [
+            case_id
+            for case_id in selected_ids
+            if payload.complexity != "all"
+            and case_map[case_id].complexity != payload.complexity
+        ]
+        if mismatched:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    f"Cases do not match complexity={payload.complexity}: "
+                    + ", ".join(mismatched)
+                ),
             )
         if len(selected_ids) > payload.case_limit:
             selected_ids = selected_ids[: payload.case_limit]
@@ -162,6 +181,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 {
                     "case_id": case_id,
                     "case_name": case_map[case_id].name,
+                    "complexity": case_map[case_id].complexity,
                 }
                 for case_id in selected_ids
             ],

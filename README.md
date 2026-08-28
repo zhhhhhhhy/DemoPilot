@@ -206,16 +206,17 @@ npm.cmd run build
 
 ### 真实 DeepSeek Demo 清单
 
-当前正式目录只包含 **11 个真实成功 Demo**，覆盖 11 个不重复行业。每个 Demo 都对应独立的 DeepSeek Agent Team 任务，并通过文件落盘、Chromium 真实点击和 Reviewer Quality Gate；每项均保留 8 个文件产物与 ZIP。
+当前正式目录包含 **23 个真实成功 Demo**，覆盖 23 个不重复行业，并分为 9 个简单要求与 14 个复杂要求。每个 Demo 都对应独立的 DeepSeek Agent Team 任务，并通过文件落盘、Chromium 真实点击和 Reviewer Quality Gate；每项均保留 8 个文件产物与 ZIP。
 
 | 指标 | 当前正式成果 |
 | --- | ---: |
-| 真实 DeepSeek Demo | 11 |
-| 不重复行业 | 11 |
-| 浏览器通过 | 11/11 |
-| Quality Gate 通过 | 11/11 |
-| Agent 调用合计 | 115 |
-| 定向返修合计 | 13 |
+| 真实 DeepSeek Demo | 23 |
+| 简单 / 复杂要求 | 9 / 14 |
+| 不重复行业 | 23 |
+| 浏览器通过 | 23/23 |
+| Quality Gate 通过 | 23/23 |
+| Agent 调用合计 | 255 |
+| 定向返修合计 | 33 |
 
 详细 run ID、行业和调用次数见 [真实 Demo 清单](docs/REAL_DEMO_CATALOG.md)。这里统计的是经验证的正式成果，不把 Mock、失败尝试或批量回归用例算作 Demo。
 
@@ -229,7 +230,7 @@ npm.cmd run build
 
 ### 扩大后的真实 DeepSeek 覆盖
 
-2026-08-28 将正式成果从 4 个扩充为 **11 个真实 Demo**。扩充过程中新增了契约控件可见性、唯一 ID、契约视图存在性和 `data-target → contract-view-N` 精确路由门禁。新路由规则又通过此前失败的销售场景真实回归。失败尝试已移出正式目录并放入可恢复归档，只保留排障价值，不进入 Demo 数量。
+2026-08-28 先将正式成果从 4 个扩充为 11 个，再按难度扩充到 20 个，并追加电商售后、安全响应和酒店收益 3 个真实 Demo，当前共 **23 个**。扩充过程中新增了契约控件可见性、唯一 ID、契约视图存在性和 `data-target → contract-view-N` 精确路由门禁；评测中心进一步支持简单 / 复杂筛选和分组统计。追加 3 个 Demo 的最终成功率、浏览器通过率和功能覆盖率均为 100%，平均评测分 94.42；其中酒店案例首轮被产物门禁拦下，重新生成后才进入正式清单。详见 [难度扩容报告](docs/DIFFICULTY_EXPANSION_REPORT.md)。
 
 ## 自动评测中心
 
@@ -237,6 +238,7 @@ npm.cmd run build
 
 - **Mock**：支持 5 / 10 / 20 / 30 条离线回归。
 - **真实 Provider**：DeepSeek、AIHubMix、ZJU 一次最多 3 条并强制串行，限制误触发成本。
+- **难度分组**：支持“简单要求 / 复杂要求”筛选，并分别计算成功率、首轮成功率、平均分与返工率。
 - **可追溯结果**：保存 Demo 任务 ID、输入摘要、来源模式、验证结果、浏览器证据、调用数、返工次数和耗时。
 - **版本比较**：对比相同 Provider 的上一版本，并输出 Markdown 报告。
 - **Skill 晋级**：`baseline`、`candidate`、`approved` 三种配置支持首轮质量 A/B；未通过门槛的候选不会进入正式 Harness。

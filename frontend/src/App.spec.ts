@@ -96,6 +96,8 @@ describe('DemoPilot control plane', () => {
 
     const evaluation = wrapper.get('.evaluation-config')
     expect(evaluation.text()).toContain('30 个用例')
+    expect(evaluation.text()).toContain('简单要求 · 单页核心流程')
+    expect(evaluation.text()).toContain('复杂要求 · 多步骤联动')
 
     await evaluation.findAll('select')[0].setValue('deepseek')
     await flushPromises()

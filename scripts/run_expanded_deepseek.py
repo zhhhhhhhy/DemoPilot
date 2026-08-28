@@ -44,6 +44,7 @@ def create_batch(
     *,
     case_ids: list[str],
     label: str,
+    complexity: str,
 ) -> dict[str, Any]:
     response = client.post(
         f"{base_url}/api/evaluations",
@@ -51,6 +52,7 @@ def create_batch(
             "provider": "deepseek",
             "case_ids": case_ids,
             "case_limit": len(case_ids),
+            "complexity": complexity,
             "concurrency": 1,
             "version_label": label,
             "skill_profile": "approved",
@@ -103,6 +105,11 @@ def main() -> int:
     parser.add_argument("--timeout", type=float, default=3600)
     parser.add_argument("--label-prefix", default="expanded-deepseek")
     parser.add_argument("--case-ids", nargs="+", default=DEFAULT_CASE_IDS)
+    parser.add_argument(
+        "--complexity",
+        choices=("all", "simple", "complex"),
+        default="all",
+    )
     args = parser.parse_args()
     base_url = args.base_url.rstrip("/")
     stamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
@@ -133,6 +140,7 @@ def main() -> int:
                 base_url,
                 case_ids=batch,
                 label=f"{args.label_prefix}-{stamp}-b{index}",
+                complexity=args.complexity,
             )
             completed = wait_for(client, base_url, created["id"], args.timeout)
             evaluations.append(compact(completed))
@@ -145,6 +153,7 @@ def main() -> int:
             "concurrency": 1,
             "skill_profile": "approved",
             "builder_preflight_enabled": True,
+            "complexity": args.complexity,
         },
         "evaluations": evaluations,
     }
