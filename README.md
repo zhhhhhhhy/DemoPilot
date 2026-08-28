@@ -2,9 +2,11 @@
 
 # DemoPilot
 
-### 把一段客户需求，变成一套可以讲、可以点、可以交付的销售 Demo
+### 由 Agent Team 亲手造出来的 Agent Team Demo 工厂
 
-由 9 个协作节点完成需求增强、产品设计、交互契约、代码生成、浏览器验证与独立评审。
+**Human-directed. Agent-built. Evidence-verified.**
+
+人类负责目标、边界与最终验收；Agent Team 完成架构、前后端开发、浏览器测试、失败复盘与持续迭代。
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -12,10 +14,25 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![uv](https://img.shields.io/badge/managed%20with-uv-DE5FE9)](https://docs.astral.sh/uv/)
 [![DeepSeek](https://img.shields.io/badge/Provider-DeepSeek-4D6BFE)](https://www.deepseek.com/)
+[![Built by Agent Team](https://img.shields.io/badge/Built_by-Agent_Team-111111)](#built-by-an-agent-team)
 
 [快速开始](#快速开始) · [核心能力](#核心能力) · [运行架构](#运行架构) · [评测证据](#评测证据) · [API](#api) · [项目边界](#项目边界)
 
 </div>
+
+## Built by an Agent Team
+
+DemoPilot 不只是一个“内部调用多个模型”的项目。**这个项目本身也采用 Agent Team 协作方式完成**：从需求讨论、公开方案调研、系统架构、Vue 前端、Python 后端，到真实 API 调用、Chromium 端到端测试、失败归因、修复和 A/B 评测，都由不同职责的 AI Agent 在人的目标与验收标准下持续推进。
+
+| 参与者 | 主要职责 |
+| --- | --- |
+| 人类负责人 | 提出真实业务目标、确认产品边界、作出关键决策并最终验收 |
+| 产品与架构 Agent | 丰富需求，设计 Agent Team、Harness、契约与评测体系 |
+| 工程 Agent | 实现 Vue 前端、FastAPI 后端、Provider、沙箱与持久化 |
+| 测试与 Reviewer Agent | 运行真实 DeepSeek/API/浏览器测试，记录失败证据并驱动返工 |
+| Harness | 约束调用预算、文件权限、验证顺序和 Skill 晋级，防止“自称完成” |
+
+这不是“全自动、无人监督”的营销故事，而是一种更可复现的工程分工：**人负责方向和责任，Agent Team 负责高密度执行，测试证据决定能否交付。**
 
 ## 为什么是 DemoPilot
 
@@ -41,7 +58,7 @@
 - **真实浏览器验证**：Playwright + Chromium 执行页面加载、导航、按钮点击、状态变化与控制台错误检查，并保存截图证据。
 - **独立 Reviewer**：只读取需求、最终项目和运行证据，不修改文件，也不接受 Builder 自报完成。
 - **受控执行 Harness**：任务级沙箱、生命周期 Hook、审批、取消/恢复、最大调用数、最大返工轮次和 SSE 实时事件流。
-- **自动评测中心**：20 条固定跨行业用例，跟踪成功率、质量分、浏览器通过率、功能覆盖率、调用数和耗时。
+- **自动评测中心**：30 条固定跨行业用例，跟踪成功率、质量分、浏览器通过率、功能覆盖率、调用数和耗时。
 - **Skill A/B 晋级**：六个小型工程 Skill 只有通过同 Provider、同用例、同停止条件的 A/B 门槛后，才进入正式 Harness。
 
 ## 运行架构
@@ -169,9 +186,9 @@ manifest.json
 | 检查项 | 结果 |
 | --- | --- |
 | Backend Ruff | 通过 |
-| Backend pytest | 35 tests passed |
+| Backend pytest | 36 tests passed |
 | Frontend ESLint | 通过 |
-| Frontend Vitest | 3 tests passed |
+| Frontend Vitest | 4 tests passed |
 | Frontend production build | 通过 |
 
 复现命令：
@@ -187,35 +204,38 @@ npm.cmd run test:run
 npm.cmd run build
 ```
 
-### 真实 DeepSeek 复杂任务
+### 真实 DeepSeek Demo 清单
 
-运行 `a50e398debcb` 使用真实 DeepSeek 完成复杂零售 Demo：前三个 Builder 版本因缺失冻结契约选择器被预检提前阻断，第 3 次修订进入 Chromium 与 Reviewer 阶段，最终浏览器通过、Reviewer 100 分、质量门通过，共 12 次模型调用、3 次修订。
+当前正式目录只包含 **11 个真实成功 Demo**，覆盖 11 个不重复行业。每个 Demo 都对应独立的 DeepSeek Agent Team 任务，并通过文件落盘、Chromium 真实点击和 Reviewer Quality Gate；每项均保留 8 个文件产物与 ZIP。
 
-这证明了“真实 Provider → Agent Team → 预检 → 产物落盘 → Chromium → Reviewer → 返工”的链路可运行；它不代表模型在所有行业和需求上都能达到相同质量。
+| 指标 | 当前正式成果 |
+| --- | ---: |
+| 真实 DeepSeek Demo | 11 |
+| 不重复行业 | 11 |
+| 浏览器通过 | 11/11 |
+| Quality Gate 通过 | 11/11 |
+| Agent 调用合计 | 115 |
+| 定向返修合计 | 13 |
 
-### Builder 预检探索性 A/B
+详细 run ID、行业和调用次数见 [真实 Demo 清单](docs/REAL_DEMO_CATALOG.md)。这里统计的是经验证的正式成果，不把 Mock、失败尝试或批量回归用例算作 Demo。
 
-| 指标 | 关闭预检 | 开启预检 | 变化 |
-| --- | ---: | ---: | ---: |
-| 最终成功率 | 0% | 33.3% | +33.3pp |
-| 平均质量分 | 19.00 | 32.42 | +13.42 |
-| 平均模型调用 | 17.00 | 12.67 | -4.33 |
-| 平均耗时 | 285.81s | 181.50s | -104.31s |
-| 记录的功能覆盖率 | 100% | 33.3% | -66.7pp |
-
-这是 3 条用例的小样本探索，不是统计证明。开启预检的两个失败用例在产物生成前就被阻断，因此现有评测器没有最终产物可计算覆盖率。当前结论仅限于：预检减少了无效浏览器/Reviewer 工作，并给出初步的最终质量正向信号；尚未证明首轮质量稳定提升。
-
-完整实验记录：
+工程与实验记录：
 
 - [Builder 确定性预检报告](BUILDER_PREFLIGHT_REPORT.md)
 - [共享交互契约报告](SHARED_CONTRACT_REPORT.md)
 - [工程 Skill A/B 报告](SKILL_AB_REPORT.md)
+- [扩大评测用例报告](EXPANDED_EVALUATION_REPORT.md)
+- [本地评测数据清理报告](DATA_CLEANUP_REPORT.md)
+
+### 扩大后的真实 DeepSeek 覆盖
+
+2026-08-28 将正式成果从 4 个扩充为 **11 个真实 Demo**。扩充过程中新增了契约控件可见性、唯一 ID、契约视图存在性和 `data-target → contract-view-N` 精确路由门禁。新路由规则又通过此前失败的销售场景真实回归。失败尝试已移出正式目录并放入可恢复归档，只保留排障价值，不进入 Demo 数量。
 
 ## 自动评测中心
 
-评测中心内置 20 条固定用例，覆盖运营、销售、客服、制造、零售、金融、人力、物流、教育、医疗、能源、物业、法务、营销、采购、安全、项目管理、知识库、电商和经营驾驶舱。
+评测中心内置 30 条固定用例。在原有运营、销售、客服、制造、零售、金融、人力、物流、教育、医疗、能源、物业、法务、营销、采购、安全、项目管理、知识库、电商和经营驾驶舱之外，新增保险、酒店、农业、航空、汽车服务、建筑施工、医药供应链、公共服务、数字内容和碳排管理。
 
-- **Mock**：支持 5 / 10 / 20 条离线回归。
+- **Mock**：支持 5 / 10 / 20 / 30 条离线回归。
 - **真实 Provider**：DeepSeek、AIHubMix、ZJU 一次最多 3 条并强制串行，限制误触发成本。
 - **可追溯结果**：保存 Demo 任务 ID、输入摘要、来源模式、验证结果、浏览器证据、调用数、返工次数和耗时。
 - **版本比较**：对比相同 Provider 的上一版本，并输出 Markdown 报告。
@@ -301,7 +321,7 @@ uv run uvicorn --env-file ../.env --app-dir src demopilot.main:app --host 127.0.
 ## 项目边界
 
 - Mock 是确定性的受控基线，不代表真实大模型效果。
-- 20 条固定用例用于工程回归，不是客户真实数据集；3 条 DeepSeek A/B 不能代表模型总体质量。
+- 30 条固定用例用于工程回归，不是客户真实数据集；当前正式 DeepSeek 成果覆盖 11 个不重复行业，仍不能代表模型总体质量或随机任务成功率。
 - Builder 只生成 `index.html`、`styles.css`、`app.js`，沙箱不开放 Bash、任意文件读写、包安装或外部网络。
 - Chromium E2E 证明受控页面在当前环境可加载和点击，不等于完成跨浏览器、无障碍、性能、部署或生产验收。
 - 本地 JSON 适合单机 MVP；多实例与多租户部署仍需要数据库、对象存储、任务队列、权限与租户隔离。
@@ -313,7 +333,7 @@ uv run uvicorn --env-file ../.env --app-dir src demopilot.main:app --host 127.0.
 - [x] Contract Agent 与 Harness 冻结交互协议
 - [x] Builder 确定性预检与 Chromium 质量门
 - [x] 独立 Reviewer 与证据化 QA 报告
-- [x] 20 用例自动评测中心与 Skill A/B 晋级
+- [x] 30 用例自动评测中心与 Skill A/B 晋级
 - [ ] PostgreSQL / 对象存储 / 任务队列适配
 - [ ] 多租户、RBAC 与审计后台
 - [ ] 跨浏览器、无障碍与性能基线

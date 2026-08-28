@@ -21,6 +21,8 @@ class _HTMLInventory(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.ids: dict[str, str] = {}
+        self.attributes: dict[str, dict[str, str]] = {}
+        self.duplicate_ids: list[str] = []
         self.viewport = False
         self.local_styles = False
         self.local_script = False
@@ -29,7 +31,10 @@ class _HTMLInventory(HTMLParser):
         values = {key.lower(): value or "" for key, value in attrs}
         element_id = values.get("id")
         if element_id:
+            if element_id in self.ids:
+                self.duplicate_ids.append(element_id)
             self.ids[element_id] = tag.lower()
+            self.attributes[element_id] = values
         if tag.lower() == "meta" and values.get("name", "").lower() == "viewport":
             self.viewport = True
         if tag.lower() == "link" and values.get("href") == "styles.css":
@@ -64,6 +69,25 @@ def _app_data(app_js: str) -> dict[str, Any]:
     except json.JSONDecodeError:
         return {}
     return parsed if isinstance(parsed, dict) else {}
+
+
+def _directly_hidden(attributes: dict[str, str]) -> bool:
+    """Reject contract controls that are hidden on the element itself.
+
+    Route containers may start hidden and become visible after navigation. Contract
+    controls themselves must stay renderable so a test step never depends on a
+    different, model-invented control to reveal the frozen selector.
+    """
+
+    class_names = set(attributes.get("class", "").split())
+    style = re.sub(r"\s+", "", attributes.get("style", "").lower())
+    return (
+        "hidden" in attributes
+        or "hidden" in class_names
+        or attributes.get("aria-hidden", "").lower() == "true"
+        or "display:none" in style
+        or "visibility:hidden" in style
+    )
 
 
 def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
@@ -203,7 +227,33 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
     tests = contract_tests(shared_contract)
     missing_selectors: list[str] = []
     wrong_controls: list[str] = []
+    hidden_controls: list[str] = []
+    missing_route_views: list[str] = []
+    invalid_route_mappings: list[str] = []
     missing_assertions: list[str] = []
+    requirements = (
+        shared_contract.get("requirements", [])
+        if isinstance(shared_contract, dict)
+        else []
+    )
+    for requirement in requirements if isinstance(requirements, list) else []:
+        if not isinstance(requirement, dict):
+            continue
+        route = requirement.get("route", {})
+        if not isinstance(route, dict):
+            continue
+        view_selector = str(route.get("view_selector", ""))
+        view_id = view_selector.removeprefix("#")
+        if not view_selector.startswith("#") or view_id not in inventory.ids:
+            missing_route_views.append(view_selector or "<empty>")
+        nav_selector = str(route.get("nav_selector", ""))
+        nav_id = nav_selector.removeprefix("#")
+        nav_attributes = inventory.attributes.get(nav_id, {})
+        if nav_id in inventory.ids and nav_attributes.get("data-target") != view_id:
+            actual = nav_attributes.get("data-target") or "<missing>"
+            invalid_route_mappings.append(
+                f"{nav_selector}[data-target={actual}]→{view_selector}"
+            )
     for test in tests:
         steps = test.get("steps", [])
         for step_index, step in enumerate(steps if isinstance(steps, list) else []):
@@ -223,6 +273,8 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
             }.get(action, set())
             if step_index > 0 and tag not in allowed_tags:
                 wrong_controls.append(f"{selector}({action}->{tag})")
+            if _directly_hidden(inventory.attributes.get(element_id, {})):
+                hidden_controls.append(selector)
         assertion = test.get("assertion", {})
         if not isinstance(assertion, dict):
             continue
@@ -240,6 +292,9 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
             missing_assertions.extend(value for value in expected if value not in combined)
 
     missing_selectors = list(dict.fromkeys(missing_selectors))
+    hidden_controls = list(dict.fromkeys(hidden_controls))
+    missing_route_views = list(dict.fromkeys(missing_route_views))
+    invalid_route_mappings = list(dict.fromkeys(invalid_route_mappings))
     if not tests:
         issues.append(
             _issue(
@@ -259,6 +314,26 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
                 selectors=missing_selectors[:12],
             )
         )
+    if missing_route_views:
+        issues.append(
+            _issue(
+                "CONTRACT_ROUTE_VIEWS_MISSING",
+                "route_view",
+                "HTML 未声明契约路由视图：" + "、".join(missing_route_views[:12]),
+                "为每个 route.view_selector 创建真实容器；点击对应 nav_selector 后必须显示该容器。",
+                selectors=missing_route_views[:12],
+            )
+        )
+    if invalid_route_mappings:
+        issues.append(
+            _issue(
+                "CONTRACT_ROUTE_MAPPING_INVALID",
+                "route_mapping",
+                "契约导航没有直接指向对应视图：" + "、".join(invalid_route_mappings[:12]),
+                "在每个 nav_selector 上设置 data-target，值必须逐字等于对应 view_selector 去掉 # 后的 ID；"
+                "点击时直接读取 dataset.target 并显示 document.getElementById(dataset.target)。",
+            )
+        )
     if wrong_controls:
         issues.append(
             _issue(
@@ -266,6 +341,28 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
                 "control_type",
                 "契约动作与控件类型不一致：" + "、".join(wrong_controls[:12]),
                 "fill 使用 input/textarea，select 使用 select，click 使用可点击原生控件。",
+            )
+        )
+    if hidden_controls:
+        issues.append(
+            _issue(
+                "CONTRACT_CONTROLS_HIDDEN",
+                "control_visibility",
+                "契约操作控件被直接隐藏：" + "、".join(hidden_controls[:12]),
+                "移除契约控件自身的 hidden、hidden class、aria-hidden 或 display:none；"
+                "需要分步交互时也保留冻结控件可见，并由点击更新状态与结果区。",
+                selectors=hidden_controls[:12],
+            )
+        )
+    if inventory.duplicate_ids:
+        duplicate_ids = list(dict.fromkeys(inventory.duplicate_ids))
+        issues.append(
+            _issue(
+                "DUPLICATE_HTML_IDS",
+                "selector_uniqueness",
+                "HTML 包含重复 ID：" + "、".join(f"#{item}" for item in duplicate_ids[:12]),
+                "每个冻结 selector 只绑定一个可见元素；删除隐藏副本和重复占位控件。",
+                selectors=[f"#{item}" for item in duplicate_ids[:12]],
             )
         )
     if missing_assertions:
@@ -277,7 +374,16 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
                 "在对应操作后通过 textContent 写入逐字匹配的可见结果。",
             )
         )
-    if tests and not missing_selectors and not wrong_controls and not missing_assertions:
+    if (
+        tests
+        and not missing_selectors
+        and not missing_route_views
+        and not invalid_route_mappings
+        and not wrong_controls
+        and not hidden_controls
+        and not inventory.duplicate_ids
+        and not missing_assertions
+    ):
         checks.append("冻结契约的选择器、控件类型和成功反馈均已静态实现")
 
     if isinstance(app_js, str):
@@ -359,6 +465,10 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
                 "contract",
                 "selector",
                 "control_type",
+                "control_visibility",
+                "route_view",
+                "route_mapping",
+                "selector_uniqueness",
                 "assertion",
                 "action_binding",
                 "data_contract",

@@ -151,8 +151,8 @@ onBeforeUnmount(stopUpdates)
         <label>Skill 配置<select v-model="form.skill_profile"><option value="approved">已批准 Skill</option><option value="baseline">Baseline · 不加载 Skill</option><option value="candidate">Candidate · 候选 Skill</option></select></label>
         <label><input v-model="form.first_pass_only" type="checkbox" /> 仅评测首轮，不允许 Reviewer 返工</label>
         <label><input v-model="form.builder_preflight_enabled" type="checkbox" /> 启用 Builder 确定性预检（关闭仅用于 A/B 对照）</label>
-        <label>用例数量<select v-model.number="form.case_limit"><option v-for="count in (realProvider ? [1, 2, 3] : [5, 10, 20])" :key="count" :value="count">{{ count }} 个用例</option></select></label>
-        <div class="eval-budget" :class="{ real: realProvider }"><strong>{{ realProvider ? '真实 API 保护已开启' : '离线回归模式' }}</strong><span>{{ realProvider ? '最多 3 条、并发 1，不会静默扩大调用。' : '使用确定性 Provider，可运行完整 20 条。' }}</span></div>
+        <label>用例数量<select v-model.number="form.case_limit"><option v-for="count in (realProvider ? [1, 2, 3] : [5, 10, 20, 30])" :key="count" :value="count">{{ count }} 个用例</option></select></label>
+        <div class="eval-budget" :class="{ real: realProvider }"><strong>{{ realProvider ? '真实 API 保护已开启' : '离线回归模式' }}</strong><span>{{ realProvider ? '最多 3 条、并发 1，不会静默扩大调用。' : '使用确定性 Provider，可运行完整 30 条。' }}</span></div>
         <div class="threshold-grid"><span>成功率 ≥ {{ percent(form.thresholds.min_success_rate) }}</span><span>平均分 ≥ {{ form.thresholds.min_average_score }}</span><span>浏览器 ≥ {{ percent(form.thresholds.min_browser_pass_rate) }}</span><span>调用数 ≤ {{ form.thresholds.max_average_agent_calls }}</span></div>
         <button class="evaluation-run-button" type="submit" :disabled="loading || Boolean(activeEvaluation)">{{ loading ? '正在创建…' : activeEvaluation ? '已有评测运行中' : `运行 ${form.case_limit} 条评测` }}</button>
       </form>

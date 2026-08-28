@@ -90,6 +90,20 @@ beforeEach(() => {
 })
 
 describe('DemoPilot control plane', () => {
+  it('offers all 30 cases for Mock while preserving the three-case real-provider cap', async () => {
+    const wrapper = mount(App)
+    await flushPromises()
+
+    const evaluation = wrapper.get('.evaluation-config')
+    expect(evaluation.text()).toContain('30 个用例')
+
+    await evaluation.findAll('select')[0].setValue('deepseek')
+    await flushPromises()
+    expect(evaluation.text()).toContain('最多 3 条')
+    expect(evaluation.text()).not.toContain('30 个用例')
+    wrapper.unmount()
+  })
+
   it('creates a DeepSeek run from the brief form', async () => {
     const created = makeRun({ status: 'queued', progress: 0, checkpoint: null })
     mocks.createRun.mockResolvedValue(created)

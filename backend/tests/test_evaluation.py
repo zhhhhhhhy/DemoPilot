@@ -42,12 +42,16 @@ def evaluation_payload(**overrides):
     return payload
 
 
-def test_builtin_suite_has_twenty_unique_cross_industry_cases():
+def test_builtin_suite_has_thirty_unique_cross_industry_cases():
     cases = builtin_evaluation_cases()
-    assert len(cases) == 20
-    assert len({case.id for case in cases}) == 20
-    assert len({case.industry for case in cases}) >= 15
+    assert len(cases) == 30
+    assert len({case.id for case in cases}) == 30
+    assert len({case.industry for case in cases}) >= 25
     assert {case.difficulty for case in cases} == {"basic", "standard", "edge"}
+    expanded = [case for case in cases if "expanded" in case.tags]
+    assert len(expanded) == 10
+    assert all(len(case.must_haves) == 3 for case in expanded)
+    assert all(case.difficulty == "edge" for case in expanded)
 
 
 def test_real_provider_budget_is_hard_limited(tmp_path):
@@ -109,7 +113,7 @@ def test_mock_evaluation_runs_full_evidence_loop_and_report(tmp_path):
     with TestClient(create_app(Settings(data_dir=tmp_path / "data"))) as client:
         cases = client.get("/api/evaluation-cases")
         assert cases.status_code == 200
-        assert len(cases.json()) == 20
+        assert len(cases.json()) == 30
 
         created = client.post("/api/evaluations", json=evaluation_payload())
         assert created.status_code == 202

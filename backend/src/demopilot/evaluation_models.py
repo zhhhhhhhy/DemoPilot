@@ -31,8 +31,8 @@ class EvaluationThresholds(BaseModel):
 
 class EvaluationRequest(BaseModel):
     provider: ProviderName = "mock"
-    case_ids: list[str] = Field(default_factory=list, max_length=20)
-    case_limit: int = Field(default=5, ge=1, le=20)
+    case_ids: list[str] = Field(default_factory=list, max_length=30)
+    case_limit: int = Field(default=5, ge=1, le=30)
     concurrency: int = Field(default=2, ge=1, le=3)
     version_label: str = Field(default="local", min_length=1, max_length=60)
     baseline_id: str | None = None

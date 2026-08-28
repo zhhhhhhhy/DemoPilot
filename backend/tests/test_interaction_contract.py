@@ -103,10 +103,10 @@ def valid_builder_files() -> dict[str, str]:
 <link rel="stylesheet" href="styles.css"></head><body>
 <p>演示数据，未连接客户生产系统</p>
 <button id="advanceButton" class="nav-item">推进</button>
-<button id="contract-nav-1">异常筛选</button><section id="contract-view-1">
+<button id="contract-nav-1" data-target="contract-view-1">异常筛选</button><section id="contract-view-1">
 <select id="contract-1-step-1"><option>高风险</option></select>
 <div id="contract-1-result">等待操作</div></section>
-<button id="contract-nav-2">创建任务</button><section id="contract-view-2">
+<button id="contract-nav-2" data-target="contract-view-2">创建任务</button><section id="contract-view-2">
 <input id="contract-2-step-1"><button id="contract-2-step-2">提交</button>
 <div id="contract-2-result">等待操作</div></section>
 <script src="app.js"></script></body></html>""",
@@ -168,3 +168,39 @@ def test_builder_preflight_reports_security_and_exact_missing_selectors():
         item for item in result["issues"] if item["code"] == "CONTRACT_SELECTORS_MISSING"
     )
     assert "#contract-2-step-1" in selector_issue["selectors"]
+
+
+def test_builder_preflight_blocks_hidden_controls_missing_views_and_duplicate_ids():
+    demo_request = request()
+    run = DemoRun(id="preflight-visibility", request=demo_request)
+    run.outputs["interaction_contract"] = compile_interaction_contract(demo_request, {})
+    files = valid_builder_files()
+    files["demo/index.html"] = (
+        files["demo/index.html"]
+        .replace('id="contract-view-2"', 'id="model-view-2"')
+        .replace(
+            'id="contract-1-step-1"',
+            'id="contract-1-step-1" class="hidden"',
+        )
+        .replace('data-target="contract-view-1"', 'data-target="wrong-view"')
+        .replace(
+            '<div id="contract-1-result">',
+            '<div id="contract-1-result"></div><div id="contract-1-result">',
+        )
+    )
+    run.outputs["builder"] = {"files": files}
+
+    result = preflight_builder_output(run)
+
+    assert result["status"] == "failed"
+    assert {
+        "control_visibility",
+        "route_mapping",
+        "route_view",
+        "selector_uniqueness",
+    }.issubset(result["failure_classes"])
+    assert any(
+        item["code"] == "CONTRACT_CONTROLS_HIDDEN"
+        and "#contract-1-step-1" in item["selectors"]
+        for item in result["issues"]
+    )
