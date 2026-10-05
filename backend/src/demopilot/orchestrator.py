@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import uuid
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from typing import Any
 
 from .browser_qa import verify_browser_interactions
@@ -12,6 +13,7 @@ from .harness import SandboxViolation, SandboxWorkspace
 from .interaction_contract import compile_interaction_contract
 from .models import AgentEvent, AgentStatus, ApprovalRequest, Artifact, DemoRun, RunStatus
 from .providers import AgentProvider
+from .providers.codex_cli import CodexCliAgentProvider
 from .reviewer import normalize_final_review, normalize_review_rubric
 from .skill_runtime import SkillProfile, SkillRegistry
 from .storage import RunStore
@@ -207,13 +209,71 @@ class DemoOrchestrator:
         )
         self.store.save(run)
         provider = self.providers[run.request.provider]
-        async with self.parallel_limit:
-            result = await provider.run_agent(
-                agent_id,
-                run.request,
-                context,
-                iteration=iteration,
+        trace_call: dict[str, Any] | None = None
+        if isinstance(provider, CodexCliAgentProvider):
+            trace = run.outputs.setdefault(
+                "codex_cli_trace",
+                {
+                    "provider": "codex_cli",
+                    "model": provider.model or "desktop-configured",
+                    "reasoning_effort": provider.reasoning_effort or "desktop-configured",
+                    "timeout_seconds": provider.timeout_seconds,
+                    "calls": [],
+                },
             )
+            trace_call = {
+                "call": run.agent_calls,
+                "agent": agent_id,
+                "stage": stage,
+                "iteration": iteration,
+                "status": "running",
+                "started_at": datetime.now(UTC).isoformat(),
+                "events": [],
+            }
+            trace["calls"].append(trace_call)
+            self.store.save(run)
+
+            def on_cli_event(event: dict[str, Any]) -> None:
+                if trace_call is None:
+                    return
+                trace_call["last_event"] = event.get("type", "unknown")
+                if isinstance(event.get("elapsed_seconds"), (int, float)):
+                    trace_call["elapsed_seconds"] = event["elapsed_seconds"]
+                if isinstance(event.get("stdout_bytes"), int):
+                    trace_call["stdout_bytes"] = event["stdout_bytes"]
+                events = trace_call.setdefault("events", [])
+                events.append(event)
+                del events[:-80]
+                self.store.save(run)
+
+        async with self.parallel_limit:
+            try:
+                if trace_call is not None:
+                    result = await provider.run_agent(
+                        agent_id,
+                        run.request,
+                        context,
+                        iteration=iteration,
+                        on_event=on_cli_event,
+                    )
+                else:
+                    result = await provider.run_agent(
+                        agent_id,
+                        run.request,
+                        context,
+                        iteration=iteration,
+                    )
+            except BaseException as exc:
+                if trace_call is not None:
+                    trace_call["status"] = "cancelled" if isinstance(exc, asyncio.CancelledError) else "failed"
+                    trace_call["error"] = str(exc)[:500]
+                    trace_call["finished_at"] = datetime.now(UTC).isoformat()
+                    self.store.save(run)
+                raise
+        if trace_call is not None:
+            trace_call["status"] = "completed"
+            trace_call["finished_at"] = datetime.now(UTC).isoformat()
+            self.store.save(run)
         latest = self.store.get(run.id)
         if latest and latest.cancel_requested:
             run.cancel_requested = True

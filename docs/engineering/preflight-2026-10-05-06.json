@@ -1,0 +1,15 @@
+{
+  "preflight_id": "demopilot-real-codex-debug-2026-10-05-02",
+  "timestamp": "2026-10-05T06:43:00Z",
+  "scope": "dev",
+  "status": "ready",
+  "checks": [
+    {"id":"source.tests","owner":"script","status":"passed","evidence":"uv run pytest -q tests/test_codex_cli_provider.py; uv run ruff check src tests","detail":"CLI JSON extraction, Windows config argument, event redaction, and provider checks pass."},
+    {"id":"frontend.tests","owner":"script","status":"passed","evidence":"npm.cmd run lint; npm.cmd run build","detail":"The UI debug trace panel builds successfully."},
+    {"id":"live.failure-preserved","owner":"hybrid","status":"passed","evidence":".data/runs/eaec331a415a/run.json; work/real-debug/run-original-timeout.json","detail":"The completed real CLI calls, preflight assertion failure, reviewer revision decision, and skipped browser gate are durable evidence."},
+    {"id":"next-revision-bound","owner":"script","status":"passed","evidence":".env DEMOPILOT_MAX_AGENT_CALLS=18; DEMOPILOT_MAX_REVISIONS=2","detail":"One additional Builder repair and a final Reviewer remain bounded; approval and browser gates stay enabled."},
+    {"id":"safety-boundary","owner":"script","status":"passed","evidence":"prompts.py; provider args; orchestrator approval path","detail":"The prompt now requires literal observable assertion text; read-only CLI and task-scoped artifact approval remain unchanged."
+    }
+  ],
+  "next_action":"Restart the API and resume the failed real run. The next Builder revision must satisfy the frozen contract before Chromium is allowed to run."
+}

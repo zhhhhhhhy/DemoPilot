@@ -8,7 +8,7 @@ import pytest
 
 from demopilot.models import DemoRequest
 from demopilot.providers.base import ProviderUnavailableError
-from demopilot.providers.codex_cli import CodexCliAgentProvider, _final_message
+from demopilot.providers.codex_cli import CodexCliAgentProvider, _final_message, _json_object
 
 
 def request() -> DemoRequest:
@@ -32,6 +32,17 @@ def test_final_message_extracts_last_agent_message():
         ]
     )
     assert _final_message(stream, "brief") == '{"status":"ok"}'
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        '{"payload":"{\\"status\\":\\"ok\\"}"} trailing explanation',
+        '```json\n{"payload":"{\\"status\\":\\"ok\\"}"}\n```',
+    ],
+)
+def test_json_object_accepts_fenced_or_trailing_text(raw):
+    assert _json_object(raw, "brief") == {"status": "ok"}
 
 
 def test_codex_cli_provider_parses_structured_json(monkeypatch, tmp_path: Path):
@@ -175,3 +186,76 @@ def test_codex_cli_provider_serializes_local_cli_calls(monkeypatch):
 
     assert asyncio.run(run_both()) == [{"agent": "ok"}, {"agent": "ok"}]
     assert max_active == 1
+
+
+def test_codex_cli_provider_streams_metadata_without_model_text(monkeypatch):
+    captured: dict[str, object] = {}
+
+    class FakeStdin:
+        def write(self, value: bytes):
+            captured["prompt"] = value
+
+        async def drain(self):
+            return None
+
+        def close(self):
+            captured["stdin_closed"] = True
+
+    class FakeStream:
+        def __init__(self, chunks: list[bytes]):
+            self.chunks = iter(chunks)
+
+        async def read(self, _size: int) -> bytes:
+            return next(self.chunks, b"")
+
+    class FakeProcess:
+        pid = 42
+        returncode = 0
+
+        def __init__(self):
+            self.stdin = FakeStdin()
+            message = json.dumps({"payload": json.dumps({"status": "ok"})})
+            agent_event = json.dumps(
+                {"type": "item.completed", "item": {"type": "agent_message", "text": message}}
+            )
+            reasoning_event = json.dumps(
+                {"type": "item.completed", "item": {"type": "reasoning", "text": "secret customer text"}}
+            )
+            self.stdout = FakeStream(
+                [
+                    b'{"type":"thread.started","thread_id":"safe-id"}\n',
+                    f"{agent_event}\n".encode(),
+                    f"{reasoning_event}\n".encode(),
+                ]
+            )
+            self.stderr = FakeStream([b""])
+
+        async def wait(self):
+            return self.returncode
+
+    async def fake_create(*args, **kwargs):
+        captured["args"] = args
+        return FakeProcess()
+
+    monkeypatch.setattr(
+        "demopilot.providers.codex_cli.shutil.which",
+        lambda _command: r"C:\\Users\\demo\\AppData\\Roaming\\npm\\codex.exe",
+    )
+    monkeypatch.setattr("demopilot.providers.codex_cli.asyncio.create_subprocess_exec", fake_create)
+    events: list[dict[str, object]] = []
+
+    result = asyncio.run(
+        CodexCliAgentProvider(reasoning_effort="low").run_agent(
+            "brief", request(), {}, on_event=events.append
+        )
+    )
+
+    assert result == {"status": "ok"}
+    assert captured["stdin_closed"] is True
+    assert any(event["type"] == "process.started" for event in events)
+    assert any(event["type"] == "thread.started" for event in events)
+    assert any(event["type"] == "process.exited" for event in events)
+    serialized_events = json.dumps(events, ensure_ascii=False)
+    assert "secret customer text" not in serialized_events
+    args = list(captured["args"])
+    assert "model_reasoning_effort=low" in args

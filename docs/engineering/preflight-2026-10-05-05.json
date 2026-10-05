@@ -1,0 +1,44 @@
+{
+  "preflight_id": "demopilot-real-codex-debug-2026-10-05-01",
+  "timestamp": "2026-10-05T06:29:00Z",
+  "scope": "dev",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "source.tests",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv run pytest -q tests/test_codex_cli_provider.py; uv run ruff check src tests",
+      "detail": "Provider parsing, Windows argument construction, event redaction, and process cleanup checks pass."
+    },
+    {
+      "id": "frontend.tests",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "npm.cmd run lint; npm.cmd run build",
+      "detail": "The debug trace panel type-checks, lints, and builds."
+    },
+    {
+      "id": "live.failure-preserved",
+      "owner": "hybrid",
+      "status": "passed",
+      "evidence": "work/real-debug/run-original-timeout.json; .data/runs/eaec331a415a/run.json",
+      "detail": "Timeout, invalid Windows -c quoting, and structured-output parse failures remain visible as separate live run states; no Mock fallback or artifact fabrication occurred."
+    },
+    {
+      "id": "cli.authentication",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status; GET /api/health",
+      "detail": "The locally authenticated Codex CLI is available and registered by the API."
+    },
+    {
+      "id": "safety.boundary",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "provider args and orchestrator approval path",
+      "detail": "CLI agents remain read-only; DemoPilot still requires the existing task-scoped approval before artifact writes; trace excludes model text and customer input."
+    }
+  ],
+  "next_action": "Observe the resumed Builder, then complete real Runner, browser evidence, Reviewer, and approval gates without switching to Mock."
+}

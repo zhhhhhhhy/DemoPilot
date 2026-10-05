@@ -133,6 +133,7 @@ codex login status
 ```dotenv
 DEMOPILOT_CODEX_COMMAND=codex
 DEMOPILOT_CODEX_MODEL=
+DEMOPILOT_CODEX_REASONING_EFFORT=medium
 DEMOPILOT_CODEX_TIMEOUT_SECONDS=180
 ```
 
@@ -144,7 +145,7 @@ DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-v4-flash
 ```
 
-没有 API Key 也可以启动项目，并在界面中选择 **Mock** 完成确定性的离线全流程回归。Mock 会明确标记为 `controlled_template_fallback`，不会冒充真实模型生成。
+没有 API Key 也可以启动项目，并在界面中选择 **Mock** 完成确定性的离线全流程回归。Mock 是固定 Provider：它不启动模型进程，结果用于验证编排、门禁和 UI 回归；运行会明确标记为 `controlled_template_fallback`，不会冒充真实模型生成。选择 **Codex CLI** 才会启动本机已登录的 `codex exec --json`，并在运行记录中保存进程事件、心跳、退出码、耗时和 token 计数。
 
 可选 Provider 还支持同样格式的 `AIHUBMIX_*` 与 `ZJU_*` 配置。Claude 默认禁用；如需启用，只使用 Anthropic 官方 SDK，详见[可选：Claude 官方 SDK](#可选claude-官方-sdk)。
 
@@ -319,6 +320,7 @@ DemoPilot/
 | `DEMOPILOT_ENABLE_CLAUDE` | `false` | 是否启用 Claude 官方 SDK |
 | `DEMOPILOT_CODEX_COMMAND` | `codex` | Codex CLI 可执行命令或路径 |
 | `DEMOPILOT_CODEX_MODEL` | 空 | 可选的 Codex CLI 模型覆盖 |
+| `DEMOPILOT_CODEX_REASONING_EFFORT` | `medium` | DemoPilot 自己的推理强度覆盖，不修改桌面版配置 |
 | `DEMOPILOT_CODEX_TIMEOUT_SECONDS` | `180` | 单次 Codex CLI 调用超时 |
 | `DEEPSEEK_API_KEY` | 空 | DeepSeek API 密钥 |
 | `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | DeepSeek API 地址 |

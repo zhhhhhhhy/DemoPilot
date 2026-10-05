@@ -1,0 +1,58 @@
+{
+  "preflight_id": "demopilot-real-codex-browser-2026-10-05-01",
+  "timestamp": "2026-10-05T05:23:21.487Z",
+  "scope": "dev",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "checkout.clean",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git status --short --branch; git log -1 --oneline",
+      "detail": "main is aligned with origin/main at d4651a8 and the working tree is clean."
+    },
+    {
+      "id": "runtime.backend",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "backend: uv run python -c \"import demopilot\"; pytest --collect-only -q",
+      "detail": "Backend import works from backend root and 47 tests are collectible."
+    },
+    {
+      "id": "runtime.frontend",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "npm.cmd --version; node --version; frontend/package.json; node_modules present",
+      "detail": "Node/npm and the Vite/Vue dependencies are available."
+    },
+    {
+      "id": "runtime.codex_cli",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status",
+      "detail": "codex-cli 0.160.0 is installed and logged in using ChatGPT."
+    },
+    {
+      "id": "provider.registration",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "backend/src/demopilot/main.py; CodexCliAgentProvider.available()",
+      "detail": "The API registers codex_cli when the local executable is available."
+    },
+    {
+      "id": "service.boundary",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "Get-NetTCPConnection -LocalPort 5173,8091 -State Listen",
+      "detail": "The planned local service ports are free before startup."
+    },
+    {
+      "id": "side_effects",
+      "owner": "hybrid",
+      "status": "passed",
+      "evidence": "provider implementation and request scope",
+      "detail": "The real run uses a small local synthetic brief, read-only Codex agent sandboxing, and DemoPilot's existing task approval before artifact writes."
+    }
+  ],
+  "next_action": "Start local API and Vite, fill a bounded synthetic intent in the browser, select Codex CLI, submit, approve only the task-scoped artifact write, and preserve run events plus browser evidence."
+}

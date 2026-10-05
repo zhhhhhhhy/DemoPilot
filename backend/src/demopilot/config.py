@@ -25,6 +25,11 @@ def _positive_float(name: str, default: float, maximum: float) -> float:
     return max(1.0, min(value, maximum))
 
 
+def _reasoning_effort() -> str:
+    value = os.getenv("DEMOPILOT_CODEX_REASONING_EFFORT", "medium").strip().lower()
+    return value if value in {"low", "medium", "high", "xhigh", "max", "ultra"} else "medium"
+
+
 @dataclass(frozen=True, slots=True)
 class CompatibleProviderSettings:
     name: str
@@ -55,6 +60,9 @@ class Settings:
     )
     codex_command: str = field(default_factory=lambda: os.getenv("DEMOPILOT_CODEX_COMMAND", "codex"))
     codex_model: str = field(default_factory=lambda: os.getenv("DEMOPILOT_CODEX_MODEL", ""))
+    # This is a DemoPilot-only override. It does not modify the user's desktop
+    # Codex configuration and is recorded with each live call for debugging.
+    codex_reasoning_effort: str = field(default_factory=_reasoning_effort)
     codex_timeout_seconds: float = field(
         default_factory=lambda: _positive_float("DEMOPILOT_CODEX_TIMEOUT_SECONDS", 180.0, 900.0)
     )

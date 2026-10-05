@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -17,17 +18,22 @@ from .base import ProviderUnavailableError
 
 def _json_object(raw: str, agent_id: str) -> dict[str, Any]:
     raw = raw.strip()
-    try:
-        value = json.loads(raw)
-    except json.JSONDecodeError:
-        start = raw.find("{")
-        end = raw.rfind("}")
-        if start < 0 or end <= start:
-            raise RuntimeError(f"Codex CLI agent {agent_id} did not return a JSON object") from None
+    value: object | None = None
+    # ``agent_message`` may contain a fenced JSON object or a short sentence
+    # after the object even when --output-schema was requested. Decode the
+    # first complete JSON value instead of slicing through the final brace;
+    # this also handles large nested payloads safely.
+    decoder = json.JSONDecoder()
+    start = raw.find("{")
+    if start >= 0:
         try:
-            value = json.loads(raw[start : end + 1])
-        except json.JSONDecodeError as exc:
-            raise RuntimeError(f"Codex CLI agent {agent_id} returned invalid JSON") from exc
+            value, _ = decoder.raw_decode(raw[start:])
+        except json.JSONDecodeError:
+            value = None
+    if value is None:
+        raise RuntimeError(
+            f"Codex CLI agent {agent_id} did not return a valid JSON object"
+        )
     if not isinstance(value, dict):
         raise RuntimeError(f"Codex CLI agent {agent_id} returned a non-object payload")
     # `codex exec --output-schema` currently requires a closed schema.  The
@@ -129,6 +135,7 @@ class CodexCliAgentProvider:
 
     command: str = "codex"
     model: str = ""
+    reasoning_effort: str = "medium"
     timeout_seconds: float = 180.0
     cwd: Path | None = None
     _gate: asyncio.Semaphore | None = field(default=None, init=False, repr=False)
@@ -157,6 +164,7 @@ class CodexCliAgentProvider:
         context: dict[str, Any],
         *,
         iteration: int = 0,
+        on_event: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
         # A single local CLI process at a time avoids competing auth/session
         # state when the orchestrator starts Product, Experience, and Reviewer
@@ -166,7 +174,7 @@ class CodexCliAgentProvider:
             self._gate = asyncio.Semaphore(1)
         async with self._gate:
             return await self._run_agent_once(
-                agent_id, request, context, iteration=iteration
+                agent_id, request, context, iteration=iteration, on_event=on_event
             )
 
     async def _run_agent_once(
@@ -176,6 +184,7 @@ class CodexCliAgentProvider:
         context: dict[str, Any],
         *,
         iteration: int = 0,
+        on_event: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
         executable = self.executable()
         if not executable:
@@ -208,6 +217,10 @@ class CodexCliAgentProvider:
         ]
         if self.model:
             args[1:1] = ["--model", self.model]
+        if self.reasoning_effort:
+            # A bare enum avoids an extra round of escaping when a Windows
+            # .cmd shim forwards argv through ``cmd /c``.
+            args[1:1] = ["-c", f"model_reasoning_effort={self.reasoning_effort}"]
         command = self._command_args(executable, args)
         process: asyncio.subprocess.Process | None = None
         try:
@@ -218,16 +231,25 @@ class CodexCliAgentProvider:
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
-            stdout, stderr = await asyncio.wait_for(
-                process.communicate(prompt.encode("utf-8")), timeout=self.timeout_seconds
-            )
+            if on_event is None:
+                stdout, stderr = await asyncio.wait_for(
+                    process.communicate(prompt.encode("utf-8")), timeout=self.timeout_seconds
+                )
+            else:
+                stdout, stderr = await self._communicate_with_events(
+                    process, prompt.encode("utf-8"), on_event
+                )
         except TimeoutError as exc:
             if process is not None:
                 await _terminate_process_tree(process)
+            if on_event is not None:
+                on_event({"type": "process.timeout"})
             raise RuntimeError(f"Codex CLI agent {agent_id} timed out") from exc
         except asyncio.CancelledError:
             if process is not None:
                 await _terminate_process_tree(process)
+            if on_event is not None:
+                on_event({"type": "process.cancelled"})
             raise
         except OSError as exc:
             raise ProviderUnavailableError("Codex CLI could not be started") from exc
@@ -257,3 +279,131 @@ class CodexCliAgentProvider:
             )
         message = _final_message(stdout.decode("utf-8", errors="replace"), agent_id)
         return _json_object(message, agent_id)
+
+    async def _communicate_with_events(
+        self,
+        process: asyncio.subprocess.Process,
+        prompt: bytes,
+        on_event: Callable[[dict[str, Any]], None],
+    ) -> tuple[bytes, bytes]:
+        """Send one prompt while preserving a safe, metadata-only event trace.
+
+        The normal provider path intentionally uses ``communicate`` for simple
+        compatibility with older CLI wrappers. The live DemoPilot path opts in
+        here so a run can show whether the authenticated process started,
+        emitted JSONL, is still waiting, or exited. Event payloads are reduced
+        to types, counters, timings and usage; model text and customer inputs
+        never enter the durable trace.
+        """
+
+        started = asyncio.get_running_loop().time()
+        stdout_bytes = 0
+        on_event(
+            {
+                "type": "process.started",
+                "pid": process.pid,
+                "model": self.model or "desktop-configured",
+                "reasoning_effort": self.reasoning_effort or "desktop-configured",
+            }
+        )
+
+        async def read_stream(
+            stream: asyncio.StreamReader | None,
+            *,
+            is_stdout: bool,
+        ) -> bytes:
+            nonlocal stdout_bytes
+            if stream is None:
+                return b""
+            collected = bytearray()
+            pending = bytearray()
+            while True:
+                chunk = await stream.read(65536)
+                if not chunk:
+                    break
+                collected.extend(chunk)
+                if is_stdout:
+                    stdout_bytes += len(chunk)
+                    pending.extend(chunk)
+                    while b"\n" in pending:
+                        raw_line, _, remainder = pending.partition(b"\n")
+                        pending = bytearray(remainder)
+                        self._emit_jsonl_event(raw_line, on_event, started, stdout_bytes)
+            if is_stdout and pending:
+                self._emit_jsonl_event(bytes(pending), on_event, started, stdout_bytes)
+            return bytes(collected)
+
+        async def heartbeat() -> None:
+            while True:
+                await asyncio.sleep(15)
+                on_event(
+                    {
+                        "type": "process.heartbeat",
+                        "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1),
+                        "stdout_bytes": stdout_bytes,
+                    }
+                )
+
+        if process.stdin is not None:
+            process.stdin.write(prompt)
+            await process.stdin.drain()
+            process.stdin.close()
+        stdout_task = asyncio.create_task(read_stream(process.stdout, is_stdout=True))
+        stderr_task = asyncio.create_task(read_stream(process.stderr, is_stdout=False))
+        heartbeat_task = asyncio.create_task(heartbeat())
+        try:
+            await asyncio.wait_for(process.wait(), timeout=self.timeout_seconds)
+            stdout, stderr = await asyncio.gather(stdout_task, stderr_task)
+        except BaseException:
+            for task in (stdout_task, stderr_task, heartbeat_task):
+                task.cancel()
+            await asyncio.gather(stdout_task, stderr_task, heartbeat_task, return_exceptions=True)
+            raise
+        finally:
+            heartbeat_task.cancel()
+            await asyncio.gather(heartbeat_task, return_exceptions=True)
+        on_event(
+            {
+                "type": "process.exited",
+                "returncode": process.returncode,
+                "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1),
+                "stdout_bytes": stdout_bytes,
+            }
+        )
+        return stdout, stderr
+
+    @staticmethod
+    def _emit_jsonl_event(
+        raw_line: bytes,
+        on_event: Callable[[dict[str, Any]], None],
+        started: float,
+        stdout_bytes: int,
+    ) -> None:
+        try:
+            event = json.loads(raw_line.decode("utf-8", errors="replace"))
+        except json.JSONDecodeError:
+            return
+        if not isinstance(event, dict):
+            return
+        safe: dict[str, Any] = {
+            "type": event.get("type", "unknown"),
+            "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1),
+            "stdout_bytes": stdout_bytes,
+        }
+        item = event.get("item")
+        if isinstance(item, dict) and isinstance(item.get("type"), str):
+            safe["item_type"] = item["type"]
+        for key in ("status", "thread_id", "error_code"):
+            value = event.get(key)
+            if isinstance(value, (str, int, float, bool)):
+                safe[key] = value
+        usage = event.get("usage")
+        if isinstance(usage, dict):
+            safe_usage = {
+                key: usage[key]
+                for key in ("input_tokens", "cached_input_tokens", "output_tokens", "reasoning_output_tokens")
+                if isinstance(usage.get(key), int)
+            }
+            if safe_usage:
+                safe["usage"] = safe_usage
+        on_event(safe)

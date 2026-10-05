@@ -19,4 +19,5 @@ class AgentProvider(Protocol):
         context: dict[str, Any],
         *,
         iteration: int = 0,
+        on_event: Any | None = None,
     ) -> dict[str, Any]: ...

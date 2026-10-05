@@ -37,6 +37,24 @@ interface ReviewerOutput {
   evidence: { source_mode?: string; browser_status?: string; validator_issue_count?: number }
 }
 
+interface CodexTraceCall {
+  call: number
+  agent: string
+  status: string
+  last_event?: string
+  elapsed_seconds?: number
+  stdout_bytes?: number
+  error?: string
+}
+
+interface CodexTrace {
+  provider: string
+  model: string
+  reasoning_effort: string
+  timeout_seconds: number
+  calls: CodexTraceCall[]
+}
+
 const runs = ref<DemoRun[]>([])
 const templates = ref<DemoTemplate[]>([])
 const selectedRunId = ref<string | null>(null)
@@ -72,6 +90,11 @@ const demoArtifact = computed(() => selectedRun.value?.artifacts.find((artifact)
 const archiveArtifact = computed(() => selectedRun.value?.artifacts.find((artifact) => artifact.kind === 'archive'))
 const pendingApproval = computed(() => selectedRun.value?.approvals?.find((approval) => approval.status === 'pending'))
 const recentReceipts = computed(() => selectedRun.value?.tool_receipts?.slice(-6).reverse() ?? [])
+const codexCliTrace = computed<CodexTrace | null>(() => {
+  const raw = selectedRun.value?.outputs?.codex_cli_trace
+  if (!raw || !Array.isArray(raw.calls)) return null
+  return raw as unknown as CodexTrace
+})
 
 const defaultIntentBoundary = ['交付纯展示型静态 Demo，不连接客户生产系统', '业务数据使用本地虚构样例，交互仅在浏览器内模拟']
 const defaultIntentAcceptance = ['每项必须能力都有可操作控件和可见结果', '生成文件、交互契约与浏览器验证全部通过', 'Reviewer 能根据证据给出独立结论']
@@ -438,6 +461,7 @@ onBeforeUnmount(stopLiveUpdates)
             <div v-else class="preview-wait"><div class="preview-pulse">D</div><h3>{{ selectedRun.status === 'failed' ? '生成中断' : selectedRun.status === 'waiting_approval' ? '等待批准后生成' : selectedRun.status === 'cancelled' ? '任务已取消' : '团队正在搭建 Demo' }}</h3><p>{{ selectedRun.error || '完成后，这里会出现可交互预览。' }}</p></div>
           </article>
         </div>
+        <details v-if="codexCliTrace" class="codex-trace delivery-trace"><summary>Codex CLI 调试记录 · {{ codexCliTrace.reasoning_effort }} · {{ codexCliTrace.calls.length }} 次真实调用</summary><div class="trace-meta"><span>模型：{{ codexCliTrace.model }}</span><span>单调用上限：{{ codexCliTrace.timeout_seconds }} 秒</span></div><div class="trace-call" v-for="call in codexCliTrace.calls" :key="`${call.call}-${call.agent}`"><span :class="`trace-dot trace-${call.status}`"></span><div><strong>#{{ call.call }} {{ call.agent }}</strong><small>{{ call.status }} · {{ call.last_event ?? '等待事件' }} · {{ call.elapsed_seconds ?? 0 }}s · {{ call.stdout_bytes ?? 0 }} bytes</small><em v-if="call.error">{{ call.error }}</em></div></div><p class="trace-note">只保留进程状态、事件类型、耗时和计数，不保存模型思考内容或客户输入。</p></details>
         <article v-if="reviewerOutput" class="reviewer-panel">
           <div class="reviewer-heading">
             <div><span class="section-kicker">INDEPENDENT REVIEWER</span><h3>需求、项目与证据的独立评审</h3><p>Reviewer 属于 Agent Team，但不修改文件，也不接受 Builder 自报完成。</p></div>

@@ -46,6 +46,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     codex_provider = CodexCliAgentProvider(
         command=settings.codex_command,
         model=settings.codex_model,
+        reasoning_effort=settings.codex_reasoning_effort,
         timeout_seconds=settings.codex_timeout_seconds,
     )
     if codex_provider.available():
