@@ -166,19 +166,29 @@ def _run_evaluation_contract(
                         locator.select_option(value=value, timeout=5_000)
                 else:
                     raise ValueError(f"不支持的动作：{action}")
-                page.wait_for_timeout(100)
                 if isinstance(assertions, dict):
                     for target, expected in assertions.items():
                         target = str(target)
                         if not _SAFE_SELECTOR.fullmatch(target) or not isinstance(expected, dict):
                             raise ValueError("断言选择器或断言格式错误")
                         target_locator = page.locator(target)
-                        actual = " ".join(
-                            (target_locator.nth(i).text_content() or "")
-                            for i in range(target_locator.count())
-                        )
-                        missing = [str(item) for item in expected.get("contains", []) if str(item) not in actual]
-                        present = [str(item) for item in expected.get("excludes", []) if str(item) in actual]
+                        deadline = asyncio.get_running_loop().time() + 2.5
+                        actual = ""
+                        missing: list[str] = []
+                        present: list[str] = []
+                        while True:
+                            actual = " ".join(
+                                (target_locator.nth(i).text_content() or "")
+                                for i in range(target_locator.count())
+                            )
+                            missing = [str(item) for item in expected.get("contains", []) if str(item) not in actual]
+                            present = [str(item) for item in expected.get("excludes", []) if str(item) in actual]
+                            changed = not expected.get("changed") or actual != before.get(target, "")
+                            if not missing and not present and changed:
+                                break
+                            if asyncio.get_running_loop().time() >= deadline:
+                                break
+                            page.wait_for_timeout(100)
                         if missing or present:
                             raise AssertionError(
                                 f"{target}: missing={missing[:4]}, present={present[:4]}, actual={actual[:240]}"

@@ -33,7 +33,7 @@ requirements 必须逐字、逐项、同序覆盖 customer_request.must_haves，
     "builder": """生成一个受控静态 Web Demo 的真实文件内容，而不是只给计划。只允许交付 demo/index.html、demo/styles.css、demo/app.js；系统会在任务级沙箱内写入它们，并另行生成规格、讲解词、QA 和 ZIP。不得引入数据库、大型库、包管理器或外部服务；所有业务数据和状态必须使用本地 JavaScript 虚构样例并支持一键重置。
 files 必须是对象，且严格含三个字符串键：demo/index.html、demo/styles.css、demo/app.js。HTML 只能引用相对路径 styles.css 和 app.js，不得内联脚本/事件，不得引用网络资源、iframe 或后端接口；JS 不得 fetch、WebSocket、Cookie、eval、localStorage，不得通过 innerHTML 插入任何非空内容，优先使用 textContent、createElement、replaceChildren 和 DOM API。
 页面必须明确显示“未连接客户生产系统”，至少实现这些固定真实交互：导航高亮切换、三幕故事逐步推进、核心能力卡片展示、任务数量随真实表单创建变化。HTML 必须包含 advanceButton、timeline、progressLabel、taskCount、featureChips 与 nav-item。advanceButton 点击后必须同时更新 progressLabel 和 timeline 的当前幕视觉状态，确保点击前后的 progressLabel 不同；taskCount 应准确反映当前模拟任务数量。JS 必须以 `const data = {合法 JSON};` 开头，紧接 `let current`。严格按这个数据契约：`const data = {"story":["第一幕：...","第二幕：...","第三幕：..."],"features":["客户 must-have 原文 1","客户 must-have 原文 2"]}; let current = 0;`。story 必须恰好是 3 个字符串；features 必须逐字包含 customer_request.must_haves 的每一项，不能改写成对象、分类或近义词。必须绑定 advanceButton click、nav-item active 切换并渲染 data.features。
-如果 customer_request.evaluation_assets 非空，必须把每个路径最后的文件名作为 `assets/<filename>` 的相对路径使用，在页面中提供可见的本地输入素材区，并为每张图片显示文件名或对应样例标签；图片可以由 HTML 直接引用，也可以由 JS 根据当前选择动态设置相对路径。不要把绝对路径写入 HTML，也不要省略这些输入素材。素材由 Harness 在 Runner 前按 SHA-256 复制到 Demo 沙箱。
+如果 customer_request.evaluation_assets 非空，必须把每个文件名作为 `assets/<filename>` 的相对路径使用；如果素材路径带有子目录，保留 `assets/<子目录>/<filename>`（发票素材使用 `assets/invoices/<filename>`）。在页面中提供可见的本地输入素材区，并为每张图片显示文件名或对应样例标签；图片可以由 HTML 直接引用，也可以由 JS 根据当前选择动态设置相对路径。不要把绝对路径写入 HTML，也不要省略这些输入素材。素材由 Harness 在 Runner 前按 SHA-256 复制到 Demo 沙箱。
 每项 must_haves 都必须对应可识别的业务模块、虚构样例数据和至少一个适合静态页面的真实前端交互；使用 button、input、select 等原生可操作控件，并为状态变化提供页面内可见反馈。允许使用表单、筛选、状态流转、弹层和看板，但不得声称已写入真实系统。CSS 必须写入客户 primary_color 的原始十六进制值并响应移动端。
   prior_results.interaction_contract 是 Contract Agent 与 Harness 编译后冻结的内部共享协议。必须逐项实现其中 route、elements 和 test 指定的全部稳定 selector、控件类型、演示值、操作顺序和可见断言；不得重命名、隐藏、删除、替换或自行发明另一套选择器。每个 selector ID 全页只能出现一次。每个 route.nav_selector 必须是始终可见的原生 button，并设置 `data-target="contract-view-N"`，其值必须逐字等于对应 route.view_selector 去掉 # 后的 ID；统一用 `document.getElementById(button.dataset.target)` 切换视图，禁止自行拼接、replace 或另造 view1/view-1/overview 等映射。点击 nav_selector 后对应 route.view_selector 必须可见；每条 test 必须能从页面初始状态独立执行。所有 action=click 的步骤必须直接绑定在带该冻结 ID 的原生 button/a/input 上，绝不能把 ID 放在 div、隐藏占位按钮或代理控件上。契约步骤控件自身不得带 hidden、hidden class、aria-hidden=true、display:none 或 visibility:hidden；即使是分步流程，也让下一步的冻结控件保持可见，只通过 disabled 状态、说明文本和结果区表达流程。interaction_tests 只能原样复制 interaction_contract 中每项 test，不能自行改写。
   若需求包含筛选和排序：测试必须先选择至少一个非空筛选条件，再点击排序，并断言筛选外的数据仍未出现；排序必须作用于当前过滤结果，不能恢复全部数据。若包含钻取：点击异常后断言关联仓、门店与货品信息出现。若包含方案比较：冻结的“选择方案”和“确认方案”按钮都必须从对应页面加载时可见，前一步点击只改变选择状态，不负责临时创建或显示下一步按钮。若包含带校验的任务创建：填写负责人、数量、说明后提交，断言任务数或任务列表变化。若包含状态机/时间线：在创建任务后推进状态，断言状态和时间线变化。若包含重置：先改变数据再点击重置，断言恢复初始状态。为这些测试涉及的控件与结果区提供稳定、唯一的 id。
@@ -51,6 +51,13 @@ dimension_scores 必须返回全部六项并遵守满分：requirement_coverage 
 }
 
 
+CORE_BUILDER_INSTRUCTIONS = """你现在负责 Agent Core 评测用例的核心生成。直接返回一个可运行的受控静态 Web Demo，不要写 brief、方案说明或 Markdown。
+files 必须严格包含三个字符串键：demo/index.html、demo/styles.css、demo/app.js。HTML 只能引用相对 styles.css 和 app.js；禁止 fetch、WebSocket、Cookie、eval、localStorage、外部网络、iframe、后端接口和非空 innerHTML。业务数据只能来自本地 JavaScript，页面必须显示“未连接客户生产系统”。
+customer_request 中的 evaluation_intent 是意图，evaluation_goal 是目标，evaluation_flow_steps 是业务流程，evaluation_method 是验收方式；四者必须同时落实。evaluation_browser_contract 只提供控件、动作和数据形状，断言文本被 Runner 保留，不会提供给你，不要猜测或硬编码隐藏金标准。
+必须逐字实现 evaluation_browser_contract.tests 中的 selector、action、value 和相对业务结果；控件使用原生可见 input、select、button。每条路径从初始页面可执行，选择/填写后要更新可见结果，切换不同输入必须清空或更新前一条结果。若 evaluation_assets 非空，所有素材都要通过相对 `assets/<filename>` 或保留子目录的 `assets/<子目录>/<filename>` 路径在 HTML 或 JS 的本地数据中出现（发票素材使用 `assets/invoices/<filename>`），并在页面显示每个文件名或样例标签；不得省略后续素材。
+保留 DemoPilot 基本可讲解结构：三幕 story、features、advanceButton、timeline、progressLabel、taskCount、featureChips、nav-item 和可重置的浏览器内状态。优先完成评测契约闭环，不增加无关功能。返回前检查三个文件齐全、所有冻结 selector 存在且可见、每个素材文件名可追踪、静态安全规则通过。"""
+
+
 def build_agent_prompt(
     agent_id: str,
     request: DemoRequest,
@@ -61,6 +68,8 @@ def build_agent_prompt(
     instruction = AGENT_INSTRUCTIONS.get(agent_id)
     if not instruction:
         raise ValueError(f"Unknown prompt agent: {agent_id}")
+    if agent_id == "builder" and request.evaluation_mode == "core_generation":
+        instruction = CORE_BUILDER_INSTRUCTIONS
     engineering_skills = context.get("__engineering_skills__", {})
     prior_results = {
         key: value for key, value in context.items() if key != "__engineering_skills__"

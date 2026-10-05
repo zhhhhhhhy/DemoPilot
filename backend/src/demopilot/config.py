@@ -64,7 +64,7 @@ class Settings:
     # Codex configuration and is recorded with each live call for debugging.
     codex_reasoning_effort: str = field(default_factory=_reasoning_effort)
     codex_timeout_seconds: float = field(
-        default_factory=lambda: _positive_float("DEMOPILOT_CODEX_TIMEOUT_SECONDS", 180.0, 900.0)
+        default_factory=lambda: _positive_float("DEMOPILOT_CODEX_TIMEOUT_SECONDS", 300.0, 900.0)
     )
     allowed_origins: tuple[str, ...] = (
         "http://localhost:5173",

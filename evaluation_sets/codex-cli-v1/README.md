@@ -39,9 +39,16 @@ browser interactions, artifact validation, safety boundaries, and Reviewer
 evidence. It does not claim that the generated Demo correctly performs OCR.
 For cases with assets, the Runner checksum-verifies and copies the JPG files
 into the run-scoped Demo package; the Builder must reference each copied file
-through a relative `assets/<filename>` path, either directly in HTML or through
-the page's local JavaScript data. This makes the input material part of the
-browser-tested artifact without giving the model the held-out gold.
+through a relative `assets/<filename>` path or its preserved subdirectory (the
+invoice fixtures use `assets/invoices/<filename>`). This makes the input
+material part of the browser-tested artifact without giving the model the
+held-out gold.
+
+In `core_generation` mode the authored case is the source of truth: the
+orchestrator seeds the frozen browser contract, then calls the real Codex CLI
+Builder, deterministic gates, Runner/Chromium, and independent Reviewer. It
+does not spend model calls on the ordinary Brief/Manager/Discovery design
+chain, and it never silently falls back to Mock.
 
 ## Run the set
 
@@ -67,6 +74,7 @@ uv run --project backend python scripts/run_codex_cli_eval_set.py --real
 The script writes only a new JSON result under `results/` and stores normal
 DemoPilot run evidence under `.data/runs/`. It checks that the backend reports
 `codex_cli=true`, refuses to start without `--real`, and never sends the held-
+out `invoice-gold.json` to Codex CLI.
 
 The checked-in result files are evidence records, including failed real runs.
 Do not turn a failed or incomplete run into a pass by editing its JSON; run the

@@ -106,6 +106,24 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
     outputs = run.get("outputs", {})
     validation = outputs.get("artifact_validation", {})
     browser = validation.get("browser_e2e", {}) if isinstance(validation, dict) else {}
+    # A later failed revision can overwrite the final artifact summary after an
+    # earlier revision already exercised Chromium. Preserve the strongest
+    # observed browser evidence in the case result instead of reporting only
+    # the last checkpoint.
+    validation_candidates = [
+        value
+        for key, value in outputs.items()
+        if key.startswith("artifact_validation_iteration_") and isinstance(value, dict)
+    ]
+    for candidate in validation_candidates:
+        candidate_browser = candidate.get("browser_e2e", {})
+        if isinstance(candidate_browser, dict) and candidate_browser.get("status") in {
+            "passed",
+            "failed",
+            "unavailable",
+        }:
+            validation = candidate
+            browser = candidate_browser
     reviewer = outputs.get("reviewer", {})
     if not isinstance(reviewer, dict):
         reviewer = {}
@@ -121,6 +139,8 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         "revision_count": run.get("revision_count", 0),
         "artifact_status": validation.get("status", "not_run"),
         "browser_status": browser.get("status", "not_run"),
+        "browser_checks": browser.get("checks", []),
+        "browser_issues": browser.get("issues", []),
         "reviewer_decision": reviewer.get("decision"),
         "reviewer_score": reviewer.get("overall_score"),
         "artifact_count": len(run.get("artifacts", [])),

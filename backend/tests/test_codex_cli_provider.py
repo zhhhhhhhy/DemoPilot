@@ -129,6 +129,42 @@ def test_codex_cli_prompt_contains_agent_core_evaluation_contract():
     assert "assertions" not in prompt
 
 
+def test_core_builder_prompt_uses_core_generation_contract_without_gold():
+    evaluated = request().model_copy(
+        update={
+            "evaluation_mode": "core_generation",
+            "evaluation_case_id": "simple-invoice-ocr-01",
+            "evaluation_intent": "把图片变成可复核的本地演示。",
+            "evaluation_goal": "切换输入后看到可见结果变化。",
+            "evaluation_flow_steps": ["选择素材", "执行处理", "复核结果"],
+            "evaluation_method": ["Chromium 点击并检查可见状态"],
+            "evaluation_assets": ["invoice-01.jpg"],
+            "evaluation_browser_contract": {
+                "tests": [
+                    {
+                        "id": "gold-path",
+                        "steps": [
+                            {
+                                "action": "click",
+                                "selector": "#recognize",
+                                "assertions": {"#fields": {"contains": ["HIDDEN_GOLD"]}},
+                            }
+                        ],
+                    }
+                ]
+            },
+        }
+    )
+
+    prompt = build_agent_prompt("builder", evaluated, {})
+
+    assert "Agent Core 评测用例的核心生成" in prompt
+    assert "evaluation_intent" in prompt
+    assert "assets/<filename>" in prompt
+    assert "HIDDEN_GOLD" not in prompt
+    assert "assertions" not in prompt
+
+
 def test_codex_cli_provider_fails_closed_when_unavailable(monkeypatch):
     monkeypatch.setattr("demopilot.providers.codex_cli.shutil.which", lambda _command: None)
     provider = CodexCliAgentProvider(command="missing-codex")

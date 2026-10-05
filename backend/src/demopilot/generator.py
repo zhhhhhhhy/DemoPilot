@@ -131,10 +131,19 @@ def generate_artifacts(
         if not digest:
             raise ValueError(f"评测素材缺少 SHA-256：{source_name}")
         target_name = source.name
-        workspace.copy_fixture(
-            f"artifacts/demo/assets/{target_name}", source, digest
+        source_group = source.parent.name
+        relative_dir = (
+            f"assets/{source_group}"
+            if source_group and source_group not in {".", "assets"}
+            else "assets"
         )
-        mounted_assets.append({"name": target_name, "sha256": digest})
+        relative_path = f"{relative_dir}/{target_name}"
+        workspace.copy_fixture(
+            f"artifacts/demo/{relative_path}", source, digest
+        )
+        mounted_assets.append(
+            {"name": target_name, "path": relative_path, "sha256": digest}
+        )
 
     index_html = f"""<!doctype html>
 <html lang="zh-CN">

@@ -1,0 +1,29 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-05T11:00:49.583315+00:00",
+  "provider": "codex_cli",
+  "real_runs": true,
+  "case_count": 1,
+  "tier_counts": {
+    "simple": 1
+  },
+  "results": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "name": "发票文字识别台",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "run_id": "b7ea89a5f618",
+      "status": "failed",
+      "quality_gate": "failed",
+      "agent_calls": 6,
+      "revision_count": 4,
+      "artifact_status": "failed",
+      "browser_status": "skipped",
+      "reviewer_decision": null,
+      "reviewer_score": null,
+      "artifact_count": 0,
+      "error": "Codex CLI agent reviewer timed out"
+    }
+  ]
+}

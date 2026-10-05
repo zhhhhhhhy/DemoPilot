@@ -1,0 +1,29 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-05T10:35:25.160534+00:00",
+  "provider": "codex_cli",
+  "real_runs": true,
+  "case_count": 1,
+  "tier_counts": {
+    "simple": 1
+  },
+  "results": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "name": "发票文字识别台",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "run_id": "b2ff1c3e5353",
+      "status": "failed",
+      "quality_gate": "failed",
+      "agent_calls": 1,
+      "revision_count": 0,
+      "artifact_status": "not_run",
+      "browser_status": "not_run",
+      "reviewer_decision": null,
+      "reviewer_score": null,
+      "artifact_count": 0,
+      "error": "Codex CLI agent builder exited with code 1: {   \"type\": \"error\",   \"error\": {     \"type\": \"invalid_request_error\",     \"code\": \"invalid_json_schema\",     \"message\": \"Invalid schema for response_format 'codex_output_schema': In context=('properties', 'payload'), 'additionalProperties' is required to be supplied and to be false.\",     \"param\": \"text.format.schema\"   },   \"status\": 400 }"
+    }
+  ]
+}

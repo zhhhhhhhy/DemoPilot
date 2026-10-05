@@ -14,7 +14,7 @@ from .interaction_contract import compile_interaction_contract
 from .models import AgentEvent, AgentStatus, ApprovalRequest, Artifact, DemoRun, RunStatus
 from .providers import AgentProvider
 from .providers.codex_cli import CodexCliAgentProvider
-from .reviewer import normalize_final_review, normalize_review_rubric
+from .reviewer import default_review_rubric, normalize_final_review, normalize_review_rubric
 from .skill_runtime import SkillProfile, SkillRegistry
 from .storage import RunStore
 from .verifier import verify_artifacts
@@ -501,6 +501,75 @@ class DemoOrchestrator:
                 return True
         return False
 
+    def _seed_core_generation(self, run: DemoRun) -> None:
+        """Prepare the authored core benchmark without spending model calls on planning.
+
+        Core-generation cases measure the Builder, deterministic gates, browser
+        journey, and final Reviewer. The benchmark author owns the frozen
+        browser contract, so Brief/Manager/Discovery/Product/Experience/Contract
+        are deterministic setup records rather than extra model stages.
+        """
+
+        request = run.request
+        if request.evaluation_mode != "core_generation" or not request.evaluation_browser_contract:
+            return
+        run.outputs.setdefault(
+            "brief",
+            {
+                "status": "authored_core_generation_case",
+                "goal": request.evaluation_goal,
+                "evaluation_case_id": request.evaluation_case_id,
+            },
+        )
+        run.outputs.setdefault(
+            "manager",
+            {
+                "objective": "Generate the authored core evaluation demo",
+                "parallel_groups": [],
+                "acceptance_criteria": request.evaluation_method,
+            },
+        )
+        run.outputs.setdefault(
+            "discovery",
+            {
+                "problem_statement": request.evaluation_intent,
+                "success_signals": request.evaluation_method,
+            },
+        )
+        run.outputs.setdefault(
+            "product",
+            {
+                "features": list(request.must_haves),
+                "demo_story": list(request.evaluation_flow_steps[:3])
+                or ["输入", "处理", "复核"],
+            },
+        )
+        run.outputs.setdefault(
+            "experience",
+            {"primary_color": request.primary_color, "mode": "core_generation"},
+        )
+        run.outputs.setdefault("review_rubric", default_review_rubric(request))
+        if "interaction_contract" not in run.outputs:
+            raw_contract = {"requirements": [], "assumptions": ["authored evaluation contract"]}
+            run.outputs["interaction_contract_raw"] = raw_contract
+            run.outputs["interaction_contract"] = compile_interaction_contract(
+                request, raw_contract
+            )
+        run.outputs.setdefault(
+            "workflow_plan",
+            {
+                "mode": "core_generation",
+                "stages": [["builder"], ["builder:preflight"], ["approval"], ["runner"], ["reviewer:final"]],
+                "parallel_design": False,
+                "max_agent_calls": self.max_agent_calls,
+                "max_revision_rounds": self.max_revision_rounds,
+                "recovery": "checkpoint_resume",
+                "event_transport": "sse",
+            },
+        )
+        run.checkpoint = "core-generation:authored-contract"
+        self.store.save(run)
+
     async def _verify_with_browser(
         self,
         run: DemoRun,
@@ -788,6 +857,7 @@ class DemoOrchestrator:
         run.error = None
         self.store.save(run)
         try:
+            self._seed_core_generation(run)
             if "brief" not in run.outputs:
                 await self._run_agent(run, "brief")
             if "manager" not in run.outputs:

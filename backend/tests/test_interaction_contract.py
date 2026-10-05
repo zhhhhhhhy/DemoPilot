@@ -181,6 +181,42 @@ def test_builder_preflight_passes_only_objective_contract_checks():
     assert "visual_taste" in result["scope"]["soft_reviewer_only"]
 
 
+def test_builder_preflight_accepts_equivalent_data_declaration_formatting():
+    demo_request = request()
+    run = DemoRun(id="preflight-data-format", request=demo_request)
+    run.outputs["interaction_contract"] = compile_interaction_contract(
+        demo_request,
+        {
+            "requirements": [
+                {
+                    "requirement": "异常筛选",
+                    "steps": [{"action": "select", "value": "高风险"}],
+                    "assertion": {"text_contains": ["仅显示高风险"]},
+                },
+                {
+                    "requirement": "创建任务",
+                    "steps": [
+                        {"action": "fill", "value": "李雷"},
+                        {"action": "click"},
+                    ],
+                    "assertion": {"text_contains": ["任务创建成功"]},
+                },
+            ]
+        },
+    )
+    files = valid_builder_files()
+    files["demo/app.js"] = files["demo/app.js"].replace(
+        'const data = {"story":["发现异常","处理异常","复核结果"],"features":["异常筛选","创建任务"]}; let current = 0;',
+        'const data={story:["发现异常","处理异常","复核结果"],features:["异常筛选","创建任务"]}; const current=0;',
+    )
+    run.outputs["builder"] = {"files": files}
+
+    result = preflight_builder_output(run)
+
+    assert result["status"] == "passed"
+    assert result["blocking"] is False
+
+
 def test_builder_preflight_reports_security_and_exact_missing_selectors():
     demo_request = request()
     run = DemoRun(id="preflight-fail", request=demo_request)

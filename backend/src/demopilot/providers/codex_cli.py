@@ -77,7 +77,9 @@ def _schema_file() -> Path:
         json.dump(
             {
                 "type": "object",
-                "properties": {"payload": {"type": "string"}},
+                "properties": {
+                    "payload": {"type": "string"}
+                },
                 "required": ["payload"],
                 "additionalProperties": False,
             },
@@ -136,7 +138,7 @@ class CodexCliAgentProvider:
     command: str = "codex"
     model: str = ""
     reasoning_effort: str = "medium"
-    timeout_seconds: float = 180.0
+    timeout_seconds: float = 300.0
     cwd: Path | None = None
     _gate: asyncio.Semaphore | None = field(default=None, init=False, repr=False)
 
@@ -192,16 +194,25 @@ class CodexCliAgentProvider:
                 "Codex CLI is not available. Install @openai/codex and ensure codex is on PATH."
             )
 
+        direct_builder = agent_id == "builder" and request.evaluation_mode == "core_generation"
+        output_instruction = (
+            "最终只返回本职责要求的直接 JSON 对象，不要使用 Markdown 或代码围栏。\n\n"
+            if direct_builder
+            else (
+                "最终只返回一个符合 JSON Schema 的对象，格式必须是"
+                "{\"payload\":\"...\"}；payload 的值是你本来要返回的 JSON 对象序列化后的单行字符串，"
+                "不要使用 Markdown 或代码围栏。\n\n"
+            )
+        )
         prompt = (
             f"{SYSTEM_PROMPT}\n\n"
             "你现在通过本地 Codex CLI 作为 DemoPilot 的一个 Agent 工作。"
             "只能依据下面给出的客户输入和前序证据作答；不要调用工具、不要读写文件、"
-            "不要输出思考过程。最终只返回一个符合 JSON Schema 的对象，格式必须是"
-            "{\"payload\":\"...\"}；payload 的值是你本来要返回的 JSON 对象序列化后的单行字符串，"
-            "不要使用 Markdown 或代码围栏。\n\n"
+            "不要输出思考过程。"
+            + output_instruction
             + build_agent_prompt(agent_id, request, context, iteration=iteration)
         )
-        schema_path = _schema_file()
+        schema_path: Path | None = None
         args = [
             "exec",
             "--ephemeral",
@@ -211,10 +222,11 @@ class CodexCliAgentProvider:
             "never",
             "--json",
             "--skip-git-repo-check",
-            "--output-schema",
-            str(schema_path),
             "-",
         ]
+        if not direct_builder:
+            schema_path = _schema_file()
+            args[7:7] = ["--output-schema", str(schema_path)]
         if self.model:
             args[1:1] = ["--model", self.model]
         if self.reasoning_effort:
@@ -254,7 +266,8 @@ class CodexCliAgentProvider:
         except OSError as exc:
             raise ProviderUnavailableError("Codex CLI could not be started") from exc
         finally:
-            schema_path.unlink(missing_ok=True)
+            if schema_path is not None:
+                schema_path.unlink(missing_ok=True)
 
         if process.returncode != 0:
             stdout_text = stdout.decode("utf-8", errors="replace")

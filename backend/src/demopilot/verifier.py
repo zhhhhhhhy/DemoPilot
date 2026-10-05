@@ -1,24 +1,17 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import re
 from pathlib import Path
 from typing import Any
 
+from .builder_preflight import _app_data as _parse_app_data
 from .interaction_contract import contract_tests
 from .models import DemoRun
 
 
 def _app_data(app_js: str) -> dict[str, Any]:
-    match = re.search(r"const data = (\{.*?\});\s*let current", app_js, re.DOTALL)
-    if not match:
-        return {}
-    try:
-        value = json.loads(match.group(1))
-    except json.JSONDecodeError:
-        return {}
-    return value if isinstance(value, dict) else {}
+    return _parse_app_data(app_js)
 
 
 def verify_artifacts(run: DemoRun, run_dir: Path) -> dict[str, Any]:
@@ -70,16 +63,33 @@ def verify_artifacts(run: DemoRun, run_dir: Path) -> dict[str, Any]:
         if run.request.evaluation_assets:
             for source_name in run.request.evaluation_assets:
                 asset_name = Path(source_name).name
-                asset_path = artifact_dir / "demo" / "assets" / asset_name
-                relative_ref = f"assets/{asset_name}"
+                source_group = Path(source_name).parent.name
+                relative_dir = (
+                    f"assets/{source_group}"
+                    if source_group and source_group not in {".", "assets"}
+                    else "assets"
+                )
+                relative_ref = f"{relative_dir}/{asset_name}"
+                asset_path = artifact_dir / "demo" / Path(*relative_ref.split("/"))
                 if not asset_path.is_file():
-                    issues.append(f"评测输入素材未复制：{relative_ref}")
+                    legacy_path = artifact_dir / "demo" / "assets" / asset_name
+                    if legacy_path.is_file():
+                        asset_path = legacy_path
+                    else:
+                        issues.append(f"评测输入素材未复制：{relative_ref}")
                 # A Builder may switch an image via JS (for example
                 # `src = "assets/" + invoice.file`) and show only the
                 # filename in the visible HTML list.  Validate the complete
                 # delivered source instead of requiring a literal path in
                 # index.html, while still requiring the copied file.
-                elif asset_name not in "\n".join((page, app_js)):
+                elif not (
+                    asset_name in "\n".join((page, app_js))
+                    or (
+                        Path(asset_name).stem in "\n".join((page, app_js))
+                        and "assets/" in "\n".join((page, app_js))
+                        and Path(asset_name).suffix in "\n".join((page, app_js))
+                    )
+                ):
                     issues.append(f"评测输入素材未进入页面：{relative_ref}")
                 else:
                     checks.append(f"评测输入素材已挂载并在页面引用：{relative_ref}")

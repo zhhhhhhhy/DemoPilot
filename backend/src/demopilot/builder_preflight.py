@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 import re
 from html.parser import HTMLParser
@@ -61,14 +62,48 @@ def _issue(
 
 
 def _app_data(app_js: str) -> dict[str, Any]:
-    match = re.search(r"const data = (\{.*?\});\s*let current", app_js, re.DOTALL)
-    if not match:
-        return {}
-    try:
-        parsed = json.loads(match.group(1))
-    except json.JSONDecodeError:
-        return {}
-    return parsed if isinstance(parsed, dict) else {}
+    """Read the small story/features contract across common JS formatting.
+
+    Builder output is JavaScript, so a valid object may use unquoted keys,
+    single-quoted strings, or continue with another declaration instead of
+    the old ``let current`` sentinel.  The preflight only needs the two string
+    arrays; it should not reject equivalent formatting as a data failure.
+    """
+
+    match = re.search(r"\b(?:const|let|var)\s+data\s*=\s*(\{.*?\});", app_js, re.DOTALL)
+    if match:
+        try:
+            parsed = json.loads(match.group(1))
+        except json.JSONDecodeError:
+            parsed = None
+        if isinstance(parsed, dict):
+            return parsed
+
+    def array_strings(field: str) -> list[str]:
+        field_match = re.search(
+            rf"\b{re.escape(field)}\s*:\s*\[(.*?)\]",
+            app_js,
+            re.DOTALL,
+        )
+        if not field_match:
+            return []
+        values: list[str] = []
+        for literal in re.findall(
+            r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', field_match.group(1)
+        ):
+            try:
+                values.append(
+                    json.loads(literal)
+                    if literal.startswith('"')
+                    else ast.literal_eval(literal)
+                )
+            except (ValueError, SyntaxError, json.JSONDecodeError):
+                continue
+        return values
+
+    story = array_strings("story")
+    features = array_strings("features")
+    return {"story": story, "features": features} if story or features else {}
 
 
 def _directly_hidden(attributes: dict[str, str]) -> bool:

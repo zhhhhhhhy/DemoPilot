@@ -229,7 +229,6 @@ def _compile_evaluation_contract(
         route_view = f"#eval-view-{index}"
         route_step = {"action": "click", "selector": route_nav, "value": "", "purpose": f"进入{requirement}评测视图"}
         assertion_selector = "#evaluation-result"
-        assertion_values = [f"{requirement} 已完成"]
         if raw_steps and isinstance(raw_steps[-1], dict):
             assertions = raw_steps[-1].get("assertions", {})
             if isinstance(assertions, dict) and assertions:
@@ -246,7 +245,10 @@ def _compile_evaluation_contract(
                     "steps": [route_step, *steps],
                     "assertion": {
                         "selector": assertion_selector,
-                        "text_contains": assertion_values,
+                        # Benchmark assertions stay in the Runner request. Do
+                        # not copy gold or hidden terms into the Builder-facing
+                        # shared contract.
+                        "text_contains": [],
                         "text_not_contains": [],
                         "text_changed": True,
                     },

@@ -1,0 +1,37 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-05T11:38:43.318431+00:00",
+  "provider": "codex_cli",
+  "real_runs": true,
+  "case_count": 1,
+  "tier_counts": {
+    "simple": 1
+  },
+  "results": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "name": "发票文字识别台",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "run_id": "c44966743537",
+      "status": "failed",
+      "quality_gate": "failed",
+      "agent_calls": 7,
+      "revision_count": 4,
+      "artifact_status": "failed",
+      "browser_status": "failed",
+      "browser_checks": [
+        "Chromium 中推进按钮确实改变三幕故事进度",
+        "Chromium 中导航切换确实更新高亮状态"
+      ],
+      "browser_issues": [
+        "评测路径失败：two-distinct-images（Locator.wait_for: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"#invoice-select\").first to be visible\n    14 × locator resolved to hidden <select id=\"invoice-select\">…</select>\n）",
+        "浏览器控制台出现 20 个错误"
+      ],
+      "reviewer_decision": "revise",
+      "reviewer_score": 14.0,
+      "artifact_count": 5,
+      "error": "Quality gate failed after the allowed revision rounds"
+    }
+  ]
+}
