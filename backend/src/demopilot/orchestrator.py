@@ -831,7 +831,13 @@ class DemoOrchestrator:
             if "review_rubric" not in run.outputs:
                 await self._prepare_review_rubric(run)
             if "interaction_contract" not in run.outputs:
-                raw_contract = await self._run_agent(run, "contract")
+                if (
+                    run.request.evaluation_mode == "core_generation"
+                    and run.request.evaluation_browser_contract
+                ):
+                    raw_contract = {"requirements": [], "assumptions": ["authored evaluation contract"]}
+                else:
+                    raw_contract = await self._run_agent(run, "contract")
                 run.outputs["interaction_contract_raw"] = raw_contract
                 run.outputs["interaction_contract"] = compile_interaction_contract(
                     run.request, raw_contract

@@ -31,7 +31,7 @@ _UNSAFE_WEB_PATTERNS = (
     (re.compile(r"(?i)(?:\beval\s*\(|\bnew\s+Function\s*\()"), "动态代码执行"),
 )
 _INNER_HTML_ASSIGNMENT = re.compile(r"(?i)\.innerHTML\s*=\s*([^;\r\n]*)")
-_ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".md", ".zip", ".png"}
+_ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".md", ".zip", ".png", ".jpg"}
 
 
 def scan_generated_text(relative: str, content: str) -> list[str]:
@@ -193,6 +193,34 @@ class SandboxWorkspace:
                 input_summary=f"尝试写入二进制证据 {relative_path}",
                 output_summary=str(exc),
                 started=started,
+            )
+            raise
+
+    def copy_fixture(self, relative_path: str, source: Path, expected_sha256: str) -> Path:
+        """Copy a trusted, checksum-pinned image into the run, with a receipt."""
+        started = time.perf_counter()
+        try:
+            relative, target = self._resolve(relative_path)
+            if not relative.startswith("artifacts/demo/assets/") or target.suffix != ".jpg":
+                raise SandboxViolation("输入图片只允许写入当前 Demo assets 目录")
+            content = source.read_bytes()
+            digest = hashlib.sha256(content).hexdigest()
+            if digest != expected_sha256 or not content.startswith(b"\xff\xd8\xff"):
+                raise SandboxViolation("输入图片的校验和或文件类型不符")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+            self._receipt(
+                tool_name="sandbox.copy_fixture", action="write", status="succeeded",
+                input_summary=f"复制已校验输入图片 {relative}",
+                output_summary="公开合成素材已复制；未生成或改写原图片",
+                relative_paths=[relative], sha256={relative: digest}, started=started,
+            )
+            return target
+        except Exception as exc:
+            self._receipt(
+                tool_name="sandbox.copy_fixture", action="write", status="failed",
+                input_summary=f"尝试复制评测输入图片 {relative_path}",
+                output_summary=str(exc), started=started,
             )
             raise
 

@@ -63,6 +63,26 @@ def verify_artifacts(run: DemoRun, run_dir: Path) -> dict[str, Any]:
         }
         checks.extend(label for label, passed in page_checks.items() if passed)
         issues.extend(label for label, passed in page_checks.items() if not passed)
+        styles_path = artifact_dir / "demo" / "styles.css"
+        app_path = artifact_dir / "demo" / "app.js"
+        styles = styles_path.read_text(encoding="utf-8") if styles_path.is_file() else ""
+        app_js = app_path.read_text(encoding="utf-8") if app_path.is_file() else ""
+        if run.request.evaluation_assets:
+            for source_name in run.request.evaluation_assets:
+                asset_name = Path(source_name).name
+                asset_path = artifact_dir / "demo" / "assets" / asset_name
+                relative_ref = f"assets/{asset_name}"
+                if not asset_path.is_file():
+                    issues.append(f"评测输入素材未复制：{relative_ref}")
+                # A Builder may switch an image via JS (for example
+                # `src = "assets/" + invoice.file`) and show only the
+                # filename in the visible HTML list.  Validate the complete
+                # delivered source instead of requiring a literal path in
+                # index.html, while still requiring the copied file.
+                elif asset_name not in "\n".join((page, app_js)):
+                    issues.append(f"评测输入素材未进入页面：{relative_ref}")
+                else:
+                    checks.append(f"评测输入素材已挂载并在页面引用：{relative_ref}")
 
     styles_path = artifact_dir / "demo" / "styles.css"
     app_path = artifact_dir / "demo" / "app.js"
@@ -155,6 +175,29 @@ def verify_artifacts(run: DemoRun, run_dir: Path) -> dict[str, Any]:
         )
     elif unique_selectors:
         checks.append("Builder 文件包含共享协议声明的全部稳定选择器")
+    evaluation_contract = run.request.evaluation_browser_contract
+    if run.request.evaluation_mode == "core_generation" and isinstance(evaluation_contract, dict):
+        evaluation_selectors: list[str] = []
+        for evaluation_test in evaluation_contract.get("tests", []):
+            if not isinstance(evaluation_test, dict):
+                continue
+            for step in evaluation_test.get("steps", []):
+                if not isinstance(step, dict):
+                    continue
+                selector = step.get("selector")
+                if isinstance(selector, str):
+                    evaluation_selectors.append(selector)
+                assertions = step.get("assertions", {})
+                if isinstance(assertions, dict):
+                    evaluation_selectors.extend(str(item) for item in assertions)
+        missing_evaluation_selectors = [
+            selector for selector in dict.fromkeys(evaluation_selectors)
+            if selector.removeprefix("#").removeprefix(".") not in combined_web
+        ]
+        if missing_evaluation_selectors:
+            issues.append("评测路径选择器未进入 Demo：" + "、".join(missing_evaluation_selectors[:12]))
+        else:
+            checks.append("评测集冻结路径选择器均进入 Demo")
     if run.request.primary_color.lower() in styles.lower():
         checks.append("客户主色已写入视觉变量")
     else:

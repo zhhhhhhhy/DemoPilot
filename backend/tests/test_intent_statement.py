@@ -40,3 +40,29 @@ def test_intent_statement_does_not_drop_empty_optional_dimensions():
     assert statement["boundary"]
     assert statement["acceptance"]
     assert statement["constraints"]
+
+
+def test_agent_core_evaluation_contract_is_persisted_and_explicit():
+    request = DemoRequest(
+        client_name="评测客户",
+        project_name="发票文字识别台",
+        industry="财务共享",
+        scenario="财务助理需要查看公开合成发票的识别结果。",
+        audience="财务助理",
+        must_haves=["发票样例列表", "识别结果卡片"],
+        provider="codex_cli",
+        evaluation_case_id="simple-invoice-ocr-01",
+        evaluation_difficulty="simple",
+        evaluation_intent="把公开发票图片转成文字识别演示入口。",
+        evaluation_goal="选中发票后看到关键字段。",
+        evaluation_flow_steps=["收集发票并识别文字"],
+        evaluation_method=["点击样例并检查识别结果变化"],
+        evaluation_assets=["D:/worker/DemoPilot/evaluation_sets/codex-cli-v1/assets/invoices/invoice-01.jpg"],
+    )
+
+    statement = build_intent_statement(request)
+
+    assert statement["evaluation"]["case_id"] == "simple-invoice-ocr-01"
+    assert statement["evaluation"]["goal"] == "选中发票后看到关键字段。"
+    assert statement["evaluation"]["method"] == ["点击样例并检查识别结果变化"]
+    assert statement["evaluation"]["assets"]

@@ -1,0 +1,76 @@
+{
+  "goal": "构造 10 个 simple、5 个 medium、5 个 hard 的 Agent Core 评测用例，并通过本地 Codex CLI 运行入口产生可追溯的生成与浏览器验收证据。",
+  "user_impact": "后续可以按难度比较 Codex CLI 生成 Demo 的流程覆盖、真实可点击性、返修成本和失败类型，而不是把少量 Demo 当成总体结论。",
+  "acceptance": [
+    "cases.json 含 20 个唯一用例，分布严格为 simple=10、medium=5、hard=5",
+    "每个用例显式包含 intent、goal、flow_steps、must_haves、acceptance_criteria 和 evaluation_method",
+    "10 张发票图片可本地读取，来源、许可证和 SHA-256 可追溯，金标准不进入 Codex CLI prompt",
+    "run_codex_cli_eval_set.py 通过 provider=codex_cli 调用正常 /api/runs 链路并写出逐用例结果",
+    "自动验收只在产物、交互契约、浏览器和 Reviewer 证据齐备时判定用例通过"
+  ],
+  "subtasks": [
+    {
+      "id": "S1",
+      "task": "定义三档难度规则和 20 条结构化用例",
+      "owner": "hybrid",
+      "reason": "数量、字段、流程计数可由脚本验证；任务意图和行业场景需要人工设计",
+      "inputs": ["article-derived intent/acceptance/result dimensions", "existing DemoPilot contracts"],
+      "outputs": ["evaluation_sets/codex-cli-v1/cases.json"],
+      "evidence_required": ["JSON parse", "tier count", "required prompt fields", "unique IDs"],
+      "risk": "medium",
+      "handoff_condition": "流程边界或验收方式不明确时保留 human review，不让模型自行降低难度",
+      "acceptance_or_eval": "script-only schema validation plus human review of tier rationale"
+    },
+    {
+      "id": "S2",
+      "task": "搜集并固定 10 张公开发票输入素材",
+      "owner": "hybrid",
+      "reason": "下载、校验、哈希和路径是脚本职责；许可证、隐私和是否适合纳入仓库需要人工确认",
+      "inputs": ["public dataset card", "signed dataset image URLs"],
+      "outputs": ["assets/invoices/*.jpg", "invoice-manifest.json", "invoice-gold.json"],
+      "evidence_required": ["source URL", "license note", "SHA-256", "image readability", "gold excluded from prompt"],
+      "risk": "medium",
+      "handoff_condition": "来源许可证不清、出现真实个人敏感信息或下载校验失败时停止纳入",
+      "acceptance_or_eval": "manifest and byte/hash checks; human source and privacy review"
+    },
+    {
+      "id": "S3",
+      "task": "把意图、目标、流程和评估方式送入 Codex CLI prompt",
+      "owner": "script",
+      "reason": "DemoRequest 序列化和 provider prompt 构造是确定性代码路径",
+      "inputs": ["cases.json", "DemoRequest evaluation_* fields", "CodexCliAgentProvider"],
+      "outputs": ["explicit evaluation fields in model payload and prompt"],
+      "evidence_required": ["unit test or dry-run output", "provider=codex_cli", "no gold payload"],
+      "risk": "medium",
+      "handoff_condition": "prompt 缺字段、路径越界或出现隐藏答案时阻断真实 run",
+      "acceptance_or_eval": "dry-run checks all required fields; prompt test confirms evaluation block"
+    },
+    {
+      "id": "S4",
+      "task": "通过真实 Codex CLI 运行并记录逐用例结果",
+      "owner": "ai",
+      "reason": "模型生成、返修和 Reviewer 判断只能通过真实 provider 观察",
+      "inputs": ["evaluation set", "authenticated local codex CLI", "DemoPilot API"],
+      "outputs": ["run-scoped artifacts, browser evidence, result JSON"],
+      "evidence_required": ["codex_cli trace", "artifact validation", "Chromium evidence", "Reviewer decision"],
+      "risk": "high",
+      "handoff_condition": "CLI 未认证、服务不健康、预算耗尽或安全/交互门禁失败时保留失败，不改成 Mock 或静默降级",
+      "acceptance_or_eval": "per-case completed + quality_gate passed + browser passed + no unresolved issues"
+    },
+    {
+      "id": "S5",
+      "task": "解释分层结果和下一轮校准",
+      "owner": "human",
+      "reason": "是否把流程数量作为难度、是否接受业务表达和是否升级评测集需要人承担判断",
+      "inputs": ["result JSON", "per-case evidence", "failure categories"],
+      "outputs": ["iteration report and candidate calibration changes"],
+      "evidence_required": ["tier metrics", "failure examples", "manual visual/flow sampling"],
+      "risk": "medium",
+      "handoff_condition": "发现跨层混淆时进入人工复核，不直接调高或调低分数",
+      "acceptance_or_eval": "retain evidence boundaries; do not call a successful subset a general success rate"
+    }
+  ],
+  "automatic_steps": ["S1 schema checks", "S2 download/hash checks", "S3 prompt contract checks", "S4 artifact/browser gates"],
+  "human_required_steps": ["S2 source/privacy decision", "S5 difficulty calibration and release interpretation"],
+  "fail_closed_conditions": ["missing source/license", "gold data sent to model", "provider silently falls back to Mock", "browser or artifact evidence absent", "CLI/auth preflight not ready"]
+}

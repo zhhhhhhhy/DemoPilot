@@ -49,8 +49,28 @@ class DemoRequest(BaseModel):
     primary_color: str = Field(default="#0071e3", pattern=r"^#[0-9A-Fa-f]{6}$")
     provider: ProviderName = "deepseek"
     require_execution_approval: bool = False
+    # Evaluation-only context is explicit so the real Codex CLI prompt carries
+    # the intent, goal, flow and acceptance method instead of hiding them in a
+    # free-form scenario string. These fields are optional for normal runs.
+    evaluation_case_id: str | None = Field(default=None, max_length=100)
+    evaluation_mode: Literal["full_pipeline", "core_generation"] = "full_pipeline"
+    evaluation_difficulty: Literal["simple", "medium", "hard"] | None = None
+    evaluation_intent: str | None = Field(default=None, max_length=1200)
+    evaluation_goal: str | None = Field(default=None, max_length=1200)
+    evaluation_flow_steps: list[str] = Field(default_factory=list, max_length=12)
+    evaluation_method: list[str] = Field(default_factory=list, max_length=12)
+    evaluation_assets: list[str] = Field(default_factory=list, max_length=24)
+    evaluation_asset_sha256: dict[str, str] = Field(default_factory=dict, max_length=24)
+    evaluation_browser_contract: dict[str, Any] = Field(default_factory=dict)
 
-    @field_validator("must_haves", "boundaries", "acceptance_criteria", "constraints")
+    @field_validator(
+        "must_haves",
+        "boundaries",
+        "acceptance_criteria",
+        "constraints",
+        "evaluation_flow_steps",
+        "evaluation_method",
+    )
     @classmethod
     def clean_string_list(cls, values: list[str]) -> list[str]:
         cleaned: list[str] = []
@@ -93,6 +113,20 @@ def build_intent_statement(request: DemoRequest) -> dict[str, Any]:
         "acceptance": acceptance,
         "constraints": constraints,
         "must_haves": list(request.must_haves),
+        "evaluation": {
+            "case_id": request.evaluation_case_id,
+            "mode": request.evaluation_mode,
+            "difficulty": request.evaluation_difficulty,
+            "intent": request.evaluation_intent,
+            "goal": request.evaluation_goal,
+            "flow_steps": list(request.evaluation_flow_steps),
+            "method": list(request.evaluation_method),
+            "assets": list(request.evaluation_assets),
+            "asset_sha256": dict(request.evaluation_asset_sha256),
+            "browser_contract_version": request.evaluation_browser_contract.get("version"),
+        }
+        if request.evaluation_case_id
+        else None,
         "source": "user_brief_and_article_dimensions",
     }
 

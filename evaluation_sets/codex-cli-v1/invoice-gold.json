@@ -1,0 +1,407 @@
+{
+  "purpose": "Held-out reference only; do not include in the Codex CLI Builder prompt.",
+  "source": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+  "license": "CC BY 4.0",
+  "records": [
+    {
+      "id": "invoice-01",
+      "source_row": 2,
+      "fields": {
+        "supplier_name": "PixelWave Solutions Inc.",
+        "customer_name": "Greenfield Marketing Ltd.",
+        "invoice_number": "INV-2023-0098",
+        "document_date": "2023-07-15",
+        "currency": "CAD",
+        "total_amount": 2331.0,
+        "total_net": 2220.0,
+        "total_tax": 111.0,
+        "line_items": [
+          {
+            "description": "Website design services",
+            "quantity": 1.0,
+            "unit_price": 1200.0,
+            "amount": 1200.0,
+            "tax_rate": "5%",
+            "tax_amount": 60.0
+          },
+          {
+            "description": "Content writing package",
+            "quantity": 10.0,
+            "unit_price": 50.0,
+            "amount": 500.0,
+            "tax_rate": "5%",
+            "tax_amount": 25.0
+          },
+          {
+            "description": "SEO optimization",
+            "quantity": 5.0,
+            "unit_price": 80.0,
+            "amount": 400.0,
+            "tax_rate": "5%",
+            "tax_amount": 20.0
+          },
+          {
+            "description": "Hosting subscription",
+            "quantity": 12.0,
+            "unit_price": 10.0,
+            "amount": 120.0,
+            "tax_rate": "5%",
+            "tax_amount": 6.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-02",
+      "source_row": 3,
+      "fields": {
+        "supplier_name": "CloudWave Solutions Ltd.",
+        "customer_name": "Acme Manufacturing Co.",
+        "invoice_number": "INV-20230815-001",
+        "document_date": "2023-08-15",
+        "currency": "GBP",
+        "total_amount": 2366.0,
+        "total_net": 2120.0,
+        "total_tax": 246.0,
+        "line_items": [
+          {
+            "description": "Consulting services",
+            "quantity": 10.0,
+            "unit_price": 120.0,
+            "amount": 1200.0,
+            "tax_rate": "20%",
+            "tax_amount": 240.0
+          },
+          {
+            "description": "Software license",
+            "quantity": 2.0,
+            "unit_price": 350.0,
+            "amount": 700.0,
+            "tax_rate": "0%",
+            "tax_amount": 0.0
+          },
+          {
+            "description": "Office supplies",
+            "quantity": 15.0,
+            "unit_price": 8.0,
+            "amount": 120.0,
+            "tax_rate": "5%",
+            "tax_amount": 6.0
+          },
+          {
+            "description": "Fuel expense",
+            "quantity": 1.0,
+            "unit_price": 100.0,
+            "amount": 100.0,
+            "tax_rate": "0%",
+            "tax_amount": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-03",
+      "source_row": 5,
+      "fields": {
+        "supplier_name": "TechSolutions Ltd",
+        "customer_name": null,
+        "invoice_number": "IE-INV-2024-000123",
+        "document_date": "2024-03-15",
+        "currency": "EUR",
+        "total_amount": 7343.0,
+        "total_net": 6200.0,
+        "total_tax": 1143.0,
+        "line_items": [
+          {
+            "description": "Consulting services for project X",
+            "quantity": 3.0,
+            "unit_price": 1500.0,
+            "amount": 4500.0,
+            "tax_rate": "23%",
+            "tax_amount": 1035.0
+          },
+          {
+            "description": "High-performance laptop (Model Y)",
+            "quantity": 1.0,
+            "unit_price": 1200.0,
+            "amount": 1200.0,
+            "tax_rate": "9%",
+            "tax_amount": 108.0
+          },
+          {
+            "description": "International shipping to Germany",
+            "quantity": 1.0,
+            "unit_price": 500.0,
+            "amount": 500.0,
+            "tax_rate": "0%",
+            "tax_amount": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-04",
+      "source_row": 6,
+      "fields": {
+        "supplier_name": "CloudCompute Solutions Inc.",
+        "customer_name": "Acme Corp.",
+        "invoice_number": "INV-20230815-001",
+        "document_date": "2023-08-15",
+        "currency": "USD",
+        "total_amount": 119.07,
+        "total_net": 110.0,
+        "total_tax": 9.07,
+        "line_items": [
+          {
+            "description": "Enterprise Cloud Storage Subscription",
+            "quantity": 1.0,
+            "unit_price": 50.0,
+            "amount": 50.0,
+            "tax_rate": "8.25%",
+            "tax_amount": 4.12
+          },
+          {
+            "description": "Premium Support Add-On",
+            "quantity": 2.0,
+            "unit_price": 30.0,
+            "amount": 60.0,
+            "tax_rate": "8.25%",
+            "tax_amount": 4.95
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-05",
+      "source_row": 7,
+      "fields": {
+        "supplier_name": "Tech Solutions Ltd",
+        "customer_name": "Acme Construction Ltd",
+        "invoice_number": "INV-20230815-001",
+        "document_date": "2023-08-15",
+        "currency": "GBP",
+        "total_amount": 1740.0,
+        "total_net": 1500.0,
+        "total_tax": 240.0,
+        "line_items": [
+          {
+            "description": "High-performance laptop",
+            "quantity": 1.0,
+            "unit_price": 1200.0,
+            "amount": 1200.0,
+            "tax_rate": "20%",
+            "tax_amount": 240.0
+          },
+          {
+            "description": "Office desk chair",
+            "quantity": 2.0,
+            "unit_price": 150.0,
+            "amount": 300.0,
+            "tax_rate": "0%",
+            "tax_amount": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-06",
+      "source_row": 9,
+      "fields": {
+        "supplier_name": "Celtic Code Solutions",
+        "customer_name": "North Star Consulting Ltd.",
+        "invoice_number": "INV-2023-0075",
+        "document_date": "2023-07-15",
+        "currency": "EUR",
+        "total_amount": 5658.0,
+        "total_net": 4600.0,
+        "total_tax": 1058.0,
+        "line_items": [
+          {
+            "description": "UI Development Consulting",
+            "quantity": 20.0,
+            "unit_price": 80.0,
+            "amount": 1600.0,
+            "tax_rate": "23%",
+            "tax_amount": 368.0
+          },
+          {
+            "description": "UX Research",
+            "quantity": 10.0,
+            "unit_price": 90.0,
+            "amount": 900.0,
+            "tax_rate": "23%",
+            "tax_amount": 207.0
+          },
+          {
+            "description": "Custom API Integration",
+            "quantity": 15.0,
+            "unit_price": 100.0,
+            "amount": 1500.0,
+            "tax_rate": "23%",
+            "tax_amount": 345.0
+          },
+          {
+            "description": "Project Management Support",
+            "quantity": 5.0,
+            "unit_price": 120.0,
+            "amount": 600.0,
+            "tax_rate": "23%",
+            "tax_amount": 138.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-07",
+      "source_row": 10,
+      "fields": {
+        "supplier_name": "Oak Property Management Ltd",
+        "customer_name": "John Doe",
+        "invoice_number": "RENT-2023-001",
+        "document_date": "2023-05-01",
+        "currency": "EUR",
+        "total_amount": 1753.5,
+        "total_net": 1650.0,
+        "total_tax": 103.5,
+        "line_items": [
+          {
+            "description": "Monthly Base Rent",
+            "quantity": 1.0,
+            "unit_price": 1200.0,
+            "amount": 1200.0,
+            "tax_rate": "0%",
+            "tax_amount": 0.0
+          },
+          {
+            "description": "Utilities (Electricity/Gas)",
+            "quantity": 1.0,
+            "unit_price": 200.0,
+            "amount": 200.0,
+            "tax_rate": "23%",
+            "tax_amount": 46.0
+          },
+          {
+            "description": "Property Tax",
+            "quantity": 1.0,
+            "unit_price": 150.0,
+            "amount": 150.0,
+            "tax_rate": "23%",
+            "tax_amount": 34.5
+          },
+          {
+            "description": "Cleaning Service",
+            "quantity": 1.0,
+            "unit_price": 100.0,
+            "amount": 100.0,
+            "tax_rate": "23%",
+            "tax_amount": 23.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-08",
+      "source_row": 11,
+      "fields": {
+        "supplier_name": "Acme Office Supplies Inc.",
+        "customer_name": "Global Tech Corp.",
+        "invoice_number": "INV-2023-0001",
+        "document_date": "2023-07-15",
+        "currency": "USD",
+        "total_amount": 642.0,
+        "total_net": 600.0,
+        "total_tax": 42.0,
+        "line_items": [
+          {
+            "description": "Office chairs",
+            "quantity": 5.0,
+            "unit_price": 120.0,
+            "amount": 600.0,
+            "tax_rate": "7%",
+            "tax_amount": 42.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-09",
+      "source_row": 12,
+      "fields": {
+        "supplier_name": "Digital Solutions Pty Ltd",
+        "customer_name": "Global Tech Industries Ltd",
+        "invoice_number": "INV-2024-005",
+        "document_date": "2024-06-15",
+        "currency": "AUD",
+        "total_amount": 4224.0,
+        "total_net": 3840.0,
+        "total_tax": 384.0,
+        "line_items": [
+          {
+            "description": "Cloud hosting services",
+            "quantity": 12.0,
+            "unit_price": 120.0,
+            "amount": 1440.0,
+            "tax_rate": "10%",
+            "tax_amount": 144.0
+          },
+          {
+            "description": "Software license renewal",
+            "quantity": 1.0,
+            "unit_price": 1200.0,
+            "amount": 1200.0,
+            "tax_rate": "10%",
+            "tax_amount": 120.0
+          },
+          {
+            "description": "Subscription data analytics package",
+            "quantity": 1.0,
+            "unit_price": 800.0,
+            "amount": 800.0,
+            "tax_rate": "10%",
+            "tax_amount": 80.0
+          },
+          {
+            "description": "Technical support",
+            "quantity": 1.0,
+            "unit_price": 400.0,
+            "amount": 400.0,
+            "tax_rate": "10%",
+            "tax_amount": 40.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "invoice-10",
+      "source_row": 14,
+      "fields": {
+        "supplier_name": "Acme Consulting Group",
+        "customer_name": null,
+        "invoice_number": "INV-2023-0789",
+        "document_date": "2023-07-15",
+        "currency": "USD",
+        "total_amount": 3518.12,
+        "total_net": 3250.0,
+        "total_tax": 268.12,
+        "line_items": [
+          {
+            "description": "Business Strategy Consultation",
+            "quantity": 10.0,
+            "unit_price": 200.0,
+            "amount": 2000.0,
+            "tax_rate": "8.25%",
+            "tax_amount": 165.0
+          },
+          {
+            "description": "Technology Roadmap Development",
+            "quantity": 5.0,
+            "unit_price": 250.0,
+            "amount": 1250.0,
+            "tax_rate": "8.25%",
+            "tax_amount": 103.12
+          }
+        ]
+      }
+    }
+  ]
+}

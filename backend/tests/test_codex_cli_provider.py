@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from demopilot.models import DemoRequest
+from demopilot.prompts import build_agent_prompt
 from demopilot.providers.base import ProviderUnavailableError
 from demopilot.providers.codex_cli import CodexCliAgentProvider, _final_message, _json_object
 
@@ -87,6 +88,45 @@ def test_codex_cli_provider_parses_structured_json(monkeypatch, tmp_path: Path):
     assert "customer_request" in str(captured["prompt"])
     assert '"payload"' in str(captured["prompt"])
     assert captured["kwargs"]["cwd"] == str(tmp_path)
+
+
+def test_codex_cli_prompt_contains_agent_core_evaluation_contract():
+    evaluated = request().model_copy(
+        update={
+            "evaluation_case_id": "simple-invoice-ocr-01",
+            "evaluation_difficulty": "simple",
+            "evaluation_intent": "把公开发票图片转成文字识别演示入口。",
+            "evaluation_goal": "选中发票后看到关键字段。",
+            "evaluation_flow_steps": ["收集发票并识别文字"],
+            "evaluation_method": ["点击样例并检查识别结果变化"],
+            "evaluation_assets": ["invoice-01.jpg"],
+            "evaluation_browser_contract": {
+                "tests": [
+                    {
+                        "id": "gold-path",
+                        "steps": [
+                            {
+                                "action": "click",
+                                "selector": "#recognize",
+                                "assertions": {"#fields": {"contains": ["HIDDEN_GOLD"]}},
+                            }
+                        ],
+                    }
+                ]
+            },
+        }
+    )
+
+    prompt = build_agent_prompt("brief", evaluated, {})
+
+    assert "evaluation_intent" in prompt
+    assert "evaluation_goal" in prompt
+    assert "evaluation_flow_steps" in prompt
+    assert "evaluation_method" in prompt
+    assert "Agent Core 评测用例" in prompt
+    assert "#recognize" in prompt
+    assert "HIDDEN_GOLD" not in prompt
+    assert "assertions" not in prompt
 
 
 def test_codex_cli_provider_fails_closed_when_unavailable(monkeypatch):

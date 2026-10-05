@@ -1,0 +1,29 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-05T09:29:32.797567+00:00",
+  "provider": "codex_cli",
+  "real_runs": true,
+  "case_count": 1,
+  "tier_counts": {
+    "simple": 1
+  },
+  "results": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "name": "发票文字识别台",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "run_id": "ee9996f72e96",
+      "status": "failed",
+      "quality_gate": "failed",
+      "agent_calls": 7,
+      "revision_count": 0,
+      "artifact_status": "not_run",
+      "browser_status": "not_run",
+      "reviewer_decision": null,
+      "reviewer_score": null,
+      "artifact_count": 0,
+      "error": "Codex CLI agent builder did not return a valid JSON object"
+    }
+  ]
+}

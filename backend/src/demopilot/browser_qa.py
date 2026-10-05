@@ -22,6 +22,11 @@ def _run_declared_interactions(page: Any, page_uri: str, workspace: SandboxWorks
 
     if workspace.run.request.provider == "mock":
         return [], []
+    if (
+        workspace.run.request.evaluation_mode == "core_generation"
+        and workspace.run.request.evaluation_browser_contract
+    ):
+        return _run_evaluation_contract(page, page_uri, workspace)
     checks: list[str] = []
     issues: list[str] = []
     declared = _shared_interaction_tests(workspace.run)
@@ -112,6 +117,77 @@ def _run_declared_interactions(page: Any, page_uri: str, workspace: SandboxWorks
             checks.append(f"Chromium 已按共享协议执行 must-have：{requirement}")
         except Exception as exc:
             issues.append(f"must-have 浏览器测试失败：{requirement}（{str(exc)[:160]}）")
+    return checks, issues
+
+
+def _run_evaluation_contract(
+    page: Any, page_uri: str, workspace: SandboxWorkspace
+) -> tuple[list[str], list[str]]:
+    """Run benchmark-authored journeys while keeping their gold assertions local."""
+
+    checks: list[str] = []
+    issues: list[str] = []
+    contract = workspace.run.request.evaluation_browser_contract
+    tests = contract.get("tests", []) if isinstance(contract, dict) else []
+    for test in tests if isinstance(tests, list) else []:
+        if not isinstance(test, dict):
+            continue
+        test_id = str(test.get("id", "evaluation-test"))
+        try:
+            page.goto(page_uri, wait_until="load", timeout=15_000)
+            for step in test.get("steps", []):
+                if not isinstance(step, dict):
+                    raise ValueError("步骤格式错误")
+                selector = str(step.get("selector", ""))
+                if not _SAFE_SELECTOR.fullmatch(selector):
+                    raise ValueError(f"不安全或缺失 selector: {selector}")
+                locator = page.locator(selector).first
+                locator.wait_for(state="visible", timeout=5_000)
+                before: dict[str, str] = {}
+                assertions = step.get("assertions", {})
+                if isinstance(assertions, dict):
+                    for target in assertions:
+                        if _SAFE_SELECTOR.fullmatch(str(target)):
+                            target_locator = page.locator(str(target))
+                            before[str(target)] = " ".join(
+                                (target_locator.nth(i).text_content() or "")
+                                for i in range(target_locator.count())
+                            )
+                action = str(step.get("action", ""))
+                value = str(step.get("value", ""))
+                if action == "click":
+                    locator.click(timeout=5_000)
+                elif action == "fill":
+                    locator.fill(value, timeout=5_000)
+                elif action == "select":
+                    try:
+                        locator.select_option(label=value, timeout=5_000)
+                    except Exception:
+                        locator.select_option(value=value, timeout=5_000)
+                else:
+                    raise ValueError(f"不支持的动作：{action}")
+                page.wait_for_timeout(100)
+                if isinstance(assertions, dict):
+                    for target, expected in assertions.items():
+                        target = str(target)
+                        if not _SAFE_SELECTOR.fullmatch(target) or not isinstance(expected, dict):
+                            raise ValueError("断言选择器或断言格式错误")
+                        target_locator = page.locator(target)
+                        actual = " ".join(
+                            (target_locator.nth(i).text_content() or "")
+                            for i in range(target_locator.count())
+                        )
+                        missing = [str(item) for item in expected.get("contains", []) if str(item) not in actual]
+                        present = [str(item) for item in expected.get("excludes", []) if str(item) in actual]
+                        if missing or present:
+                            raise AssertionError(
+                                f"{target}: missing={missing[:4]}, present={present[:4]}, actual={actual[:240]}"
+                            )
+                        if expected.get("changed") and actual == before.get(target, ""):
+                            raise AssertionError(f"{target}: 操作前后文本未变化")
+            checks.append(f"Chromium 已执行评测路径：{test_id}")
+        except Exception as exc:
+            issues.append(f"评测路径失败：{test_id}（{str(exc)[:220]}）")
     return checks, issues
 
 

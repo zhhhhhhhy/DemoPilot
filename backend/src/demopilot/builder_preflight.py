@@ -225,6 +225,33 @@ def preflight_builder_output(run: DemoRun) -> dict[str, Any]:
 
     shared_contract = run.outputs.get("interaction_contract", {})
     tests = contract_tests(shared_contract)
+    evaluation_contract = run.request.evaluation_browser_contract
+    if run.request.evaluation_mode == "core_generation" and isinstance(evaluation_contract, dict):
+        evaluation_selectors: list[str] = []
+        for evaluation_test in evaluation_contract.get("tests", []):
+            if not isinstance(evaluation_test, dict):
+                continue
+            for step in evaluation_test.get("steps", []):
+                if isinstance(step, dict) and isinstance(step.get("selector"), str):
+                    evaluation_selectors.append(step["selector"])
+                assertions = step.get("assertions", {}) if isinstance(step, dict) else {}
+                if isinstance(assertions, dict):
+                    evaluation_selectors.extend(str(item) for item in assertions)
+        missing_evaluation_selectors = [
+            selector for selector in dict.fromkeys(evaluation_selectors)
+            if selector.removeprefix("#").removeprefix(".") not in f"{index_html}\n{app_js}"
+        ]
+        if missing_evaluation_selectors:
+            issues.append(
+                _issue(
+                    "EVALUATION_SELECTORS_MISSING",
+                    "evaluation_contract",
+                    "评测路径选择器未在 Builder 文件中声明：" + "、".join(missing_evaluation_selectors[:12]),
+                    "逐字实现评测集冻结的 input/select/button/result selector，不得改名。",
+                )
+            )
+        else:
+            checks.append("评测集冻结路径的控件与断言选择器均已声明")
     missing_selectors: list[str] = []
     wrong_controls: list[str] = []
     hidden_controls: list[str] = []

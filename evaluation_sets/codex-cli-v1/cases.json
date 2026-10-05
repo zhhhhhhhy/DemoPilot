@@ -1,0 +1,3714 @@
+{
+  "schema_version": "codex-cli-v1",
+  "provider": "codex_cli",
+  "purpose": "评估本地 Codex CLI 驱动 DemoPilot Agent Core 生成可运行、可复核的静态 Demo，不评估真实业务系统接入能力。",
+  "difficulty_rule": {
+    "simple": "1-2 个业务处理阶段；输入、选择素材不另算难度。",
+    "medium": "3-5 个业务操作阶段，有筛选、详情及状态联动。",
+    "hard": "6 个以上连续业务处理阶段，同时包含分支、错误阻断、跨实体状态隔离和审计。"
+  },
+  "default_boundaries": [
+    "只交付本地纯展示型静态 Demo，不连接客户生产系统、数据库或外部 API",
+    "业务数据使用虚构或公开合成样例，所有写入只发生在浏览器内存中",
+    "生成过程不得把凭证、真实个人信息或金标准答案写入 Demo"
+  ],
+  "default_constraints": [
+    "必须优先实现列出的核心流程，失败时保留确定性验证和 Reviewer 证据",
+    "每个流程都要有可见结果，不能只展示静态卡片或把能力写在说明文字里",
+    "评测方法只允许使用本地文件、交互契约、Runner 浏览器结果和 Reviewer 结论"
+  ],
+  "cases": [
+    {
+      "id": "simple-invoice-ocr-01",
+      "name": "发票文字识别台",
+      "difficulty": "simple",
+      "industry": "财务共享",
+      "audience": "财务助理",
+      "scenario": "财务助理需要把一批公开的合成发票放进一个页面，快速查看每张发票的关键文字。",
+      "intent": "把公开发票图片转成一个可浏览的文字识别演示入口。",
+      "goal": "让用户选中一张发票后，看到发票号、日期、币种和合计金额等识别结果。",
+      "flow_steps": [
+        "收集发票并识别文字"
+      ],
+      "must_haves": [
+        "发票样例列表",
+        "识别结果卡片",
+        "识别状态提示"
+      ],
+      "acceptance_criteria": [
+        "页面能展示 10 张本地发票样例",
+        "点击一张样例后出现可见识别结果",
+        "识别结果明确标注为本地演示数据"
+      ],
+      "evaluation_method": [
+        "逐项检查三个 must-have 是否有可见模块",
+        "浏览器点击一张发票并确认识别状态和关键字段发生可见变化",
+        "确认未调用外部 OCR、未把金标准写入 prompt 或网络请求"
+      ],
+      "assets": [
+        "invoice-01",
+        "invoice-02",
+        "invoice-03",
+        "invoice-04",
+        "invoice-05",
+        "invoice-06",
+        "invoice-07",
+        "invoice-08",
+        "invoice-09",
+        "invoice-10"
+      ],
+      "tags": [
+        "invoice",
+        "ocr",
+        "public-synthetic-data"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "image_ids": [
+            "invoice-01",
+            "invoice-02",
+            "invoice-03",
+            "invoice-04",
+            "invoice-05",
+            "invoice-06",
+            "invoice-07",
+            "invoice-08",
+            "invoice-09",
+            "invoice-10"
+          ],
+          "processing_mode": "local static OCR demonstration; no external OCR engine"
+        },
+        "controls": {
+          "#invoice-select": "select: invoice-01 through invoice-10",
+          "#recognize": "button: 识别",
+          "#status": "visible status",
+          "#fields": "visible extracted fields"
+        },
+        "tests": [
+          {
+            "id": "two-distinct-images",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#invoice-select",
+                "value": "invoice-01",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#recognize",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "识别完成"
+                    ],
+                    "changed": true
+                  },
+                  "#fields": {
+                    "contains": [
+                      "供应方",
+                      "发票号"
+                    ],
+                    "changed": true
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#invoice-select",
+                "value": "invoice-02",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#recognize",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "识别完成"
+                    ],
+                    "changed": true
+                  },
+                  "#fields": {
+                    "contains": [
+                      "供应方",
+                      "发票号"
+                    ],
+                    "changed": true
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Use attached invoice pictures to prepare the display-only extraction data. Reference labels are excluded from the model prompt. Assertions only measure visible completion and input switching, not OCR-model accuracy; invoice-gold.json remains held out for a separate extraction benchmark.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-receipt-summary-01",
+      "name": "小票摘要卡",
+      "difficulty": "simple",
+      "industry": "零售",
+      "audience": "门店店员",
+      "scenario": "店员需要查看一张小票的商户、日期和合计，不需要进入复杂的结算系统。",
+      "intent": "把一张小票整理成一张容易讲解的摘要卡。",
+      "goal": "让用户看到商户、购买日期和总额，并能切换一张本地样例。",
+      "flow_steps": [
+        "查看小票摘要"
+      ],
+      "must_haves": [
+        "小票预览",
+        "商户与日期",
+        "总额突出显示"
+      ],
+      "acceptance_criteria": [
+        "默认样例可加载",
+        "点击切换后摘要字段同步变化",
+        "页面标明数据为虚构样例"
+      ],
+      "evaluation_method": [
+        "检查首屏是否同时出现预览和三个关键字段",
+        "浏览器切换样例并确认总额变化",
+        "Reviewer 检查没有真实支付或结算承诺"
+      ],
+      "assets": [],
+      "tags": [
+        "receipt",
+        "summary"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "receipts": [
+            {
+              "id": "R-01",
+              "merchant": "晨光书店",
+              "date": "2026-09-01",
+              "total": 86
+            },
+            {
+              "id": "R-02",
+              "merchant": "北岸咖啡",
+              "date": "2026-09-02",
+              "total": 38
+            }
+          ]
+        },
+        "controls": {
+          "#receipt-select": "select: R-01/R-02",
+          "#summary": "visible summary"
+        },
+        "tests": [
+          {
+            "id": "switch-receipt",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#receipt-select",
+                "value": "R-02",
+                "assertions": {
+                  "#summary": {
+                    "contains": [
+                      "北岸咖啡",
+                      "38"
+                    ],
+                    "excludes": [
+                      "86"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-appointment-card-01",
+      "name": "预约确认卡",
+      "difficulty": "simple",
+      "industry": "医疗服务",
+      "audience": "患者服务专员",
+      "scenario": "患者服务专员需要在演示中填写一个日期和时间，然后给出预约确认。",
+      "intent": "把预约填写动作压缩成一个可验证的单页流程。",
+      "goal": "用户填写日期和时间后获得带状态的预约确认卡。",
+      "flow_steps": [
+        "填写日期与时间并确认预约"
+      ],
+      "must_haves": [
+        "预约日期输入",
+        "预约时间选择",
+        "确认状态"
+      ],
+      "acceptance_criteria": [
+        "空表单不能直接显示已确认",
+        "提交后出现预约成功状态",
+        "确认卡显示用户刚填写的值"
+      ],
+      "evaluation_method": [
+        "浏览器填写日期和时间并提交",
+        "检查按钮前后状态和文本变化",
+        "检查没有真实挂号接口"
+      ],
+      "assets": [],
+      "tags": [
+        "form",
+        "confirmation"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "times": [
+            "09:00",
+            "14:30"
+          ],
+          "default_date": "",
+          "default_time": ""
+        },
+        "controls": {
+          "#date": "input type=date",
+          "#time": "select: 09:00/14:30",
+          "#confirm": "button",
+          "#status": "visible error or confirmation"
+        },
+        "tests": [
+          {
+            "id": "required-fields",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#confirm",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "请选择日期"
+                    ],
+                    "excludes": [
+                      "预约成功"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "valid-appointment",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#date",
+                "value": "2026-11-12",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#time",
+                "value": "14:30",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#confirm",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "预约成功",
+                      "2026-11-12",
+                      "14:30"
+                    ],
+                    "changed": true
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-sku-lookup-01",
+      "name": "商品编码查询卡",
+      "difficulty": "simple",
+      "industry": "仓储零售",
+      "audience": "仓库管理员",
+      "scenario": "仓库管理员输入一个 SKU，希望立刻看到商品名称、库存和货位。",
+      "intent": "用一个输入框演示商品编码查询的核心反馈。",
+      "goal": "输入示例 SKU 后展示对应商品卡片和库存数字。",
+      "flow_steps": [
+        "输入 SKU 并查看商品卡"
+      ],
+      "must_haves": [
+        "SKU 输入框",
+        "商品信息卡",
+        "库存数量"
+      ],
+      "acceptance_criteria": [
+        "输入已知 SKU 后出现匹配商品",
+        "输入未知 SKU 后出现可理解的未找到状态",
+        "展示本地虚构数据边界"
+      ],
+      "evaluation_method": [
+        "分别输入一个已知和一个未知 SKU",
+        "确认成功与失败状态都可见",
+        "检查没有真实库存写入"
+      ],
+      "assets": [],
+      "tags": [
+        "inventory",
+        "lookup"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "products": [
+            {
+              "sku": "SKU-001",
+              "name": "无线鼠标",
+              "stock": 12,
+              "location": "A-01"
+            },
+            {
+              "sku": "SKU-002",
+              "name": "蓝牙键盘",
+              "stock": 24,
+              "location": "B-02"
+            }
+          ]
+        },
+        "controls": {
+          "#sku": "input",
+          "#lookup": "button",
+          "#result": "visible product or error"
+        },
+        "tests": [
+          {
+            "id": "known-and-unknown",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#sku",
+                "value": "SKU-002",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#lookup",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "蓝牙键盘",
+                      "24",
+                      "B-02"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#sku",
+                "value": "BAD-999",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#lookup",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "未找到"
+                    ],
+                    "excludes": [
+                      "蓝牙键盘"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-expense-entry-01",
+      "name": "单笔费用登记",
+      "difficulty": "simple",
+      "industry": "企业财务",
+      "audience": "员工",
+      "scenario": "员工只需要登记一笔差旅费用，并立即看到分类和合计。",
+      "intent": "将单笔费用录入变成一个低认知负担的展示流程。",
+      "goal": "填写金额和类别后显示一笔待报销费用。",
+      "flow_steps": [
+        "填写一笔费用并保存"
+      ],
+      "must_haves": [
+        "金额输入",
+        "费用类别",
+        "保存后记录"
+      ],
+      "acceptance_criteria": [
+        "金额必填校验可见",
+        "保存后列表出现一条新记录",
+        "总额与输入金额一致"
+      ],
+      "evaluation_method": [
+        "浏览器填写金额和类别并保存",
+        "检查记录和总额发生变化",
+        "确认只模拟本地保存"
+      ],
+      "assets": [],
+      "tags": [
+        "expense",
+        "local-state"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "initial_records": [],
+          "categories": [
+            "交通",
+            "住宿"
+          ]
+        },
+        "controls": {
+          "#amount": "input number",
+          "#category": "select: 交通/住宿",
+          "#save": "button",
+          "#status": "visible status",
+          "#records": "visible saved rows",
+          "#total": "visible sum"
+        },
+        "tests": [
+          {
+            "id": "reject-empty",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#save",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "请输入有效金额"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "two-amounts",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#amount",
+                "value": "128.50",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#category",
+                "value": "交通",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#save",
+                "value": "",
+                "assertions": {
+                  "#records": {
+                    "contains": [
+                      "128.50",
+                      "交通"
+                    ]
+                  },
+                  "#total": {
+                    "contains": [
+                      "128.50"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#amount",
+                "value": "71.50",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#category",
+                "value": "住宿",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#save",
+                "value": "",
+                "assertions": {
+                  "#total": {
+                    "contains": [
+                      "200.00"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-feedback-tag-01",
+      "name": "反馈标签卡",
+      "difficulty": "simple",
+      "industry": "客户服务",
+      "audience": "客服主管",
+      "scenario": "客服主管粘贴一段客户反馈，希望看到一个主题标签和情绪提示。",
+      "intent": "把一段文本转成一个可解释的反馈标签结果。",
+      "goal": "提交文本后展示主题、情绪和待跟进提示。",
+      "flow_steps": [
+        "粘贴反馈并生成标签"
+      ],
+      "must_haves": [
+        "反馈文本框",
+        "主题标签",
+        "情绪提示"
+      ],
+      "acceptance_criteria": [
+        "提交前有输入提示",
+        "提交后主题和情绪变为可见结果",
+        "结果标明为规则演示"
+      ],
+      "evaluation_method": [
+        "输入正向和负向样例各一次",
+        "检查结果区文本发生变化",
+        "检查没有外部情感分析调用"
+      ],
+      "assets": [],
+      "tags": [
+        "feedback",
+        "classification"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "rules": [
+            {
+              "topic_keyword": "配送",
+              "topic": "物流"
+            },
+            {
+              "topic_keyword": "客服",
+              "topic": "服务"
+            }
+          ],
+          "positive_keywords": [
+            "满意",
+            "热心"
+          ],
+          "negative_keywords": [
+            "失望",
+            "太慢"
+          ],
+          "mode": "local rules demo"
+        },
+        "controls": {
+          "#feedback": "textarea",
+          "#analyze": "button",
+          "#result": "visible topic and sentiment"
+        },
+        "tests": [
+          {
+            "id": "opposite-sentiments",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#feedback",
+                "value": "配送太慢，我很失望",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#analyze",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "物流",
+                      "负向"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#feedback",
+                "value": "客服很热心，我很满意",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#analyze",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "服务",
+                      "正向"
+                    ],
+                    "excludes": [
+                      "负向"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-shipment-status-01",
+      "name": "物流状态查询",
+      "difficulty": "simple",
+      "industry": "物流",
+      "audience": "客服人员",
+      "scenario": "客服人员输入运单号，希望快速看到当前物流节点。",
+      "intent": "提供一个单输入、单结果的物流状态演示。",
+      "goal": "输入运单号后显示当前节点和预计到达时间。",
+      "flow_steps": [
+        "输入运单号并查询状态"
+      ],
+      "must_haves": [
+        "运单号输入",
+        "当前节点",
+        "预计到达时间"
+      ],
+      "acceptance_criteria": [
+        "有效运单号显示节点",
+        "无效运单号显示未找到状态",
+        "数据明确为虚构演示"
+      ],
+      "evaluation_method": [
+        "验证有效和无效两条路径",
+        "检查状态文本和时间文本可见",
+        "检查未连接物流供应商"
+      ],
+      "assets": [],
+      "tags": [
+        "logistics",
+        "lookup"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "shipments": [
+            {
+              "id": "SHIP-001",
+              "node": "已揽收",
+              "eta": "2026-11-05"
+            },
+            {
+              "id": "SHIP-002",
+              "node": "派送中",
+              "eta": "2026-11-03"
+            }
+          ]
+        },
+        "controls": {
+          "#shipment": "input",
+          "#query": "button",
+          "#result": "visible status and ETA"
+        },
+        "tests": [
+          {
+            "id": "found-then-missing",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#shipment",
+                "value": "SHIP-002",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#query",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "派送中",
+                      "2026-11-03"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#shipment",
+                "value": "UNKNOWN",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#query",
+                "value": "",
+                "assertions": {
+                  "#result": {
+                    "contains": [
+                      "未找到"
+                    ],
+                    "excludes": [
+                      "派送中"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-profile-completion-01",
+      "name": "资料完整度卡",
+      "difficulty": "simple",
+      "industry": "人力资源",
+      "audience": "新员工",
+      "scenario": "新员工填写姓名、部门和联系方式，希望看到资料完整度。",
+      "intent": "将资料填写反馈做成一个清晰的完成度演示。",
+      "goal": "填写三项资料后进度从未完成变为已完成。",
+      "flow_steps": [
+        "填写资料并查看完整度"
+      ],
+      "must_haves": [
+        "姓名字段",
+        "部门字段",
+        "完整度进度"
+      ],
+      "acceptance_criteria": [
+        "缺字段时显示未完成",
+        "字段齐全后进度达到 100%",
+        "页面不保存个人真实资料"
+      ],
+      "evaluation_method": [
+        "先填一项再填齐三项",
+        "检查进度数值和提示变化",
+        "检查数据只保留在页面内"
+      ],
+      "assets": [],
+      "tags": [
+        "profile",
+        "progress"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "required_fields": [
+            "name",
+            "department",
+            "contact"
+          ],
+          "initial_fields": {
+            "name": "",
+            "department": "",
+            "contact": ""
+          }
+        },
+        "controls": {
+          "#name": "input",
+          "#department": "input",
+          "#contact": "input",
+          "#check": "button",
+          "#progress": "visible percentage",
+          "#status": "visible status"
+        },
+        "tests": [
+          {
+            "id": "partial-to-complete",
+            "steps": [
+              {
+                "action": "fill",
+                "selector": "#name",
+                "value": "演示员工",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#check",
+                "value": "",
+                "assertions": {
+                  "#progress": {
+                    "contains": [
+                      "33"
+                    ]
+                  },
+                  "#status": {
+                    "contains": [
+                      "未完成"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#department",
+                "value": "产品部",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#contact",
+                "value": "demo@example.invalid",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#check",
+                "value": "",
+                "assertions": {
+                  "#progress": {
+                    "contains": [
+                      "100%"
+                    ]
+                  },
+                  "#status": {
+                    "contains": [
+                      "已完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-quote-generator-01",
+      "name": "套餐报价卡",
+      "difficulty": "simple",
+      "industry": "B2B 销售",
+      "audience": "售前顾问",
+      "scenario": "售前顾问选择一个套餐和席位数，希望看到即时的演示报价。",
+      "intent": "把套餐选择和报价反馈收敛为单页交互。",
+      "goal": "选择套餐和席位后展示小计、折扣和演示总价。",
+      "flow_steps": [
+        "选择套餐和席位并生成报价"
+      ],
+      "must_haves": [
+        "套餐选择",
+        "席位数量",
+        "报价总额"
+      ],
+      "acceptance_criteria": [
+        "不同套餐会改变报价",
+        "席位变化会改变总价",
+        "标注价格为演示估算"
+      ],
+      "evaluation_method": [
+        "切换套餐和席位各一次",
+        "检查总额随输入变化",
+        "确认无真实合同或支付动作"
+      ],
+      "assets": [],
+      "tags": [
+        "sales",
+        "pricing"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "prices_per_seat": {
+            "基础": 100,
+            "专业": 200
+          },
+          "discount": 0,
+          "formula": "price_per_seat * seats",
+          "boundary": "演示估算"
+        },
+        "controls": {
+          "#plan": "select: 基础/专业",
+          "#seats": "input number",
+          "#calculate": "button",
+          "#total": "visible quote"
+        },
+        "tests": [
+          {
+            "id": "dependent-pricing",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#plan",
+                "value": "专业",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#seats",
+                "value": "3",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#calculate",
+                "value": "",
+                "assertions": {
+                  "#total": {
+                    "contains": [
+                      "600"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#seats",
+                "value": "4",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#calculate",
+                "value": "",
+                "assertions": {
+                  "#total": {
+                    "contains": [
+                      "800"
+                    ],
+                    "excludes": [
+                      "600"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "simple-faq-answer-01",
+      "name": "常见问题答案卡",
+      "difficulty": "simple",
+      "industry": "企业知识库",
+      "audience": "一线员工",
+      "scenario": "员工从三个常见问题中选择一个，希望快速看到答案和来源标签。",
+      "intent": "演示结构化知识问答的单步反馈。",
+      "goal": "选中问题后显示答案、更新时间和来源类型。",
+      "flow_steps": [
+        "选择问题并查看答案"
+      ],
+      "must_haves": [
+        "问题选择",
+        "答案内容",
+        "来源标记"
+      ],
+      "acceptance_criteria": [
+        "不同问题显示不同答案",
+        "答案区有来源标记",
+        "明确这是本地知识样例"
+      ],
+      "evaluation_method": [
+        "选择两个问题比较答案",
+        "检查答案和来源文本改变",
+        "检查没有声称连接企业真实知识库"
+      ],
+      "assets": [],
+      "tags": [
+        "knowledge",
+        "faq"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "faqs": [
+            {
+              "id": "FAQ-01",
+              "question": "请假需要提前多久？",
+              "answer": "提前三天申请。",
+              "source": "员工手册"
+            },
+            {
+              "id": "FAQ-02",
+              "question": "费用什么时候报销？",
+              "answer": "每周五集中处理。",
+              "source": "员工手册"
+            },
+            {
+              "id": "FAQ-03",
+              "question": "电脑故障如何处理？",
+              "answer": "提交 IT 工单。",
+              "source": "IT 指南"
+            }
+          ],
+          "updated": "2026-09-01"
+        },
+        "controls": {
+          "#question": "select: FAQ-01/FAQ-02/FAQ-03",
+          "#answer": "visible answer and source"
+        },
+        "tests": [
+          {
+            "id": "answer-switch",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#question",
+                "value": "FAQ-02",
+                "assertions": {
+                  "#answer": {
+                    "contains": [
+                      "每周五",
+                      "员工手册"
+                    ],
+                    "excludes": [
+                      "三天"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#question",
+                "value": "FAQ-03",
+                "assertions": {
+                  "#answer": {
+                    "contains": [
+                      "工单",
+                      "IT 指南"
+                    ],
+                    "excludes": [
+                      "每周五"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "medium-invoice-review-01",
+      "name": "发票复核工作台",
+      "difficulty": "medium",
+      "industry": "财务共享",
+      "audience": "发票审核员",
+      "scenario": "审核员需要从多张发票中选择一张，查看关键字段，并把它标记为已复核或需补充。",
+      "intent": "把发票识别结果连接到一个最小复核状态流程。",
+      "goal": "用户选择发票、检查字段、选择复核结论后能看到状态和备注。",
+      "flow_steps": [
+        "选择发票",
+        "查看识别字段",
+        "选择复核结论",
+        "查看复核状态"
+      ],
+      "must_haves": [
+        "发票筛选列表",
+        "字段详情区",
+        "复核结论按钮",
+        "复核状态记录"
+      ],
+      "acceptance_criteria": [
+        "选择的发票与详情区一致",
+        "复核结论会更新状态",
+        "需补充时显示原因输入或提示"
+      ],
+      "evaluation_method": [
+        "浏览器选择两张不同发票并检查详情切换",
+        "走通已复核和需补充两条路径",
+        "检查状态与当前发票不会串线，且不接真实财务系统"
+      ],
+      "assets": [
+        "invoice-01",
+        "invoice-02",
+        "invoice-03"
+      ],
+      "tags": [
+        "invoice",
+        "review",
+        "state"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "invoice_ids": [
+            "invoice-01",
+            "invoice-02",
+            "invoice-03"
+          ],
+          "initial_status": "待复核"
+        },
+        "controls": {
+          "#invoice-select": "select: invoice-01/invoice-02/invoice-03",
+          "#fields": "visible fields",
+          "#note": "textarea",
+          "#approve": "button 已复核",
+          "#return": "button 需补充",
+          "#status": "visible per-invoice status"
+        },
+        "tests": [
+          {
+            "id": "per-invoice-state",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#invoice-select",
+                "value": "invoice-01",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#approve",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "invoice-01",
+                      "已复核"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#invoice-select",
+                "value": "invoice-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待复核"
+                    ],
+                    "excludes": [
+                      "已复核"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#return",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "请填写原因"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#note",
+                "value": "请补充采购编号",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#return",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "invoice-02",
+                      "需补充",
+                      "采购编号"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#invoice-select",
+                "value": "invoice-01",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已复核"
+                    ],
+                    "excludes": [
+                      "需补充"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Selected images are attached. This tests review-state isolation; OCR accuracy is not scored.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "medium-lead-followup-01",
+      "name": "销售线索跟进台",
+      "difficulty": "medium",
+      "industry": "B2B 销售",
+      "audience": "销售经理",
+      "scenario": "销售经理按行业筛选线索，查看详情，分配负责人并创建一次跟进行动。",
+      "intent": "演示从线索筛选到一次跟进动作的连续闭环。",
+      "goal": "让筛选结果、线索详情、负责人和跟进状态保持一致。",
+      "flow_steps": [
+        "按行业筛选线索",
+        "打开线索详情",
+        "分配负责人",
+        "创建跟进行动"
+      ],
+      "must_haves": [
+        "行业筛选",
+        "线索详情",
+        "负责人选择",
+        "跟进行动状态"
+      ],
+      "acceptance_criteria": [
+        "筛选后结果数量变化",
+        "详情显示当前线索",
+        "提交后出现带负责人的跟进记录"
+      ],
+      "evaluation_method": [
+        "先筛选再打开详情并确认上下文一致",
+        "填写负责人后创建跟进",
+        "刷新或切换线索后检查状态没有错误迁移"
+      ],
+      "assets": [],
+      "tags": [
+        "sales",
+        "filter",
+        "follow-up"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "leads": [
+            {
+              "id": "L-01",
+              "name": "星港制造",
+              "industry": "制造"
+            },
+            {
+              "id": "L-02",
+              "name": "云帆零售",
+              "industry": "零售"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_tasks": []
+        },
+        "controls": {
+          "#industry": "select: 全部/制造/零售",
+          "#lead": "select: L-01/L-02",
+          "#list": "visible filtered list",
+          "#detail": "visible lead detail",
+          "#owner": "select: 林澄/周岚",
+          "#create": "button",
+          "#tasks": "visible tasks"
+        },
+        "tests": [
+          {
+            "id": "filter-to-task",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#industry",
+                "value": "制造",
+                "assertions": {
+                  "#list": {
+                    "contains": [
+                      "星港制造"
+                    ],
+                    "excludes": [
+                      "云帆零售"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#lead",
+                "value": "L-01",
+                "assertions": {
+                  "#detail": {
+                    "contains": [
+                      "星港制造"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#create",
+                "value": "",
+                "assertions": {
+                  "#tasks": {
+                    "contains": [
+                      "L-01",
+                      "林澄",
+                      "待跟进"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "medium-replenishment-01",
+      "name": "库存补货台",
+      "difficulty": "medium",
+      "industry": "供应链",
+      "audience": "库存计划员",
+      "scenario": "计划员筛选低库存商品，查看 SKU 详情，填写补货数量并创建补货任务。",
+      "intent": "演示从异常库存识别到补货任务创建的连续操作。",
+      "goal": "将低库存筛选、商品详情和补货任务连接起来。",
+      "flow_steps": [
+        "筛选低库存商品",
+        "查看商品详情",
+        "填写补货数量",
+        "创建补货任务"
+      ],
+      "must_haves": [
+        "低库存筛选",
+        "库存详情",
+        "补货数量输入",
+        "补货任务卡"
+      ],
+      "acceptance_criteria": [
+        "筛选结果只保留低库存项",
+        "任务数量与输入一致",
+        "任务显示待处理状态和商品名称"
+      ],
+      "evaluation_method": [
+        "改变筛选条件并检查结果",
+        "选择商品并填写数量",
+        "提交后验证任务卡与详情上下文一致"
+      ],
+      "assets": [],
+      "tags": [
+        "inventory",
+        "task",
+        "filter"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "products": [
+            {
+              "sku": "SKU-001",
+              "name": "无线鼠标",
+              "stock": 8
+            },
+            {
+              "sku": "SKU-002",
+              "name": "蓝牙键盘",
+              "stock": 80
+            }
+          ],
+          "low_stock_below": 20,
+          "initial_tasks": []
+        },
+        "controls": {
+          "#stock-filter": "select: 全部/低库存",
+          "#sku": "select: SKU-001/SKU-002",
+          "#list": "visible filtered list",
+          "#detail": "visible SKU details",
+          "#quantity": "input number",
+          "#create": "button",
+          "#tasks": "visible tasks"
+        },
+        "tests": [
+          {
+            "id": "low-stock-task",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#stock-filter",
+                "value": "低库存",
+                "assertions": {
+                  "#list": {
+                    "contains": [
+                      "无线鼠标"
+                    ],
+                    "excludes": [
+                      "蓝牙键盘"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#sku",
+                "value": "SKU-001",
+                "assertions": {
+                  "#detail": {
+                    "contains": [
+                      "无线鼠标",
+                      "8"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "fill",
+                "selector": "#quantity",
+                "value": "32",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#create",
+                "value": "",
+                "assertions": {
+                  "#tasks": {
+                    "contains": [
+                      "SKU-001",
+                      "32",
+                      "待处理"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "medium-support-triage-01",
+      "name": "客服工单分诊台",
+      "difficulty": "medium",
+      "industry": "客户服务",
+      "audience": "客服主管",
+      "scenario": "客服主管筛选高优先级工单，查看客户问题，调整优先级并留下处理备注。",
+      "intent": "把工单筛选、查看和一次分诊动作做成可见闭环。",
+      "goal": "让工单状态和备注在同一个演示上下文内完成更新。",
+      "flow_steps": [
+        "筛选高优先级工单",
+        "查看工单详情",
+        "调整优先级",
+        "保存处理备注"
+      ],
+      "must_haves": [
+        "优先级筛选",
+        "工单详情",
+        "优先级调整",
+        "处理备注"
+      ],
+      "acceptance_criteria": [
+        "筛选后可打开一条工单",
+        "保存后优先级和备注可见",
+        "详情标题与列表选择一致"
+      ],
+      "evaluation_method": [
+        "浏览器走通筛选到保存备注",
+        "检查列表与详情的优先级同步",
+        "检查失败输入有提示且无外部工单写入"
+      ],
+      "assets": [],
+      "tags": [
+        "support",
+        "triage",
+        "notes"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "tickets": [
+            {
+              "id": "TK-01",
+              "subject": "无法登录",
+              "priority": "高"
+            },
+            {
+              "id": "TK-02",
+              "subject": "修改昵称",
+              "priority": "低"
+            }
+          ]
+        },
+        "controls": {
+          "#priority-filter": "select: 全部/高",
+          "#ticket": "select: TK-01/TK-02",
+          "#list": "visible filtered list",
+          "#detail": "visible detail",
+          "#priority": "select: 高/中/低",
+          "#note": "textarea",
+          "#save": "button",
+          "#status": "visible saved status"
+        },
+        "tests": [
+          {
+            "id": "triage-sync",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#priority-filter",
+                "value": "高",
+                "assertions": {
+                  "#list": {
+                    "contains": [
+                      "无法登录"
+                    ],
+                    "excludes": [
+                      "修改昵称"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#ticket",
+                "value": "TK-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#priority",
+                "value": "中",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#note",
+                "value": "已提供临时解决方案",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#save",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "TK-01",
+                      "中",
+                      "临时解决方案"
+                    ]
+                  },
+                  "#list": {
+                    "excludes": [
+                      "无法登录"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "medium-content-calendar-01",
+      "name": "内容排期台",
+      "difficulty": "medium",
+      "industry": "市场营销",
+      "audience": "内容运营",
+      "scenario": "内容运营选择一场活动，创建一条短文案，预览后把它放入待发布状态。",
+      "intent": "演示内容从活动上下文到排期状态的基本流程。",
+      "goal": "活动选择、文案编辑、预览和排期状态需要连续可见。",
+      "flow_steps": [
+        "选择活动",
+        "填写文案",
+        "预览内容",
+        "加入待发布排期"
+      ],
+      "must_haves": [
+        "活动选择",
+        "文案编辑",
+        "预览区",
+        "待发布状态"
+      ],
+      "acceptance_criteria": [
+        "预览内容与输入一致",
+        "加入排期后出现状态标签",
+        "空文案不能进入排期"
+      ],
+      "evaluation_method": [
+        "选择活动并填写文案",
+        "检查预览和排期状态",
+        "尝试空文案验证阻断"
+      ],
+      "assets": [],
+      "tags": [
+        "marketing",
+        "content",
+        "schedule"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "campaigns": [
+            "春季发布",
+            "新品首发"
+          ],
+          "initial_queue": []
+        },
+        "controls": {
+          "#campaign": "select: 春季发布/新品首发",
+          "#copy": "textarea",
+          "#preview-button": "button",
+          "#preview": "visible preview",
+          "#schedule": "button",
+          "#status": "visible queue or error"
+        },
+        "tests": [
+          {
+            "id": "empty-copy",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#schedule",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "请填写文案"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "draft-to-queue",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#campaign",
+                "value": "新品首发",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#copy",
+                "value": "今天发布轻量协同工具",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#preview-button",
+                "value": "",
+                "assertions": {
+                  "#preview": {
+                    "contains": [
+                      "新品首发",
+                      "轻量协同工具"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#schedule",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待发布",
+                      "新品首发",
+                      "轻量协同工具"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "hard-procurement-approval-01",
+      "name": "采购审批协同台",
+      "difficulty": "hard",
+      "industry": "供应链采购",
+      "audience": "采购经理",
+      "scenario": "采购经理比较三家供应商，选择方案，填写理由，提交审批，审批人可批准或驳回并留下审计记录。",
+      "intent": "构造包含比较、提交、审批分支和审计追踪的采购演示。",
+      "goal": "让供应商方案、采购申请、审批结果和时间线形成一致的状态机。",
+      "flow_steps": [
+        "需求已创建",
+        "已比较",
+        "方案已选",
+        "待审批",
+        "已批准",
+        "订单已下达",
+        "已验收"
+      ],
+      "must_haves": [
+        "供应商比较表",
+        "推荐方案选择",
+        "采购理由校验",
+        "审批分支",
+        "审计时间线"
+      ],
+      "acceptance_criteria": [
+        "只有选择方案并填写理由后可提交",
+        "批准和驳回产生不同可见状态",
+        "审计记录包含方案、结果和操作人"
+      ],
+      "evaluation_method": [
+        "先比较并选择供应商再提交",
+        "分别验证批准和驳回分支",
+        "验证缺少理由时提交被阻断",
+        "检查时间线和重置后的初始状态"
+      ],
+      "assets": [],
+      "tags": [
+        "procurement",
+        "approval",
+        "branch",
+        "audit"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "entity_type": "采购申请",
+          "entities": [
+            {
+              "id": "P-01",
+              "title": "采购申请甲"
+            },
+            {
+              "id": "P-02",
+              "title": "采购申请乙"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_state": "待处理",
+          "ordered_transitions": [
+            [
+              "create-request",
+              "需求已创建"
+            ],
+            [
+              "compare",
+              "已比较"
+            ],
+            [
+              "choose",
+              "方案已选"
+            ],
+            [
+              "submit",
+              "待审批"
+            ],
+            [
+              "approve",
+              "已批准"
+            ],
+            [
+              "order",
+              "订单已下达"
+            ],
+            [
+              "receive",
+              "已验收"
+            ]
+          ],
+          "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+        },
+        "controls": {
+          "#create-request": "button: execute the named business transition",
+          "#compare": "button: execute the named business transition",
+          "#choose": "button: execute the named business transition",
+          "#submit": "button: execute the named business transition",
+          "#approve": "button: execute the named business transition",
+          "#order": "button: execute the named business transition",
+          "#receive": "button: execute the named business transition",
+          "#entity": "select: P-01/P-02",
+          "#owner": "select: 林澄/周岚",
+          "#reason": "textarea",
+          "#status": "visible current entity, owner, state and reason",
+          "#timeline": "visible per-entity audit",
+          "#reject": "button: return request to start with reason",
+          "#illegal": "button: illegal rollback after terminal state",
+          "#reset": "button: reset all entities",
+          "#errors": "visible rejection reason"
+        },
+        "tests": [
+          {
+            "id": "main-state-machine",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "P-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "本轮演示核验",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#create-request",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "需求已创建"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "需求已创建"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#compare",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "已比较"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已比较"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#choose",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "方案已选"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "方案已选"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#submit",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "待审批"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "待审批"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#approve",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "已批准"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已批准"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#order",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "订单已下达"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "订单已下达"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#receive",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "P-01",
+                      "林澄",
+                      "已验收"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已验收"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#illegal",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已验收"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "不可回退"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "P-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ],
+                    "excludes": [
+                      "已验收"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reset",
+                "value": "",
+                "assertions": {
+                  "#timeline": {
+                    "excludes": [
+                      "已验收"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "out-of-order-blocked",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#receive",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "前置步骤未完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "return-or-escalate",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "周岚",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "资料需要补充",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#create-request",
+                "value": "",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#reject",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已退回",
+                      "资料需要补充"
+                    ]
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已退回",
+                      "周岚"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Show domain context and consequences for each step, not just a list of buttons. Preserve all prior audit events; reset returns to initial state. Negative and branch paths are independent tests.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "hard-incident-response-01",
+      "name": "安全事件响应台",
+      "difficulty": "hard",
+      "industry": "网络安全",
+      "audience": "安全运营主管",
+      "scenario": "值班人员筛选高危告警，查看证据，分派响应人，创建事件，必要时升级，最后关闭或保留调查状态。",
+      "intent": "演示安全告警从发现到处置的多分支状态流程。",
+      "goal": "保持告警、事件、响应人和处置时间线的一致，并显式拒绝非法状态回退。",
+      "flow_steps": [
+        "已分级",
+        "已分派",
+        "已隔离",
+        "调查中",
+        "已修复",
+        "已复验",
+        "已关闭"
+      ],
+      "must_haves": [
+        "高危告警筛选",
+        "证据详情",
+        "响应人分派",
+        "事件状态机",
+        "非法回退提示"
+      ],
+      "acceptance_criteria": [
+        "高危筛选后结果可见",
+        "创建事件后显示响应人和时间线",
+        "已关闭事件不能非法回退并显示原因"
+      ],
+      "evaluation_method": [
+        "走通告警到事件创建链路",
+        "验证升级、调查和关闭分支",
+        "点击非法回退并确认失败事件可见",
+        "检查无真实安全系统调用"
+      ],
+      "assets": [],
+      "tags": [
+        "security",
+        "incident",
+        "state-machine",
+        "negative-path"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "entity_type": "安全事件",
+          "entities": [
+            {
+              "id": "INC-01",
+              "title": "安全事件甲"
+            },
+            {
+              "id": "INC-02",
+              "title": "安全事件乙"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_state": "待处理",
+          "ordered_transitions": [
+            [
+              "triage",
+              "已分级"
+            ],
+            [
+              "assign",
+              "已分派"
+            ],
+            [
+              "isolate",
+              "已隔离"
+            ],
+            [
+              "investigate",
+              "调查中"
+            ],
+            [
+              "resolve",
+              "已修复"
+            ],
+            [
+              "verify",
+              "已复验"
+            ],
+            [
+              "close",
+              "已关闭"
+            ]
+          ],
+          "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+        },
+        "controls": {
+          "#triage": "button: execute the named business transition",
+          "#assign": "button: execute the named business transition",
+          "#isolate": "button: execute the named business transition",
+          "#investigate": "button: execute the named business transition",
+          "#resolve": "button: execute the named business transition",
+          "#verify": "button: execute the named business transition",
+          "#close": "button: execute the named business transition",
+          "#entity": "select: INC-01/INC-02",
+          "#owner": "select: 林澄/周岚",
+          "#reason": "textarea",
+          "#status": "visible current entity, owner, state and reason",
+          "#timeline": "visible per-entity audit",
+          "#reject": "button: return request to start with reason",
+          "#illegal": "button: illegal rollback after terminal state",
+          "#reset": "button: reset all entities",
+          "#errors": "visible rejection reason"
+        },
+        "tests": [
+          {
+            "id": "main-state-machine",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "INC-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "本轮演示核验",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#triage",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已分级"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已分级"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#assign",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已分派"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已分派"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#isolate",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已隔离"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已隔离"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#investigate",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "调查中"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "调查中"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#resolve",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已修复"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已修复"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#verify",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已复验"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已复验"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "INC-01",
+                      "林澄",
+                      "已关闭"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#illegal",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已关闭"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "不可回退"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "INC-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ],
+                    "excludes": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reset",
+                "value": "",
+                "assertions": {
+                  "#timeline": {
+                    "excludes": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "out-of-order-blocked",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "前置步骤未完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "return-or-escalate",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "周岚",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "资料需要补充",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#triage",
+                "value": "",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#reject",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已退回",
+                      "资料需要补充"
+                    ]
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已退回",
+                      "周岚"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Show domain context and consequences for each step, not just a list of buttons. Preserve all prior audit events; reset returns to initial state. Negative and branch paths are independent tests.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "hard-contract-renewal-01",
+      "name": "合同续签协同台",
+      "difficulty": "hard",
+      "industry": "企业法务",
+      "audience": "法务经理",
+      "scenario": "法务经理找到即将到期的合同，比较条款，发起法务复核，修改续签期限，提交审批并查看完整审计时间线。",
+      "intent": "把合同续签中的发现、复核、修改、审批和留痕连成一条可演示路径。",
+      "goal": "合同详情、条款差异、复核状态、续签方案和审计记录要保持一致。",
+      "flow_steps": [
+        "已识别到期",
+        "已比较条款",
+        "已复核",
+        "方案已编辑",
+        "待审批",
+        "已批准",
+        "已生效"
+      ],
+      "must_haves": [
+        "到期合同筛选",
+        "条款差异视图",
+        "复核状态",
+        "续签期限编辑",
+        "审批审计记录"
+      ],
+      "acceptance_criteria": [
+        "筛选结果与合同详情一致",
+        "修改期限后摘要同步",
+        "退回分支显示原因且审计记录完整"
+      ],
+      "evaluation_method": [
+        "验证筛选、钻取、编辑、提交的连续路径",
+        "验证批准和退回两条分支",
+        "检查审计记录不丢失前序状态"
+      ],
+      "assets": [],
+      "tags": [
+        "legal",
+        "contract",
+        "approval",
+        "audit"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "entity_type": "续签合同",
+          "entities": [
+            {
+              "id": "C-01",
+              "title": "续签合同甲"
+            },
+            {
+              "id": "C-02",
+              "title": "续签合同乙"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_state": "待处理",
+          "ordered_transitions": [
+            [
+              "find",
+              "已识别到期"
+            ],
+            [
+              "compare",
+              "已比较条款"
+            ],
+            [
+              "review",
+              "已复核"
+            ],
+            [
+              "edit",
+              "方案已编辑"
+            ],
+            [
+              "submit",
+              "待审批"
+            ],
+            [
+              "approve",
+              "已批准"
+            ],
+            [
+              "activate",
+              "已生效"
+            ]
+          ],
+          "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+        },
+        "controls": {
+          "#find": "button: execute the named business transition",
+          "#compare": "button: execute the named business transition",
+          "#review": "button: execute the named business transition",
+          "#edit": "button: execute the named business transition",
+          "#submit": "button: execute the named business transition",
+          "#approve": "button: execute the named business transition",
+          "#activate": "button: execute the named business transition",
+          "#entity": "select: C-01/C-02",
+          "#owner": "select: 林澄/周岚",
+          "#reason": "textarea",
+          "#status": "visible current entity, owner, state and reason",
+          "#timeline": "visible per-entity audit",
+          "#reject": "button: return request to start with reason",
+          "#illegal": "button: illegal rollback after terminal state",
+          "#reset": "button: reset all entities",
+          "#errors": "visible rejection reason"
+        },
+        "tests": [
+          {
+            "id": "main-state-machine",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "C-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "本轮演示核验",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#find",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "已识别到期"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已识别到期"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#compare",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "已比较条款"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已比较条款"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#review",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "已复核"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已复核"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#edit",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "方案已编辑"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "方案已编辑"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#submit",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "待审批"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "待审批"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#approve",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "已批准"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已批准"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#activate",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "C-01",
+                      "林澄",
+                      "已生效"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已生效"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#illegal",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已生效"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "不可回退"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "C-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ],
+                    "excludes": [
+                      "已生效"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reset",
+                "value": "",
+                "assertions": {
+                  "#timeline": {
+                    "excludes": [
+                      "已生效"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "out-of-order-blocked",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#activate",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "前置步骤未完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "return-or-escalate",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "周岚",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "资料需要补充",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#find",
+                "value": "",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#reject",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已退回",
+                      "资料需要补充"
+                    ]
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已退回",
+                      "周岚"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Show domain context and consequences for each step, not just a list of buttons. Preserve all prior audit events; reset returns to initial state. Negative and branch paths are independent tests.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "hard-logistics-exception-01",
+      "name": "物流异常协同台",
+      "difficulty": "hard",
+      "industry": "物流供应链",
+      "audience": "履约负责人",
+      "scenario": "履约负责人筛选延误订单，查看仓库、承运商和货品详情，创建跟进任务，改派负责人，发送通知并关闭异常。",
+      "intent": "构造一个包含钻取、任务创建、改派、通知和关闭的履约异常处理流。",
+      "goal": "订单异常、跟进任务、负责人、通知状态和关闭原因保持一致。",
+      "flow_steps": [
+        "异常已定位",
+        "原因已确认",
+        "任务已创建",
+        "已改派",
+        "已重排",
+        "已通知",
+        "已关闭"
+      ],
+      "must_haves": [
+        "延误筛选与排序",
+        "订单详情钻取",
+        "跟进任务创建",
+        "负责人改派",
+        "关闭原因时间线"
+      ],
+      "acceptance_criteria": [
+        "详情显示被选订单的仓库和承运商",
+        "任务创建后有负责人和状态",
+        "关闭后不能继续编辑并保留原因"
+      ],
+      "evaluation_method": [
+        "从筛选到关闭完整点击一遍",
+        "验证任务、改派、通知和时间线的联动",
+        "验证关闭后的保护性失败路径"
+      ],
+      "assets": [],
+      "tags": [
+        "logistics",
+        "exception",
+        "workflow",
+        "timeline"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "entity_type": "延误订单",
+          "entities": [
+            {
+              "id": "O-01",
+              "title": "延误订单甲"
+            },
+            {
+              "id": "O-02",
+              "title": "延误订单乙"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_state": "待处理",
+          "ordered_transitions": [
+            [
+              "filter",
+              "异常已定位"
+            ],
+            [
+              "inspect",
+              "原因已确认"
+            ],
+            [
+              "create",
+              "任务已创建"
+            ],
+            [
+              "reassign",
+              "已改派"
+            ],
+            [
+              "reschedule",
+              "已重排"
+            ],
+            [
+              "notify",
+              "已通知"
+            ],
+            [
+              "close",
+              "已关闭"
+            ]
+          ],
+          "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+        },
+        "controls": {
+          "#filter": "button: execute the named business transition",
+          "#inspect": "button: execute the named business transition",
+          "#create": "button: execute the named business transition",
+          "#reassign": "button: execute the named business transition",
+          "#reschedule": "button: execute the named business transition",
+          "#notify": "button: execute the named business transition",
+          "#close": "button: execute the named business transition",
+          "#entity": "select: O-01/O-02",
+          "#owner": "select: 林澄/周岚",
+          "#reason": "textarea",
+          "#status": "visible current entity, owner, state and reason",
+          "#timeline": "visible per-entity audit",
+          "#reject": "button: return request to start with reason",
+          "#illegal": "button: illegal rollback after terminal state",
+          "#reset": "button: reset all entities",
+          "#errors": "visible rejection reason"
+        },
+        "tests": [
+          {
+            "id": "main-state-machine",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "O-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "本轮演示核验",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#filter",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "异常已定位"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "异常已定位"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#inspect",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "原因已确认"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "原因已确认"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#create",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "任务已创建"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "任务已创建"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reassign",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "已改派"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已改派"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reschedule",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "已重排"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已重排"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#notify",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "已通知"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已通知"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "O-01",
+                      "林澄",
+                      "已关闭"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#illegal",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已关闭"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "不可回退"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "O-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ],
+                    "excludes": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reset",
+                "value": "",
+                "assertions": {
+                  "#timeline": {
+                    "excludes": [
+                      "已关闭"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "out-of-order-blocked",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "前置步骤未完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "return-or-escalate",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "周岚",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "资料需要补充",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#filter",
+                "value": "",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#reject",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已退回",
+                      "资料需要补充"
+                    ]
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已退回",
+                      "周岚"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Show domain context and consequences for each step, not just a list of buttons. Preserve all prior audit events; reset returns to initial state. Negative and branch paths are independent tests.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    },
+    {
+      "id": "hard-clinic-followup-01",
+      "name": "高风险随访协同台",
+      "difficulty": "hard",
+      "industry": "医疗服务",
+      "audience": "随访管理负责人",
+      "scenario": "随访负责人筛选高风险患者，查看合成病例信息，分派工作人员，安排随访，记录结果；逾期时需要升级。",
+      "intent": "演示高风险随访的筛选、分派、计划、记录和逾期升级闭环。",
+      "goal": "病例卡、随访任务、负责人、结果和升级状态形成可追踪链路。",
+      "flow_steps": [
+        "风险已分层",
+        "计划已创建",
+        "已分派",
+        "已安排",
+        "随访已记录",
+        "已复核",
+        "已闭环"
+      ],
+      "must_haves": [
+        "高风险筛选",
+        "病例详情",
+        "人员分派",
+        "随访计划",
+        "逾期升级"
+      ],
+      "acceptance_criteria": [
+        "页面明确标注合成病例",
+        "完成随访后任务状态和结果可见",
+        "模拟逾期后升级动作和原因可见"
+      ],
+      "evaluation_method": [
+        "走通筛选、分派、安排、记录的主路径",
+        "触发逾期分支并检查升级状态",
+        "检查没有真实患者数据、医疗决策或外部系统调用"
+      ],
+      "assets": [],
+      "tags": [
+        "health",
+        "follow-up",
+        "risk",
+        "synthetic-data"
+      ],
+      "browser_contract": {
+        "fixture": {
+          "entity_type": "随访计划",
+          "entities": [
+            {
+              "id": "F-01",
+              "title": "随访计划甲"
+            },
+            {
+              "id": "F-02",
+              "title": "随访计划乙"
+            }
+          ],
+          "owners": [
+            "林澄",
+            "周岚"
+          ],
+          "initial_state": "待处理",
+          "ordered_transitions": [
+            [
+              "risk",
+              "风险已分层"
+            ],
+            [
+              "plan",
+              "计划已创建"
+            ],
+            [
+              "assign",
+              "已分派"
+            ],
+            [
+              "schedule",
+              "已安排"
+            ],
+            [
+              "record",
+              "随访已记录"
+            ],
+            [
+              "review",
+              "已复核"
+            ],
+            [
+              "close",
+              "已闭环"
+            ]
+          ],
+          "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+        },
+        "controls": {
+          "#risk": "button: execute the named business transition",
+          "#plan": "button: execute the named business transition",
+          "#assign": "button: execute the named business transition",
+          "#schedule": "button: execute the named business transition",
+          "#record": "button: execute the named business transition",
+          "#review": "button: execute the named business transition",
+          "#close": "button: execute the named business transition",
+          "#entity": "select: F-01/F-02",
+          "#owner": "select: 林澄/周岚",
+          "#reason": "textarea",
+          "#status": "visible current entity, owner, state and reason",
+          "#timeline": "visible per-entity audit",
+          "#reject": "button: return request to start with reason",
+          "#illegal": "button: illegal rollback after terminal state",
+          "#reset": "button: reset all entities",
+          "#errors": "visible rejection reason",
+          "#overdue": "button: simulate overdue for current follow-up",
+          "#escalate": "button: escalate overdue task"
+        },
+        "tests": [
+          {
+            "id": "main-state-machine",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "F-01",
+                "assertions": {}
+              },
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "林澄",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "本轮演示核验",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#risk",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "风险已分层"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "风险已分层"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#plan",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "计划已创建"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "计划已创建"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#assign",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "已分派"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已分派"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#schedule",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "已安排"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已安排"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#record",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "随访已记录"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "随访已记录"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#review",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "已复核"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已复核"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "F-01",
+                      "林澄",
+                      "已闭环"
+                    ],
+                    "changed": true
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已闭环"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#illegal",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已闭环"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "不可回退"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "select",
+                "selector": "#entity",
+                "value": "F-02",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ],
+                    "excludes": [
+                      "已闭环"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#reset",
+                "value": "",
+                "assertions": {
+                  "#timeline": {
+                    "excludes": [
+                      "已闭环"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "out-of-order-blocked",
+            "steps": [
+              {
+                "action": "click",
+                "selector": "#close",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "待处理"
+                    ]
+                  },
+                  "#errors": {
+                    "contains": [
+                      "前置步骤未完成"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "return-or-escalate",
+            "steps": [
+              {
+                "action": "select",
+                "selector": "#owner",
+                "value": "周岚",
+                "assertions": {}
+              },
+              {
+                "action": "fill",
+                "selector": "#reason",
+                "value": "逾期未联系",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#risk",
+                "value": "",
+                "assertions": {}
+              },
+              {
+                "action": "click",
+                "selector": "#overdue",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已逾期"
+                    ]
+                  }
+                }
+              },
+              {
+                "action": "click",
+                "selector": "#escalate",
+                "value": "",
+                "assertions": {
+                  "#status": {
+                    "contains": [
+                      "已升级",
+                      "周岚"
+                    ]
+                  },
+                  "#timeline": {
+                    "contains": [
+                      "已逾期",
+                      "已升级"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "notes": "Show domain context and consequences for each step, not just a list of buttons. Preserve all prior audit events; reset returns to initial state. Negative and branch paths are independent tests.",
+        "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
+      }
+    }
+  ],
+  "protocol": {
+    "version": "core-generation-v1",
+    "mode": "core_generation",
+    "planning_owner": "benchmark author",
+    "model_stages": [
+      "builder",
+      "reviewer:final"
+    ],
+    "max_revisions": 2,
+    "no_mock_fallback": true,
+    "split": "open development/calibration suite; not a sealed holdout",
+    "hard_pass": "real CLI code + static gates + all frozen browser paths + reviewer pass; preserve all failures in denominator"
+  }
+}

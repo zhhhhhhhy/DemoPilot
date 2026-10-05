@@ -68,6 +68,38 @@ def test_compiler_supplies_safe_default_for_missing_model_requirement():
     assert any("创建任务" in warning for warning in contract["normalization_warnings"])
 
 
+def test_core_generation_compiler_preserves_authored_selectors_and_steps():
+    demo_request = request().model_copy(
+        update={
+            "evaluation_mode": "core_generation",
+            "evaluation_browser_contract": {
+                "tests": [
+                    {
+                        "id": "journey",
+                        "steps": [
+                            {
+                                "action": "fill",
+                                "selector": "#owner",
+                                "value": "演示员",
+                                "assertions": {"#status": {"contains": ["HIDDEN_GOLD"]}},
+                            }
+                        ],
+                    }
+                ]
+            },
+        }
+    )
+
+    contract = compile_interaction_contract(demo_request, {})
+    tests = contract_tests(contract)
+
+    assert contract["version"] == "interaction-contract-core-generation-v1"
+    assert tests[0]["steps"][1]["selector"] == "#owner"
+    assert tests[1]["steps"][1]["selector"] == "#owner"
+    assert tests[0]["assertion"]["selector"] == "#status"
+    assert "HIDDEN_GOLD" not in str(contract)
+
+
 def test_compiler_normalizes_descriptive_assertions_to_atomic_visible_terms():
     contract = compile_interaction_contract(
         request(),

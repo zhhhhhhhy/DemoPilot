@@ -1,0 +1,58 @@
+{
+  "preflight_id": "demopilot-codex-cli-eval-set-2026-10-05",
+  "timestamp": "2026-10-05T08:14:52.3327427Z",
+  "scope": "evaluation",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "source.revision",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git rev-parse HEAD",
+      "detail": "b97fe498b1a813c65c7769f72f884f52d373fe4d"
+    },
+    {
+      "id": "backend.health",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "GET http://127.0.0.1:8091/api/health",
+      "detail": "{\"status\":\"ok\",\"version\":\"0.1.0\",\"claude_enabled\":false,\"providers\":{\"mock\":true,\"codex_cli\":true,\"claude\":false,\"deepseek\":false,\"aihubmix\":false,\"zju\":false}}"
+    },
+    {
+      "id": "codex-cli.auth",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex login status",
+      "detail": "Logged in using ChatGPT"
+    },
+    {
+      "id": "evalset.schema",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "schema-validation-20261005.json",
+      "detail": "20 cases; simple=10, medium=5, hard=5; explicit evaluation fields=true"
+    },
+    {
+      "id": "invoice.assets",
+      "owner": "hybrid",
+      "status": "passed",
+      "evidence": "invoice-manifest.json + assets/invoices/*.jpg",
+      "detail": "10 local CC BY 4.0 synthetic invoices; checksums verified; held-out gold excluded from prompt"
+    },
+    {
+      "id": "prompt.contract",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "models.py; prompts.py; run_codex_cli_eval_set.py",
+      "detail": "evaluation_intent, evaluation_goal, evaluation_flow_steps, evaluation_method, evaluation_assets and checksums are explicit in the real codex_cli request"
+    },
+    {
+      "id": "side-effect.boundary",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "harness.copy_fixture; .data/runs; evaluation_sets/codex-cli-v1/results",
+      "detail": "Only run-scoped artifacts and new evaluation results are written; no external systems or credentials."
+    }
+  ],
+  "next_action": "Run a single simple invoice case through the real codex_cli provider, then retain its artifact, browser, Reviewer and prompt-contract evidence."
+}

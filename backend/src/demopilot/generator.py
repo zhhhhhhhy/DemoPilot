@@ -124,6 +124,18 @@ def generate_artifacts(
     )
     contract_nav_html, contract_views_html, contract_runtime = _contract_fallback_parts(run)
 
+    mounted_assets: list[dict[str, str]] = []
+    for source_name in request.evaluation_assets:
+        source = Path(source_name)
+        digest = request.evaluation_asset_sha256.get(source_name)
+        if not digest:
+            raise ValueError(f"评测素材缺少 SHA-256：{source_name}")
+        target_name = source.name
+        workspace.copy_fixture(
+            f"artifacts/demo/assets/{target_name}", source, digest
+        )
+        mounted_assets.append({"name": target_name, "sha256": digest})
+
     index_html = f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -300,6 +312,7 @@ render();
         },
         "request": request.model_dump(),
         "intent_statement": run.outputs.get("intent_statement", {}),
+        "evaluation_assets": mounted_assets,
         "agent_outputs": run.outputs,
     }
     workspace.write_text(

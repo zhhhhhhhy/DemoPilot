@@ -401,11 +401,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise HTTPException(status_code=400, detail="Invalid file path") from exc
         allowed_paths = {(base_dir / item.relative_path).resolve() for item in run.artifacts}
         demo_assets = (base_dir / "artifacts" / "demo").resolve()
-        is_demo_asset = demo_assets in requested.parents and requested.name in {
-            "index.html",
-            "styles.css",
-            "app.js",
-        }
+        is_demo_asset = demo_assets in requested.parents and (
+            requested.name in {"index.html", "styles.css", "app.js"}
+            or (requested.parent == (demo_assets / "assets") and requested.suffix.lower() == ".jpg")
+        )
         if requested not in allowed_paths and not is_demo_asset:
             raise HTTPException(status_code=404, detail="Artifact not found")
         if not requested.is_file():
@@ -418,6 +417,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             ".md": "text/markdown",
             ".zip": "application/zip",
             ".png": "image/png",
+            ".jpg": "image/jpeg",
         }
         return FileResponse(
             path=Path(requested),

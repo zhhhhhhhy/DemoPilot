@@ -59,6 +59,9 @@ def compile_interaction_contract(
     """
 
     raw = raw if isinstance(raw, dict) else {}
+    evaluation_contract = request.evaluation_browser_contract
+    if request.evaluation_mode == "core_generation" and isinstance(evaluation_contract, dict):
+        return _compile_evaluation_contract(request, evaluation_contract)
     candidates = _raw_requirements(raw)
     compiled: list[dict[str, Any]] = []
     warnings: list[str] = []
@@ -185,6 +188,81 @@ def compile_interaction_contract(
         **core,
         "contract_sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
     }
+
+
+def _compile_evaluation_contract(
+    request: DemoRequest, authored: dict[str, Any]
+) -> dict[str, Any]:
+    """Compile authored controls into the normal frozen selector contract.
+
+    The benchmark author owns the journey selectors and Runner assertions; the
+    model still receives only the assertion-free journey shape. This lets the
+    existing Builder preflight and artifact verifier use the same contract
+    format as ordinary DemoPilot runs.
+    """
+
+    authored_tests = [
+        item for item in authored.get("tests", []) if isinstance(item, dict)
+    ]
+    compiled: list[dict[str, Any]] = []
+    for index, requirement in enumerate(request.must_haves, start=1):
+        selected = authored_tests[min(index - 1, len(authored_tests) - 1)] if authored_tests else {}
+        raw_steps = selected.get("steps", []) if isinstance(selected, dict) else []
+        elements: list[dict[str, str]] = []
+        steps: list[dict[str, str]] = []
+        seen: set[str] = set()
+        for step in raw_steps if isinstance(raw_steps, list) else []:
+            if not isinstance(step, dict):
+                continue
+            action = str(step.get("action", "click")).strip().lower()
+            if action not in ALLOWED_ACTIONS:
+                action = "click"
+            selector = str(step.get("selector", "")).strip()
+            if not selector.startswith("#") or selector in seen:
+                continue
+            seen.add(selector)
+            value = _text(step.get("value"), "演示值", maximum=80) if action in {"fill", "select"} else ""
+            purpose = _text(step.get("purpose"), f"完成{requirement}的业务动作")
+            steps.append({"action": action, "selector": selector, "value": value, "purpose": purpose})
+            elements.append({"selector": selector, "control": action, "value": value, "purpose": purpose})
+        route_nav = f"#eval-nav-{index}"
+        route_view = f"#eval-view-{index}"
+        route_step = {"action": "click", "selector": route_nav, "value": "", "purpose": f"进入{requirement}评测视图"}
+        assertion_selector = "#evaluation-result"
+        assertion_values = [f"{requirement} 已完成"]
+        if raw_steps and isinstance(raw_steps[-1], dict):
+            assertions = raw_steps[-1].get("assertions", {})
+            if isinstance(assertions, dict) and assertions:
+                assertion_selector = str(next(iter(assertions)))
+        compiled.append(
+            {
+                "requirement": requirement,
+                "screen": f"{requirement}评测视图",
+                "outcome": f"页面显示{requirement}的可复核结果",
+                "route": {"nav_selector": route_nav, "view_selector": route_view},
+                "elements": elements,
+                "test": {
+                    "requirement": requirement,
+                    "steps": [route_step, *steps],
+                    "assertion": {
+                        "selector": assertion_selector,
+                        "text_contains": assertion_values,
+                        "text_not_contains": [],
+                        "text_changed": True,
+                    },
+                },
+            }
+        )
+    core = {
+        "version": "interaction-contract-core-generation-v1",
+        "frozen": True,
+        "owner": "benchmark-author+harness-compiler",
+        "requirements": compiled,
+        "coverage": {"required": list(request.must_haves), "contracted": list(request.must_haves), "missing": []},
+        "normalization_warnings": [],
+    }
+    canonical = json.dumps(core, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return {**core, "contract_sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest()}
 
 
 def contract_tests(contract: object) -> list[dict[str, Any]]:

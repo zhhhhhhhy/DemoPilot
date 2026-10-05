@@ -1,0 +1,174 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-05T09:59:59.348441+00:00",
+  "provider": "codex_cli",
+  "real_runs": false,
+  "case_count": 20,
+  "tier_counts": {
+    "simple": 10,
+    "medium": 5,
+    "hard": 5
+  },
+  "results": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 10
+    },
+    {
+      "case_id": "simple-receipt-summary-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-appointment-card-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-sku-lookup-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-expense-entry-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-feedback-tag-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-shipment-status-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-profile-completion-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-quote-generator-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "simple-faq-answer-01",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "medium-invoice-review-01",
+      "difficulty": "medium",
+      "flow_count": 4,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 3
+    },
+    {
+      "case_id": "medium-lead-followup-01",
+      "difficulty": "medium",
+      "flow_count": 4,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "medium-replenishment-01",
+      "difficulty": "medium",
+      "flow_count": 4,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "medium-support-triage-01",
+      "difficulty": "medium",
+      "flow_count": 4,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "medium-content-calendar-01",
+      "difficulty": "medium",
+      "flow_count": 4,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "hard-procurement-approval-01",
+      "difficulty": "hard",
+      "flow_count": 7,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "hard-incident-response-01",
+      "difficulty": "hard",
+      "flow_count": 7,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "hard-contract-renewal-01",
+      "difficulty": "hard",
+      "flow_count": 7,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "hard-logistics-exception-01",
+      "difficulty": "hard",
+      "flow_count": 7,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    },
+    {
+      "case_id": "hard-clinic-followup-01",
+      "difficulty": "hard",
+      "flow_count": 7,
+      "provider": "codex_cli",
+      "evaluation_fields_present": true,
+      "asset_count": 0
+    }
+  ]
+}
