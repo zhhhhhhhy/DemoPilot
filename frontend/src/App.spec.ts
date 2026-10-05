@@ -42,6 +42,11 @@ function makeRun(overrides: Partial<DemoRun> = {}): DemoRun {
       scenario: '需要识别异常、比较处置方案并追踪状态。',
       audience: '区域运营负责人',
       must_haves: ['异常筛选', '方案比较', '状态追踪'],
+      boundaries: ['纯展示型静态 Demo，不连接客户生产系统'],
+      priority: '先完成核心可演示闭环',
+      acceptance_criteria: ['每项能力都有可操作控件和可见结果'],
+      constraints: ['使用本地虚构样例'],
+      intent_confirmed: true,
       brand_tone: '克制、清晰',
       primary_color: '#0071e3',
       provider: 'deepseek',
@@ -106,17 +111,23 @@ describe('DemoPilot control plane', () => {
     wrapper.unmount()
   })
 
-  it('creates a DeepSeek run from the brief form', async () => {
+  it('creates a Codex CLI run from the confirmed intent brief', async () => {
     const created = makeRun({ status: 'queued', progress: 0, checkpoint: null })
     mocks.createRun.mockResolvedValue(created)
     const wrapper = mount(App)
     await flushPromises()
 
+    await wrapper.get('.intent-confirm input').setValue(true)
     await wrapper.get('form.brief-card').trigger('submit')
     await flushPromises()
 
     expect(mocks.createRun).toHaveBeenCalledOnce()
-    expect(mocks.createRun.mock.calls[0][0].provider).toBe('deepseek')
+    expect(mocks.createRun.mock.calls[0][0].provider).toBe('codex_cli')
+    expect(mocks.createRun.mock.calls[0][0].intent_confirmed).toBe(true)
+    expect(mocks.createRun.mock.calls[0][0].acceptance_criteria).toEqual([
+      '每项能力都有可操作控件和可见结果',
+      '浏览器验证通过',
+    ])
     expect(wrapper.text()).toContain('复杂协同 Demo')
     wrapper.unmount()
   })

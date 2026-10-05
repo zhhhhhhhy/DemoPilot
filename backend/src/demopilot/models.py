@@ -28,7 +28,7 @@ class AgentStatus(StrEnum):
     CANCELLED = "cancelled"
 
 
-ProviderName = Literal["mock", "claude", "deepseek", "aihubmix", "zju"]
+ProviderName = Literal["mock", "codex_cli", "claude", "deepseek", "aihubmix", "zju"]
 
 
 class DemoRequest(BaseModel):
@@ -38,20 +38,63 @@ class DemoRequest(BaseModel):
     scenario: str = Field(min_length=10, max_length=2000)
     audience: str = Field(min_length=2, max_length=200)
     must_haves: list[str] = Field(default_factory=list, max_length=12)
+    boundaries: list[str] = Field(default_factory=list, max_length=8)
+    priority: str = Field(default="先完成核心可演示闭环", max_length=200)
+    acceptance_criteria: list[str] = Field(default_factory=list, max_length=8)
+    constraints: list[str] = Field(default_factory=list, max_length=8)
+    # Keep direct API clients backward-compatible while the UI asks the user
+    # to confirm the rendered one-page statement before submitting.
+    intent_confirmed: bool = True
     brand_tone: str = Field(default="专业、克制、可信", max_length=100)
     primary_color: str = Field(default="#0071e3", pattern=r"^#[0-9A-Fa-f]{6}$")
     provider: ProviderName = "deepseek"
     require_execution_approval: bool = False
 
-    @field_validator("must_haves")
+    @field_validator("must_haves", "boundaries", "acceptance_criteria", "constraints")
     @classmethod
-    def clean_must_haves(cls, values: list[str]) -> list[str]:
+    def clean_string_list(cls, values: list[str]) -> list[str]:
         cleaned: list[str] = []
         for value in values:
             item = value.strip()
             if item and item not in cleaned:
                 cleaned.append(item[:120])
         return cleaned
+
+
+def build_intent_statement(request: DemoRequest) -> dict[str, Any]:
+    """Build the durable, human-readable contract between intent and delivery.
+
+    The statement is deterministic so the UI, agents, and generated spec all
+    inspect the same acceptance surface. Empty optional lists receive explicit
+    defaults instead of disappearing from the contract.
+    """
+
+    boundaries = request.boundaries or [
+        "交付纯展示型静态 Demo，不连接客户生产系统",
+        "业务数据使用本地虚构样例，交互仅在浏览器内模拟",
+    ]
+    acceptance = request.acceptance_criteria or [
+        "每项必须能力都有可操作控件和可见结果",
+        "生成文件、交互契约与浏览器验证全部通过",
+        "Reviewer 能根据证据给出独立结论",
+    ]
+    constraints = request.constraints or [
+        "不引入外部服务、真实客户数据或生产鉴权",
+        "失败时保留证据并在下一轮定向返工，不静默降级",
+    ]
+    return {
+        "status": "confirmed" if request.intent_confirmed else "draft",
+        "goal": (
+            f"为{request.audience}制作{request.project_name}，"
+            f"帮助其在{request.scenario}的场景下完成可演示的核心闭环。"
+        ),
+        "boundary": boundaries,
+        "priority": request.priority or "先完成核心可演示闭环",
+        "acceptance": acceptance,
+        "constraints": constraints,
+        "must_haves": list(request.must_haves),
+        "source": "user_brief_and_article_dimensions",
+    }
 
 
 class AgentEvent(BaseModel):

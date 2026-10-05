@@ -1,0 +1,63 @@
+{
+  "goal": "Make the DemoPilot flow explicit as intent -> acceptance -> result, and use the authenticated local Codex CLI as the iteration provider",
+  "acceptance": [
+    "User can choose or enter boundary, priority, acceptance criteria, and constraints before generation",
+    "Run stores a one-page intent statement and visible acceptance evidence",
+    "codex_cli provider can run every Agent Team stage through codex exec --json without writing files",
+    "Builder, Runner, and Reviewer still provide deterministic and browser evidence; revision loops remain bounded",
+    "Mock regression suite and Codex CLI smoke path pass"
+  ],
+  "subtasks": [
+    {
+      "id": "S1",
+      "task": "Define and persist intent statement fields",
+      "owner": "hybrid",
+      "reason": "Pydantic schema is deterministic; wording and defaults follow the article and require product judgment",
+      "inputs": ["DemoRequest", "article-derived dimensions"],
+      "outputs": ["request fields", "intent_statement output"],
+      "evidence_required": ["schema tests", "API response"],
+      "risk": "medium",
+      "handoff_condition": "If the user needs different choice dimensions, keep the current fields and route the change to human review",
+      "acceptance_or_eval": "Intent statement contains goal, boundary, priority, acceptance, constraints and source inputs"
+    },
+    {
+      "id": "S2",
+      "task": "Add Codex CLI AgentProvider",
+      "owner": "script",
+      "reason": "Subprocess invocation, JSONL parsing, timeout and error handling are deterministic",
+      "inputs": ["codex exec", "saved CLI auth", "agent prompt/context"],
+      "outputs": ["provider result", "safe error"],
+      "evidence_required": ["provider unit tests", "codex CLI smoke call"],
+      "risk": "medium",
+      "handoff_condition": "Missing auth, timeout, invalid JSON or nonzero exit must fail the run visibly and never fall back silently",
+      "acceptance_or_eval": "Valid JSON object returned for a brief call; no file writes"
+    },
+    {
+      "id": "S3",
+      "task": "Expose intent, acceptance and result in the Vue workflow",
+      "owner": "hybrid",
+      "reason": "UI layout and choice wording need human-readable judgment; state transitions and rendering are testable",
+      "inputs": ["DemoRequest", "DemoRun.outputs"],
+      "outputs": ["confirmation step", "intent card", "result card"],
+      "evidence_required": ["Vitest", "browser screenshot/manual interaction"],
+      "risk": "medium",
+      "handoff_condition": "Visual polish and customer-specific sales wording remain human review",
+      "acceptance_or_eval": "Submit requires confirmed intent; selected run shows acceptance and evidence-bound result"
+    },
+    {
+      "id": "S4",
+      "task": "Regression and delivery evidence",
+      "owner": "script",
+      "reason": "Existing tests, lint, build and local services are deterministic",
+      "inputs": ["backend/frontend source"],
+      "outputs": ["test output", "iteration record", "preflight report"],
+      "evidence_required": ["pytest", "ruff", "Vitest", "lint", "build", "Mock run", "Codex smoke"],
+      "risk": "low",
+      "handoff_condition": "Browser rendering or model availability failures remain explicitly unverified",
+      "acceptance_or_eval": "All required checks pass or are labeled blocked/not-run"
+    }
+  ],
+  "human_review": ["final wording and visual hierarchy of the intent card", "whether generated demo is persuasive for a real customer", "whether any acceptance criterion is commercially or legally sufficient"],
+  "automatic_steps": ["schema validation", "Codex CLI JSON parsing", "sandbox and browser checks", "bounded revision loop"],
+  "fail_closed": ["Codex CLI auth or availability failure", "missing or contradictory acceptance evidence", "browser verification failure", "no silent Mock fallback for codex_cli"]
+}

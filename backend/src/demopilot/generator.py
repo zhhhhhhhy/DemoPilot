@@ -299,6 +299,7 @@ render();
             "source_mode": source_mode,
         },
         "request": request.model_dump(),
+        "intent_statement": run.outputs.get("intent_statement", {}),
         "agent_outputs": run.outputs,
     }
     workspace.write_text(

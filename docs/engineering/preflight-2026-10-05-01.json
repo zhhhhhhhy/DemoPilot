@@ -1,0 +1,58 @@
+{
+  "preflight_id": "demopilot-codex-cli-2026-10-05-01",
+  "timestamp": "2026-10-04T20:26:25.1988874Z",
+  "scope": "dev",
+  "status": "blocked",
+  "checks": [
+    {
+      "id": "repo.clean",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git status --short --branch",
+      "detail": "main worktree clean at commit 8199749"
+    },
+    {
+      "id": "runtime.uv",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv --version",
+      "detail": "uv 0.7.14"
+    },
+    {
+      "id": "runtime.node",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "node --version; npm.cmd --version",
+      "detail": "Node v24.19.0, npm 11.3.0"
+    },
+    {
+      "id": "runtime.codex_cli",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status",
+      "detail": "Codex CLI 0.160.0 and ChatGPT login status available"
+    },
+    {
+      "id": "deps.backend",
+      "owner": "script",
+      "status": "blocked",
+      "evidence": "Test-Path backend\\.venv",
+      "detail": "backend virtual environment is absent"
+    },
+    {
+      "id": "deps.frontend",
+      "owner": "script",
+      "status": "blocked",
+      "evidence": "Test-Path frontend\\node_modules",
+      "detail": "frontend dependencies are absent"
+    },
+    {
+      "id": "config.env",
+      "owner": "script",
+      "status": "blocked",
+      "evidence": "Test-Path .env",
+      "detail": "project .env is absent; Mock mode can run after dependency setup; external provider credentials remain unresolved"
+    }
+  ],
+  "next_action": "Install backend and frontend dependencies without creating or copying credentials, then rerun this gate before implementation."
+}

@@ -1,0 +1,72 @@
+{
+  "preflight_id": "demopilot-codex-cli-2026-10-05-03",
+  "timestamp": "2026-10-05T04:19:32Z",
+  "scope": "implementation",
+  "status": "ready_with_live_latency_limit",
+  "checks": [
+    {
+      "id": "runtime.codex_cli",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status; CodexCliAgentProvider brief smoke",
+      "detail": "Codex CLI 0.160.0 is available, ChatGPT login is active, and a real brief call returned a non-empty structured JSON object"
+    },
+    {
+      "id": "provider.fail_closed",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "backend/tests/test_codex_cli_provider.py; short-timeout smoke",
+      "detail": "Missing CLI, non-zero exit, invalid JSON, cancellation, and timeout paths remain visible; Windows process-tree cleanup is bounded"
+    },
+    {
+      "id": "intent_contract",
+      "owner": "hybrid",
+      "status": "passed",
+      "evidence": "backend/tests/test_intent_statement.py; backend/tests/test_api.py; frontend/src/App.spec.ts",
+      "detail": "Boundary, priority, acceptance, constraints, confirmation, durable intent statement, and result evidence are covered"
+    },
+    {
+      "id": "backend.regression",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv run ruff check .; uv run pytest --basetemp=.pytest-tmp",
+      "detail": "Ruff passed; 47 backend tests passed"
+    },
+    {
+      "id": "frontend.regression",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "npm.cmd run lint; npm.cmd run test:run; npm.cmd run build",
+      "detail": "ESLint passed; 4 Vitest tests passed; Vite production build passed"
+    },
+    {
+      "id": "ui.browser_smoke",
+      "owner": "human",
+      "status": "passed",
+      "evidence": "local Vite + Uvicorn; Codex in-app browser accessibility and screenshot check",
+      "detail": "The one-page intent card, confirmed state, Codex CLI default selection, and unlocked iteration button were visible in the running browser"
+    },
+    {
+      "id": "mock.acceptance",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "backend/tests/test_api.py::test_run_completes_and_artifacts_download",
+      "detail": "Mock run persisted the explicit intent statement and completed artifact, contract, browser, and Reviewer gates"
+    },
+    {
+      "id": "codex.full_e2e",
+      "owner": "script",
+      "status": "needs_follow_up",
+      "evidence": "live TestClient runs with provider=codex_cli",
+      "detail": "Two 180-second runs failed visibly on live latency; a 600-second run reached the design stage before being stopped after a roughly ten-minute Product call; no Mock fallback occurred and no browser/Reviewer result is claimed"
+    },
+    {
+      "id": "config.external",
+      "owner": "human",
+      "status": "needs_remote_check",
+      "evidence": "Test-Path .env",
+      "detail": "No project .env or external API key is present; the intended authenticated runtime is the local Codex CLI"
+    }
+  ],
+  "next_action": "Use the UI with the confirmed Codex CLI provider; when a full live acceptance record is required, set DEMOPILOT_CODEX_TIMEOUT_SECONDS to a deliberate higher value and repeat the nine-node run, then inspect browser and Reviewer evidence before delivery."
+}

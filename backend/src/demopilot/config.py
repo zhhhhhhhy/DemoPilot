@@ -17,6 +17,14 @@ def _positive_int(name: str, default: int, maximum: int) -> int:
     return max(1, min(value, maximum))
 
 
+def _positive_float(name: str, default: float, maximum: float) -> float:
+    try:
+        value = float(os.getenv(name, str(default)))
+    except ValueError:
+        return default
+    return max(1.0, min(value, maximum))
+
+
 @dataclass(frozen=True, slots=True)
 class CompatibleProviderSettings:
     name: str
@@ -44,6 +52,11 @@ class Settings:
     )
     max_parallel_agents: int = field(
         default_factory=lambda: _positive_int("DEMOPILOT_MAX_PARALLEL_AGENTS", 2, 4)
+    )
+    codex_command: str = field(default_factory=lambda: os.getenv("DEMOPILOT_CODEX_COMMAND", "codex"))
+    codex_model: str = field(default_factory=lambda: os.getenv("DEMOPILOT_CODEX_MODEL", ""))
+    codex_timeout_seconds: float = field(
+        default_factory=lambda: _positive_float("DEMOPILOT_CODEX_TIMEOUT_SECONDS", 180.0, 900.0)
     )
     allowed_origins: tuple[str, ...] = (
         "http://localhost:5173",

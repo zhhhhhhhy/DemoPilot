@@ -16,11 +16,19 @@ from .evaluation_cases import builtin_evaluation_cases
 from .evaluation_models import EvaluationCase, EvaluationRequest, EvaluationRun
 from .evaluation_store import EvaluationStore
 from .evaluator import EvaluationManager
-from .models import ApprovalDecision, DemoRequest, DemoRun, HealthResponse, RunStatus
+from .models import (
+    ApprovalDecision,
+    DemoRequest,
+    DemoRun,
+    HealthResponse,
+    RunStatus,
+    build_intent_statement,
+)
 from .orchestrator import DemoOrchestrator
 from .providers import (
     AgentProvider,
     ClaudeAgentProvider,
+    CodexCliAgentProvider,
     MockAgentProvider,
     OpenAICompatibleAgentProvider,
 )
@@ -35,6 +43,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         "mock": MockAgentProvider(),
         "claude": ClaudeAgentProvider(),
     }
+    codex_provider = CodexCliAgentProvider(
+        command=settings.codex_command,
+        model=settings.codex_model,
+        timeout_seconds=settings.codex_timeout_seconds,
+    )
+    if codex_provider.available():
+        providers["codex_cli"] = codex_provider
     for provider_settings in settings.compatible_providers():
         if provider_settings.enabled:
             providers[provider_settings.name] = OpenAICompatibleAgentProvider(
@@ -85,6 +100,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def health() -> HealthResponse:
         availability = {
             "mock": True,
+            "codex_cli": "codex_cli" in providers,
             "claude": settings.enable_claude,
             **{
                 item.name: item.enabled
@@ -259,6 +275,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/api/runs", response_model=DemoRun, status_code=202)
     async def create_run(payload: DemoRequest) -> DemoRun:
+        if not payload.intent_confirmed:
+            raise HTTPException(
+                status_code=400,
+                detail="Confirm the one-page intent statement before starting an iteration.",
+            )
         if payload.provider == "claude" and not settings.enable_claude:
             raise HTTPException(
                 status_code=400,
@@ -270,6 +291,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 detail=f"{payload.provider} provider is not configured in the project environment.",
             )
         run = DemoRun(id=uuid.uuid4().hex[:12], request=payload)
+        run.outputs["intent_statement"] = build_intent_statement(payload)
         run.outputs["skill_runtime"] = orchestrator.skill_registry.describe_profile(
             "approved"
         )

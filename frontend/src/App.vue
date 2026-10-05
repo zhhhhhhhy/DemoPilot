@@ -3,7 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { api } from './api'
 import AgentTimeline from './components/AgentTimeline.vue'
 import EvaluationCenter from './components/EvaluationCenter.vue'
-import type { DemoRequest, DemoRun, DemoTemplate, ProviderName } from './types'
+import type { DemoRequest, DemoRun, DemoTemplate, IntentStatement, ProviderName } from './types'
 
 interface ReviewerIssue {
   id: string
@@ -54,9 +54,14 @@ const form = reactive({
   scenario: '运营团队每天需要在多个系统之间切换，无法快速判断优先级并追踪结果。',
   audience: '运营负责人',
   must_haves: '运营总览，智能任务分派，效果追踪',
+  boundaries: '纯展示型静态 Demo；不连接客户生产系统',
+  priority: '先完成核心可演示闭环',
+  acceptance_criteria: '每项能力都有可操作控件和可见结果，浏览器验证通过',
+  constraints: '使用本地虚构样例；失败保留证据并定向返工',
+  intent_confirmed: false,
   brand_tone: '简洁、可信、现代',
   primary_color: '#0071e3',
-  provider: 'deepseek' as ProviderName,
+  provider: 'codex_cli' as ProviderName,
   require_execution_approval: true,
 })
 
@@ -68,9 +73,50 @@ const archiveArtifact = computed(() => selectedRun.value?.artifacts.find((artifa
 const pendingApproval = computed(() => selectedRun.value?.approvals?.find((approval) => approval.status === 'pending'))
 const recentReceipts = computed(() => selectedRun.value?.tool_receipts?.slice(-6).reverse() ?? [])
 
+const defaultIntentBoundary = ['交付纯展示型静态 Demo，不连接客户生产系统', '业务数据使用本地虚构样例，交互仅在浏览器内模拟']
+const defaultIntentAcceptance = ['每项必须能力都有可操作控件和可见结果', '生成文件、交互契约与浏览器验证全部通过', 'Reviewer 能根据证据给出独立结论']
+const defaultIntentConstraints = ['不引入外部服务、真实客户数据或生产鉴权', '失败时保留证据并在下一轮定向返工，不静默降级']
+
 function stringList(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)).filter(Boolean) : []
 }
+
+function splitList(value: string): string[] {
+  return value.split(/[，,;；\n]/).map((item) => item.trim()).filter(Boolean)
+}
+
+function normalizeIntentStatement(value: unknown): IntentStatement | null {
+  if (!value || typeof value !== 'object') return null
+  const raw = value as Record<string, unknown>
+  if (!raw.goal) return null
+  return {
+    status: raw.status === 'confirmed' ? 'confirmed' : 'draft',
+    goal: String(raw.goal),
+    boundary: stringList(raw.boundary).length ? stringList(raw.boundary) : defaultIntentBoundary,
+    priority: String(raw.priority ?? '先完成核心可演示闭环'),
+    acceptance: stringList(raw.acceptance).length ? stringList(raw.acceptance) : defaultIntentAcceptance,
+    constraints: stringList(raw.constraints).length ? stringList(raw.constraints) : defaultIntentConstraints,
+    must_haves: stringList(raw.must_haves),
+    source: String(raw.source ?? 'user_brief_and_article_dimensions'),
+  }
+}
+
+const draftIntent = computed<IntentStatement>(() => ({
+  status: form.intent_confirmed ? 'confirmed' : 'draft',
+  goal: `为${form.audience}制作${form.project_name}，帮助其在${form.scenario}的场景下完成可演示的核心闭环。`,
+  boundary: splitList(form.boundaries).length ? splitList(form.boundaries) : defaultIntentBoundary,
+  priority: form.priority || '先完成核心可演示闭环',
+  acceptance: splitList(form.acceptance_criteria).length ? splitList(form.acceptance_criteria) : defaultIntentAcceptance,
+  constraints: splitList(form.constraints).length ? splitList(form.constraints) : defaultIntentConstraints,
+  must_haves: splitList(form.must_haves),
+  source: 'user_brief_and_article_dimensions',
+}))
+const selectedIntent = computed(() => normalizeIntentStatement(selectedRun.value?.outputs.intent_statement) ?? null)
+const selectedArtifactValidation = computed(() => {
+  const value = selectedRun.value?.outputs.artifact_validation
+  return value && typeof value === 'object' ? value as Record<string, unknown> : null
+})
+const selectedValidationChecks = computed(() => stringList(selectedArtifactValidation.value?.checks).slice(0, 5))
 
 const intentionalBoundaryPattern = /erp|wms|crm|真实系统|真实集成|真实客户数据|实时数据|实时库存|数据接入|数据同步|数据库|预测|实时计算|后端|审批|权限|角色|生产鉴权|生产部署|生产环境/i
 const defaultScopeBoundaries = ['纯展示型静态售前 Demo', '业务数据使用本地虚构样例', '业务交互仅在浏览器内模拟并可重置']
@@ -142,7 +188,10 @@ const reviewerDimensions: Record<string, string> = {
 function payloadFromForm(): DemoRequest {
   return {
     ...form,
-    must_haves: form.must_haves.split(/[，,\n]/).map((item) => item.trim()).filter(Boolean),
+    must_haves: splitList(form.must_haves),
+    boundaries: splitList(form.boundaries),
+    acceptance_criteria: splitList(form.acceptance_criteria),
+    constraints: splitList(form.constraints),
   }
 }
 
@@ -151,6 +200,7 @@ function useTemplate(template: DemoTemplate) {
   form.industry = template.industry
   form.scenario = template.scenario
   form.must_haves = template.must_haves.join('，')
+  form.intent_confirmed = false
   formElement.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
@@ -217,6 +267,10 @@ function startLiveUpdates(id: string) {
 }
 
 async function submitBrief() {
+  if (!form.intent_confirmed) {
+    loadError.value = '请先确认下方的一页纸意图声明，再开始生成。'
+    return
+  }
   isSubmitting.value = true
   loadError.value = ''
   try {
@@ -344,21 +398,38 @@ onBeforeUnmount(stopLiveUpdates)
         </div>
 
         <form ref="formElement" class="brief-card" @submit.prevent="submitBrief">
-          <div class="brief-heading"><div><span class="section-kicker">NEW BRIEF</span><h2>告诉团队客户想要什么</h2></div><div class="live-pill"><span></span>就绪</div></div>
+          <div class="brief-heading"><div><span class="section-kicker">01 · INTENT</span><h2>先把意图说清楚</h2><p>围绕边界、优先级、验收和约束收敛，完成后再让 Agent 开始实现。</p></div><div class="live-pill"><span></span>先确认意图</div></div>
           <div class="form-row"><label>客户名称<input v-model="form.client_name" required minlength="2" maxlength="80" placeholder="例如：远山科技" /></label><label>Demo 名称<input v-model="form.project_name" required minlength="2" maxlength="100" /></label></div>
           <div class="form-row"><label>行业<input v-model="form.industry" required maxlength="80" /></label><label>演示对象<input v-model="form.audience" required maxlength="200" /></label></div>
           <label>客户场景<textarea v-model="form.scenario" required minlength="10" maxlength="2000" rows="4"></textarea><small>{{ form.scenario.length }} / 2000</small></label>
           <label>必须出现的能力<input v-model="form.must_haves" placeholder="使用逗号分隔" /><small>例如：经营看板，智能分析，报告导出</small></label>
+          <div class="intent-questions">
+            <div class="intent-question"><span>边界</span><label><textarea v-model="form.boundaries" rows="2" placeholder="哪些事情明确不做？"></textarea><small>可用分号补充多个边界</small></label></div>
+            <div class="intent-question"><span>优先级</span><label><select v-model="form.priority"><option>先完成核心可演示闭环</option><option>先证明一个关键业务结果</option><option>先做出可讲解的视觉主线</option></select></label></div>
+            <div class="intent-question"><span>验收</span><label><textarea v-model="form.acceptance_criteria" rows="2" placeholder="什么结果算完成？"></textarea></label></div>
+            <div class="intent-question"><span>约束</span><label><textarea v-model="form.constraints" rows="2" placeholder="成本、合规、数据或技术限制"></textarea></label></div>
+          </div>
+          <div class="intent-statement-preview">
+            <div class="statement-heading"><div><span class="section-kicker">ONE-PAGE INTENT</span><strong>一页纸意图声明</strong></div><span :class="`statement-status ${form.intent_confirmed ? 'confirmed' : 'draft'}`">{{ form.intent_confirmed ? '已确认' : '待确认' }}</span></div>
+            <p class="statement-goal">{{ draftIntent.goal }}</p>
+            <div class="statement-columns"><div><b>验收标准</b><ul><li v-for="item in draftIntent.acceptance" :key="item">{{ item }}</li></ul></div><div><b>边界与约束</b><ul><li v-for="item in [...draftIntent.boundary, ...draftIntent.constraints]" :key="item">{{ item }}</li></ul></div></div>
+            <label class="intent-confirm"><input v-model="form.intent_confirmed" type="checkbox" /><span><strong>我确认这份意图声明</strong><small>确认后才会启动 Codex CLI 的 Agent Team 迭代。</small></span></label>
+          </div>
           <div class="form-row"><label>品牌气质<input v-model="form.brand_tone" maxlength="100" /></label><label>主色<div class="color-control"><input v-model="form.primary_color" type="color" /><input v-model="form.primary_color" pattern="^#[0-9A-Fa-f]{6}$" /></div></label></div>
-          <div class="provider-control"><div><strong>执行内核</strong><span>默认使用 DeepSeek 驱动完整 Agent Team；Mock 仅用于离线回归</span></div><select v-model="form.provider"><option value="deepseek">DeepSeek · 默认开发内核</option><option value="mock">Mock · 仅离线回归</option><option value="aihubmix">AIHubMix · 手动备用</option><option value="zju">ZJU · 手动备用</option><option value="claude">Claude · 未配置</option></select></div>
+          <div class="provider-control"><div><strong>执行内核</strong><span>Codex CLI 驱动每一轮 Agent 调用；Mock 只用于离线回归</span></div><select v-model="form.provider"><option value="codex_cli">Codex CLI · 本机登录内核</option><option value="mock">Mock · 仅离线回归</option><option value="deepseek">DeepSeek · 外部 API</option><option value="aihubmix">AIHubMix · 手动备用</option><option value="zju">ZJU · 手动备用</option><option value="claude">Claude · 未配置</option></select></div>
           <label class="approval-toggle"><input v-model="form.require_execution_approval" type="checkbox" /><span><strong>生成文件前需要人工批准</strong><small>规划可自动完成；只有任务级沙箱准备写入产物时暂停。</small></span></label>
-          <button class="submit-button" type="submit" :disabled="isSubmitting"><span v-if="isSubmitting" class="button-spinner"></span><span v-else>✦</span>{{ isSubmitting ? '正在组建团队…' : '让 Agent Team 开始工作' }}</button>
+          <button class="submit-button" type="submit" :disabled="isSubmitting || !form.intent_confirmed"><span v-if="isSubmitting" class="button-spinner"></span><span v-else>✦</span>{{ isSubmitting ? '正在组建团队…' : form.intent_confirmed ? '让 Codex CLI 开始迭代' : '确认意图后开始迭代' }}</button>
           <p class="form-boundary">不会连接客户生产系统，也不会自动对外发布。所有产物需由销售复核后交付。</p>
         </form>
       </section>
 
       <section v-if="selectedRun" id="team" class="delivery-section">
         <div class="section-heading"><div><span class="section-kicker">DELIVERY ROOM</span><h2>{{ selectedRun.request.project_name }}</h2></div><div class="delivery-actions"><button v-if="['queued', 'running', 'waiting_approval'].includes(selectedRun.status)" type="button" :disabled="isActing" @click="cancelSelected">取消任务</button><button v-if="['failed', 'cancelled'].includes(selectedRun.status)" type="button" :disabled="isActing" @click="resumeSelected">从检查点恢复</button><a v-if="demoArtifact" :href="api.artifactUrl(demoArtifact.download_url)" target="_blank" rel="noreferrer">打开 Demo</a><a v-if="archiveArtifact" class="primary-link" :href="api.artifactUrl(archiveArtifact.download_url)">下载交付包</a></div></div>
+        <article class="intent-result-card">
+          <div class="result-card-heading"><div><span class="section-kicker">02 · INTENT → ACCEPTANCE → RESULT</span><h3>这次迭代的完成定义</h3></div><span :class="`result-status result-${selectedRun.quality_gate}`">{{ selectedRun.status === 'completed' ? selectedRun.quality_gate === 'passed' ? '已验证' : '带边界完成' : statusLabel(selectedRun.status) }}</span></div>
+          <div v-if="selectedIntent" class="result-intent"><strong>意图</strong><p>{{ selectedIntent.goal }}</p><div class="result-meta"><span>优先级：{{ selectedIntent.priority }}</span><span>内核：{{ selectedRun.request.provider }}</span></div></div>
+          <div class="result-columns"><div><b>验收标准</b><ul><li v-for="item in (selectedIntent?.acceptance ?? [])" :key="item">{{ item }}</li></ul></div><div><b>结果证据</b><ul><li v-for="item in selectedValidationChecks" :key="item">{{ item }}</li><li v-if="!selectedValidationChecks.length">等待 Runner 产生验证证据</li></ul></div></div>
+        </article>
         <div class="delivery-grid">
           <article class="agent-panel"><div class="panel-title"><div><h3>Agent Team</h3><p>{{ selectedRun.agent_calls }} 次调用 · {{ selectedRun.revision_count }} 次返工 · {{ selectedRun.tool_receipts?.length ?? 0 }} 条工具凭证</p></div><strong>{{ selectedRun.progress }}%</strong></div><div class="overall-progress"><span :style="{ width: `${selectedRun.progress}%` }"></span></div><div v-if="pendingApproval" class="approval-card"><span>需要你的批准</span><strong>允许在本任务沙箱生成交付文件？</strong><p>{{ pendingApproval.reason }}</p><div><button type="button" :disabled="isActing" @click="decideApproval('decline')">拒绝</button><button class="approve-button" type="button" :disabled="isActing" @click="decideApproval('approve')">批准并继续</button></div></div><AgentTimeline :events="selectedRun.events" :run-status="selectedRun.status" /><div v-if="recentReceipts.length" class="receipt-list"><div class="receipt-heading"><strong>工具调用凭证</strong><span>真实落盘后生成</span></div><div v-for="receipt in recentReceipts" :key="receipt.id" class="receipt-row"><span :class="`receipt-${receipt.status}`"></span><div><strong>{{ receipt.tool_name }}</strong><small>{{ receipt.output_summary }}</small></div><code v-if="Object.values(receipt.sha256)[0]">{{ Object.values(receipt.sha256)[0].slice(0, 8) }}</code></div></div></article>
           <article class="preview-panel">

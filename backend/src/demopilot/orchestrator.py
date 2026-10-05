@@ -124,6 +124,8 @@ class DemoOrchestrator:
             keys = tuple(run.outputs)
 
         context = {key: run.outputs[key] for key in keys if key in run.outputs}
+        if "intent_statement" in run.outputs:
+            context["intent_statement"] = run.outputs["intent_statement"]
         if agent_id == "reviewer" and phase == "rubric":
             context["review_phase"] = {"mode": "rubric"}
         if agent_id == "builder" and iteration and "builder" in run.outputs:

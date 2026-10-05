@@ -1,6 +1,6 @@
 export type RunStatus = 'queued' | 'running' | 'waiting_approval' | 'completed' | 'failed' | 'cancelled'
 export type AgentStatus = 'waiting' | 'running' | 'completed' | 'failed' | 'cancelled'
-export type ProviderName = 'mock' | 'claude' | 'deepseek' | 'aihubmix' | 'zju'
+export type ProviderName = 'mock' | 'codex_cli' | 'claude' | 'deepseek' | 'aihubmix' | 'zju'
 
 export interface DemoRequest {
   client_name: string
@@ -9,6 +9,11 @@ export interface DemoRequest {
   scenario: string
   audience: string
   must_haves: string[]
+  boundaries: string[]
+  priority: string
+  acceptance_criteria: string[]
+  constraints: string[]
+  intent_confirmed: boolean
   brand_tone: string
   primary_color: string
   provider: ProviderName
@@ -81,6 +86,17 @@ export interface DemoRun {
   last_event_sequence: number
   created_at: string
   updated_at: string
+}
+
+export interface IntentStatement {
+  status: 'confirmed' | 'draft'
+  goal: string
+  boundary: string[]
+  priority: string
+  acceptance: string[]
+  constraints: string[]
+  must_haves: string[]
+  source: string
 }
 
 export interface DemoTemplate {

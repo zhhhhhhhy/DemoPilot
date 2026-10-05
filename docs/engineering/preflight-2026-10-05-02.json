@@ -1,0 +1,65 @@
+{
+  "preflight_id": "demopilot-codex-cli-2026-10-05-02",
+  "timestamp": "2026-10-04T20:36:01.5291693Z",
+  "scope": "dev",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "repo.clean",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git status --short --branch",
+      "detail": "source worktree remains clean; ignored dependency directories only"
+    },
+    {
+      "id": "runtime.uv",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv --version; backend/.venv",
+      "detail": "uv 0.7.14 and Python 3.11.13 environment available"
+    },
+    {
+      "id": "runtime.node",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "node --version; npm.cmd --version",
+      "detail": "Node v24.19.0, npm 11.3.0"
+    },
+    {
+      "id": "runtime.codex_cli",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status; codex exec --ephemeral --json",
+      "detail": "Codex CLI 0.160.0 authenticated with ChatGPT and returned a structured JSON smoke response"
+    },
+    {
+      "id": "deps.backend",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv run ruff check .; uv run pytest --basetemp=.pytest-tmp",
+      "detail": "Ruff passed; 38 backend tests passed in 119.01 seconds"
+    },
+    {
+      "id": "deps.frontend",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "npm.cmd run lint; npm.cmd run test:run; npm.cmd run build",
+      "detail": "ESLint passed; 4 Vitest tests passed; Vite production build passed"
+    },
+    {
+      "id": "config.mock",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "backend tests and Mock provider",
+      "detail": "offline provider path is runnable without .env"
+    },
+    {
+      "id": "config.external",
+      "owner": "script",
+      "status": "needs_remote_check",
+      "evidence": "Test-Path .env",
+      "detail": "external provider API keys are not configured; Codex CLI saved ChatGPT auth is available and will be the integration target"
+    }
+  ],
+  "next_action": "Implement the Codex CLI provider and intent/acceptance/result contract; rerun deterministic tests and a local Mock plus Codex CLI smoke run."
+}

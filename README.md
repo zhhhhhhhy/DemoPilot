@@ -13,7 +13,7 @@
 [![Vue](https://img.shields.io/badge/Vue-3-42B883?logo=vuedotjs&logoColor=white)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![uv](https://img.shields.io/badge/managed%20with-uv-DE5FE9)](https://docs.astral.sh/uv/)
-[![DeepSeek](https://img.shields.io/badge/Provider-DeepSeek-4D6BFE)](https://www.deepseek.com/)
+[![Codex CLI](https://img.shields.io/badge/Provider-Codex%20CLI-111111)](https://developers.openai.com/codex/cli/)
 [![Built by Agent Team](https://img.shields.io/badge/Built_by-Agent_Team-111111)](#built-by-an-agent-team)
 
 [快速开始](#快速开始) · [核心能力](#核心能力) · [运行架构](#运行架构) · [评测证据](#评测证据) · [API](#api) · [项目边界](#项目边界)
@@ -22,14 +22,14 @@
 
 ## Built by an Agent Team
 
-DemoPilot 不只是一个“内部调用多个模型”的项目。**这个项目本身也采用 Agent Team 协作方式完成**：从需求讨论、公开方案调研、系统架构、Vue 前端、Python 后端，到真实 API 调用、Chromium 端到端测试、失败归因、修复和 A/B 评测，都由不同职责的 AI Agent 在人的目标与验收标准下持续推进。
+DemoPilot 不只是一个“内部调用多个模型”的项目。**这个项目本身也采用 Agent Team 协作方式完成**：从需求讨论、公开方案调研、系统架构、Vue 前端、Python 后端，到本机 Codex CLI 调用、Chromium 端到端测试、失败归因、修复和 A/B 评测，都由不同职责的 AI Agent 在人的目标与验收标准下持续推进。
 
 | 参与者 | 主要职责 |
 | --- | --- |
 | 人类负责人 | 提出真实业务目标、确认产品边界、作出关键决策并最终验收 |
 | 产品与架构 Agent | 丰富需求，设计 Agent Team、Harness、契约与评测体系 |
 | 工程 Agent | 实现 Vue 前端、FastAPI 后端、Provider、沙箱与持久化 |
-| 测试与 Reviewer Agent | 运行真实 DeepSeek/API/浏览器测试，记录失败证据并驱动返工 |
+| 测试与 Reviewer Agent | 运行真实 Codex CLI/API/浏览器测试，记录失败证据并驱动返工 |
 | Harness | 约束调用预算、文件权限、验证顺序和 Skill 晋级，防止“自称完成” |
 
 这不是“全自动、无人监督”的营销故事，而是一种更可复现的工程分工：**人负责方向和责任，Agent Team 负责高密度执行，测试证据决定能否交付。**
@@ -101,8 +101,8 @@ flowchart LR
 ### 1. 获取项目
 
 ```powershell
-git clone https://github.com/zhhhhhhhy/DemoPolit.git
-cd DemoPolit
+git clone https://github.com/zhhhhhhhy/DemoPilot.git
+cd DemoPilot
 Copy-Item .env.example .env
 ```
 
@@ -120,7 +120,23 @@ cd ..
 
 ### 3. 配置 Provider
 
-DeepSeek 是真实开发的默认 Provider。把下面配置加入项目根目录 `.env`：
+Codex CLI 是默认的本地迭代 Provider。它通过 CLI 自己的登录状态访问模型；先安装并登录：
+
+```powershell
+npm.cmd install --global @openai/codex
+codex login
+codex login status
+```
+
+项目根目录 `.env` 可显式指定 CLI：
+
+```dotenv
+DEMOPILOT_CODEX_COMMAND=codex
+DEMOPILOT_CODEX_MODEL=
+DEMOPILOT_CODEX_TIMEOUT_SECONDS=180
+```
+
+DeepSeek 仍可作为外部 API Provider 使用，把下面配置加入项目根目录 `.env`：
 
 ```dotenv
 DEEPSEEK_API_KEY=your_deepseek_api_key
@@ -159,7 +175,7 @@ npm.cmd run dev
 ## 使用方式
 
 1. 填写客户名称、行业、演示对象、客户场景和必须出现的能力。
-2. 选择 DeepSeek 进行真实生成，或选择 Mock 进行离线回归。
+2. 确认边界、优先级、验收标准和约束，在一页纸意图声明中勾选确认；默认使用 Codex CLI，或选择 Mock 进行离线回归。
 3. 需要时开启“生成文件前人工批准”；团队会在首次写入产物前暂停。
 4. 在 Agent Team 时间线中查看每个节点、工具凭证、预检失败和返工轨迹。
 5. 预览最终 Demo，检查独立 Reviewer 报告，下载完整 ZIP 交付包。
@@ -186,7 +202,7 @@ manifest.json
 | 检查项 | 结果 |
 | --- | --- |
 | Backend Ruff | 通过 |
-| Backend pytest | 36 tests passed |
+| Backend pytest | 47 tests passed |
 | Frontend ESLint | 通过 |
 | Frontend Vitest | 4 tests passed |
 | Frontend production build | 通过 |
@@ -275,7 +291,7 @@ npm.cmd run build
 DemoPilot/
 ├── backend/
 │   ├── src/demopilot/
-│   │   ├── providers/          # DeepSeek / Mock / 可选 Provider
+│   │   ├── providers/          # Codex CLI / Mock / 外部可选 Provider
 │   │   ├── skills/             # 六个小型工程 Skill
 │   │   ├── orchestrator.py     # Agent Team 编排与返工循环
 │   │   ├── interaction_contract.py
@@ -301,6 +317,9 @@ DemoPilot/
 | `DEMOPILOT_MAX_REVISIONS` | `4` | 最大返工轮次 |
 | `DEMOPILOT_MAX_PARALLEL_AGENTS` | `2` | 最大并行 Agent 数 |
 | `DEMOPILOT_ENABLE_CLAUDE` | `false` | 是否启用 Claude 官方 SDK |
+| `DEMOPILOT_CODEX_COMMAND` | `codex` | Codex CLI 可执行命令或路径 |
+| `DEMOPILOT_CODEX_MODEL` | 空 | 可选的 Codex CLI 模型覆盖 |
+| `DEMOPILOT_CODEX_TIMEOUT_SECONDS` | `180` | 单次 Codex CLI 调用超时 |
 | `DEEPSEEK_API_KEY` | 空 | DeepSeek API 密钥 |
 | `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | DeepSeek API 地址 |
 | `DEEPSEEK_MODEL` | `deepseek-v4-flash` | DeepSeek 模型名 |

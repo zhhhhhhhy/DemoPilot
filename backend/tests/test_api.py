@@ -64,6 +64,7 @@ def test_health_and_templates(tmp_path):
         health = client.get("/api/health")
         assert health.status_code == 200
         assert health.json()["status"] == "ok"
+        assert isinstance(health.json()["providers"]["codex_cli"], bool)
         templates = client.get("/api/templates")
         assert templates.status_code == 200
         assert len(templates.json()) == 3
@@ -71,7 +72,16 @@ def test_health_and_templates(tmp_path):
 
 def test_run_completes_and_artifacts_download(tmp_path):
     with make_client(tmp_path) as client:
-        response = client.post("/api/runs", json=payload())
+        response = client.post(
+            "/api/runs",
+            json=payload(
+                boundaries=["仅做浏览器内演示"],
+                priority="先证明异常闭环",
+                acceptance_criteria=["页面可点击并出现反馈"],
+                constraints=["不接生产系统"],
+                intent_confirmed=True,
+            ),
+        )
         assert response.status_code == 202
         run_id = response.json()["id"]
         run = wait_for_status(client, run_id, "completed")
@@ -79,6 +89,11 @@ def test_run_completes_and_artifacts_download(tmp_path):
         assert run["progress"] == 100
         assert len(run["events"]) == 22
         assert run["outputs"]["builder_preflight"]["status"] == "skipped"
+        assert run["outputs"]["intent_statement"]["status"] == "confirmed"
+        assert run["outputs"]["intent_statement"]["acceptance"] == ["页面可点击并出现反馈"]
+        assert run["outputs"]["intent_statement"]["boundary"] == ["仅做浏览器内演示"]
+        assert run["outputs"]["intent_statement"]["priority"] == "先证明异常闭环"
+        assert run["outputs"]["intent_statement"]["constraints"] == ["不接生产系统"]
         assert any(event["event_type"] == "gate" for event in run["events"])
         assert run["agent_calls"] == 9
         assert run["revision_count"] == 0
@@ -129,6 +144,8 @@ def test_run_completes_and_artifacts_download(tmp_path):
             assert "demo/index.html" in bundle.namelist()
             spec = json.loads(bundle.read("demo-spec.json").decode("utf-8"))
         assert spec["meta"]["data_mode"] == "controlled_fixture"
+        assert spec["intent_statement"]["priority"] == "先证明异常闭环"
+        assert spec["intent_statement"]["acceptance"] == ["页面可点击并出现反馈"]
         assert run["outputs"]["review_rubric"]["total_weight"] == 100
         review = run["outputs"]["reviewer"]
         assert review["decision"] == "pass"
@@ -165,6 +182,13 @@ def test_claude_mode_requires_explicit_enablement(tmp_path):
     with make_client(tmp_path) as client:
         response = client.post("/api/runs", json=payload(provider="claude"))
         assert response.status_code == 400
+
+
+def test_run_requires_confirmed_intent_statement(tmp_path):
+    with make_client(tmp_path) as client:
+        response = client.post("/api/runs", json=payload(intent_confirmed=False))
+        assert response.status_code == 400
+        assert "intent statement" in response.json()["detail"]
 
 
 class RevisionOnceProvider(MockAgentProvider):
