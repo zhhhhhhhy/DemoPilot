@@ -1,6 +1,6 @@
 {
-  "preflight_id": "demopilot-codex-cli-eval-set-2026-10-05",
-  "timestamp": "2026-10-05T08:14:52.3327427Z",
+  "preflight_id": "demopilot-codex-cli-eval-set-2026-10-05-final",
+  "timestamp": "2026-10-05T10:06:09.613502+00:00",
   "scope": "evaluation",
   "status": "ready",
   "checks": [
@@ -9,14 +9,33 @@
       "owner": "script",
       "status": "passed",
       "evidence": "git rev-parse HEAD",
-      "detail": "b97fe498b1a813c65c7769f72f884f52d373fe4d"
+      "detail": "987e8b369e878ee60dd9e8f572c360d96ecde4f0"
+    },
+    {
+      "id": "working-tree.clean",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git status --porcelain",
+      "detail": "clean"
     },
     {
       "id": "backend.health",
       "owner": "script",
       "status": "passed",
       "evidence": "GET http://127.0.0.1:8091/api/health",
-      "detail": "{\"status\":\"ok\",\"version\":\"0.1.0\",\"claude_enabled\":false,\"providers\":{\"mock\":true,\"codex_cli\":true,\"claude\":false,\"deepseek\":false,\"aihubmix\":false,\"zju\":false}}"
+      "detail": {
+        "status": "ok",
+        "version": "0.1.0",
+        "claude_enabled": false,
+        "providers": {
+          "mock": true,
+          "codex_cli": true,
+          "claude": false,
+          "deepseek": false,
+          "aihubmix": false,
+          "zju": false
+        }
+      }
     },
     {
       "id": "codex-cli.auth",
@@ -29,30 +48,118 @@
       "id": "evalset.schema",
       "owner": "script",
       "status": "passed",
-      "evidence": "schema-validation-20261005.json",
-      "detail": "20 cases; simple=10, medium=5, hard=5; explicit evaluation fields=true"
+      "evidence": "cases.json + schema-validation-final-20261005.json",
+      "detail": {
+        "cases": 20,
+        "tier_counts": {
+          "simple": 10,
+          "medium": 5,
+          "hard": 5
+        },
+        "explicit_prompt_fields": true
+      }
     },
     {
       "id": "invoice.assets",
       "owner": "hybrid",
       "status": "passed",
       "evidence": "invoice-manifest.json + assets/invoices/*.jpg",
-      "detail": "10 local CC BY 4.0 synthetic invoices; checksums verified; held-out gold excluded from prompt"
+      "detail": {
+        "count": 10,
+        "checksums": true,
+        "license": "CC BY 4.0",
+        "synthetic": true,
+        "gold_file": "invoice-gold.json held out"
+      }
     },
     {
       "id": "prompt.contract",
       "owner": "script",
       "status": "passed",
-      "evidence": "models.py; prompts.py; run_codex_cli_eval_set.py",
-      "detail": "evaluation_intent, evaluation_goal, evaluation_flow_steps, evaluation_method, evaluation_assets and checksums are explicit in the real codex_cli request"
+      "evidence": "models.py; prompts.py; interaction_contract.py; run_codex_cli_eval_set.py",
+      "detail": "intent, goal, flow, evaluation method are explicit; browser assertion text is redacted from model prompt; compiled contract keeps generic feedback only"
+    },
+    {
+      "id": "real-run.boundary",
+      "owner": "script",
+      "status": "observed_failed",
+      "evidence": "evaluation_sets/codex-cli-v1/results/*.json + .data/runs",
+      "detail": [
+        {
+          "file": "real-smoke-simple-invoice-20261005.json",
+          "run_id": "d348ad3b567c",
+          "status": "failed",
+          "quality_gate": "failed",
+          "browser_status": "not_run",
+          "error": "Codex CLI agent builder did not return a valid JSON object"
+        },
+        {
+          "file": "real-smoke-simple-invoice-post-contract-20261005.json",
+          "run_id": "4ed1d4a4de5d",
+          "status": "failed",
+          "quality_gate": "failed",
+          "browser_status": "failed",
+          "error": "Quality gate failed after the allowed revision rounds"
+        },
+        {
+          "file": "real-smoke-simple-invoice-core-contract-20261005.json",
+          "run_id": "ee9996f72e96",
+          "status": "failed",
+          "quality_gate": "failed",
+          "browser_status": "not_run",
+          "error": "Codex CLI agent builder did not return a valid JSON object"
+        },
+        {
+          "file": "real-smoke-simple-invoice-core-contract-2-20261005.json",
+          "run_id": "53ffc4db553d",
+          "status": "failed",
+          "quality_gate": "failed",
+          "browser_status": "failed",
+          "error": "Codex CLI agent builder did not return a valid JSON object"
+        }
+      ]
     },
     {
       "id": "side-effect.boundary",
       "owner": "script",
       "status": "passed",
       "evidence": "harness.copy_fixture; .data/runs; evaluation_sets/codex-cli-v1/results",
-      "detail": "Only run-scoped artifacts and new evaluation results are written; no external systems or credentials."
+      "detail": "Only run-scoped artifacts, checked-in fixtures, and result records were written; no external systems or credentials."
     }
   ],
-  "next_action": "Run a single simple invoice case through the real codex_cli provider, then retain its artifact, browser, Reviewer and prompt-contract evidence."
+  "real_runs": [
+    {
+      "file": "real-smoke-simple-invoice-20261005.json",
+      "run_id": "d348ad3b567c",
+      "status": "failed",
+      "quality_gate": "failed",
+      "browser_status": "not_run",
+      "error": "Codex CLI agent builder did not return a valid JSON object"
+    },
+    {
+      "file": "real-smoke-simple-invoice-post-contract-20261005.json",
+      "run_id": "4ed1d4a4de5d",
+      "status": "failed",
+      "quality_gate": "failed",
+      "browser_status": "failed",
+      "error": "Quality gate failed after the allowed revision rounds"
+    },
+    {
+      "file": "real-smoke-simple-invoice-core-contract-20261005.json",
+      "run_id": "ee9996f72e96",
+      "status": "failed",
+      "quality_gate": "failed",
+      "browser_status": "not_run",
+      "error": "Codex CLI agent builder did not return a valid JSON object"
+    },
+    {
+      "file": "real-smoke-simple-invoice-core-contract-2-20261005.json",
+      "run_id": "53ffc4db553d",
+      "status": "failed",
+      "quality_gate": "failed",
+      "browser_status": "failed",
+      "error": "Codex CLI agent builder did not return a valid JSON object"
+    }
+  ],
+  "next_action": "Run the complete 20-case set sequentially only after reviewing the recorded real failures; publish per-tier rates only when every selected case has a terminal result."
 }
