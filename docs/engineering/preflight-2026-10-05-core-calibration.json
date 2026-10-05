@@ -1,0 +1,65 @@
+{
+  "preflight_id": "core-generation-calibration-20261005-final",
+  "timestamp": "2026-10-05T11:40:07.916716+00:00",
+  "scope": "dev+evaluation",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "source",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git rev-parse HEAD + working tree before this evidence commit",
+      "detail": "33f7e85fa05ad6697edd9176936c147e39020c6c"
+    },
+    {
+      "id": "evaluation.schema",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "cases.json + schema-validation-final-core-20261005.json",
+      "detail": "20 unique cases; exact simple=10, medium=5, hard=5; every prompt contract field present"
+    },
+    {
+      "id": "invoice.assets",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "invoice-manifest.json + local assets/invoices/*.jpg",
+      "detail": "ten SHA-256-pinned JPEG fixtures; held-out invoice-gold.json remains outside CLI prompt"
+    },
+    {
+      "id": "codex.auth",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex login status; codex --version",
+      "detail": "Logged in using ChatGPT; codex-cli 0.160.0"
+    },
+    {
+      "id": "browser.runtime",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "real run c44966743537 artifact_validation_iteration_1.browser_e2e",
+      "detail": "Chromium launched; story advancement and navigation highlighting were observed; invoice journey and console errors failed closed"
+    },
+    {
+      "id": "backend.tests",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv run pytest -q -o addopts=\"\"",
+      "detail": "55 passed"
+    },
+    {
+      "id": "backend.lint",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv run ruff check src tests",
+      "detail": "All checks passed"
+    },
+    {
+      "id": "real.core.case",
+      "owner": "script",
+      "status": "failed_quality_gate",
+      "evidence": "real-smoke-simple-invoice-core-browser-20261005.json + .data/runs/c44966743537/",
+      "detail": "7 real CLI calls, 4 revisions, Chromium executed, Reviewer 14/100 revise; no pass-rate claim"
+    }
+  ],
+  "next_action": "Run all 20 cases sequentially with the fixed timeout; report terminal results and browser/reviewer failures separately from any pass rate."
+}
