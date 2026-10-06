@@ -1,0 +1,169 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-invoice-ocr-01",
+  "industry": "财务共享",
+  "audience": "财务助理",
+  "scenario": "财务助理需要把一批公开的合成发票放进一个页面，快速查看每张发票的关键文字。",
+  "fixtures": {
+    "image_ids": [
+      "invoice-01",
+      "invoice-02",
+      "invoice-03",
+      "invoice-04",
+      "invoice-05",
+      "invoice-06",
+      "invoice-07",
+      "invoice-08",
+      "invoice-09",
+      "invoice-10"
+    ],
+    "processing_mode": "local static OCR demonstration; no external OCR engine"
+  },
+  "assets": [
+    {
+      "id": "invoice-01",
+      "relative_path": "assets/invoices/invoice-01.jpg",
+      "sha256": "31b538c6fd7c1b3af5ffde784fedc8d2148e09856297120f3a725554a075fa08",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 2,
+        "source_file_name": "synth_0002_8f01361b.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-02",
+      "relative_path": "assets/invoices/invoice-02.jpg",
+      "sha256": "e9d154c6a06ee7e93107a4e6a73d59eabc41ae033dc3db5f7cc3242a8c754f47",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 3,
+        "source_file_name": "synth_0003_d1afe8fa.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-03",
+      "relative_path": "assets/invoices/invoice-03.jpg",
+      "sha256": "050ba365a7603b8eaf78ce196982c33a0242193ed0e15f9305d7be99b2b9ef1a",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 5,
+        "source_file_name": "synth_0005_553deef3.png",
+        "template": "formal_corporate",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-04",
+      "relative_path": "assets/invoices/invoice-04.jpg",
+      "sha256": "7d9492d0fb691aa6ae0bd004bfb1e4843051542a87b5c3febd1cd1e3edc97605",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 6,
+        "source_file_name": "synth_0006_474081ca.png",
+        "template": "modern_minimal",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-05",
+      "relative_path": "assets/invoices/invoice-05.jpg",
+      "sha256": "d4b3f8ca279561cb3de4a54fccba7e1fe93a700015edaa0a9c696e62ccb1214d",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 7,
+        "source_file_name": "synth_0007_7292e354.png",
+        "template": "utility_bill",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-06",
+      "relative_path": "assets/invoices/invoice-06.jpg",
+      "sha256": "7897dd9a466302bf0c04ab432a81e72a0c316d93c428790d873bf6f25c217cc5",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 9,
+        "source_file_name": "synth_0009_8f6b430f.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-07",
+      "relative_path": "assets/invoices/invoice-07.jpg",
+      "sha256": "e7f377d59eba020a6236174c8effc9e5486f09f3214f8d7a47998420070c5333",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 10,
+        "source_file_name": "synth_0010_73bd8d75.png",
+        "template": "formal_corporate",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-08",
+      "relative_path": "assets/invoices/invoice-08.jpg",
+      "sha256": "3036d8a3cd83a889389d70082733a3204ed561c12c9184efec8363dc12ac19de",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 11,
+        "source_file_name": "synth_0011_8888d5c6.png",
+        "template": "utility_bill",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-09",
+      "relative_path": "assets/invoices/invoice-09.jpg",
+      "sha256": "5caf7c407b8c00d07ba95fd229630e9a05d77c1af0302a8805006c72dc025902",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 12,
+        "source_file_name": "synth_0012_72cf2460.png",
+        "template": "modern_minimal",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-10",
+      "relative_path": "assets/invoices/invoice-10.jpg",
+      "sha256": "021e67e2cf4214f472d9e4ceede1bd1b2c7141cef61458de0bebb1f7a8e6531c",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 14,
+        "source_file_name": "synth_0014_d3972e7f.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    }
+  ],
+  "paths": {
+    "acceptance": "testdata/simple-invoice-ocr-01/acceptance.json",
+    "inputs": "testdata/simple-invoice-ocr-01/inputs.json",
+    "asset_root": "testdata/simple-invoice-ocr-01/assets"
+  }
+}

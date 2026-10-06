@@ -1,0 +1,14 @@
+{
+  "case_id": "medium-content-calendar-01",
+  "difficulty": "medium",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "9a5abc10de2210c0f09bd7e2ccd0ecf4029ff9166517b4b15b9ac2d60b325fe5"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "b8f858b4a06e26433cd7558efa17bdc57c474d3594621f99eccbbbb87b4d9514"
+    }
+  ]
+}

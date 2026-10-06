@@ -1,0 +1,19 @@
+{
+  "allocation_id": "demopilot-core-loop-2026-10-06",
+  "goal": "Make the intent -> Core Builder repair loop -> frontend publication path real, auditable, and extensible beyond Codex CLI.",
+  "acceptance": [
+    "Every one of the 20 cases has a materialized testdata/<case-id>/ input and explicit browser acceptance contract.",
+    "The CLI prompt names intent, goal, flow, expected outcome, exact data paths, writable directories, and acceptance procedure.",
+    "A Core Builder run can use native Codex subagents for acceptance, rerun after failures, and only publish after an independent deterministic browser test passes.",
+    "The run retains full CLI dialogue and acceptance evidence while repository core files remain unchanged.",
+    "The core adapter boundary can accept another harness without changing intent or publication logic."
+  ],
+  "subtasks": [
+    {"id":"S1","task":"Audit and materialize the 20-case testdata set","owner":"script","inputs":["cases.json","invoice-manifest.json","public invoice JPGs"],"outputs":["testdata/<case-id>/","acceptance-audit.json"],"evidence_required":["20 directories","tier counts","zero missing acceptance fields"],"risk":"low","handoff_condition":"S2 consumes only an audit-passed manifest","acceptance_or_eval":"deterministic schema/path/hash audit"},
+    {"id":"S2","task":"Define the harness adapter and restricted CLI workspace","owner":"hybrid","inputs":["Codex CLI","isolated run directory"],"outputs":["HarnessAdapter","CodexCliHarness","permission audit"],"evidence_required":["CLI args","changed-path allowlist","core source digest"],"risk":"high","handoff_condition":"S3 receives a complete prompt and workspace","acceptance_or_eval":"unit permission tests plus raw CLI transcript"},
+    {"id":"S3","task":"Implement intent-aware iterative Core Builder with repair and publication state","owner":"hybrid","inputs":["S1 manifest","S2 adapter"],"outputs":["loop outputs","repair history","published/hidden decision"],"evidence_required":["failure causes","retry count","latest acceptance bound to source hash"],"risk":"high","handoff_condition":"S4 can run a real browser acceptance","acceptance_or_eval":"forced-failure repair test and real CLI run"},
+    {"id":"S4","task":"Run real browser acceptance and expose only passed demos","owner":"script","inputs":["card-web","acceptance.json","testdata"],"outputs":["browser screenshot","acceptance result","frontend-safe artifact"],"evidence_required":["Playwright Chromium result","console error scan","publication status"],"risk":"high","handoff_condition":"S5 reports only evidence-backed status","acceptance_or_eval":"real Playwright path per selected case"},
+    {"id":"S5","task":"Report evidence and retain historical iteration records","owner":"hybrid","inputs":["all run outputs"],"outputs":["iteration entry","README contract","frontend state"],"evidence_required":["links to logs and reports","no reviewer stage in core path"],"risk":"medium","handoff_condition":"human can inspect the run","acceptance_or_eval":"API/frontend regression tests"}
+  ],
+  "unresolved": ["A future acceptance-recognizer agent may infer tests from intent; this iteration uses authored acceptance.json as the deterministic source of truth."]
+}

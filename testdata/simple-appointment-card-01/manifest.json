@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-appointment-card-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "dbefb372deb3959df5991e514f947f0fcef2e4ba1dadc009bc74da1e360110db"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "3998d9e85db166dc1a8c81593562f816763f8c12dd59138dff5b5772e4df1b81"
+    }
+  ]
+}

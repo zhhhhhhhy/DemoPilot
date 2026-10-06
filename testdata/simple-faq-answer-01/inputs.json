@@ -1,0 +1,36 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-faq-answer-01",
+  "industry": "企业知识库",
+  "audience": "一线员工",
+  "scenario": "员工从三个常见问题中选择一个，希望快速看到答案和来源标签。",
+  "fixtures": {
+    "faqs": [
+      {
+        "id": "FAQ-01",
+        "question": "请假需要提前多久？",
+        "answer": "提前三天申请。",
+        "source": "员工手册"
+      },
+      {
+        "id": "FAQ-02",
+        "question": "费用什么时候报销？",
+        "answer": "每周五集中处理。",
+        "source": "员工手册"
+      },
+      {
+        "id": "FAQ-03",
+        "question": "电脑故障如何处理？",
+        "answer": "提交 IT 工单。",
+        "source": "IT 指南"
+      }
+    ],
+    "updated": "2026-09-01"
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-faq-answer-01/acceptance.json",
+    "inputs": "testdata/simple-faq-answer-01/inputs.json",
+    "asset_root": "testdata/simple-faq-answer-01/assets"
+  }
+}

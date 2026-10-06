@@ -1,0 +1,25 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-profile-completion-01",
+  "industry": "人力资源",
+  "audience": "新员工",
+  "scenario": "新员工填写姓名、部门和联系方式，希望看到资料完整度。",
+  "fixtures": {
+    "required_fields": [
+      "name",
+      "department",
+      "contact"
+    ],
+    "initial_fields": {
+      "name": "",
+      "department": "",
+      "contact": ""
+    }
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-profile-completion-01/acceptance.json",
+    "inputs": "testdata/simple-profile-completion-01/inputs.json",
+    "asset_root": "testdata/simple-profile-completion-01/assets"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-expense-entry-01",
+  "difficulty": "simple",
+  "intent": "将单笔费用录入变成一个低认知负担的展示流程。",
+  "goal": "填写金额和类别后显示一笔待报销费用。",
+  "flow_steps": [
+    "填写一笔费用并保存"
+  ],
+  "expected_result": [
+    "金额必填校验可见",
+    "保存后列表出现一条新记录",
+    "总额与输入金额一致"
+  ],
+  "evaluation_method": [
+    "浏览器填写金额和类别并保存",
+    "检查记录和总额发生变化",
+    "确认只模拟本地保存"
+  ],
+  "controls": {
+    "#amount": "input number",
+    "#category": "select: 交通/住宿",
+    "#save": "button",
+    "#status": "visible status",
+    "#records": "visible saved rows",
+    "#total": "visible sum"
+  },
+  "tests": [
+    {
+      "id": "reject-empty",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#save",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "请输入有效金额"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "two-amounts",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#amount",
+          "value": "128.50",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#category",
+          "value": "交通",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#save",
+          "value": "",
+          "assertions": {
+            "#records": {
+              "contains": [
+                "128.50",
+                "交通"
+              ]
+            },
+            "#total": {
+              "contains": [
+                "128.50"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#amount",
+          "value": "71.50",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#category",
+          "value": "住宿",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#save",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "200.00"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-expense-entry-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

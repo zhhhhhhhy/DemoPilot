@@ -1,0 +1,29 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-sku-lookup-01",
+  "industry": "仓储零售",
+  "audience": "仓库管理员",
+  "scenario": "仓库管理员输入一个 SKU，希望立刻看到商品名称、库存和货位。",
+  "fixtures": {
+    "products": [
+      {
+        "sku": "SKU-001",
+        "name": "无线鼠标",
+        "stock": 12,
+        "location": "A-01"
+      },
+      {
+        "sku": "SKU-002",
+        "name": "蓝牙键盘",
+        "stock": 24,
+        "location": "B-02"
+      }
+    ]
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-sku-lookup-01/acceptance.json",
+    "inputs": "testdata/simple-sku-lookup-01/inputs.json",
+    "asset_root": "testdata/simple-sku-lookup-01/assets"
+  }
+}

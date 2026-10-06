@@ -1,0 +1,79 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-sku-lookup-01",
+  "difficulty": "simple",
+  "intent": "用一个输入框演示商品编码查询的核心反馈。",
+  "goal": "输入示例 SKU 后展示对应商品卡片和库存数字。",
+  "flow_steps": [
+    "输入 SKU 并查看商品卡"
+  ],
+  "expected_result": [
+    "输入已知 SKU 后出现匹配商品",
+    "输入未知 SKU 后出现可理解的未找到状态",
+    "展示本地虚构数据边界"
+  ],
+  "evaluation_method": [
+    "分别输入一个已知和一个未知 SKU",
+    "确认成功与失败状态都可见",
+    "检查没有真实库存写入"
+  ],
+  "controls": {
+    "#sku": "input",
+    "#lookup": "button",
+    "#result": "visible product or error"
+  },
+  "tests": [
+    {
+      "id": "known-and-unknown",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#sku",
+          "value": "SKU-002",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#lookup",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "蓝牙键盘",
+                "24",
+                "B-02"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#sku",
+          "value": "BAD-999",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#lookup",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "未找到"
+              ],
+              "excludes": [
+                "蓝牙键盘"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-sku-lookup-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

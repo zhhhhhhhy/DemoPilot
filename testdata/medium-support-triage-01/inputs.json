@@ -1,0 +1,27 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "medium-support-triage-01",
+  "industry": "客户服务",
+  "audience": "客服主管",
+  "scenario": "客服主管筛选高优先级工单，查看客户问题，调整优先级并留下处理备注。",
+  "fixtures": {
+    "tickets": [
+      {
+        "id": "TK-01",
+        "subject": "无法登录",
+        "priority": "高"
+      },
+      {
+        "id": "TK-02",
+        "subject": "修改昵称",
+        "priority": "低"
+      }
+    ]
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/medium-support-triage-01/acceptance.json",
+    "inputs": "testdata/medium-support-triage-01/inputs.json",
+    "asset_root": "testdata/medium-support-triage-01/assets"
+  }
+}

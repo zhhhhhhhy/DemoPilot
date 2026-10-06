@@ -1,0 +1,100 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "medium-content-calendar-01",
+  "difficulty": "medium",
+  "intent": "演示内容从活动上下文到排期状态的基本流程。",
+  "goal": "活动选择、文案编辑、预览和排期状态需要连续可见。",
+  "flow_steps": [
+    "选择活动",
+    "填写文案",
+    "预览内容",
+    "加入待发布排期"
+  ],
+  "expected_result": [
+    "预览内容与输入一致",
+    "加入排期后出现状态标签",
+    "空文案不能进入排期"
+  ],
+  "evaluation_method": [
+    "选择活动并填写文案",
+    "检查预览和排期状态",
+    "尝试空文案验证阻断"
+  ],
+  "controls": {
+    "#campaign": "select: 春季发布/新品首发",
+    "#copy": "textarea",
+    "#preview-button": "button",
+    "#preview": "visible preview",
+    "#schedule": "button",
+    "#status": "visible queue or error"
+  },
+  "tests": [
+    {
+      "id": "empty-copy",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#schedule",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "请填写文案"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "draft-to-queue",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#campaign",
+          "value": "新品首发",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#copy",
+          "value": "今天发布轻量协同工具",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#preview-button",
+          "value": "",
+          "assertions": {
+            "#preview": {
+              "contains": [
+                "新品首发",
+                "轻量协同工具"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#schedule",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待发布",
+                "新品首发",
+                "轻量协同工具"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id medium-content-calendar-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

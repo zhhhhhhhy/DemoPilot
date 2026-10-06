@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-shipment-status-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "e72f56c2591b0fb9e9002e42bf54225c465673e6a8deb1071122b22f07514b9e"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "ca5dcb29d1e985ed46f03abcc1de04bb488e66de8dd88dd462e9c436e5db5e36"
+    }
+  ]
+}

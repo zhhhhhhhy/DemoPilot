@@ -1,0 +1,69 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-faq-answer-01",
+  "difficulty": "simple",
+  "intent": "演示结构化知识问答的单步反馈。",
+  "goal": "选中问题后显示答案、更新时间和来源类型。",
+  "flow_steps": [
+    "选择问题并查看答案"
+  ],
+  "expected_result": [
+    "不同问题显示不同答案",
+    "答案区有来源标记",
+    "明确这是本地知识样例"
+  ],
+  "evaluation_method": [
+    "选择两个问题比较答案",
+    "检查答案和来源文本改变",
+    "检查没有声称连接企业真实知识库"
+  ],
+  "controls": {
+    "#question": "select: FAQ-01/FAQ-02/FAQ-03",
+    "#answer": "visible answer and source"
+  },
+  "tests": [
+    {
+      "id": "answer-switch",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#question",
+          "value": "FAQ-02",
+          "assertions": {
+            "#answer": {
+              "contains": [
+                "每周五",
+                "员工手册"
+              ],
+              "excludes": [
+                "三天"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#question",
+          "value": "FAQ-03",
+          "assertions": {
+            "#answer": {
+              "contains": [
+                "工单",
+                "IT 指南"
+              ],
+              "excludes": [
+                "每周五"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-faq-answer-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

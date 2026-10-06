@@ -52,6 +52,12 @@ DemoPilot 不只是一个“内部调用多个模型”的项目。**这个项�
 
 ## 核心能力
 
+### Core Builder 评测模式
+
+针对 Agent Core 生成评测，项目另有一条简化链路：`意图获取 → Core Builder loop → 前端展示`。它使用根目录 [`testdata/`](testdata/) 下按用例隔离的 `inputs.json`、`acceptance.json`、`manifest.json` 和公开素材。Goal Prompt 会把意图、目标、流程、预期结果、验收方式以及准确路径传给本地 Codex CLI；CLI 只可写运行目录内的 `card/`、`card-web/` 和当前用例的 `testdata/`。
+
+每轮都保留完整 CLI prompt、JSONL 对话、stderr、确定性验收 JSON 和 Chromium 截图。Core Builder 优先使用 CLI 原生 `spawn_agent` 调用 `acceptance_checker`；如果非交互 CLI 没有真实 spawn 事件，Harness 会启动一个只读 Codex CLI acceptance child，并要求它实际执行 `scripts/core_acceptance_cli.py`。静态安全检查与真实 Playwright Chromium 全部通过后才发布；失败继续返工，超过轮次则保持隐藏并标记 `cannot_complete`。该模式不使用独立 Reviewer，Harness 通过 `HarnessAdapter` 保留后续接入其他 CLI/Agent 框架的边界。
+
 - **9 节点 Agent Team**：Brief、Manager、Discovery、Product、Experience、Contract、Builder、Runner、Reviewer 分工协作。
 - **共享交互契约**：每项 must-have 被转换为稳定操作路径、选择器与可见断言，返工期间不得修改验收标准。
 - **Builder 确定性预检**：每一版代码在落盘前检查文件范围、安全、HTML 结构、契约选择器、控件类型、断言文本和数据契约。
@@ -244,6 +250,7 @@ npm.cmd run build
 - [工程 Skill A/B 报告](SKILL_AB_REPORT.md)
 - [扩大评测用例报告](EXPANDED_EVALUATION_REPORT.md)
 - [本地评测数据清理报告](DATA_CLEANUP_REPORT.md)
+- [Core Builder loop 终态验收记录](docs/engineering/acceptance-2026-10-06-core-loop.json)
 
 ### 扩大后的真实 DeepSeek 覆盖
 
@@ -305,7 +312,9 @@ DemoPilot/
 ├── frontend/
 │   ├── src/components/
 │   └── package.json
-├── scripts/                    # Skill 校验与 A/B 工具
+├── testdata/                   # 20 个 Core Builder 用例的输入与可执行验收
+├── scripts/                    # 评测集、testdata 物化与验收 Runner
+├── evaluation_sets/            # 10/5/5 分层用例与公开素材清单
 ├── .env.example
 └── start.ps1
 ```

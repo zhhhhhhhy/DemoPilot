@@ -1,0 +1,14 @@
+{
+  "case_id": "hard-clinic-followup-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "25a02fd98cb09b9e7bff6c4941aff7c3e3d5b36a75fa5bf9d06ceb0e76d35d11"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "5af1925d4110d7ceecb32845ac2a732c7224c2b1e22038c06c1dbfd03a80d93f"
+    }
+  ]
+}

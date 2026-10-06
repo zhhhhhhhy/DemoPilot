@@ -1,0 +1,93 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "medium-replenishment-01",
+  "difficulty": "medium",
+  "intent": "演示从异常库存识别到补货任务创建的连续操作。",
+  "goal": "将低库存筛选、商品详情和补货任务连接起来。",
+  "flow_steps": [
+    "筛选低库存商品",
+    "查看商品详情",
+    "填写补货数量",
+    "创建补货任务"
+  ],
+  "expected_result": [
+    "筛选结果只保留低库存项",
+    "任务数量与输入一致",
+    "任务显示待处理状态和商品名称"
+  ],
+  "evaluation_method": [
+    "改变筛选条件并检查结果",
+    "选择商品并填写数量",
+    "提交后验证任务卡与详情上下文一致"
+  ],
+  "controls": {
+    "#stock-filter": "select: 全部/低库存",
+    "#sku": "select: SKU-001/SKU-002",
+    "#list": "visible filtered list",
+    "#detail": "visible SKU details",
+    "#quantity": "input number",
+    "#create": "button",
+    "#tasks": "visible tasks"
+  },
+  "tests": [
+    {
+      "id": "low-stock-task",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#stock-filter",
+          "value": "低库存",
+          "assertions": {
+            "#list": {
+              "contains": [
+                "无线鼠标"
+              ],
+              "excludes": [
+                "蓝牙键盘"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#sku",
+          "value": "SKU-001",
+          "assertions": {
+            "#detail": {
+              "contains": [
+                "无线鼠标",
+                "8"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#quantity",
+          "value": "32",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create",
+          "value": "",
+          "assertions": {
+            "#tasks": {
+              "contains": [
+                "SKU-001",
+                "32",
+                "待处理"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id medium-replenishment-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

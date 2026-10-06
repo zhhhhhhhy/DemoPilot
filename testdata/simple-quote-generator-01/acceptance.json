@@ -1,0 +1,84 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-quote-generator-01",
+  "difficulty": "simple",
+  "intent": "把套餐选择和报价反馈收敛为单页交互。",
+  "goal": "选择套餐和席位后展示小计、折扣和演示总价。",
+  "flow_steps": [
+    "选择套餐和席位并生成报价"
+  ],
+  "expected_result": [
+    "不同套餐会改变报价",
+    "席位变化会改变总价",
+    "标注价格为演示估算"
+  ],
+  "evaluation_method": [
+    "切换套餐和席位各一次",
+    "检查总额随输入变化",
+    "确认无真实合同或支付动作"
+  ],
+  "controls": {
+    "#plan": "select: 基础/专业",
+    "#seats": "input number",
+    "#calculate": "button",
+    "#total": "visible quote"
+  },
+  "tests": [
+    {
+      "id": "dependent-pricing",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "专业",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "3",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "600"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "4",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "800"
+              ],
+              "excludes": [
+                "600"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-quote-generator-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

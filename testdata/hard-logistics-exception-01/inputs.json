@@ -1,0 +1,62 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-logistics-exception-01",
+  "industry": "物流供应链",
+  "audience": "履约负责人",
+  "scenario": "履约负责人筛选延误订单，查看仓库、承运商和货品详情，创建跟进任务，改派负责人，发送通知并关闭异常。",
+  "fixtures": {
+    "entity_type": "延误订单",
+    "entities": [
+      {
+        "id": "O-01",
+        "title": "延误订单甲"
+      },
+      {
+        "id": "O-02",
+        "title": "延误订单乙"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_state": "待处理",
+    "ordered_transitions": [
+      [
+        "filter",
+        "异常已定位"
+      ],
+      [
+        "inspect",
+        "原因已确认"
+      ],
+      [
+        "create",
+        "任务已创建"
+      ],
+      [
+        "reassign",
+        "已改派"
+      ],
+      [
+        "reschedule",
+        "已重排"
+      ],
+      [
+        "notify",
+        "已通知"
+      ],
+      [
+        "close",
+        "已关闭"
+      ]
+    ],
+    "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/hard-logistics-exception-01/acceptance.json",
+    "inputs": "testdata/hard-logistics-exception-01/inputs.json",
+    "asset_root": "testdata/hard-logistics-exception-01/assets"
+  }
+}

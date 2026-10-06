@@ -1,0 +1,91 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-invoice-ocr-01",
+  "difficulty": "simple",
+  "intent": "把公开发票图片转成一个可浏览的文字识别演示入口。",
+  "goal": "让用户选中一张发票后，看到发票号、日期、币种和合计金额等识别结果。",
+  "flow_steps": [
+    "收集发票并识别文字"
+  ],
+  "expected_result": [
+    "页面能展示 10 张本地发票样例",
+    "点击一张样例后出现可见识别结果",
+    "识别结果明确标注为本地演示数据"
+  ],
+  "evaluation_method": [
+    "逐项检查三个 must-have 是否有可见模块",
+    "浏览器点击一张发票并确认识别状态和关键字段发生可见变化",
+    "确认未调用外部 OCR、未把金标准写入 prompt 或网络请求"
+  ],
+  "controls": {
+    "#invoice-select": "select: invoice-01 through invoice-10",
+    "#recognize": "button: 识别",
+    "#status": "visible status",
+    "#fields": "visible extracted fields"
+  },
+  "tests": [
+    {
+      "id": "two-distinct-images",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#invoice-select",
+          "value": "invoice-01",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#recognize",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "识别完成"
+              ],
+              "changed": true
+            },
+            "#fields": {
+              "contains": [
+                "供应方",
+                "发票号"
+              ],
+              "changed": true
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#invoice-select",
+          "value": "invoice-02",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#recognize",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "识别完成"
+              ],
+              "changed": true
+            },
+            "#fields": {
+              "contains": [
+                "供应方",
+                "发票号"
+              ],
+              "changed": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-invoice-ocr-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

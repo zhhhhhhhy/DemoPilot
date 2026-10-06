@@ -1,0 +1,62 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-incident-response-01",
+  "industry": "网络安全",
+  "audience": "安全运营主管",
+  "scenario": "值班人员筛选高危告警，查看证据，分派响应人，创建事件，必要时升级，最后关闭或保留调查状态。",
+  "fixtures": {
+    "entity_type": "安全事件",
+    "entities": [
+      {
+        "id": "INC-01",
+        "title": "安全事件甲"
+      },
+      {
+        "id": "INC-02",
+        "title": "安全事件乙"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_state": "待处理",
+    "ordered_transitions": [
+      [
+        "triage",
+        "已分级"
+      ],
+      [
+        "assign",
+        "已分派"
+      ],
+      [
+        "isolate",
+        "已隔离"
+      ],
+      [
+        "investigate",
+        "调查中"
+      ],
+      [
+        "resolve",
+        "已修复"
+      ],
+      [
+        "verify",
+        "已复验"
+      ],
+      [
+        "close",
+        "已关闭"
+      ]
+    ],
+    "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/hard-incident-response-01/acceptance.json",
+    "inputs": "testdata/hard-incident-response-01/inputs.json",
+    "asset_root": "testdata/hard-incident-response-01/assets"
+  }
+}

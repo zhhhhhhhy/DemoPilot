@@ -1,0 +1,92 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "medium-lead-followup-01",
+  "difficulty": "medium",
+  "intent": "演示从线索筛选到一次跟进动作的连续闭环。",
+  "goal": "让筛选结果、线索详情、负责人和跟进状态保持一致。",
+  "flow_steps": [
+    "按行业筛选线索",
+    "打开线索详情",
+    "分配负责人",
+    "创建跟进行动"
+  ],
+  "expected_result": [
+    "筛选后结果数量变化",
+    "详情显示当前线索",
+    "提交后出现带负责人的跟进记录"
+  ],
+  "evaluation_method": [
+    "先筛选再打开详情并确认上下文一致",
+    "填写负责人后创建跟进",
+    "刷新或切换线索后检查状态没有错误迁移"
+  ],
+  "controls": {
+    "#industry": "select: 全部/制造/零售",
+    "#lead": "select: L-01/L-02",
+    "#list": "visible filtered list",
+    "#detail": "visible lead detail",
+    "#owner": "select: 林澄/周岚",
+    "#create": "button",
+    "#tasks": "visible tasks"
+  },
+  "tests": [
+    {
+      "id": "filter-to-task",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#industry",
+          "value": "制造",
+          "assertions": {
+            "#list": {
+              "contains": [
+                "星港制造"
+              ],
+              "excludes": [
+                "云帆零售"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#lead",
+          "value": "L-01",
+          "assertions": {
+            "#detail": {
+              "contains": [
+                "星港制造"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create",
+          "value": "",
+          "assertions": {
+            "#tasks": {
+              "contains": [
+                "L-01",
+                "林澄",
+                "待跟进"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id medium-lead-followup-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

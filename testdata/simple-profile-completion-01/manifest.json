@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-profile-completion-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "ea658a95cf6add84f3b27ad8cd2622e0c5049f4b876e76ee77ea9572ad3436c5"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "dcc186247c4ff89194568704ffc99480121ac3ca8c397757216baa8fce932001"
+    }
+  ]
+}

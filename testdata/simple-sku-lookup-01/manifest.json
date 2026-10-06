@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-sku-lookup-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "6e64c1984856313183b993ae0fca6bb73b9db578fc79554b442885f40c48aa5e"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "ef7969cd7d990c280914f653a2ffc37e71b246db523d0b57cb9193a80cdf3a38"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-appointment-card-01",
+  "difficulty": "simple",
+  "intent": "把预约填写动作压缩成一个可验证的单页流程。",
+  "goal": "用户填写日期和时间后获得带状态的预约确认卡。",
+  "flow_steps": [
+    "填写日期与时间并确认预约"
+  ],
+  "expected_result": [
+    "空表单不能直接显示已确认",
+    "提交后出现预约成功状态",
+    "确认卡显示用户刚填写的值"
+  ],
+  "evaluation_method": [
+    "浏览器填写日期和时间并提交",
+    "检查按钮前后状态和文本变化",
+    "检查没有真实挂号接口"
+  ],
+  "controls": {
+    "#date": "input type=date",
+    "#time": "select: 09:00/14:30",
+    "#confirm": "button",
+    "#status": "visible error or confirmation"
+  },
+  "tests": [
+    {
+      "id": "required-fields",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#confirm",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "请选择日期"
+              ],
+              "excludes": [
+                "预约成功"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "valid-appointment",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#date",
+          "value": "2026-11-12",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#time",
+          "value": "14:30",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#confirm",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "预约成功",
+                "2026-11-12",
+                "14:30"
+              ],
+              "changed": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-appointment-card-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

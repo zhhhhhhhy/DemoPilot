@@ -1,0 +1,251 @@
+{
+  "schema_version": "core-evaluation-audit-v2",
+  "source": "evaluation_sets/codex-cli-v1/cases.json",
+  "case_count": 20,
+  "tier_counts": {
+    "simple": 10,
+    "medium": 5,
+    "hard": 5
+  },
+  "acceptance_definition": {
+    "required_files": [
+      "inputs.json",
+      "acceptance.json",
+      "manifest.json"
+    ],
+    "required_acceptance_fields": [
+      "intent",
+      "goal",
+      "flow_steps",
+      "expected_result",
+      "evaluation_method",
+      "tests",
+      "policy"
+    ],
+    "test_rule": "Each test must have at least one safe selector/action step; every action and assertion selector must be declared in controls; assertions are executable visible-UI checks.",
+    "publication_rule": "A generated card is visible only after the authoritative runner passes every test against the latest source hash.",
+    "audit_boundary": "This materialization audit validates the executable contract and fixture hashes; Chromium evidence is produced only for a generated card in a real run."
+  },
+  "cases": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-invoice-ocr-01",
+      "acceptance_path": "testdata/simple-invoice-ocr-01/acceptance.json",
+      "input_path": "testdata/simple-invoice-ocr-01/inputs.json",
+      "asset_count": 10,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-receipt-summary-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-receipt-summary-01",
+      "acceptance_path": "testdata/simple-receipt-summary-01/acceptance.json",
+      "input_path": "testdata/simple-receipt-summary-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-appointment-card-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-appointment-card-01",
+      "acceptance_path": "testdata/simple-appointment-card-01/acceptance.json",
+      "input_path": "testdata/simple-appointment-card-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 2,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-sku-lookup-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-sku-lookup-01",
+      "acceptance_path": "testdata/simple-sku-lookup-01/acceptance.json",
+      "input_path": "testdata/simple-sku-lookup-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-expense-entry-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-expense-entry-01",
+      "acceptance_path": "testdata/simple-expense-entry-01/acceptance.json",
+      "input_path": "testdata/simple-expense-entry-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 2,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-feedback-tag-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-feedback-tag-01",
+      "acceptance_path": "testdata/simple-feedback-tag-01/acceptance.json",
+      "input_path": "testdata/simple-feedback-tag-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-shipment-status-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-shipment-status-01",
+      "acceptance_path": "testdata/simple-shipment-status-01/acceptance.json",
+      "input_path": "testdata/simple-shipment-status-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-profile-completion-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-profile-completion-01",
+      "acceptance_path": "testdata/simple-profile-completion-01/acceptance.json",
+      "input_path": "testdata/simple-profile-completion-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-quote-generator-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-quote-generator-01",
+      "acceptance_path": "testdata/simple-quote-generator-01/acceptance.json",
+      "input_path": "testdata/simple-quote-generator-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "simple-faq-answer-01",
+      "difficulty": "simple",
+      "path": "testdata/simple-faq-answer-01",
+      "acceptance_path": "testdata/simple-faq-answer-01/acceptance.json",
+      "input_path": "testdata/simple-faq-answer-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "medium-invoice-review-01",
+      "difficulty": "medium",
+      "path": "testdata/medium-invoice-review-01",
+      "acceptance_path": "testdata/medium-invoice-review-01/acceptance.json",
+      "input_path": "testdata/medium-invoice-review-01/inputs.json",
+      "asset_count": 3,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "medium-lead-followup-01",
+      "difficulty": "medium",
+      "path": "testdata/medium-lead-followup-01",
+      "acceptance_path": "testdata/medium-lead-followup-01/acceptance.json",
+      "input_path": "testdata/medium-lead-followup-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "medium-replenishment-01",
+      "difficulty": "medium",
+      "path": "testdata/medium-replenishment-01",
+      "acceptance_path": "testdata/medium-replenishment-01/acceptance.json",
+      "input_path": "testdata/medium-replenishment-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "medium-support-triage-01",
+      "difficulty": "medium",
+      "path": "testdata/medium-support-triage-01",
+      "acceptance_path": "testdata/medium-support-triage-01/acceptance.json",
+      "input_path": "testdata/medium-support-triage-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 1,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "medium-content-calendar-01",
+      "difficulty": "medium",
+      "path": "testdata/medium-content-calendar-01",
+      "acceptance_path": "testdata/medium-content-calendar-01/acceptance.json",
+      "input_path": "testdata/medium-content-calendar-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 2,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-procurement-approval-01",
+      "difficulty": "hard",
+      "path": "testdata/hard-procurement-approval-01",
+      "acceptance_path": "testdata/hard-procurement-approval-01/acceptance.json",
+      "input_path": "testdata/hard-procurement-approval-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 3,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-incident-response-01",
+      "difficulty": "hard",
+      "path": "testdata/hard-incident-response-01",
+      "acceptance_path": "testdata/hard-incident-response-01/acceptance.json",
+      "input_path": "testdata/hard-incident-response-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 3,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-contract-renewal-01",
+      "difficulty": "hard",
+      "path": "testdata/hard-contract-renewal-01",
+      "acceptance_path": "testdata/hard-contract-renewal-01/acceptance.json",
+      "input_path": "testdata/hard-contract-renewal-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 3,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-logistics-exception-01",
+      "difficulty": "hard",
+      "path": "testdata/hard-logistics-exception-01",
+      "acceptance_path": "testdata/hard-logistics-exception-01/acceptance.json",
+      "input_path": "testdata/hard-logistics-exception-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 3,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-clinic-followup-01",
+      "difficulty": "hard",
+      "path": "testdata/hard-clinic-followup-01",
+      "acceptance_path": "testdata/hard-clinic-followup-01/acceptance.json",
+      "input_path": "testdata/hard-clinic-followup-01/inputs.json",
+      "asset_count": 0,
+      "test_count": 3,
+      "status": "passed",
+      "issues": []
+    }
+  ]
+}

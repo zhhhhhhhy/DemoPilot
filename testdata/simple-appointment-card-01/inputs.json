@@ -1,0 +1,21 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-appointment-card-01",
+  "industry": "医疗服务",
+  "audience": "患者服务专员",
+  "scenario": "患者服务专员需要在演示中填写一个日期和时间，然后给出预约确认。",
+  "fixtures": {
+    "times": [
+      "09:00",
+      "14:30"
+    ],
+    "default_date": "",
+    "default_time": ""
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-appointment-card-01/acceptance.json",
+    "inputs": "testdata/simple-appointment-card-01/inputs.json",
+    "asset_root": "testdata/simple-appointment-card-01/assets"
+  }
+}

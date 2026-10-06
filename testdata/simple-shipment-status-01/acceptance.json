@@ -1,0 +1,78 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-shipment-status-01",
+  "difficulty": "simple",
+  "intent": "提供一个单输入、单结果的物流状态演示。",
+  "goal": "输入运单号后显示当前节点和预计到达时间。",
+  "flow_steps": [
+    "输入运单号并查询状态"
+  ],
+  "expected_result": [
+    "有效运单号显示节点",
+    "无效运单号显示未找到状态",
+    "数据明确为虚构演示"
+  ],
+  "evaluation_method": [
+    "验证有效和无效两条路径",
+    "检查状态文本和时间文本可见",
+    "检查未连接物流供应商"
+  ],
+  "controls": {
+    "#shipment": "input",
+    "#query": "button",
+    "#result": "visible status and ETA"
+  },
+  "tests": [
+    {
+      "id": "found-then-missing",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#shipment",
+          "value": "SHIP-002",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#query",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "派送中",
+                "2026-11-03"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#shipment",
+          "value": "UNKNOWN",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#query",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "未找到"
+              ],
+              "excludes": [
+                "派送中"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-shipment-status-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

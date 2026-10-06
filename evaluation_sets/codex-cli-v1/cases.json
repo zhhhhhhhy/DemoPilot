@@ -13,9 +13,9 @@
     "生成过程不得把凭证、真实个人信息或金标准答案写入 Demo"
   ],
   "default_constraints": [
-    "必须优先实现列出的核心流程，失败时保留确定性验证和 Reviewer 证据",
+    "必须优先实现列出的核心流程，失败时保留 CLI 对话、静态检查和 Chromium 验收证据",
     "每个流程都要有可见结果，不能只展示静态卡片或把能力写在说明文字里",
-    "评测方法只允许使用本地文件、交互契约、Runner 浏览器结果和 Reviewer 结论"
+    "验收只使用项目根目录 testdata/<case-id> 中的输入、交互契约和独立 Chromium 结果；通过后才允许发布，失败保持隐藏并返工"
   ],
   "cases": [
     {
@@ -143,7 +143,7 @@
             ]
           }
         ],
-        "notes": "Use attached invoice pictures to prepare the display-only extraction data. Reference labels are excluded from the model prompt. Assertions only measure visible completion and input switching, not OCR-model accuracy; invoice-gold.json remains held out for a separate extraction benchmark.",
+        "notes": "Use attached invoice pictures to prepare the display-only extraction data. Assertions only measure visible completion and input switching, not OCR-model accuracy; invoice-gold.json is outside the core generation workspace and is not required for this visible UI acceptance.",
         "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure."
       }
     },
@@ -172,7 +172,7 @@
       "evaluation_method": [
         "检查首屏是否同时出现预览和三个关键字段",
         "浏览器切换样例并确认总额变化",
-        "Reviewer 检查没有真实支付或结算承诺"
+        "检查页面未声明真实支付、结算或外部系统能力"
       ],
       "assets": [],
       "tags": [
@@ -3703,12 +3703,12 @@
     "mode": "core_generation",
     "planning_owner": "benchmark author",
     "model_stages": [
-      "builder",
-      "reviewer:final"
+      "core-builder",
+      "acceptance-checker-subagent"
     ],
     "max_revisions": 2,
     "no_mock_fallback": true,
     "split": "open development/calibration suite; not a sealed holdout",
-    "hard_pass": "real CLI code + static gates + all frozen browser paths + reviewer pass; preserve all failures in denominator"
+    "hard_pass": "real CLI file edits + static safety checks + all frozen Chromium paths pass; publish only after pass and preserve every failure"
   }
 }

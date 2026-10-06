@@ -79,6 +79,7 @@ export interface DemoRun {
   agent_calls: number
   revision_count: number
   quality_gate: 'pending' | 'passed' | 'passed_with_open_gates' | 'failed'
+  publication_status?: 'hidden' | 'published' | 'cannot_complete'
   error: string | null
   checkpoint: string | null
   cancel_requested: boolean

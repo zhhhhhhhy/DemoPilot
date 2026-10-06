@@ -1,0 +1,38 @@
+{
+  "schema_version": "codex-cli-v1-result",
+  "created_at": "2026-10-06T09:16:39.102703+00:00",
+  "provider": "codex_cli",
+  "real_runs": true,
+  "case_count": 1,
+  "tier_counts": {
+    "simple": 1
+  },
+  "results": [
+    {
+      "case_id": "simple-receipt-summary-01",
+      "name": "小票摘要卡",
+      "difficulty": "simple",
+      "flow_count": 1,
+      "run_id": "6b96addf556b",
+      "status": "failed",
+      "quality_gate": "failed",
+      "publication_status": "cannot_complete",
+      "agent_calls": 0,
+      "revision_count": 1,
+      "artifact_status": "failed",
+      "browser_status": "failed",
+      "browser_checks": [
+        "Chromium acceptance passed: switch-receipt"
+      ],
+      "browser_issues": [
+        "CLI wrote outside allowed roots: .codex/agents/acceptance_checker.toml"
+      ],
+      "subagent_execution_mode": "cli_child_fallback",
+      "subagent_spawn_count": 0,
+      "reviewer_decision": null,
+      "reviewer_score": null,
+      "artifact_count": 16,
+      "error": "Core Builder 在 2 轮内未通过真实验收"
+    }
+  ]
+}

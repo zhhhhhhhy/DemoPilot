@@ -1,0 +1,53 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-receipt-summary-01",
+  "difficulty": "simple",
+  "intent": "把一张小票整理成一张容易讲解的摘要卡。",
+  "goal": "让用户看到商户、购买日期和总额，并能切换一张本地样例。",
+  "flow_steps": [
+    "查看小票摘要"
+  ],
+  "expected_result": [
+    "默认样例可加载",
+    "点击切换后摘要字段同步变化",
+    "页面标明数据为虚构样例"
+  ],
+  "evaluation_method": [
+    "检查首屏是否同时出现预览和三个关键字段",
+    "浏览器切换样例并确认总额变化",
+    "检查页面未声明真实支付、结算或外部系统能力"
+  ],
+  "controls": {
+    "#receipt-select": "select: R-01/R-02",
+    "#summary": "visible summary"
+  },
+  "tests": [
+    {
+      "id": "switch-receipt",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#receipt-select",
+          "value": "R-02",
+          "assertions": {
+            "#summary": {
+              "contains": [
+                "北岸咖啡",
+                "38"
+              ],
+              "excludes": [
+                "86"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-receipt-summary-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

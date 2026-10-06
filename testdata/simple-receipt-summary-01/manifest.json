@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-receipt-summary-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "c1225c394487bde1fa246006a1ede073a80c4a3553952fd1d71adbcc6bf0c01c"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "912d271fa7c29b90022e808544c965f4df2dbbe1d84c2f252bc7e455d9fc3093"
+    }
+  ]
+}

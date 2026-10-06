@@ -1,0 +1,14 @@
+{
+  "case_id": "medium-support-triage-01",
+  "difficulty": "medium",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "d838743554dcac6090bba0759ad38bc702f698e33e3b227e8c8ca7b349ebd333"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "64d10f6c975c75a4d1df9951ee0395c87ca50342e511f89402780ba0da8a33f4"
+    }
+  ]
+}

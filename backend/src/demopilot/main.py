@@ -399,6 +399,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             requested.relative_to(base_dir)
         except ValueError as exc:
             raise HTTPException(status_code=400, detail="Invalid file path") from exc
+        if (
+            run.request.evaluation_mode == "core_generation"
+            and run.publication_status != "published"
+            and "artifacts" in requested.parts
+            and "demo" in requested.parts
+        ):
+            raise HTTPException(status_code=404, detail="Demo is hidden until acceptance passes")
         allowed_paths = {(base_dir / item.relative_path).resolve() for item in run.artifacts}
         demo_assets = (base_dir / "artifacts" / "demo").resolve()
         is_demo_asset = demo_assets in requested.parents and (

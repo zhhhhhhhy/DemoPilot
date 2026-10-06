@@ -1,0 +1,14 @@
+{
+  "case_id": "hard-incident-response-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "52594cf052c220f46c338b3d4e683b944db9e4beff8e89573af4babcaab55af2"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "17ddb551f67d2937378389eb045e1794502814a9bc065dcdd52c1a551d5a2678"
+    }
+  ]
+}

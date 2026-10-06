@@ -1,0 +1,29 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-receipt-summary-01",
+  "industry": "零售",
+  "audience": "门店店员",
+  "scenario": "店员需要查看一张小票的商户、日期和合计，不需要进入复杂的结算系统。",
+  "fixtures": {
+    "receipts": [
+      {
+        "id": "R-01",
+        "merchant": "晨光书店",
+        "date": "2026-09-01",
+        "total": 86
+      },
+      {
+        "id": "R-02",
+        "merchant": "北岸咖啡",
+        "date": "2026-09-02",
+        "total": 38
+      }
+    ]
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-receipt-summary-01/acceptance.json",
+    "inputs": "testdata/simple-receipt-summary-01/inputs.json",
+    "asset_root": "testdata/simple-receipt-summary-01/assets"
+  }
+}

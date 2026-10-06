@@ -1,0 +1,62 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-clinic-followup-01",
+  "industry": "医疗服务",
+  "audience": "随访管理负责人",
+  "scenario": "随访负责人筛选高风险患者，查看合成病例信息，分派工作人员，安排随访，记录结果；逾期时需要升级。",
+  "fixtures": {
+    "entity_type": "随访计划",
+    "entities": [
+      {
+        "id": "F-01",
+        "title": "随访计划甲"
+      },
+      {
+        "id": "F-02",
+        "title": "随访计划乙"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_state": "待处理",
+    "ordered_transitions": [
+      [
+        "risk",
+        "风险已分层"
+      ],
+      [
+        "plan",
+        "计划已创建"
+      ],
+      [
+        "assign",
+        "已分派"
+      ],
+      [
+        "schedule",
+        "已安排"
+      ],
+      [
+        "record",
+        "随访已记录"
+      ],
+      [
+        "review",
+        "已复核"
+      ],
+      [
+        "close",
+        "已闭环"
+      ]
+    ],
+    "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/hard-clinic-followup-01/acceptance.json",
+    "inputs": "testdata/hard-clinic-followup-01/inputs.json",
+    "asset_root": "testdata/hard-clinic-followup-01/assets"
+  }
+}

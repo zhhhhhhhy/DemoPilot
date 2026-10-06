@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-faq-answer-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "f9e525eab41526b09bdd19aac5095e02342c9d0168acb40c472e3bf3de2ebcfc"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "a5b1004dfa55f3701f623862f856df2549c1a98965457faf9da1e9574f10e189"
+    }
+  ]
+}

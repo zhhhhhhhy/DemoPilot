@@ -18,7 +18,6 @@ from typing import Any
 
 import httpx
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SET_ROOT = ROOT / "evaluation_sets" / "codex-cli-v1"
 CASES_PATH = SET_ROOT / "cases.json"
@@ -124,6 +123,20 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         }:
             validation = candidate
             browser = candidate_browser
+    # Core-generation runs deliberately do not execute the legacy Reviewer or
+    # artifact-validation stages. Their authoritative result is the latest
+    # deterministic acceptance object emitted by CoreBuilderLoop. Keep the
+    # compact evaluation record aligned with the detailed run.json instead of
+    # reporting a misleading ``not_run`` browser result.
+    core_acceptances = [
+        (int(key.rsplit("_", 1)[-1]), value)
+        for key, value in outputs.items()
+        if key.startswith("core_acceptance_iteration_") and isinstance(value, dict)
+    ]
+    if run.get("request", {}).get("evaluation_mode") == "core_generation" and core_acceptances:
+        _, latest = max(core_acceptances, key=lambda item: item[0])
+        validation = latest
+        browser = latest
     reviewer = outputs.get("reviewer", {})
     if not isinstance(reviewer, dict):
         reviewer = {}
@@ -135,12 +148,15 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         "run_id": run.get("id"),
         "status": run.get("status"),
         "quality_gate": run.get("quality_gate"),
+        "publication_status": run.get("publication_status"),
         "agent_calls": run.get("agent_calls", 0),
         "revision_count": run.get("revision_count", 0),
         "artifact_status": validation.get("status", "not_run"),
         "browser_status": browser.get("status", "not_run"),
         "browser_checks": browser.get("checks", []),
         "browser_issues": browser.get("issues", []),
+        "subagent_execution_mode": validation.get("subagent_execution_mode"),
+        "subagent_spawn_count": validation.get("subagent_spawn_count"),
         "reviewer_decision": reviewer.get("decision"),
         "reviewer_score": reviewer.get("overall_score"),
         "artifact_count": len(run.get("artifacts", [])),

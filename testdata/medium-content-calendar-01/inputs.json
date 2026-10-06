@@ -1,0 +1,20 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "medium-content-calendar-01",
+  "industry": "市场营销",
+  "audience": "内容运营",
+  "scenario": "内容运营选择一场活动，创建一条短文案，预览后把它放入待发布状态。",
+  "fixtures": {
+    "campaigns": [
+      "春季发布",
+      "新品首发"
+    ],
+    "initial_queue": []
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/medium-content-calendar-01/acceptance.json",
+    "inputs": "testdata/medium-content-calendar-01/inputs.json",
+    "asset_root": "testdata/medium-content-calendar-01/assets"
+  }
+}

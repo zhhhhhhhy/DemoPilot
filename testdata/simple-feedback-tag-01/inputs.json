@@ -1,0 +1,34 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-feedback-tag-01",
+  "industry": "客户服务",
+  "audience": "客服主管",
+  "scenario": "客服主管粘贴一段客户反馈，希望看到一个主题标签和情绪提示。",
+  "fixtures": {
+    "rules": [
+      {
+        "topic_keyword": "配送",
+        "topic": "物流"
+      },
+      {
+        "topic_keyword": "客服",
+        "topic": "服务"
+      }
+    ],
+    "positive_keywords": [
+      "满意",
+      "热心"
+    ],
+    "negative_keywords": [
+      "失望",
+      "太慢"
+    ],
+    "mode": "local rules demo"
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-feedback-tag-01/acceptance.json",
+    "inputs": "testdata/simple-feedback-tag-01/inputs.json",
+    "asset_root": "testdata/simple-feedback-tag-01/assets"
+  }
+}

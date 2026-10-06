@@ -1,0 +1,20 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-expense-entry-01",
+  "industry": "企业财务",
+  "audience": "员工",
+  "scenario": "员工只需要登记一笔差旅费用，并立即看到分类和合计。",
+  "fixtures": {
+    "initial_records": [],
+    "categories": [
+      "交通",
+      "住宿"
+    ]
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-expense-entry-01/acceptance.json",
+    "inputs": "testdata/simple-expense-entry-01/inputs.json",
+    "asset_root": "testdata/simple-expense-entry-01/assets"
+  }
+}

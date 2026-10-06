@@ -135,7 +135,16 @@ def main():
         if case["difficulty"] == "hard":
             case["flow_steps"] = [text for _, text in specs[case["id"]]["fixture"]["ordered_transitions"]]
     cases["difficulty_rule"] = {"simple": "1-2 个业务处理阶段；输入、选择素材不另算难度。", "medium": "3-5 个业务操作阶段，有筛选、详情及状态联动。", "hard": "6 个以上连续业务处理阶段，同时包含分支、错误阻断、跨实体状态隔离和审计。"}
-    cases["protocol"] = {"version": "core-generation-v1", "mode": "core_generation", "planning_owner": "benchmark author", "model_stages": ["builder", "reviewer:final"], "max_revisions": 2, "no_mock_fallback": True, "split": "open development/calibration suite; not a sealed holdout", "hard_pass": "real CLI code + static gates + all frozen browser paths + reviewer pass; preserve all failures in denominator"}
+    cases["protocol"] = {
+        "version": "core-generation-v1",
+        "mode": "core_generation",
+        "planning_owner": "benchmark author",
+        "model_stages": ["core-builder", "acceptance-checker-subagent"],
+        "max_revisions": 2,
+        "no_mock_fallback": True,
+        "split": "open development/calibration suite; not a sealed holdout",
+        "hard_pass": "real CLI file edits + static safety checks + all frozen Chromium paths pass; publish only after pass and preserve every failure",
+    }
     (ROOT / "cases.json").write_text(json.dumps(cases, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     print(f"Authored {len(specs)} frozen browser contracts")
 

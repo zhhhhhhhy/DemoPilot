@@ -1,0 +1,26 @@
+{
+  "case_id": "medium-invoice-review-01",
+  "difficulty": "medium",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "274785345dcf162e5ab0bb98b773c24f855c571d7c38862cc194a17b4f89c96f"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "1262cbff196d7dffa70c0dd3435f3e660065af1ed6f5be4f5aef2ef062005790"
+    },
+    {
+      "path": "assets/invoices/invoice-01.jpg",
+      "sha256": "31b538c6fd7c1b3af5ffde784fedc8d2148e09856297120f3a725554a075fa08"
+    },
+    {
+      "path": "assets/invoices/invoice-02.jpg",
+      "sha256": "e9d154c6a06ee7e93107a4e6a73d59eabc41ae033dc3db5f7cc3242a8c754f47"
+    },
+    {
+      "path": "assets/invoices/invoice-03.jpg",
+      "sha256": "050ba365a7603b8eaf78ce196982c33a0242193ed0e15f9305d7be99b2b9ef1a"
+    }
+  ]
+}

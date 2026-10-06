@@ -1,0 +1,125 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "medium-invoice-review-01",
+  "difficulty": "medium",
+  "intent": "把发票识别结果连接到一个最小复核状态流程。",
+  "goal": "用户选择发票、检查字段、选择复核结论后能看到状态和备注。",
+  "flow_steps": [
+    "选择发票",
+    "查看识别字段",
+    "选择复核结论",
+    "查看复核状态"
+  ],
+  "expected_result": [
+    "选择的发票与详情区一致",
+    "复核结论会更新状态",
+    "需补充时显示原因输入或提示"
+  ],
+  "evaluation_method": [
+    "浏览器选择两张不同发票并检查详情切换",
+    "走通已复核和需补充两条路径",
+    "检查状态与当前发票不会串线，且不接真实财务系统"
+  ],
+  "controls": {
+    "#invoice-select": "select: invoice-01/invoice-02/invoice-03",
+    "#fields": "visible fields",
+    "#note": "textarea",
+    "#approve": "button 已复核",
+    "#return": "button 需补充",
+    "#status": "visible per-invoice status"
+  },
+  "tests": [
+    {
+      "id": "per-invoice-state",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#invoice-select",
+          "value": "invoice-01",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "invoice-01",
+                "已复核"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#invoice-select",
+          "value": "invoice-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待复核"
+              ],
+              "excludes": [
+                "已复核"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#return",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "请填写原因"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#note",
+          "value": "请补充采购编号",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#return",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "invoice-02",
+                "需补充",
+                "采购编号"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#invoice-select",
+          "value": "invoice-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已复核"
+              ],
+              "excludes": [
+                "需补充"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id medium-invoice-review-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

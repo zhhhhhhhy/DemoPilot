@@ -1,0 +1,72 @@
+{
+  "preflight_id": "demopilot-core-loop-2026-10-06",
+  "timestamp": "2026-10-06T00:00:00+08:00",
+  "scope": "dev",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "repo.checkout",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "git status --short; git rev-parse HEAD",
+      "detail": "D:/worker/DemoPilot is a clean checkout at 55502bf."
+    },
+    {
+      "id": "runtime.python",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "uv --version; backend/.venv/Scripts/python.exe exists",
+      "detail": "uv 0.7.14 and the project virtual environment are available."
+    },
+    {
+      "id": "runtime.frontend",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "node --version; frontend/node_modules exists",
+      "detail": "Node v24.19.0 and installed frontend dependencies are available."
+    },
+    {
+      "id": "runtime.codex_cli",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "codex --version; codex login status",
+      "detail": "codex-cli 0.160.0 is logged in using ChatGPT."
+    },
+    {
+      "id": "runtime.services",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "Get-NetTCPConnection -State Listen -LocalPort 5173,8091",
+      "detail": "No stale DemoPilot frontend or backend listener was found before implementation."
+    },
+    {
+      "id": "protocol.eval_set",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "evaluation_sets/codex-cli-v1/cases.json",
+      "detail": "20 unique cases are present with simple=10, medium=5, hard=5. Existing v1 result files remain historical evidence."
+    },
+    {
+      "id": "protocol.acceptance",
+      "owner": "script",
+      "status": "needs_remote_check",
+      "evidence": "Existing v1 contracts contain browser journeys but no root testdata materialization or independent runtime audit yet.",
+      "detail": "The implementation must materialize testdata/<case-id>/ and run a new acceptance audit before claiming the set is valid."
+    },
+    {
+      "id": "side_effect.workspace",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "Planned core loop uses .data/runs/<run-id>/core-workspace only",
+      "detail": "The CLI receives an isolated workspace containing card/, card-web/, and testdata/<case-id>/; repository core files are not mounted as writable inputs."
+    },
+    {
+      "id": "side_effect.history",
+      "owner": "script",
+      "status": "passed",
+      "evidence": "RunStore JSON records and per-call transcript files",
+      "detail": "The loop will append a new iteration record and retain prompts, JSONL events, stderr, acceptance outputs, and publication decision."
+    }
+  ],
+  "next_action": "Materialize and audit per-case testdata, implement the adapter-backed Core Builder loop, then run targeted tests and one real Codex CLI case."
+}

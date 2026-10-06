@@ -1,0 +1,29 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "medium-replenishment-01",
+  "industry": "供应链",
+  "audience": "库存计划员",
+  "scenario": "计划员筛选低库存商品，查看 SKU 详情，填写补货数量并创建补货任务。",
+  "fixtures": {
+    "products": [
+      {
+        "sku": "SKU-001",
+        "name": "无线鼠标",
+        "stock": 8
+      },
+      {
+        "sku": "SKU-002",
+        "name": "蓝牙键盘",
+        "stock": 80
+      }
+    ],
+    "low_stock_below": 20,
+    "initial_tasks": []
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/medium-replenishment-01/acceptance.json",
+    "inputs": "testdata/medium-replenishment-01/inputs.json",
+    "asset_root": "testdata/medium-replenishment-01/assets"
+  }
+}

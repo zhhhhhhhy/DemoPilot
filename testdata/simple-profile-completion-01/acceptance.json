@@ -1,0 +1,93 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-profile-completion-01",
+  "difficulty": "simple",
+  "intent": "将资料填写反馈做成一个清晰的完成度演示。",
+  "goal": "填写三项资料后进度从未完成变为已完成。",
+  "flow_steps": [
+    "填写资料并查看完整度"
+  ],
+  "expected_result": [
+    "缺字段时显示未完成",
+    "字段齐全后进度达到 100%",
+    "页面不保存个人真实资料"
+  ],
+  "evaluation_method": [
+    "先填一项再填齐三项",
+    "检查进度数值和提示变化",
+    "检查数据只保留在页面内"
+  ],
+  "controls": {
+    "#name": "input",
+    "#department": "input",
+    "#contact": "input",
+    "#check": "button",
+    "#progress": "visible percentage",
+    "#status": "visible status"
+  },
+  "tests": [
+    {
+      "id": "partial-to-complete",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#name",
+          "value": "演示员工",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#check",
+          "value": "",
+          "assertions": {
+            "#progress": {
+              "contains": [
+                "33"
+              ]
+            },
+            "#status": {
+              "contains": [
+                "未完成"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#department",
+          "value": "产品部",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#contact",
+          "value": "demo@example.invalid",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#check",
+          "value": "",
+          "assertions": {
+            "#progress": {
+              "contains": [
+                "100%"
+              ]
+            },
+            "#status": {
+              "contains": [
+                "已完成"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-profile-completion-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

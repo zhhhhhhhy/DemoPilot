@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-feedback-tag-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "ab363d1a129ec3b502cbd3b885414809b071d0081d71b5f5282ec576c77ee6c8"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "84f5b505b3103709b33ef7efbfad8aa0e61070dd15efddf3f1a2ed695d769a27"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "medium-replenishment-01",
+  "difficulty": "medium",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "2538dff941b24276d9479022b0fb18ab7c58234d43c0ef14f0f62fc178bc70f1"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "4a4af5e5d3077806f5d37e7133b7efbe4ffcb8a90b7da759e8ba6664ff443b19"
+    }
+  ]
+}

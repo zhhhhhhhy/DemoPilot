@@ -194,6 +194,9 @@ class DemoRun(BaseModel):
     agent_calls: int = Field(default=0, ge=0)
     revision_count: int = Field(default=0, ge=0)
     quality_gate: Literal["pending", "passed", "passed_with_open_gates", "failed"] = "pending"
+    # Core-generation publication is fail-closed: a completed run can still be
+    # hidden/cannot_complete when the independent acceptance gate failed.
+    publication_status: Literal["hidden", "published", "cannot_complete"] = "hidden"
     error: str | None = None
     checkpoint: str | None = None
     cancel_requested: bool = False

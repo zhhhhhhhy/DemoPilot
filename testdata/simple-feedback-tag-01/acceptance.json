@@ -1,0 +1,79 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-feedback-tag-01",
+  "difficulty": "simple",
+  "intent": "把一段文本转成一个可解释的反馈标签结果。",
+  "goal": "提交文本后展示主题、情绪和待跟进提示。",
+  "flow_steps": [
+    "粘贴反馈并生成标签"
+  ],
+  "expected_result": [
+    "提交前有输入提示",
+    "提交后主题和情绪变为可见结果",
+    "结果标明为规则演示"
+  ],
+  "evaluation_method": [
+    "输入正向和负向样例各一次",
+    "检查结果区文本发生变化",
+    "检查没有外部情感分析调用"
+  ],
+  "controls": {
+    "#feedback": "textarea",
+    "#analyze": "button",
+    "#result": "visible topic and sentiment"
+  },
+  "tests": [
+    {
+      "id": "opposite-sentiments",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#feedback",
+          "value": "配送太慢，我很失望",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#analyze",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "物流",
+                "负向"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#feedback",
+          "value": "客服很热心，我很满意",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#analyze",
+          "value": "",
+          "assertions": {
+            "#result": {
+              "contains": [
+                "服务",
+                "正向"
+              ],
+              "excludes": [
+                "负向"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-feedback-tag-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

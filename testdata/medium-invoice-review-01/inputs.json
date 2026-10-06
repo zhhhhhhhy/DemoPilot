@@ -1,0 +1,64 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "medium-invoice-review-01",
+  "industry": "财务共享",
+  "audience": "发票审核员",
+  "scenario": "审核员需要从多张发票中选择一张，查看关键字段，并把它标记为已复核或需补充。",
+  "fixtures": {
+    "invoice_ids": [
+      "invoice-01",
+      "invoice-02",
+      "invoice-03"
+    ],
+    "initial_status": "待复核"
+  },
+  "assets": [
+    {
+      "id": "invoice-01",
+      "relative_path": "assets/invoices/invoice-01.jpg",
+      "sha256": "31b538c6fd7c1b3af5ffde784fedc8d2148e09856297120f3a725554a075fa08",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 2,
+        "source_file_name": "synth_0002_8f01361b.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-02",
+      "relative_path": "assets/invoices/invoice-02.jpg",
+      "sha256": "e9d154c6a06ee7e93107a4e6a73d59eabc41ae033dc3db5f7cc3242a8c754f47",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 3,
+        "source_file_name": "synth_0003_d1afe8fa.png",
+        "template": "freelancer_invoice",
+        "quality": "clean"
+      }
+    },
+    {
+      "id": "invoice-03",
+      "relative_path": "assets/invoices/invoice-03.jpg",
+      "sha256": "050ba365a7603b8eaf78ce196982c33a0242193ed0e15f9305d7be99b2b9ef1a",
+      "source": {
+        "dataset": "alamgirqazi/invoice-ocr-synthetic",
+        "dataset_url": "https://huggingface.co/datasets/alamgirqazi/invoice-ocr-synthetic",
+        "api_url": "https://datasets-server.huggingface.co/first-rows?dataset=alamgirqazi%2Finvoice-ocr-synthetic&config=default&split=train",
+        "row_index": 5,
+        "source_file_name": "synth_0005_553deef3.png",
+        "template": "formal_corporate",
+        "quality": "clean"
+      }
+    }
+  ],
+  "paths": {
+    "acceptance": "testdata/medium-invoice-review-01/acceptance.json",
+    "inputs": "testdata/medium-invoice-review-01/inputs.json",
+    "asset_root": "testdata/medium-invoice-review-01/assets"
+  }
+}

@@ -4,10 +4,13 @@ import asyncio
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 from .browser_qa import verify_browser_interactions
 from .builder_preflight import preflight_builder_output
+from .core_harness import CodexCliHarness
+from .core_loop import CoreBuilderLoop
 from .generator import generate_artifacts
 from .harness import SandboxViolation, SandboxWorkspace
 from .interaction_contract import compile_interaction_contract
@@ -41,6 +44,7 @@ AGENTS = {
         AgentDefinition("builder", "Demo 构建 Agent", 70, "正在组装页面、数据与交互", "第一版 Demo 已构建"),
         AgentDefinition("runner", "产物验证 Agent", 82, "正在检查生成文件与运行边界", "最终产物已完成本地验证"),
         AgentDefinition("reviewer", "独立评审 Agent", 94, "正在对照需求、项目与运行证据进行独立评审", "评审结论、根因与复验方法已记录"),
+        AgentDefinition("core-builder", "Core Builder（含验收子智能体）", 82, "正在按 Goal Prompt 在受限目录生成并自验收卡片", "Core Builder 已交回真实验收"),
     )
 }
 
@@ -851,6 +855,37 @@ class DemoOrchestrator:
     async def execute(self, run_id: str) -> None:
         run = self.store.get(run_id)
         if not run:
+            return
+        if run.request.evaluation_mode == "core_generation":
+            provider = self.providers.get("codex_cli")
+            if not isinstance(provider, CodexCliAgentProvider):
+                run.status = RunStatus.FAILED
+                run.quality_gate = "failed"
+                run.publication_status = "cannot_complete"
+                run.error = "core_generation requires the real Codex CLI provider"
+                self.store.save(run)
+                return
+            loop = CoreBuilderLoop(
+                self.store,
+                CodexCliHarness(provider),
+                project_root=Path(__file__).resolve().parents[3],
+                max_revision_rounds=self.max_revision_rounds,
+            )
+            try:
+                await loop.execute(run)
+            except asyncio.CancelledError:
+                run.status = RunStatus.CANCELLED
+                run.publication_status = "hidden"
+                run.error = "任务已由用户取消"
+                run.current_agent = None
+                self.store.save(run)
+            except Exception as exc:
+                run.status = RunStatus.FAILED
+                run.quality_gate = "failed"
+                run.publication_status = "cannot_complete"
+                run.current_agent = None
+                run.error = str(exc)[:500]
+                self.store.save(run)
             return
         run.status = RunStatus.RUNNING
         run.progress = max(run.progress, 4)

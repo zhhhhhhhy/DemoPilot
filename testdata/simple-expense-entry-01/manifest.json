@@ -1,0 +1,14 @@
+{
+  "case_id": "simple-expense-entry-01",
+  "difficulty": "simple",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "c70254b37db00c0ea9b7d13d356199fdd680dfc3a01a8e4b0dfa5b398e603786"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "1393013325a9a4c601a303ff9103ff701931bde0e7bb8b4504cb0474b8461a22"
+    }
+  ]
+}

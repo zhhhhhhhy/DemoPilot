@@ -1,0 +1,62 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-contract-renewal-01",
+  "industry": "企业法务",
+  "audience": "法务经理",
+  "scenario": "法务经理找到即将到期的合同，比较条款，发起法务复核，修改续签期限，提交审批并查看完整审计时间线。",
+  "fixtures": {
+    "entity_type": "续签合同",
+    "entities": [
+      {
+        "id": "C-01",
+        "title": "续签合同甲"
+      },
+      {
+        "id": "C-02",
+        "title": "续签合同乙"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_state": "待处理",
+    "ordered_transitions": [
+      [
+        "find",
+        "已识别到期"
+      ],
+      [
+        "compare",
+        "已比较条款"
+      ],
+      [
+        "review",
+        "已复核"
+      ],
+      [
+        "edit",
+        "方案已编辑"
+      ],
+      [
+        "submit",
+        "待审批"
+      ],
+      [
+        "approve",
+        "已批准"
+      ],
+      [
+        "activate",
+        "已生效"
+      ]
+    ],
+    "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity."
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/hard-contract-renewal-01/acceptance.json",
+    "inputs": "testdata/hard-contract-renewal-01/inputs.json",
+    "asset_root": "testdata/hard-contract-renewal-01/assets"
+  }
+}

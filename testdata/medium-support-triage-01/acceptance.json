@@ -1,0 +1,98 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "medium-support-triage-01",
+  "difficulty": "medium",
+  "intent": "把工单筛选、查看和一次分诊动作做成可见闭环。",
+  "goal": "让工单状态和备注在同一个演示上下文内完成更新。",
+  "flow_steps": [
+    "筛选高优先级工单",
+    "查看工单详情",
+    "调整优先级",
+    "保存处理备注"
+  ],
+  "expected_result": [
+    "筛选后可打开一条工单",
+    "保存后优先级和备注可见",
+    "详情标题与列表选择一致"
+  ],
+  "evaluation_method": [
+    "浏览器走通筛选到保存备注",
+    "检查列表与详情的优先级同步",
+    "检查失败输入有提示且无外部工单写入"
+  ],
+  "controls": {
+    "#priority-filter": "select: 全部/高",
+    "#ticket": "select: TK-01/TK-02",
+    "#list": "visible filtered list",
+    "#detail": "visible detail",
+    "#priority": "select: 高/中/低",
+    "#note": "textarea",
+    "#save": "button",
+    "#status": "visible saved status"
+  },
+  "tests": [
+    {
+      "id": "triage-sync",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#priority-filter",
+          "value": "高",
+          "assertions": {
+            "#list": {
+              "contains": [
+                "无法登录"
+              ],
+              "excludes": [
+                "修改昵称"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#ticket",
+          "value": "TK-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#priority",
+          "value": "中",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#note",
+          "value": "已提供临时解决方案",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#save",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "TK-01",
+                "中",
+                "临时解决方案"
+              ]
+            },
+            "#list": {
+              "excludes": [
+                "无法登录"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id medium-support-triage-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

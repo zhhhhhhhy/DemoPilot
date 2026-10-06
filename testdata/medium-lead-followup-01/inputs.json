@@ -1,0 +1,32 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "medium-lead-followup-01",
+  "industry": "B2B 销售",
+  "audience": "销售经理",
+  "scenario": "销售经理按行业筛选线索，查看详情，分配负责人并创建一次跟进行动。",
+  "fixtures": {
+    "leads": [
+      {
+        "id": "L-01",
+        "name": "星港制造",
+        "industry": "制造"
+      },
+      {
+        "id": "L-02",
+        "name": "云帆零售",
+        "industry": "零售"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_tasks": []
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/medium-lead-followup-01/acceptance.json",
+    "inputs": "testdata/medium-lead-followup-01/inputs.json",
+    "asset_root": "testdata/medium-lead-followup-01/assets"
+  }
+}

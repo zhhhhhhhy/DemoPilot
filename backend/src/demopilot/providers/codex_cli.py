@@ -16,6 +16,13 @@ from ..prompts import SYSTEM_PROMPT, build_agent_prompt
 from .base import ProviderUnavailableError
 
 
+class WorkspaceProcessTimeout(RuntimeError):
+    def __init__(self, message: str, *, stdout_path: Path, stderr_path: Path):
+        super().__init__(message)
+        self.stdout_path = stdout_path
+        self.stderr_path = stderr_path
+
+
 def _json_object(raw: str, agent_id: str) -> dict[str, Any]:
     raw = raw.strip()
     value: object | None = None
@@ -178,6 +185,289 @@ class CodexCliAgentProvider:
             return await self._run_agent_once(
                 agent_id, request, context, iteration=iteration, on_event=on_event
             )
+
+    async def run_workspace_builder(
+        self,
+        *,
+        prompt: str,
+        workspace: Path,
+        transcript_dir: Path,
+        allowed_roots: list[Path],
+        on_event: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
+        """Run a real file-editing Core Builder in an isolated workspace.
+
+        The normal AgentProvider path is intentionally read-only and returns a
+        JSON object. Core generation needs the CLI to edit files, so it uses a
+        separate adapter boundary with an explicit ``workspace-write`` policy,
+        a run-scoped ``--cd`` root, and additional writable roots limited to
+        card/card-web/testdata. Raw stdout/stderr and the exact prompt are
+        persisted by the caller for replayable evidence.
+        """
+
+        return await self._run_workspace_cli(
+            prompt=prompt,
+            workspace=workspace,
+            transcript_dir=transcript_dir,
+            allowed_roots=allowed_roots,
+            sandbox="workspace-write",
+            mode="workspace-write",
+            multi_agent=True,
+            purpose="Core Builder",
+            on_event=on_event,
+        )
+
+    async def run_workspace_acceptance(
+        self,
+        *,
+        prompt: str,
+        workspace: Path,
+        transcript_dir: Path,
+        readable_roots: list[Path],
+        on_event: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
+        """Run the read-only acceptance child used when native spawning is absent.
+
+        This is deliberately a second real Codex CLI process, rather than a
+        Python self-check in the parent. It can inspect the current card and
+        must execute ``core_acceptance_cli.py``; the parser records the actual
+        command-execution event and its exit code. The process has no write
+        permission and cannot publish artifacts.
+        """
+
+        return await self._run_workspace_cli(
+            prompt=prompt,
+            workspace=workspace,
+            transcript_dir=transcript_dir,
+            allowed_roots=readable_roots,
+            sandbox="read-only",
+            mode="acceptance-child-read-only",
+            multi_agent=False,
+            purpose="Core Builder acceptance child",
+            on_event=on_event,
+        )
+
+    async def _run_workspace_cli(
+        self,
+        *,
+        prompt: str,
+        workspace: Path,
+        transcript_dir: Path,
+        allowed_roots: list[Path],
+        sandbox: str,
+        mode: str,
+        multi_agent: bool,
+        purpose: str,
+        on_event: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
+        executable = self.executable()
+        if not executable:
+            raise ProviderUnavailableError(
+                "Codex CLI is not available. Install @openai/codex and ensure codex is on PATH."
+            )
+        workspace = workspace.resolve()
+        transcript_dir = transcript_dir.resolve()
+        transcript_dir.mkdir(parents=True, exist_ok=True)
+        prompt_path = transcript_dir / "prompt.txt"
+        prompt_path.write_text(prompt, encoding="utf-8")
+        args = [
+            "exec",
+            "--sandbox",
+            sandbox,
+            "--ignore-rules",
+            "-c",
+            "approval_policy=never",
+            "--cd",
+            str(workspace),
+            "--disable",
+            "apps",
+            "--color",
+            "never",
+            "--json",
+            "--skip-git-repo-check",
+        ]
+        if multi_agent:
+            args[8:8] = [
+                "--enable",
+                "multi_agent",
+                "-c",
+                "agents.enabled=true",
+                "-c",
+                "agents.max_concurrent_threads_per_session=2",
+            ]
+        if self.model:
+            args[1:1] = ["--model", self.model]
+        if self.reasoning_effort:
+            args[1:1] = ["-c", f"model_reasoning_effort={self.reasoning_effort}"]
+        for root in allowed_roots:
+            args.extend(["--add-dir", str(root.resolve())])
+        args.append("-")
+        command = self._command_args(executable, args)
+        process: asyncio.subprocess.Process | None = None
+        try:
+            process = await asyncio.create_subprocess_exec(
+                *command,
+                cwd=str(workspace),
+                stdin=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            stdout, stderr = await self._communicate_workspace_process(
+                process,
+                prompt.encode("utf-8"),
+                on_event or (lambda _event: None),
+                transcript_dir / "stdout.jsonl",
+                transcript_dir / "stderr.log",
+                mode=mode,
+            )
+        except TimeoutError as exc:
+            if process is not None:
+                await _terminate_process_tree(process)
+            if on_event:
+                on_event({"type": "process.timeout", "mode": mode})
+            raise WorkspaceProcessTimeout(
+                f"Codex CLI {purpose} timed out",
+                stdout_path=transcript_dir / "stdout.jsonl",
+                stderr_path=transcript_dir / "stderr.log",
+            ) from exc
+        except asyncio.CancelledError:
+            if process is not None:
+                await _terminate_process_tree(process)
+            if on_event:
+                on_event({"type": "process.cancelled", "mode": mode})
+            raise
+        except OSError as exc:
+            raise ProviderUnavailableError(f"Codex CLI {purpose} could not be started") from exc
+
+        stdout_path = transcript_dir / "stdout.jsonl"
+        stderr_path = transcript_dir / "stderr.log"
+        if not stdout_path.exists():
+            stdout_path.write_bytes(stdout)
+        if not stderr_path.exists():
+            stderr_path.write_bytes(stderr)
+        parsed = self._parse_workspace_events(stdout.decode("utf-8", errors="replace"))
+        if process.returncode != 0:
+            detail = stderr.decode("utf-8", errors="replace").strip().splitlines()
+            raise RuntimeError(
+                f"Codex CLI {purpose} exited with code {process.returncode}: "
+                f"{(detail[-1] if detail else 'no diagnostic')[:500]}"
+            )
+        return {
+            "returncode": process.returncode,
+            "thread_id": parsed["thread_id"],
+            "event_count": len(parsed["events"]),
+            "subagent_event_count": parsed["subagent_event_count"],
+            "subagent_spawn_count": parsed["subagent_spawn_count"],
+            "acceptance_command_passed": parsed["acceptance_command_passed"],
+            "transcript": {
+                "prompt": str(prompt_path),
+                "stdout": str(stdout_path),
+                "stderr": str(stderr_path),
+            },
+            "events": parsed["events"],
+        }
+
+    @staticmethod
+    def _parse_workspace_events(jsonl: str) -> dict[str, Any]:
+        events: list[dict[str, Any]] = []
+        thread_id: str | None = None
+        subagent_event_count = 0
+        subagent_spawn_count = 0
+        acceptance_command_passed = False
+        for line in jsonl.splitlines():
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(event, dict):
+                continue
+            event_type = str(event.get("type", ""))
+            if isinstance(event.get("thread_id"), str):
+                thread_id = event["thread_id"]
+            item = event.get("item")
+            if isinstance(item, dict):
+                item_type = str(item.get("type", ""))
+                tool_name = str(item.get("tool", ""))
+                if "agent" in item_type.lower() or "collab" in item_type.lower() or "collab" in event_type.lower() or "spawn" in event_type.lower():
+                    subagent_event_count += 1
+                if item_type == "collab_tool_call" and tool_name in {"spawn_agent", "spawn_agents", "delegate"}:
+                    subagent_spawn_count += 1
+                command = str(item.get("command", ""))
+                if item_type == "command_execution" and "core_acceptance_cli.py" in command:
+                    if str(item.get("exit_code")) == "0" and item.get("status") == "completed":
+                        acceptance_command_passed = True
+            events.append({"type": event_type, "item_type": item.get("type") if isinstance(item, dict) else None})
+        return {
+            "thread_id": thread_id,
+            "events": events,
+            "subagent_event_count": subagent_event_count,
+            "subagent_spawn_count": subagent_spawn_count,
+            "acceptance_command_passed": acceptance_command_passed,
+        }
+
+    async def _communicate_workspace_process(
+        self,
+        process: asyncio.subprocess.Process,
+        prompt: bytes,
+        on_event: Callable[[dict[str, Any]], None],
+        stdout_path: Path,
+        stderr_path: Path,
+        *,
+        mode: str = "workspace-write",
+    ) -> tuple[bytes, bytes]:
+        """Stream a workspace run while retaining partial output on timeout."""
+
+        started = asyncio.get_running_loop().time()
+        stdout_path.parent.mkdir(parents=True, exist_ok=True)
+        stdout_buffer = bytearray()
+        stderr_buffer = bytearray()
+        pending = bytearray()
+        stdout_path.write_bytes(b"")
+        stderr_path.write_bytes(b"")
+        on_event({"type": "process.started", "pid": process.pid, "mode": mode})
+
+        async def read_stream(stream: asyncio.StreamReader | None, *, is_stdout: bool) -> None:
+            if stream is None:
+                return
+            destination = stdout_path if is_stdout else stderr_path
+            buffer = stdout_buffer if is_stdout else stderr_buffer
+            while True:
+                chunk = await stream.read(65536)
+                if not chunk:
+                    break
+                buffer.extend(chunk)
+                with destination.open("ab") as handle:
+                    handle.write(chunk)
+                if is_stdout:
+                    pending.extend(chunk)
+                    while b"\n" in pending:
+                        raw_line, _, remainder = pending.partition(b"\n")
+                        pending[:] = remainder
+                        self._emit_jsonl_event(raw_line, on_event, started, len(buffer))
+            if is_stdout and pending:
+                self._emit_jsonl_event(bytes(pending), on_event, started, len(buffer))
+
+        if process.stdin is not None:
+            process.stdin.write(prompt)
+            await process.stdin.drain()
+            process.stdin.close()
+        stdout_task = asyncio.create_task(read_stream(process.stdout, is_stdout=True))
+        stderr_task = asyncio.create_task(read_stream(process.stderr, is_stdout=False))
+        try:
+            await asyncio.wait_for(process.wait(), timeout=self.timeout_seconds)
+            await asyncio.gather(stdout_task, stderr_task)
+        except TimeoutError:
+            await _terminate_process_tree(process)
+            await asyncio.gather(stdout_task, stderr_task, return_exceptions=True)
+            on_event({"type": "process.timeout", "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
+            raise
+        except BaseException:
+            stdout_task.cancel()
+            stderr_task.cancel()
+            await asyncio.gather(stdout_task, stderr_task, return_exceptions=True)
+            raise
+        on_event({"type": "process.exited", "returncode": process.returncode, "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
+        return bytes(stdout_buffer), bytes(stderr_buffer)
 
     async def _run_agent_once(
         self,

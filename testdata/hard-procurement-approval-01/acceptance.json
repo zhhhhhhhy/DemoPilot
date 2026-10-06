@@ -1,0 +1,324 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "hard-procurement-approval-01",
+  "difficulty": "hard",
+  "intent": "构造包含比较、提交、审批分支和审计追踪的采购演示。",
+  "goal": "让供应商方案、采购申请、审批结果和时间线形成一致的状态机。",
+  "flow_steps": [
+    "需求已创建",
+    "已比较",
+    "方案已选",
+    "待审批",
+    "已批准",
+    "订单已下达",
+    "已验收"
+  ],
+  "expected_result": [
+    "只有选择方案并填写理由后可提交",
+    "批准和驳回产生不同可见状态",
+    "审计记录包含方案、结果和操作人"
+  ],
+  "evaluation_method": [
+    "先比较并选择供应商再提交",
+    "分别验证批准和驳回分支",
+    "验证缺少理由时提交被阻断",
+    "检查时间线和重置后的初始状态"
+  ],
+  "controls": {
+    "#create-request": "button: execute the named business transition",
+    "#compare": "button: execute the named business transition",
+    "#choose": "button: execute the named business transition",
+    "#submit": "button: execute the named business transition",
+    "#approve": "button: execute the named business transition",
+    "#order": "button: execute the named business transition",
+    "#receive": "button: execute the named business transition",
+    "#entity": "select: P-01/P-02",
+    "#owner": "select: 林澄/周岚",
+    "#reason": "textarea",
+    "#status": "visible current entity, owner, state and reason",
+    "#timeline": "visible per-entity audit",
+    "#reject": "button: return request to start with reason",
+    "#illegal": "button: illegal rollback after terminal state",
+    "#reset": "button: reset all entities",
+    "#errors": "visible rejection reason"
+  },
+  "tests": [
+    {
+      "id": "main-state-machine",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "本轮演示核验",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "需求已创建"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已比较"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已比较"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "方案已选"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "方案已选"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "待审批"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "待审批"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已批准"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已批准"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#order",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "订单已下达"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "订单已下达"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已验收"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已验收"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已验收"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {
+            "#timeline": {
+              "excludes": [
+                "已验收"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "out-of-order-blocked",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "前置步骤未完成"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "return-or-escalate",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "周岚",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "资料需要补充",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#reject",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已退回",
+                "资料需要补充"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "已退回",
+                "周岚"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id hard-procurement-approval-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

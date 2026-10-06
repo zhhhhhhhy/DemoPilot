@@ -1,0 +1,14 @@
+{
+  "case_id": "hard-contract-renewal-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "fc0c9d843bd8d78ee04c1f5f55623587c29a565332c8a4723b3b9244c3a2778b"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "5678978e60746f3e6178cea2493f5ab8ef7ecff37ecb61c70f632ffb7218f2ab"
+    }
+  ]
+}

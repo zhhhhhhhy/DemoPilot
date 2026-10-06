@@ -35,6 +35,38 @@ def test_final_message_extracts_last_agent_message():
     assert _final_message(stream, "brief") == '{"status":"ok"}'
 
 
+def test_workspace_event_parser_requires_real_acceptance_command():
+    stream = "\n".join(
+        [
+            json.dumps({"type": "thread.started", "thread_id": "child"}),
+            json.dumps(
+                {
+                    "type": "item.completed",
+                    "item": {
+                        "type": "collab_tool_call",
+                        "tool": "wait",
+                        "receiver_thread_ids": [],
+                    },
+                }
+            ),
+            json.dumps(
+                {
+                    "type": "item.completed",
+                    "item": {
+                        "type": "command_execution",
+                        "command": "python scripts/core_acceptance_cli.py --workspace X --case-id c",
+                        "exit_code": 0,
+                        "status": "completed",
+                    },
+                }
+            ),
+        ]
+    )
+    parsed = CodexCliAgentProvider._parse_workspace_events(stream)
+    assert parsed["subagent_spawn_count"] == 0
+    assert parsed["acceptance_command_passed"] is True
+
+
 @pytest.mark.parametrize(
     "raw",
     [

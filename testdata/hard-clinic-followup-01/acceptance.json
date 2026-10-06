@@ -1,0 +1,337 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "hard-clinic-followup-01",
+  "difficulty": "hard",
+  "intent": "演示高风险随访的筛选、分派、计划、记录和逾期升级闭环。",
+  "goal": "病例卡、随访任务、负责人、结果和升级状态形成可追踪链路。",
+  "flow_steps": [
+    "风险已分层",
+    "计划已创建",
+    "已分派",
+    "已安排",
+    "随访已记录",
+    "已复核",
+    "已闭环"
+  ],
+  "expected_result": [
+    "页面明确标注合成病例",
+    "完成随访后任务状态和结果可见",
+    "模拟逾期后升级动作和原因可见"
+  ],
+  "evaluation_method": [
+    "走通筛选、分派、安排、记录的主路径",
+    "触发逾期分支并检查升级状态",
+    "检查没有真实患者数据、医疗决策或外部系统调用"
+  ],
+  "controls": {
+    "#risk": "button: execute the named business transition",
+    "#plan": "button: execute the named business transition",
+    "#assign": "button: execute the named business transition",
+    "#schedule": "button: execute the named business transition",
+    "#record": "button: execute the named business transition",
+    "#review": "button: execute the named business transition",
+    "#close": "button: execute the named business transition",
+    "#entity": "select: F-01/F-02",
+    "#owner": "select: 林澄/周岚",
+    "#reason": "textarea",
+    "#status": "visible current entity, owner, state and reason",
+    "#timeline": "visible per-entity audit",
+    "#reject": "button: return request to start with reason",
+    "#illegal": "button: illegal rollback after terminal state",
+    "#reset": "button: reset all entities",
+    "#errors": "visible rejection reason",
+    "#overdue": "button: simulate overdue for current follow-up",
+    "#escalate": "button: escalate overdue task"
+  },
+  "tests": [
+    {
+      "id": "main-state-machine",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "F-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "本轮演示核验",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#risk",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "风险已分层"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "风险已分层"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#plan",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "计划已创建"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "计划已创建"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#assign",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "已分派"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已分派"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#schedule",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "已安排"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已安排"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#record",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "随访已记录"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "随访已记录"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#review",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "已复核"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已复核"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#close",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "F-01",
+                "林澄",
+                "已闭环"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "已闭环"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已闭环"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "F-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已闭环"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {
+            "#timeline": {
+              "excludes": [
+                "已闭环"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "out-of-order-blocked",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#close",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "前置步骤未完成"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "return-or-escalate",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "周岚",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "逾期未联系",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#risk",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#overdue",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已逾期"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#escalate",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已升级",
+                "周岚"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "已逾期",
+                "已升级"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id hard-clinic-followup-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "hard-logistics-exception-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "9dc203ac65be06f31bc15708820851f99e1478f5cfba7762499467f909dc6c49"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "2849cc60c5a146db738217e37745d7b232cb4fbe185a290ea12e3a2b8d6210eb"
+    }
+  ]
+}
