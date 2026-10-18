@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "retrieved_at": "2026-10-16T08:30:39Z",
+  "initiative": "quotation-intent-v1",
+  "provenance_note": "The requirement families are adapted from public ERPNext product documentation. Dataset names, prices, thresholds, dates and seller answers are synthetic business configurations; they are not customer records, customer statements or field feedback.",
+  "selection_note": "Ten distinct rule families are supported by four source documents. Tax-inclusive pricing and fixed discounts on Net Total are separate families. Currency precision and quotation expiry are not evaluated. Source count is not independent customer count.",
+  "sources": [
+    {
+      "id": "erpnext-pricing-rule",
+      "title": "Pricing Rule | ERPNext Documentation",
+      "url": "https://docs.frappe.io/erpnext/pricing-rule",
+      "provenance_type": "official_documentation",
+      "documented_rule": "Rules support quantity bounds, selected customers, overlapping-rule priority, combined-item thresholds, replacement rates and active dates. Multiple discounts may add percentages or compound, depending on configuration. Recalculate after changing eligibility; an ineligible rule must stop affecting the price.",
+      "evidence_excerpt": "With Apply Discount on Discounted Rate, ERPNext compounds successive discounts instead of adding their percentages.",
+      "supported_families": [
+        "quantity_threshold",
+        "customer_scope",
+        "overlap_priority",
+        "discount_composition",
+        "mixed_item_threshold",
+        "rate_override",
+        "rule_validity"
+      ],
+      "evidence_sections": [
+        "Important fields and what they mean",
+        "Set quantity, value, and validity conditions",
+        "Choose the pricing result",
+        "Overlapping and advanced rules",
+        "Troubleshooting"
+      ],
+      "important_limitations": [
+        "The documentation does not specify numeric priority direction; the benchmark instead declares an explicit named precedence order.",
+        "Date boundaries, rates, thresholds and stacking choices are authored seller configuration, not asserted ERPNext defaults."
+      ]
+    },
+    {
+      "id": "erpnext-applying-discount",
+      "title": "Apply Discounts to Sales Transactions | ERPNext Documentation",
+      "url": "https://docs.frappe.io/erpnext/applying-discount",
+      "provenance_type": "official_documentation",
+      "documented_rule": "Additional discounts can use Net Total or Grand Total as their basis and can be fixed amounts or percentages. Net Total discounts change eligible item values; Grand Total discounts reference the post-tax total and recalculate relevant net and tax amounts. Displayed breakdowns depend on the tax template and rounding configuration.",
+      "evidence_excerpt": "The system recalculates the relevant item and tax amounts so the document remains internally consistent.",
+      "supported_families": ["fixed_net_discount"],
+      "evidence_sections": [
+        "Apply an additional discount to the transaction",
+        "Discount on Net Total",
+        "Discount on Grand Total"
+      ],
+      "important_limitations": [
+        "Do not treat a Grand Total discount as keeping original tax unchanged. The source does not define one universal formula for every tax template.",
+        "The benchmark chooses a fixed discount on Net Total with a simple tax recalculation. Its tax rate, amount and rounding are synthetic configuration, not statutory guidance."
+      ]
+    },
+    {
+      "id": "erpnext-free-item",
+      "title": "Set Up Buy One Get One Free Offers | ERPNext Documentation",
+      "url": "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+      "provenance_type": "official_documentation",
+      "documented_rule": "A qualifying purchase can add a same-item or different-item promotional row at zero rate. Minimum purchase quantity and free quantity are configurable, including buy two get one.",
+      "evidence_excerpt": "Confirm that ERPNext adds the free row with a zero rate.",
+      "supported_families": ["free_item"],
+      "evidence_sections": [
+        "Create a Buy 1 Get 1 Free rule",
+        "Test the offer",
+        "Same-item and different-item offers"
+      ],
+      "important_limitations": [
+        "The article does not establish a universal repeated-bundle formula. The benchmark explicitly chooses floor(purchased quantity / 2) gifts as authored seller configuration, not an ERPNext default.",
+        "Stock reservation, delivery and accounting are outside this generated-demo benchmark."
+      ]
+    },
+    {
+      "id": "erpnext-tax-inclusive",
+      "title": "Tax Inclusive Accounting | ERPNext Documentation",
+      "url": "https://docs.frappe.io/erpnext/tax-inclusive-accounting",
+      "provenance_type": "official_documentation",
+      "documented_rule": "When an entered price contains one percentage tax, derive the net value by dividing the inclusive amount by one plus the fractional tax rate. Included tax is the difference; do not add that tax again. The documentation's 108-at-8-percent example produces net 100, tax 8 and total 108.",
+      "evidence_excerpt": "ERPNext back-calculates the tax and taxable value instead of adding the tax on top of the entered price.",
+      "supported_families": ["tax_inclusive"],
+      "evidence_sections": ["Understand the back-calculation", "Apply the template to a transaction", "Discounts and inclusive tax"],
+      "important_limitations": [
+        "The benchmark deliberately uses one inclusive percentage tax. Multiple dependent tax rows and jurisdiction-specific requirements are out of scope.",
+        "Tax rates, displayed precision and rounding policy are explicit synthetic configuration; a correct final total alone does not prove a correct tax breakdown."
+      ]
+    }
+  ],
+  "family_mapping": [
+    {"id": "quantity_threshold", "name": "Quantity eligibility", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "customer_scope", "name": "Customer eligibility", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "overlap_priority", "name": "Exclusive overlapping rules", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "discount_composition", "name": "Additive versus compounded discounts", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "mixed_item_threshold", "name": "Combined qualifying items", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "rate_override", "name": "Rule rate replacing list rate", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "rule_validity", "name": "Promotion date window", "source_ids": ["erpnext-pricing-rule"]},
+    {"id": "fixed_net_discount", "name": "Fixed Net Total discount with tax recalculation", "source_ids": ["erpnext-applying-discount"]},
+    {"id": "free_item", "name": "Zero-rate promotional item", "source_ids": ["erpnext-free-item"]},
+    {"id": "tax_inclusive", "name": "Tax already included in entered prices", "source_ids": ["erpnext-tax-inclusive"]}
+  ],
+  "global_limitations": [
+    "Documentation provides business-rule provenance, not observed customer demand or salesperson satisfaction.",
+    "The ten families are one vendor's documented capabilities, not ten independent customers or ten production deployments.",
+    "Source support does not prove the generated application implements the rule; numerical and browser acceptance must verify that separately.",
+    "No source establishes that intent clarification improves generation. That is the paired experiment's hypothesis.",
+    "This registry stores short excerpts and paraphrases, not complete copyrighted pages."
+  ]
+}

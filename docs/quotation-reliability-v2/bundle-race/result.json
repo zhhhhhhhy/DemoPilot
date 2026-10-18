@@ -1,0 +1,14 @@
+{
+  "kind": "controlled-http-interleaving-not-model-score",
+  "legacy": {
+    "html": "<h1>HTML v1</h1><script src=\"app.js\"></script>",
+    "subsequent_js": "const releaseVersion=2;",
+    "mixed_versions": true
+  },
+  "fixed": {
+    "pinned_html_url": "/accepted/quote/1/f06cfb27da4510b6ae0669ea1b1a99b6d512a448183506b216ff33bb98999dc4/index.html",
+    "pinned_js": "const releaseVersion=1;",
+    "current_js": "const releaseVersion=2;",
+    "correct": true
+  }
+}

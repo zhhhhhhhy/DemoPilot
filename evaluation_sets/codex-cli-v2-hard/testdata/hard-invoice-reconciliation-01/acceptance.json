@@ -1,0 +1,381 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "hard-invoice-reconciliation-01",
+  "difficulty": "hard",
+  "intent": "把采购订单、收货记录和发票逐行匹配，并对差异进入审批和审计流程。",
+  "goal": "保持订单、行项目、收货数量和发票金额的一致，按差异阈值选择审批或退回。",
+  "flow_steps": [
+    "供应商筛选",
+    "订单核对",
+    "收货匹配",
+    "差异标记",
+    "提交复核",
+    "主管审批",
+    "财务复核",
+    "归档"
+  ],
+  "expected_result": [
+    "订单/收货/发票三方明细",
+    "逐行差异和原因",
+    "阈值审批与退回",
+    "完整审计时间线",
+    "金额差异超过阈值时必须升级审批",
+    "已归档"
+  ],
+  "evaluation_method": [
+    "完成全流程正向路径",
+    "触发非法终态和规则分支",
+    "切换三个实体确认状态和审计隔离",
+    "确认无外部服务调用"
+  ],
+  "controls": {
+    "#filter": "select: filter or scope",
+    "#entity": "select: primary entity",
+    "#subentity": "select: child record",
+    "#reason": "textarea: reason",
+    "#phase-1": "button: phase 1",
+    "#phase-2": "button: phase 2",
+    "#phase-3": "button: phase 3",
+    "#phase-4": "button: phase 4",
+    "#phase-5": "button: phase 5",
+    "#phase-6": "button: phase 6",
+    "#phase-7": "button: phase 7",
+    "#phase-8": "button: phase 8",
+    "#phase-9": "button: phase 9",
+    "#phase-10": "button: phase 10",
+    "#phase-11": "button: phase 11",
+    "#branch": "button: branch action",
+    "#approve": "button: approve",
+    "#reject": "button: reject",
+    "#terminal": "button: terminal action",
+    "#reset": "button: reset",
+    "#status": "visible current state",
+    "#summary": "visible aggregate summary",
+    "#timeline": "visible audit timeline",
+    "#errors": "visible blocking reason"
+  },
+  "tests": [
+    {
+      "id": "happy-path",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "entity-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#subentity",
+          "value": "sub-01",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "本轮高难流程核验",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#phase-1",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "供应商筛选"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "供应商筛选"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-2",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "订单核对"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "订单核对"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-3",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "收货匹配"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "收货匹配"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-4",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "差异标记"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "差异标记"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-5",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "提交复核"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "提交复核"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-6",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "主管审批"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "主管审批"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-7",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "财务复核"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "财务复核"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#phase-8",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "归档"
+              ],
+              "changed": true
+            },
+            "#timeline": {
+              "contains": [
+                "归档"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#terminal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已归档"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "已归档"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ]
+            },
+            "#timeline": {
+              "excludes": [
+                "已归档"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "invalid-terminal-action",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "entity-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#terminal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "未填写差异原因不能提交"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "threshold-or-role-branch",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "entity-01",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "触发规则分支",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#branch",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "分支处理中"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "分支"
+              ]
+            },
+            "#summary": {
+              "contains": [
+                "金额差异超过阈值"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reject",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已退回"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "原因"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-isolation",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "entity-03",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "归档"
+              ]
+            },
+            "#timeline": {
+              "excludes": [
+                "供应商筛选"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "Every journey starts from a fresh page; all branch, isolation and terminal assertions must be visible; missing evidence fails.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id hard-invoice-reconciliation-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and latest source hash matches tested source"
+  }
+}

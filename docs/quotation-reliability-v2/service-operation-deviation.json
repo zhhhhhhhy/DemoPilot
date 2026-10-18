@@ -1,0 +1,9 @@
+{
+  "action": "Stop old owned development service and start final service on5188",
+  "outcome": "automatic_approval_rejected_before_execution",
+  "stated_reason": "blocked by policy; no further reason supplied",
+  "command_executed": false,
+  "safer_alternative": "Preserve old development service and start an additional final delivery service on5189 without process termination",
+  "alternative_succeeded": true,
+  "old_service_process_terminated": false
+}

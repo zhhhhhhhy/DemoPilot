@@ -1,0 +1,1377 @@
+{
+  "development-v2-20261016": {
+    "internal_attempts": [
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "efc977f2b46d3901278ba76f3322155b3b87da51d0f479edd6a9a463885c3700",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "efc977f2b46d3901278ba76f3322155b3b87da51d0f479edd6a9a463885c3700",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "ca2b984ae0c5ae0da497eba79d816dd9e03163c82d454ab9d5423c0a391dedd3",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "f4493cedb3ff7f40d0fd9c6f433f144dc5a1174d2da71442becf41abccd1d003",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "a6f7f8c53b931caf04d1d1c27ff421dd90bcbfa73f028171c4030da96eedf710",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "1862b50121c40ac0e60787af6241fd47f56d9f26082ada50b95ce2e67ba27526",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "d74b40968f49319c82d0bfddf386fb7efbcd2394fd89ff699340065a250f09ca",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "0dbccce2e4457ccf1a1be911536291f088a8a48dc27425257f7fb5621571d2d7",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "088de0458e2a4f08bb658a73a13187d22aa746c5180ea024f898e1e6e81a1734",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "148e25188fd64e315b8201023ba251ac2b8f70d4c42aba54237e3e78cd4a56ca",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_public_business_passed",
+        "artifact_sha256": "c1f1cf45ea60226e2182522abffd38a1daa5380073ae3a05358822219eb34a28",
+        "complete_public_business_observed": true,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "c1f1cf45ea60226e2182522abffd38a1daa5380073ae3a05358822219eb34a28",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "ec773a321bc318c6a50f02189b45afb5bd42216e78592d883e8566ec9a329436",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      }
+    ],
+    "final_outcomes": [
+      {
+        "app_id": "qflow-01",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-02",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-01",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-02",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-02",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-02",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-01",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-01",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-03",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-03",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-03",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-03",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      }
+    ],
+    "final_audit_available": true,
+    "boundary": "Internal errors are never counted as final business failures; final outcome requires terminal independent full-data audit."
+  },
+  "heldout-v3-20261017": {
+    "internal_attempts": [
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "2ef54061c0a9988227968b6ee68408d9f2dcc17fe8ea4e29940ff8182e33becb",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "a10359788c94746e21743e020de8a15d1670ef0a5d81957b832a6a648d64bf0b",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_public_business_passed",
+        "artifact_sha256": "b7a742caca2b81cc1b08422d21983220b3e74aea695e847cb8c7dff88ba15161",
+        "complete_public_business_observed": true,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b7a742caca2b81cc1b08422d21983220b3e74aea695e847cb8c7dff88ba15161",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_public_business_passed",
+        "artifact_sha256": "2e8468330b6115e887973a9bd292e06ce42bd0d186e5b16533d0a5a5ab2808a8",
+        "complete_public_business_observed": true,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v2\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "2e8468330b6115e887973a9bd292e06ce42bd0d186e5b16533d0a5a5ab2808a8",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "4adf36d764e38542d7112e5738e6d7b3283243ff1ea6a90d63eb5bb5faac21d8",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "7cf0906c81873791c99ecb7941c68c4762facc085ccb59ef98fd5e27e7820baa",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "3ee92319c7c58f0672236338a9833b3b1a56a6a3a538830240fa2f6e6ef54044",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "43df8e6b90e75d06887d701b31c1d294e0bf602dedba8dc2255ee976260d2e8c",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "7f559990a871ddb724f6ab0b4e9303241571a3b26227768c417d410d6535dec2",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "bff5131c2a04dbbed85231736194ad3fa5b14579b62431b465d849c7e8502b2a",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "missing index.html",
+          "missing app.js",
+          "missing styles.css",
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "fdef20f4040994cf01bb58a71ab8890a42e30a3f151a93abedd4b9c769d9c7cc",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "13eaea8d13666082907f2bb281473af1a5d70b8ed2e57819aa5189d3cc88c54c",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "821de7b08712e39275b43acf357819b2c05f74bcb001aefda992a9d9b68b0879",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "01c8f3643edb1c369acc1ae951395329bd8e25a407a28c235030549de0b460cc",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "f8a141bbede62195d972d388ef2543dfce93fafe7bcef411b9023f07c52c4cb1",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "23d999d8944085e36d6c583234c840a63375329d5a205d2b7e79560bb2bcb7c0",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "9a1b8fbeff270a2a92e603cc095f6000ed980337d9966a5d76b2e1dd81fff338",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b6a66129b034b2efa283425a5ba32d30b50e309d5d613427f77016448ebcdb67",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "75bc67c1b09488193f55b415dac9563da9a7d51077c93f16ac8f7e57e5bc7f75",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "Writes outside allowed folders: ['debug.log']",
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "477f31ceb6f69421d267a887a1b09e616dee06199be58c3c9d4212935c908c41",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "Writes outside allowed folders: ['debug.log']",
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "a4ec55b08196ba221576f8cd03db388c3c2e0c42af31915f1f0492ddc7a97daa",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "c3095ea861cefe810abc22c6315b79e4ff2076bfcbf74ed9ca368685bf0aa518",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b9a601e4034622663bc620d15b9bf96be4546ca33e4540fedfa604984dcd6d66",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "a1eb69e21323886efe749564883190b4d3195ad2d53f4dac39c2f6a636afb4bf",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "7c0b0dc67934bfbf837e69188088d54ac4e95de4e214006d6eac2e5344bb9c35",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "2592189934edc67478bb70ddd14dffef87a5caf10e08765005f5347eb4b267a3",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b67ecec876daa07e3945cb54cd9703c36214d24ed1efb54d53c357d0f7cc30d2",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "17e226432095f1801756b64f544499839ea36d449fc4430acc69efb1a8eeace3",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      }
+    ],
+    "final_outcomes": [
+      {
+        "app_id": "qflow-04",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "correct_candidate_not_published_execution_or_gate_failure",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "correct_candidate_not_published_execution_or_gate_failure",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      }
+    ],
+    "final_audit_available": true,
+    "boundary": "Internal errors are never counted as final business failures; final outcome requires terminal independent full-data audit."
+  },
+  "heldout-clean-v4-20261017": {
+    "internal_attempts": [
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "7cd2b14ac3165db109594d60a7db11a0bad311fdaeb25122065df5e1d09339ef",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "7529fb819c1b37bdd2a598ae2b9b1f417f0c4725f6ced1782423e9a975992b5e",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b0b8ea7bb370271ebd40a13cb8c7cba0036b725ae20d3aa44ab92eb6423d4d84",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "e93a2b9daf28ae8746ce75d5854eb9905570dc23407a5ca2f47d9af3d14a08ee",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "4ba5466304d5409b59e6b5f31fd1a22ac852f4cc0e71ca3fcd4637d81f9b72dd",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "2d0130048a2d692fab22dbf774f6521996daea504d832bfbe8e628ee0d92c215",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v2\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "2d0130048a2d692fab22dbf774f6521996daea504d832bfbe8e628ee0d92c215",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "4662eab311c405da3c4a1ee2a009979d9b41d8e6838d5384a985771c57675749",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "788b67fec77548ad55aa964372221349504f6d8c5cab35a2864090c71a740a15",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_business_unobserved",
+        "artifact_sha256": "dc9c03505ddc6ba19e3b39ce2845ef823800073565b87a3fb467292d6ea21258",
+        "complete_public_business_observed": false,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "dc9c03505ddc6ba19e3b39ce2845ef823800073565b87a3fb467292d6ea21258",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "366e3ba42f323df1d0b19021a39cb751b05f05c137322e650935f2cdb4f3bb8b",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "054681833452ee05053deeeb245a76935f56fa3c865280b9b2abe0018e51323e",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "18ed9943ca3e2aa968003833e25933c8122371e7f76dd7a924530390bbaffbda",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "8689f371aefae0f8eb7a9f00ef75dc3a58c0a2908acf1dcb28384934d8112892",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "afab9394244c31dddc8c1918bffb5bdc8d37c71a5a619b5460ae648ee331fcd7",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "6c87ba898b8ca44572cdefe3ce2a0dd16e547166b832c9d2971f9f30433d8f10",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "2db1ee0344e963c17aef5f63889396a6d63febc7c6d3bc8e213c6cad5fee284e",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "0fdd620c99daa59e37ac7d635be3dfcf886462a4b3a8130e4da58b5124af3295",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "512d72be3ad54189f319ca056a909bebc0cebb93428cb15bf0df764f2fc1f204",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "866b7fa96e8baa8e311d5397542b3edd8fe6d57f12709b226ced2fbe4127c823",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "aefd14e64e1ed1da5d98fc552ae6a67e1ecbdb71a36490083501b15445ab1a78",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "b39d91c4292f71d181ae6926fbeb157b5f2155a6252a97d2bae5153f6c368bb7",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "48fd6f541930923fc25fff552668de8716a649b64f39e8ebad56e90d8d554abc",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "ceec62f233f88084a3208227581d52f1af427af02e40db426c2e7bfbf67b18c8",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "1576e25e6438d8b270d6bf09cb4c22600092c1dc9518b07a008fd170198b2ba3",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\direct\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "3d6f03ab2bab72b8a12210e68df8a3c4b0dbcc6e0c5a3ec8183e4566baa014f1",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\direct\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "d2935138315261ec3facbdf86f7885cc42a87769eab595917debc1b118a9d298",
+        "complete_public_business_observed": false,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v1\\iteration-0\\iteration.json",
+        "kind": "internal_cli_execution_public_business_passed",
+        "artifact_sha256": "56d4b01b096c4aef8d7be54f8cc065bfd2c225fbf3f11e516a5a502e377a530d",
+        "complete_public_business_observed": true,
+        "cli_error": {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        "issues": [
+          "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+        ],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v1\\iteration-1\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "56d4b01b096c4aef8d7be54f8cc065bfd2c225fbf3f11e516a5a502e377a530d",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      },
+      {
+        "path": "evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v2\\iteration-0\\iteration.json",
+        "kind": "internal_acceptance_passed",
+        "artifact_sha256": "1c282d251d307f54f78fa81be005ac0d4686d5bb0995eb7de2bb65292aac14b8",
+        "complete_public_business_observed": true,
+        "cli_error": null,
+        "issues": [],
+        "counts_as_final_business_failure": false
+      }
+    ],
+    "final_outcomes": [
+      {
+        "app_id": "qflow-04",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-04",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-05",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-06",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-07",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-08",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-09",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "direct",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "direct",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "reliable",
+        "version": 1,
+        "stage": "final_pass",
+        "planned": 60,
+        "passed": 60,
+        "failed_journeys": []
+      },
+      {
+        "app_id": "qflow-10",
+        "arm": "reliable",
+        "version": 2,
+        "stage": "final_pass",
+        "planned": 70,
+        "passed": 70,
+        "failed_journeys": []
+      }
+    ],
+    "final_audit_available": true,
+    "boundary": "Internal errors are never counted as final business failures; final outcome requires terminal independent full-data audit."
+  }
+}

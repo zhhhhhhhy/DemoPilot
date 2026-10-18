@@ -1,0 +1,221 @@
+{
+  "checked_at": "2026-10-16T14:18:27.674586+00:00",
+  "status": "passed",
+  "method": "Read-only artifact, request, hash, denominator and report reconciliation; no new generation, browser replay or scoring",
+  "checks": [
+    {
+      "name": "frozen_context_and_history_unchanged",
+      "passed": true,
+      "detail": {
+        "original_runtime_files": 18,
+        "new_adapter_files": 2,
+        "historical_files": 6
+      }
+    },
+    {
+      "name": "archived_code_matches_executed_source",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "all_ten_unique_real_terminal_cases",
+      "passed": true,
+      "detail": {
+        "cases": 10,
+        "primary": 6,
+        "development": 4
+      }
+    },
+    {
+      "name": "zero_intent_calls",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "name": "exact_complete_information_reaches_actual_core",
+      "passed": true,
+      "detail": {
+        "input_errors": [],
+        "prompt_errors": []
+      }
+    },
+    {
+      "name": "ordinary_testdata_unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no_business_intent_transform",
+      "passed": true,
+      "detail": "No typed goal, requirements or business acceptance fields"
+    },
+    {
+      "name": "matching_core_configuration",
+      "passed": true,
+      "detail": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "medium",
+        "cli_timeout_seconds": 300,
+        "max_revision_rounds": 2,
+        "max_parallel_cases": 2
+      }
+    },
+    {
+      "name": "all112_required_browser_journeys_executed_passed",
+      "passed": true,
+      "detail": {
+        "planned": 112,
+        "executed": 112,
+        "passed": 112
+      }
+    },
+    {
+      "name": "primary68_and_development44_separate",
+      "passed": true,
+      "detail": "6primary and4development kept separate"
+    },
+    {
+      "name": "every_executed_journey_has_saved_screenshot",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "all_old_and_new_scored_pages_unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "both_original_score_hashes_preserved",
+      "passed": true,
+      "detail": {
+        "c_audit": "ea956c4eaf76a9c940500cbb88d356d6107d1f6d7197a86507502ecd2140f8f6",
+        "ab_audit": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2"
+      }
+    },
+    {
+      "name": "strict_score_not_replaced_by_functional_passes",
+      "passed": true,
+      "detail": {
+        "overall": 9,
+        "primary": 5,
+        "guard_flag_retained": "contaminated"
+      }
+    },
+    {
+      "name": "three_arm_primary_metrics_reconciled",
+      "passed": true,
+      "detail": {
+        "direct": {
+          "cases": 6,
+          "published": 6,
+          "complete_pass": 1,
+          "core_calls": 14,
+          "intent_calls": 0,
+          "total_calls": 14,
+          "repairs": 1,
+          "planned_journeys": 68,
+          "executed_journeys": 68,
+          "passed_journeys": 36,
+          "not_run_journeys": 0,
+          "monetary_mismatch_journeys": 32,
+          "timeout_journeys": 0,
+          "total_wall_seconds": 12470.125
+        },
+        "clarify": {
+          "cases": 6,
+          "published": 6,
+          "complete_pass": 5,
+          "core_calls": 14,
+          "intent_calls": 11,
+          "total_calls": 25,
+          "repairs": 1,
+          "planned_journeys": 68,
+          "executed_journeys": 68,
+          "passed_journeys": 67,
+          "not_run_journeys": 0,
+          "monetary_mismatch_journeys": 0,
+          "timeout_journeys": 1,
+          "total_wall_seconds": 1711.453
+        },
+        "full-rules": {
+          "cases": 6,
+          "published": 6,
+          "complete_pass": 5,
+          "core_calls": 18,
+          "intent_calls": 0,
+          "total_calls": 18,
+          "repairs": 3,
+          "planned_journeys": 68,
+          "executed_journeys": 68,
+          "passed_journeys": 68,
+          "not_run_journeys": 0,
+          "monetary_mismatch_journeys": 0,
+          "timeout_journeys": 0,
+          "total_wall_seconds": 2028.67
+        }
+      }
+    },
+    {
+      "name": "total30_case_arm_outcomes_accounted",
+      "passed": true,
+      "detail": "20old+10new; superseded pilot and targeted regressions excluded"
+    },
+    {
+      "name": "same_business_facts_for_five_missing_information_cases",
+      "passed": true,
+      "detail": [
+        {
+          "case": "quotation-05",
+          "same_facts": true,
+          "already_complete": false
+        },
+        {
+          "case": "quotation-06",
+          "same_facts": true,
+          "already_complete": false
+        },
+        {
+          "case": "quotation-07",
+          "same_facts": false,
+          "already_complete": true
+        },
+        {
+          "case": "quotation-08",
+          "same_facts": true,
+          "already_complete": false
+        },
+        {
+          "case": "quotation-09",
+          "same_facts": true,
+          "already_complete": false
+        },
+        {
+          "case": "quotation-10",
+          "same_facts": true,
+          "already_complete": false
+        }
+      ]
+    },
+    {
+      "name": "guard_explanation_matches_full_original_command",
+      "passed": true,
+      "detail": "Only parent marker is a literal link in written spec text; frozen flag remains"
+    },
+    {
+      "name": "no_business_feedback_or_score_replay",
+      "passed": true,
+      "detail": "No post-score model repair or browser rescore"
+    },
+    {
+      "name": "delivered_document_links_resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "owned_process_cleanup",
+      "passed": true,
+      "detail": "Only processes attributable to this appended-control script or result directory"
+    }
+  ],
+  "completion_boundary": "Evaluation complete, not all strict case scores passed; actual C functions112/112 with strict9/10 and5/6primary preserved. No real customer or extra typed-intent benefit claim."
+}

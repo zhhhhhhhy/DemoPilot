@@ -1,0 +1,375 @@
+{
+  "metrics": {
+    "development-v2-20261016": {
+      "schema_version": "quotation-reliability-v2-summary",
+      "metrics": {
+        "direct": {
+          "v1": {
+            "application_groups": 3,
+            "complete_application_success": 3,
+            "combinations": 30,
+            "complete_combination_success": 30,
+            "published": 3,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 180,
+            "executed_journeys": 180,
+            "passed_journeys": 180,
+            "cli_calls": 4,
+            "internal_repair_rounds": 1
+          },
+          "v2": {
+            "application_groups": 3,
+            "complete_application_success": 3,
+            "combinations": 30,
+            "complete_combination_success": 30,
+            "published": 3,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 210,
+            "executed_journeys": 210,
+            "passed_journeys": 210,
+            "cli_calls": 3,
+            "internal_repair_rounds": 0
+          },
+          "change_regression": {
+            "previously_correct_combinations": 30,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        },
+        "reliable": {
+          "v1": {
+            "application_groups": 3,
+            "complete_application_success": 3,
+            "combinations": 30,
+            "complete_combination_success": 30,
+            "published": 3,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 180,
+            "executed_journeys": 180,
+            "passed_journeys": 180,
+            "cli_calls": 4,
+            "internal_repair_rounds": 1
+          },
+          "v2": {
+            "application_groups": 3,
+            "complete_application_success": 3,
+            "combinations": 30,
+            "complete_combination_success": 30,
+            "published": 3,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 210,
+            "executed_journeys": 210,
+            "passed_journeys": 210,
+            "cli_calls": 3,
+            "internal_repair_rounds": 0
+          },
+          "change_regression": {
+            "previously_correct_combinations": 30,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        }
+      },
+      "limitations": [
+        "Combinations within each workflow are correlated; application-group count is the independent task denominator.",
+        "Synthetic configured cases grounded in public docs/requests, not real customers or real financial transactions.",
+        "One trial per arm/group/version. No statistical significance, generalization or token-cost claim from this sample.",
+        "Equal configured caps do not imply equal consumed tokens, same service latency or same number of internal native tool turns."
+      ]
+    },
+    "heldout-v3-20261017": {
+      "schema_version": "quotation-reliability-v2-summary",
+      "metrics": {
+        "direct": {
+          "v1": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 420,
+            "executed_journeys": 420,
+            "passed_journeys": 420,
+            "cli_calls": 7,
+            "internal_repair_rounds": 0
+          },
+          "v2": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 490,
+            "executed_journeys": 490,
+            "passed_journeys": 490,
+            "cli_calls": 7,
+            "internal_repair_rounds": 0
+          },
+          "change_regression": {
+            "previously_correct_combinations": 70,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        },
+        "reliable": {
+          "v1": {
+            "application_groups": 7,
+            "complete_application_success": 6,
+            "combinations": 70,
+            "complete_combination_success": 60,
+            "published": 6,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 1,
+            "planned_journeys": 420,
+            "executed_journeys": 420,
+            "passed_journeys": 420,
+            "cli_calls": 9,
+            "internal_repair_rounds": 2
+          },
+          "v2": {
+            "application_groups": 7,
+            "complete_application_success": 6,
+            "combinations": 70,
+            "complete_combination_success": 60,
+            "published": 6,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 1,
+            "planned_journeys": 490,
+            "executed_journeys": 490,
+            "passed_journeys": 490,
+            "cli_calls": 8,
+            "internal_repair_rounds": 1
+          },
+          "change_regression": {
+            "previously_correct_combinations": 70,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        }
+      },
+      "limitations": [
+        "Combinations within each workflow are correlated; application-group count is the independent task denominator.",
+        "Synthetic configured cases grounded in public docs/requests, not real customers or real financial transactions.",
+        "One trial per arm/group/version. No statistical significance, generalization or token-cost claim from this sample.",
+        "Equal configured caps do not imply equal consumed tokens, same service latency or same number of internal native tool turns."
+      ]
+    },
+    "heldout-clean-v4-20261017": {
+      "schema_version": "quotation-reliability-v2-summary",
+      "metrics": {
+        "direct": {
+          "v1": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 420,
+            "executed_journeys": 420,
+            "passed_journeys": 420,
+            "cli_calls": 8,
+            "internal_repair_rounds": 1
+          },
+          "v2": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 490,
+            "executed_journeys": 490,
+            "passed_journeys": 490,
+            "cli_calls": 8,
+            "internal_repair_rounds": 1
+          },
+          "change_regression": {
+            "previously_correct_combinations": 70,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        },
+        "reliable": {
+          "v1": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 420,
+            "executed_journeys": 420,
+            "passed_journeys": 420,
+            "cli_calls": 8,
+            "internal_repair_rounds": 1
+          },
+          "v2": {
+            "application_groups": 7,
+            "complete_application_success": 7,
+            "combinations": 70,
+            "complete_combination_success": 70,
+            "published": 7,
+            "incorrectly_published": 0,
+            "functionally_correct_but_hidden": 0,
+            "planned_journeys": 490,
+            "executed_journeys": 490,
+            "passed_journeys": 490,
+            "cli_calls": 7,
+            "internal_repair_rounds": 0
+          },
+          "change_regression": {
+            "previously_correct_combinations": 70,
+            "regressed_combinations": 0,
+            "regressed_ids": [],
+            "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+          }
+        }
+      },
+      "limitations": [
+        "Combinations within each workflow are correlated; application-group count is the independent task denominator.",
+        "Synthetic configured cases grounded in public docs/requests, not real customers or real financial transactions.",
+        "One trial per arm/group/version. No statistical significance, generalization or token-cost claim from this sample.",
+        "Equal configured caps do not imply equal consumed tokens, same service latency or same number of internal native tool turns."
+      ]
+    }
+  },
+  "total_main_browser_executions": 4420,
+  "independent_group_count": 10,
+  "primary_group_count": 7,
+  "authored_combinations": 100,
+  "replayed_primary_group_count": 7,
+  "final_delivery": {
+    "created_at": "2026-10-17T04:06:10.495360+00:00",
+    "application_groups": 10,
+    "current_visible": 10,
+    "current_hidden": 0,
+    "imports": [
+      {
+        "source": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016",
+        "split": "development",
+        "accepted_versions": 6,
+        "context_sha256": "34a06fa938b1549e3e5a223cc255766b2b698030b561eba89861f22b8b71e105",
+        "audit_sha256": "904f31995173385b0640328be11eb144e6e19af3f11069624b6815ce1a120ce3",
+        "original_db_unchanged": true
+      },
+      {
+        "source": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017",
+        "split": "heldout",
+        "accepted_versions": 14,
+        "context_sha256": "4d3df368f6de33c754677961a2b28f3b0b260b4dfea8d9a57f6a2707594f4be6",
+        "audit_sha256": "e9f14abf11a6b8881b04cef034db2fe0f88a14c039264f8797340ff6d216d34d",
+        "original_db_unchanged": true
+      }
+    ],
+    "excluded": [],
+    "private_audit_feedback_to_builder": false,
+    "manual_page_repairs": false,
+    "original_experiment_scores_changed": false,
+    "boundary": "Separate delivery copy. Only byte-identical releases accepted in original terminal independent scoring are exposed; any originally incorrect publication remains a failure in the immutable experiment."
+  },
+  "audit_sha256": {
+    "development-v2-20261016": "904f31995173385b0640328be11eb144e6e19af3f11069624b6815ce1a120ce3",
+    "heldout-v3-20261017": "5c1e76c0712ba3e4eba3e8188dcec92b9858fb55d3ebddc4fe0ab3643d3b066d",
+    "heldout-clean-v4-20261017": "e9f14abf11a6b8881b04cef034db2fe0f88a14c039264f8797340ff6d216d34d"
+  },
+  "natural_comparison_finding": "本次复验两组严格成功交付均为14/14个应用版本，没有观察到业务门禁带来的最终交付通过率增益。这里是7个应用各两个版本，不能当成14个独立需求。",
+  "controlled_repair": {
+    "status": "passed",
+    "kind": "controlled_real_cli_repair_integration_not_generation_accuracy",
+    "actual_cli_calls": 3,
+    "configured_cap": 3,
+    "timeout_seconds": 300,
+    "error_origin": "Deliberate test-driver corruption after a real CLI return; no natural model failure claim.",
+    "initial_candidate_hidden_before_repair": true,
+    "trusted_business_rejections": 1,
+    "final_publication": "published",
+    "independent_planned": 60,
+    "independent_passed": 60,
+    "benchmark_artifacts_modified": false,
+    "primary_scores_changed": false,
+    "source_fixture": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\terminal-v1",
+    "seed_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+    "terminal_sha256": "8e663247a0ec7b73d9487cf337b3e0f795015c1d47a61332a8b7953db3191118"
+  },
+  "controlled_gate": {
+    "kind": "controlled_same_bytes_structure_vs_public_business_gate",
+    "seeded_fault_classes": 8,
+    "structural_rejected": 0,
+    "business_gate_rejected": 8,
+    "rows": [
+      {
+        "name": "valid_control",
+        "source_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+        "structural_status": "passed",
+        "business_status": "passed"
+      },
+      {
+        "name": "wrong_total",
+        "source_sha256": "0260015e6158f356def37c975fbf8263bcb59b4f4e667ce52a85666d94cdb959",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "missing_discount",
+        "source_sha256": "7cb7ac94d414f15008a4a2b816fbd9c6bc0510309981e8225757f8cd2aa47337",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "wrong_tax",
+        "source_sha256": "43b721a12f8139539636ed765bcf7fc5fd6a77ad747811b41ac38e19cd20d0b3",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "history_double_write",
+        "source_sha256": "a2b2143130e879b74d33d277153cdade1bca72d04378875553f54911fa8ffa1b",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "stale_approval",
+        "source_sha256": "f28c186a91f996bb97d0da445b740ea4e801adcf41c64e87fbcbdf723942b165",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "cross_record_leak",
+        "source_sha256": "e8581b92198914ef4f6caa00344c532e7a988a61d36f3533c8584d8b50943ed8",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "freight_twice",
+        "source_sha256": "9c9abf5eed2c98ca809c5a2a37c16fc8be7cc13280a345af27710d4ead07d1c5",
+        "structural_status": "passed",
+        "business_status": "failed"
+      },
+      {
+        "name": "hidden_fake_output",
+        "source_sha256": "fbc584a764026c50e8266bbaf5f17800c83e55c45edc3b6869c9ccb044955801",
+        "structural_status": "passed",
+        "business_status": "failed"
+      }
+    ],
+    "boundary": "Eight deliberately seeded errors on copies of one development artifact; not eight naturally failed tasks or an estimated production detection rate."
+  },
+  "original_scores_preserved": true
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "qflow-07",
+  "workflow": "customer_owner",
+  "title": "指定客户确认及越权拦截",
+  "version": 1,
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "A",
+      "tiers": [
+        {
+          "minimum": 5,
+          "percent": "10"
+        },
+        {
+          "minimum": 10,
+          "percent": "20"
+        }
+      ]
+    },
+    "customer_scope": {
+      "kind": "customer_scope",
+      "product": "A",
+      "discounts": {
+        "vip": "15",
+        "partner": "5"
+      }
+    },
+    "validity_dates": {
+      "kind": "validity_dates",
+      "product": "A",
+      "start": "2026-03-01",
+      "end": "2026-03-31",
+      "percent": "25"
+    },
+    "compound_discounts": {
+      "kind": "compound_discounts",
+      "percents": [
+        "10",
+        "20"
+      ]
+    },
+    "overlap_priority": {
+      "kind": "overlap_priority",
+      "product": "A",
+      "vip_percent": "10",
+      "volume_minimum": 5,
+      "volume_percent": "20",
+      "priority": "vip"
+    },
+    "mixed_threshold": {
+      "kind": "mixed_threshold",
+      "products": [
+        "A",
+        "B"
+      ],
+      "minimum": 5,
+      "percent": "10"
+    },
+    "rate_override": {
+      "kind": "rate_override",
+      "product": "A",
+      "customer": "partner",
+      "rate": "88"
+    },
+    "tax_inclusive": {
+      "kind": "tax_inclusive",
+      "tax_percent": "10"
+    },
+    "net_total_discount": {
+      "kind": "net_total_discount",
+      "amount": "30",
+      "tax_percent": "10"
+    },
+    "free_items": {
+      "kind": "free_items",
+      "product": "A",
+      "buy": 2,
+      "free": 1
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "样例商品A",
+      "unit_price": "100"
+    },
+    {
+      "id": "B",
+      "name": "样例商品B",
+      "unit_price": "60"
+    },
+    {
+      "id": "C",
+      "name": "样例商品C",
+      "unit_price": "200"
+    }
+  ],
+  "approval_threshold": "1000.00",
+  "valid_until": "2026-03-31",
+  "sources": [
+    "https://docs.frappe.io/erpnext/workflows",
+    "https://docs.frappe.io/erpnext/quotation",
+    "https://docs.frappe.io/erpnext/role-based-permissions",
+    "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297"
+  ],
+  "provenance": "Source-derived workflow patterns and pricing semantics; synthetic configured combinations, identities and money. No real customer records."
+}

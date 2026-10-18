@@ -1,0 +1,79 @@
+{
+  "schema_version": "codex-hard-v2-audit",
+  "case_count": 8,
+  "tier_counts": {
+    "hard": 8
+  },
+  "cases": [
+    {
+      "case_id": "hard-invoice-reconciliation-01",
+      "difficulty": "hard",
+      "flow_count": 8,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-access-review-01",
+      "difficulty": "hard",
+      "flow_count": 8,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-refund-dispute-01",
+      "difficulty": "hard",
+      "flow_count": 9,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-release-gate-01",
+      "difficulty": "hard",
+      "flow_count": 10,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-data-pipeline-recovery-01",
+      "difficulty": "hard",
+      "flow_count": 9,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-employee-onboarding-01",
+      "difficulty": "hard",
+      "flow_count": 10,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-product-recall-01",
+      "difficulty": "hard",
+      "flow_count": 10,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    },
+    {
+      "case_id": "hard-budget-control-01",
+      "difficulty": "hard",
+      "flow_count": 9,
+      "test_count": 4,
+      "status": "passed",
+      "issues": []
+    }
+  ],
+  "status": "passed",
+  "execution_status": "real_executed_8_of_8",
+  "pilot_result": "docs/engineering/hard-v2-ab/pilot-2026-10-07.json",
+  "full_result": "docs/engineering/hard-v2-ab/full-real-2026-10-07.json",
+  "semantic_status": "needs_dataset_revision",
+  "semantic_gap_report": "docs/engineering/hard-v2-ab/semantic-gap-2026-10-07.json"
+}

@@ -1,0 +1,100 @@
+{
+  "primary_cases": [
+    {
+      "case_id": "quotation-05",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "只有A参与客户和数量两种优惠，B、C用原价。",
+        "VIP优惠10%；商品合计数量至少5件时批量优惠20%。",
+        "同时命中时VIP规则优先，只用VIP的10%；不叠加，也不自动选更大的20%。"
+      ],
+      "b_released_facts": [
+        "只有A参与客户和数量两种优惠，B、C用原价。",
+        "VIP优惠10%；商品合计数量至少5件时批量优惠20%。",
+        "同时命中时VIP规则优先，只用VIP的10%；不叠加，也不自动选更大的20%。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-06",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "A和B属于同一优惠组，C不参与凑数也不享受优惠。",
+        "组内商品合计至少5件时，组内所有商品都优惠10%。"
+      ],
+      "b_released_facts": [
+        "A和B属于同一优惠组，C不参与凑数也不享受优惠。",
+        "组内商品合计至少5件时，组内所有商品都优惠10%。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-07",
+      "initial_information": "sufficient",
+      "c_facts": [
+        "协议价只适用合作客户购买A，其他客户和商品用目录价。",
+        "协议单价是88元，替代目录单价，不是减88或打88折；保留目录原金额，把价差计入价格调整金额。"
+      ],
+      "b_released_facts": [],
+      "all_c_facts_were_released_to_b": false,
+      "original_already_complete_control": true,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-08",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "本题只有一项10%的演示税，没有优惠。",
+        "目录单价均为含税价。未税金额为含税金额除以1.10，税额为两者差，最终应付保持原含税金额，不能重复加税。"
+      ],
+      "b_released_facts": [
+        "本题只有一项10%的演示税，没有优惠。",
+        "目录单价均为含税价。未税金额为含税金额除以1.10，税额为两者差，最终应付保持原含税金额，不能重复加税。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-09",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "每张报价从整单未税金额先减30元，最多减到0；不是从含税总价减。",
+        "目录单价不含税，先扣整单优惠，再对折后未税金额计算10%的演示税。"
+      ],
+      "b_released_facts": [
+        "每张报价从整单未税金额先减30元，最多减到0；不是从含税总价减。",
+        "目录单价不含税，先扣整单优惠，再对折后未税金额计算10%的演示税。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-10",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "只有A参与买赠，B和C不参与。",
+        "每买2件付费商品，额外赠1件同款，可重复，赠送数量向下取整。付费数量不含赠品，赠品单价0，应付只算付费商品。"
+      ],
+      "b_released_facts": [
+        "只有A参与买赠，B和C不参与。",
+        "每买2件付费商品，额外赠1件同款，可重复，赠送数量向下取整。付费数量不含赠品，赠品单价0，应付只算付费商品。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    }
+  ],
+  "note": "B07 already had complete rules in the original brief; C repeats the seller rule without an intent transform."
+}

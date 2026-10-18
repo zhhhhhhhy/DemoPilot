@@ -1,0 +1,51 @@
+{
+  "experiment_id": "core-builder-prompt-harness-ab-2026-10-07",
+  "status": "pilot_ready",
+  "objective": "Measure whether structured intent and Goal Prompt construction improve Core Builder reliability when common safety and acceptance rules are held constant.",
+  "treatment": {
+    "name": "structured_intent_goal_prompt",
+    "description": "Use the current Goal Prompt with explicit intent, goal, business flow, expected result and evaluation method; common safety and recheck rules remain fixed for both variants.",
+    "source": "backend/src/demopilot/core_loop.py"
+  },
+  "control": {
+    "name": "minimal_unstructured_intent",
+    "description": "Pass only the free-form scenario, priority and must-have capabilities in the prompt header; keep testdata, acceptance, safety, workspace and publication rules identical.",
+    "source": "backend/src/demopilot/core_loop.py control-legacy branch"
+  },
+  "frozen_inputs": {
+    "case_count": 20,
+    "tier_counts": {"simple": 10, "medium": 5, "hard": 5},
+    "provider": "codex_cli",
+    "acceptance_contract": "testdata/<case-id>/acceptance.json",
+    "testdata_check": "uv run --project backend python scripts/materialize_testdata.py --check"
+  },
+  "primary_metrics": [
+    "first-pass Builder acceptance / selected cases",
+    "published cases and fresh post-publish audit passes / selected cases",
+    "CLI or Harness blocked cases / selected cases",
+    "final Core Builder output failures / selected cases"
+  ],
+  "secondary_metrics": [
+    "publication rate by tier",
+    "mean and median revision_count",
+    "mean and median agent_calls",
+    "browser gate issue count",
+    "console error count",
+    "wall time per case"
+  ],
+  "stopping_rules": [
+    "Every selected case must reach a terminal status.",
+    "A case counts as published only when Builder acceptance and fresh post-publish audit both pass.",
+    "CLI/Harness transport failures are reported separately from Core Builder output failures.",
+    "No Mock result, self-report, or carried-forward baseline pass may enter the treatment denominator."
+  ],
+  "required_outputs": [
+    "evaluation_sets/codex-cli-v1/results/core-ab-control-20261007.json",
+    "evaluation_sets/codex-cli-v1/results/core-ab-treatment-20261007.json",
+    "docs/engineering/core-builder-ab-report-2026-10-07.md"
+  ],
+  "acceptance": {
+    "status": "pilot_ready",
+    "required_claim": "Only report a causal improvement if treatment and control use the same 20 cases, same provider conditions, terminal evidence, and separate failure taxonomy."
+  }
+}

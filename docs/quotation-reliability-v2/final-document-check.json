@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "canonical_documents": 9,
+  "local_links_checked": 216,
+  "missing": [],
+  "clean_internal_timeouts": [
+    {
+      "app": "qflow-05",
+      "arm": "direct",
+      "version": 2,
+      "error": {
+        "type": "WorkspaceProcessTimeout",
+        "message": "Codex CLI Core Builder timed out"
+      },
+      "engineering": "passed"
+    },
+    {
+      "app": "qflow-06",
+      "arm": "direct",
+      "version": 1,
+      "error": {
+        "type": "WorkspaceProcessTimeout",
+        "message": "Codex CLI Core Builder timed out"
+      },
+      "engineering": "passed"
+    },
+    {
+      "app": "qflow-10",
+      "arm": "reliable",
+      "version": 1,
+      "error": {
+        "type": "WorkspaceProcessTimeout",
+        "message": "Codex CLI Core Builder timed out"
+      },
+      "engineering": "passed"
+    }
+  ],
+  "main_numbers_crosschecked": true
+}

@@ -1,0 +1,29 @@
+{
+  "case_id": "quotation-03",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "date_window",
+      "question_aliases": [
+        "日期",
+        "时间",
+        "有效",
+        "起止",
+        "活动",
+        "date",
+        "valid"
+      ],
+      "text": "A商品仅在2026-03-01至2026-03-31优惠25%，包含起止当天；其他日期及B、C用原价。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

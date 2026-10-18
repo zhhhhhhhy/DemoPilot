@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-employee-onboarding-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "c0f6865c2c511bcd99f3b518b722942ed0273324fe9e1fd6d8ca9e95ccba639a"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "65e7498218518748171a4e7069ceb6b354ddf1004703074632997547cbb98932"
+    }
+  ],
+  "status": "authored_not_run"
+}

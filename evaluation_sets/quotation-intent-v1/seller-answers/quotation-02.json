@@ -1,0 +1,56 @@
+{
+  "case_id": "quotation-02",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "eligibility",
+      "question_aliases": [
+        "适用",
+        "范围",
+        "商品",
+        "产品",
+        "哪些",
+        "对象",
+        "客户",
+        "scope",
+        "item",
+        "customer"
+      ],
+      "text": "客户优惠只针对A商品，B和C无优惠。"
+    },
+    {
+      "topic": "customer_rates",
+      "question_aliases": [
+        "比例",
+        "折扣",
+        "优惠",
+        "价格",
+        "多少",
+        "几",
+        "门槛",
+        "数量",
+        "阶梯",
+        "threshold",
+        "discount",
+        "percent",
+        "rate",
+        "quantity",
+        "客户",
+        "vip",
+        "VIP",
+        "合作"
+      ],
+      "text": "VIP客户优惠15%，合作客户优惠5%，普通客户无优惠。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

@@ -1,0 +1,35 @@
+{
+  "rows": [
+    {
+      "case_id": "simple-quote-generator-01",
+      "old_run_id": "6ba9414d84b5",
+      "new_gate_status": "failed",
+      "issues": [
+        "Chromium acceptance failed: subtotal-discount (#breakdown: missing=['小计', '折扣'], present=[], changed=True, actual=)"
+      ],
+      "old_artifact_unchanged": true
+    },
+    {
+      "case_id": "medium-lead-followup-01",
+      "old_run_id": "56b546934e42",
+      "new_gate_status": "failed",
+      "issues": [
+        "Chromium acceptance failed: lead-0-owner-0 (#tasks: missing=['L-01', '林澄'], present=[], changed=True, actual=暂无跟进记录，分配负责人后即可创建。)",
+        "Chromium acceptance failed: lead-0-owner-1 (#tasks: missing=['L-01', '周岚'], present=[], changed=True, actual=暂无跟进记录，分配负责人后即可创建。)",
+        "Chromium acceptance failed: lead-1-owner-0 (#tasks: missing=['L-02', '林澄'], present=[], changed=True, actual=暂无跟进记录，分配负责人后即可创建。)",
+        "Chromium acceptance failed: lead-1-owner-1 (#tasks: missing=['L-02', '周岚'], present=[], changed=True, actual=暂无跟进记录，分配负责人后即可创建。)"
+      ],
+      "old_artifact_unchanged": true
+    },
+    {
+      "case_id": "hard-procurement-approval-01",
+      "old_run_id": "cb2ecd9f94ff",
+      "new_gate_status": "failed",
+      "issues": [
+        "Chromium acceptance failed: three-suppliers-and-chosen-B (#suppliers: missing=['供应商 A', '供应商 B', '供应商 C', '100'], present=[], changed=True, actual=价格优势启新供应链¥48,000交期：15 天合格率：97.5%付款：预付 50%交期较长，需确认排产选为候选综合推荐衡远工业¥52,000交期：7 天合格率：99.2%付款：到货后 30 天单价适中，交付与质量均衡✓ 当前候选快速交付云帆精密¥58,000交期：3 天合格率：99.6%付款：预付 3)"
+      ],
+      "old_artifact_unchanged": true
+    }
+  ],
+  "not_an_intent_ab": true
+}

@@ -1,0 +1,63 @@
+{
+  "kind": "controlled_same_bytes_structure_vs_public_business_gate",
+  "seeded_fault_classes": 8,
+  "structural_rejected": 0,
+  "business_gate_rejected": 8,
+  "rows": [
+    {
+      "name": "valid_control",
+      "source_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+      "structural_status": "passed",
+      "business_status": "passed"
+    },
+    {
+      "name": "wrong_total",
+      "source_sha256": "0260015e6158f356def37c975fbf8263bcb59b4f4e667ce52a85666d94cdb959",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "missing_discount",
+      "source_sha256": "7cb7ac94d414f15008a4a2b816fbd9c6bc0510309981e8225757f8cd2aa47337",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "wrong_tax",
+      "source_sha256": "43b721a12f8139539636ed765bcf7fc5fd6a77ad747811b41ac38e19cd20d0b3",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "history_double_write",
+      "source_sha256": "a2b2143130e879b74d33d277153cdade1bca72d04378875553f54911fa8ffa1b",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "stale_approval",
+      "source_sha256": "f28c186a91f996bb97d0da445b740ea4e801adcf41c64e87fbcbdf723942b165",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "cross_record_leak",
+      "source_sha256": "e8581b92198914ef4f6caa00344c532e7a988a61d36f3533c8584d8b50943ed8",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "freight_twice",
+      "source_sha256": "9c9abf5eed2c98ca809c5a2a37c16fc8be7cc13280a345af27710d4ead07d1c5",
+      "structural_status": "passed",
+      "business_status": "failed"
+    },
+    {
+      "name": "hidden_fake_output",
+      "source_sha256": "fbc584a764026c50e8266bbaf5f17800c83e55c45edc3b6869c9ccb044955801",
+      "structural_status": "passed",
+      "business_status": "failed"
+    }
+  ],
+  "boundary": "Eight deliberately seeded errors on copies of one development artifact; not eight naturally failed tasks or an estimated production detection rate."
+}

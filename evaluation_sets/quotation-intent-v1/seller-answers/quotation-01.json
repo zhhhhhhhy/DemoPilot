@@ -1,0 +1,52 @@
+{
+  "case_id": "quotation-01",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "eligibility",
+      "question_aliases": [
+        "适用",
+        "范围",
+        "商品",
+        "产品",
+        "哪些",
+        "对象",
+        "客户",
+        "scope",
+        "item",
+        "customer"
+      ],
+      "text": "只有A参加阶梯优惠，B和C始终原价；同一种商品两行的数量合并。"
+    },
+    {
+      "topic": "thresholds",
+      "question_aliases": [
+        "比例",
+        "折扣",
+        "优惠",
+        "价格",
+        "多少",
+        "几",
+        "门槛",
+        "数量",
+        "阶梯",
+        "threshold",
+        "discount",
+        "percent",
+        "rate",
+        "quantity"
+      ],
+      "text": "参加优惠的商品，少于5件无优惠，5至9件优惠10%，10件及以上优惠20%；选中的档位应用全部付费数量，不逐段计费。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

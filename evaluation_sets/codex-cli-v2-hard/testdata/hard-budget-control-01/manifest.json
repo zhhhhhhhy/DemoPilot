@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-budget-control-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "d00cd0f34c8ec547ec81691fae1ea91ed38f19c484dae246012594ef6ec782c6"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "c4fa718d302cd3e681379bbe4b074219e1a60d5a9c5ebb0ae0cc4e697598b0a0"
+    }
+  ],
+  "status": "authored_not_run"
+}

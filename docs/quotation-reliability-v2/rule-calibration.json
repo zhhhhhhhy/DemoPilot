@@ -1,0 +1,243 @@
+{
+  "kind": "literal-hand-calculated-examples-not-human-labelled-customer-data",
+  "rows": [
+    {
+      "profile": "quantity_tiers",
+      "inputs": {
+        "quantity": "5"
+      },
+      "hand_calculated_expected": {
+        "subtotal": "500.00",
+        "discount": "50.00",
+        "tax": "0.00",
+        "total": "450.00"
+      },
+      "actual": {
+        "subtotal": "500.00",
+        "discount": "50.00",
+        "tax": "0.00",
+        "total": "450.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "customer_scope",
+      "inputs": {
+        "quantity": "2",
+        "customer": "partner"
+      },
+      "hand_calculated_expected": {
+        "total": "190.00",
+        "discount": "10.00"
+      },
+      "actual": {
+        "subtotal": "200.00",
+        "discount": "10.00",
+        "tax": "0.00",
+        "total": "190.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "validity_dates",
+      "inputs": {
+        "date": "2026-04-01"
+      },
+      "hand_calculated_expected": {
+        "total": "100.00",
+        "discount": "0.00"
+      },
+      "actual": {
+        "subtotal": "100.00",
+        "discount": "0.00",
+        "tax": "0.00",
+        "total": "100.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "validity_dates",
+      "inputs": {
+        "date": "2026-03-31"
+      },
+      "hand_calculated_expected": {
+        "total": "75.00",
+        "discount": "25.00"
+      },
+      "actual": {
+        "subtotal": "100.00",
+        "discount": "25.00",
+        "tax": "0.00",
+        "total": "75.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "compound_discounts",
+      "inputs": {
+        "second_quantity": "1"
+      },
+      "hand_calculated_expected": {
+        "subtotal": "160.00",
+        "discount": "44.80",
+        "total": "115.20"
+      },
+      "actual": {
+        "subtotal": "160.00",
+        "discount": "44.80",
+        "tax": "0.00",
+        "total": "115.20",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "overlap_priority",
+      "inputs": {
+        "quantity": "5",
+        "customer": "vip"
+      },
+      "hand_calculated_expected": {
+        "total": "450.00",
+        "discount": "50.00"
+      },
+      "actual": {
+        "subtotal": "500.00",
+        "discount": "50.00",
+        "tax": "0.00",
+        "total": "450.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "mixed_threshold",
+      "inputs": {
+        "quantity": "3",
+        "second_quantity": "2"
+      },
+      "hand_calculated_expected": {
+        "subtotal": "420.00",
+        "discount": "42.00",
+        "total": "378.00"
+      },
+      "actual": {
+        "subtotal": "420.00",
+        "discount": "42.00",
+        "tax": "0.00",
+        "total": "378.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "rate_override",
+      "inputs": {
+        "quantity": "2",
+        "customer": "partner"
+      },
+      "hand_calculated_expected": {
+        "subtotal": "200.00",
+        "discount": "24.00",
+        "total": "176.00"
+      },
+      "actual": {
+        "subtotal": "200.00",
+        "discount": "24.00",
+        "tax": "0.00",
+        "total": "176.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "tax_inclusive",
+      "inputs": {},
+      "hand_calculated_expected": {
+        "subtotal": "90.91",
+        "tax": "9.09",
+        "total": "100.00"
+      },
+      "actual": {
+        "subtotal": "90.91",
+        "discount": "0.00",
+        "tax": "9.09",
+        "total": "100.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "net_total_discount",
+      "inputs": {},
+      "hand_calculated_expected": {
+        "subtotal": "100.00",
+        "discount": "30.00",
+        "tax": "7.00",
+        "total": "77.00"
+      },
+      "actual": {
+        "subtotal": "100.00",
+        "discount": "30.00",
+        "tax": "7.00",
+        "total": "77.00",
+        "free_quantity": "0",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "free_items",
+      "inputs": {
+        "quantity": "3"
+      },
+      "hand_calculated_expected": {
+        "total": "300.00",
+        "free_quantity": "1"
+      },
+      "actual": {
+        "subtotal": "300.00",
+        "discount": "0.00",
+        "tax": "0.00",
+        "total": "300.00",
+        "free_quantity": "1",
+        "freight": "0.00"
+      },
+      "passed": true
+    },
+    {
+      "profile": "compound_discounts",
+      "inputs": {
+        "second_quantity": "1",
+        "shipping": "express"
+      },
+      "hand_calculated_expected": {
+        "total": "165.20",
+        "freight": "50.00"
+      },
+      "actual": {
+        "subtotal": "160.00",
+        "discount": "44.80",
+        "tax": "0.00",
+        "total": "165.20",
+        "free_quantity": "0",
+        "freight": "50.00"
+      },
+      "passed": true
+    }
+  ],
+  "count": 12
+}

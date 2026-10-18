@@ -1,0 +1,96 @@
+{
+  "kind": "controlled-checker-calibration-not-cli-accuracy",
+  "vector_mode": "public-prepublication",
+  "source_cli_artifact": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\pilot-20261016\\qflow-01\\terminal-v2",
+  "source_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+  "source_unchanged": true,
+  "valid_controls": 1,
+  "valid_controls_accepted": 1,
+  "seeded_fault_classes": 8,
+  "seeded_faults_rejected": 8,
+  "all_expected": true,
+  "rows": [
+    {
+      "name": "valid_control",
+      "expected": "passed",
+      "actual": "passed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 14
+    },
+    {
+      "name": "wrong_total",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 0
+    },
+    {
+      "name": "missing_discount",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 7
+    },
+    {
+      "name": "wrong_tax",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 7
+    },
+    {
+      "name": "history_double_write",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 0
+    },
+    {
+      "name": "stale_approval",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 0
+    },
+    {
+      "name": "cross_record_leak",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 12
+    },
+    {
+      "name": "freight_twice",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 12
+    },
+    {
+      "name": "hidden_fake_output",
+      "expected": "failed",
+      "actual": "failed",
+      "correct": true,
+      "planned": 14,
+      "executed": 14,
+      "passed": 0
+    }
+  ],
+  "boundary": "Synthetic seeded corruptions on copied development artifact; not real independent requirements, not model trials or estimated real-world detection rate."
+}

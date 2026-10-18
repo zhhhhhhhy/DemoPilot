@@ -17,11 +17,13 @@
     "protected": ["repository core", "acceptance.json", "inputs.json", "fixture bytes"],
     "independent_reviewer": false,
     "acceptance_child": "native spawn_agent plus command evidence preferred; verified read-only Codex CLI child fallback",
-    "publication": "Chromium + acceptance-child evidence required; otherwise hidden/cannot_complete"
+    "publication": "Builder Gate + hidden candidate + fresh post-publish functional audit required; otherwise hidden/cannot_complete",
+    "candidate_status": "candidate is internal and remains hidden from artifact downloads until the second gate passes",
+    "post_publish_audit": "fresh Chromium context executes the complete authored acceptance contract against the exact staged files; agent self-report is not used"
   },
   "live_run": {
     "case_id": "simple-receipt-summary-01",
-    "run_id": "07184f0d7dbc",
+    "run_id": "199375e019bb",
     "status": "completed",
     "quality_gate": "passed",
     "publication_status": "published",
@@ -31,9 +33,12 @@
     "acceptance_child_command_exit_code": 0,
     "browser_status": "passed",
     "browser_checks": ["Chromium acceptance passed: switch-receipt"],
+    "post_publish_audit_status": "passed",
+    "post_publish_browser_checks": ["Chromium acceptance passed: switch-receipt"],
+    "post_publish_fresh_browser_context": true,
     "console_errors": 0,
     "unauthorized_paths": [],
-    "evidence_root": ".data/runs/07184f0d7dbc/artifacts/evidence/core"
+    "evidence_root": ".data/runs/199375e019bb/artifacts/evidence/core"
   },
   "verification": {
     "backend_pytest": "56 passed",
@@ -42,5 +47,5 @@
     "frontend_build": "passed",
     "testdata_audit": "passed"
   },
-  "boundary": "This verifies the generation loop and visible UI acceptance. It does not claim OCR field accuracy, production integrations, or a 20-case statistical success rate."
+  "boundary": "This verifies the generation loop, pre-publish Builder Gate, hidden candidate audit, and final visible UI acceptance. It does not claim OCR field accuracy, production integrations, or a 20-case statistical success rate."
 }

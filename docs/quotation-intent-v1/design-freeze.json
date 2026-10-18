@@ -1,0 +1,32 @@
+{
+  "status": "frozen_design_before_generation",
+  "development": [
+    "quotation-01",
+    "quotation-02",
+    "quotation-03",
+    "quotation-04"
+  ],
+  "heldout": [
+    "quotation-05",
+    "quotation-06",
+    "quotation-07",
+    "quotation-08",
+    "quotation-09",
+    "quotation-10"
+  ],
+  "sufficient_controls": [
+    "quotation-03",
+    "quotation-07"
+  ],
+  "dataset_manifest_sha256": "207c21848d882f72b383009f8ed3f89a1c64ce72356adcd3506b42d39275930b",
+  "sources_sha256": "60eb17a1a79e67196f95d5c8cd4851b0ecb8f82106cf632d9aa385f66a5f664e",
+  "review_fixes": [
+    "included-tax prompt contradiction",
+    "negative-input false pass",
+    "shared general engineering context",
+    "topic-specific delayed answers",
+    "isolated experiment storage",
+    "exact intent stdin and tool-use audit"
+  ],
+  "no_model_run_yet": true
+}

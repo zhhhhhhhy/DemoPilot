@@ -1,0 +1,296 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "simple-quote-generator-01",
+  "difficulty": "simple",
+  "intent": "把套餐选择和报价反馈收敛为单页交互。",
+  "goal": "选择套餐和席位后展示小计、折扣和演示总价。",
+  "flow_steps": [
+    "选择套餐和席位并生成报价"
+  ],
+  "expected_result": [
+    "不同套餐会改变报价",
+    "席位变化会改变总价",
+    "标注价格为演示估算",
+    "小计和折扣明细可见；覆盖两套餐与四种席位数量"
+  ],
+  "evaluation_method": [
+    "切换套餐和席位各一次",
+    "检查总额随输入变化",
+    "确认无真实合同或支付动作"
+  ],
+  "controls": {
+    "#plan": "select: 基础/专业",
+    "#seats": "input number",
+    "#calculate": "button",
+    "#total": "visible quote",
+    "#breakdown": "visible breakdown with labels 小计 and 折扣"
+  },
+  "tests": [
+    {
+      "id": "plan-0-seats-1",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "基础",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "1",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "100"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-0-seats-3",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "基础",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "3",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "300"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-0-seats-4",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "基础",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "4",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "400"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-0-seats-7",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "基础",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "7",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "700"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-1-seats-1",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "专业",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "1",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "200"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-1-seats-3",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "专业",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "3",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "600"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-1-seats-4",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "专业",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "4",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "800"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan-1-seats-7",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#plan",
+          "value": "专业",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#seats",
+          "value": "7",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "1400"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "subtotal-discount",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#breakdown": {
+              "contains": [
+                "小计",
+                "折扣"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id simple-quote-generator-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  },
+  "coverage_revision": "sales-business-v2"
+}

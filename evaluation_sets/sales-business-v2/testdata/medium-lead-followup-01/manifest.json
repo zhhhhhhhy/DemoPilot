@@ -1,0 +1,13 @@
+{
+  "case_id": "medium-lead-followup-01",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "02a63ccf7bbf4fc2b7875685df783e1f1806404033c7ecbaf5669703539171aa"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "5fe9fcfe6e803764c0fdf653a3e0b14913dfb0e2f30f6698df1748b64bf2e21c"
+    }
+  ]
+}

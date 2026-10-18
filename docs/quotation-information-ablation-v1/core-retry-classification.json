@@ -1,0 +1,43 @@
+{
+  "recorded_at": "2026-10-16T14:09:40.971356+00:00",
+  "findings": [
+    {
+      "case_id": "quotation-08",
+      "terminal_status": "completed",
+      "repairs": 2,
+      "outer_core_calls": 6,
+      "issues_by_iteration": [
+        [
+          "Neither a native spawn_agent event nor a read-only acceptance_checker CLI child with a passing command was recorded; a self-reported child result is insufficient"
+        ],
+        [
+          "Neither a native spawn_agent event nor a read-only acceptance_checker CLI child with a passing command was recorded; a self-reported child result is insufficient"
+        ],
+        []
+      ],
+      "generated_page_identical_across_attempts": true,
+      "final_child_execution_mode": "cli_child_fallback",
+      "interpretation": "Observed retries were missing executable acceptance-child evidence, not confirmed monetary errors. Only final independent audit determines business correctness."
+    },
+    {
+      "case_id": "quotation-09",
+      "terminal_status": "completed",
+      "repairs": 1,
+      "outer_core_calls": 4,
+      "issues_by_iteration": [
+        [
+          "Neither a native spawn_agent event nor a read-only acceptance_checker CLI child with a passing command was recorded; a self-reported child result is insufficient"
+        ],
+        []
+      ],
+      "generated_page_identical_across_attempts": true,
+      "final_child_execution_mode": "cli_child_fallback",
+      "interpretation": "Observed retries were missing executable acceptance-child evidence, not confirmed monetary errors. Only final independent audit determines business correctness."
+    }
+  ],
+  "all_c_outer_calls": 26,
+  "all_c_intent_calls": 0,
+  "all_c_repairs": 3,
+  "primary_c_outer_calls": 18,
+  "primary_c_repairs": 3
+}

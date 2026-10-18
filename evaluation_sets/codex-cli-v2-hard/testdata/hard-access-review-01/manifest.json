@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-access-review-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "3a90c2bc9b90629370272a5ef56f8679263a0a4591327cceb718782a0239212b"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "9b5bfd8feed2cf6af87ec1f328304aca4c9cb60d034aba462385aec8de3e905e"
+    }
+  ],
+  "status": "authored_not_run"
+}

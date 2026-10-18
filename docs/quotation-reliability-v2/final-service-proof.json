@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "base_url": "http://127.0.0.1:5189",
+  "application_groups": 10,
+  "current_visible": 10,
+  "ownership_tokens_exposed": false,
+  "process_id": 40480,
+  "old_development_service_preserved": true,
+  "old_development_pid": 41184
+}

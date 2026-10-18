@@ -1,0 +1,38 @@
+{
+  "schema_version": "codex-cli-prompt-ab-v1",
+  "experiment_id": "core-builder-prompt-harness-ab-2026-10-07",
+  "status": "pilot_ready",
+  "research_question": "在相同任务、数据和验收门禁下，结构化意图与 Goal Prompt 是否比仅给场景和 must-have 的弱 Prompt 带来更高的最终发布率？",
+  "case_source": "../codex-cli-v1/cases.json",
+  "case_count": 20,
+  "tier_counts": {"simple": 10, "medium": 5, "hard": 5},
+  "variants": [
+    {"id": "control-legacy", "prompt_file": "variants/control-legacy.md", "profile": "minimal-unstructured-intent"},
+    {"id": "treatment-current", "prompt_file": "variants/treatment-current.md", "profile": "structured-intent-goal-prompt"}
+  ],
+  "frozen_runtime": {
+    "provider": "codex_cli",
+    "evaluation_mode": "core_generation",
+    "workspace_policy": "fresh run-scoped workspace per case and variant",
+    "acceptance_contract": "root testdata/<case-id>/acceptance.json",
+    "browser": "Playwright Chromium headless",
+    "max_revision_rounds": 4,
+    "mock_allowed": false
+  },
+  "failure_taxonomy": {
+    "infra_block": "CLI/Harness fails before Builder starts",
+    "measurement_block": "acceptance child or test environment cannot execute",
+    "builder_output_failure": "CLI started and artifact reached acceptance but final publication failed",
+    "release_regression": "candidate was staged but fresh post-publish audit failed"
+  },
+  "primary_metric": "published and fresh post-publish audit passed / selected cases",
+  "secondary_metrics": ["builder_output_failure_rate", "infra_block_rate", "measurement_block_rate", "median_revision_count", "median_agent_calls", "regression_count", "console_error_count"],
+  "required_outputs": [
+    "results/control-legacy-20261007.json",
+    "results/treatment-current-20261007.json",
+    "results/report-20261007.md"
+  ],
+  "analysis_status": "pilot_pending",
+  "pilot_selection": ["simple-invoice-ocr-01", "simple-sku-lookup-01", "medium-invoice-review-01", "hard-procurement-approval-01"],
+  "pilot_rule": "Run each selected case once under each profile with fresh run-scoped workspaces; do not reuse artifacts or carry forward passes."
+}

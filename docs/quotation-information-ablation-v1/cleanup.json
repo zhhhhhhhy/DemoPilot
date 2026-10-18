@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-16T14:17:09.0180715Z",
+  "scope": "Only processes attributable to this appended-control script or result directory",
+  "matching_running_processes": [],
+  "matching_count": 0,
+  "terminated_processes": [],
+  "excluded": "Unrelated user apps, generic MCP tool servers without ownership evidence and other project servers left untouched",
+  "result": "No identifiable appended experiment runner or CLI remains active"
+}

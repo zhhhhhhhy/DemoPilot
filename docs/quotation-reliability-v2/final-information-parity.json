@@ -1,0 +1,273 @@
+{
+  "development-v2-20261016": {
+    "split": "development",
+    "all_equal": true,
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "call_cap": 3,
+    "timeout": 300,
+    "rows": [
+      {
+        "app_id": "qflow-01",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-01",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-02",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-02",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-03",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-03",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-01",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-02",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-03",
+        "identical_public_fixture_bytes": true
+      }
+    ],
+    "boundary": "Goal and public fixture parity; subsequent generated code differs naturally. Equal configured caps do not force identical consumed tokens or internal subagent use."
+  },
+  "heldout-v3-20261017": {
+    "split": "heldout",
+    "all_equal": true,
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "call_cap": 3,
+    "timeout": 300,
+    "rows": [
+      {
+        "app_id": "qflow-04",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-04",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-05",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-05",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-06",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-06",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-07",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-07",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-08",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-08",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-09",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-09",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-10",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-10",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-04",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-05",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-06",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-07",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-08",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-09",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-10",
+        "identical_public_fixture_bytes": true
+      }
+    ],
+    "boundary": "Goal and public fixture parity; subsequent generated code differs naturally. Equal configured caps do not force identical consumed tokens or internal subagent use."
+  },
+  "heldout-clean-v4-20261017": {
+    "split": "heldout",
+    "all_equal": true,
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "call_cap": 3,
+    "timeout": 300,
+    "rows": [
+      {
+        "app_id": "qflow-04",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-04",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-05",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-05",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-06",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-06",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-07",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-07",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-08",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-08",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-09",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-09",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-10",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-10",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-04",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-05",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-06",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-07",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-08",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-09",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-10",
+        "identical_public_fixture_bytes": true
+      }
+    ],
+    "boundary": "Goal and public fixture parity; subsequent generated code differs naturally. Equal configured caps do not force identical consumed tokens or internal subagent use."
+  }
+}

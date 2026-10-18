@@ -1,0 +1,23 @@
+{
+  "primary_policy": "Keep original full-condition scores, labels and audits unchanged. Explain observer defects separately, no rescoring or new generation.",
+  "c_audit_sha256": "ea956c4eaf76a9c940500cbb88d356d6107d1f6d7197a86507502ecd2140f8f6",
+  "original_ab_heldout_audit_sha256": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2",
+  "strict_primary_scores": {"direct": "1/6", "clarify": "5/6", "full-rules": "5/6"},
+  "browser_journeys_primary": {"direct": "36/68", "clarify": "67/68", "full-rules": "68/68"},
+  "c_all_ten_cases": {"strict_complete_pass": "9/10", "functional_journeys": "112/112", "postscore_model_calls": 0, "postscore_browser_replays": 0},
+  "c06_guard": {
+    "status": "false_positive_in_displayed_command_primary_flag_preserved",
+    "event_id": "item_7",
+    "transcript": "evaluation_sets/quotation-intent-v1/results/full-rules-20261016/runtime/runs/be895bd32367/artifacts/evidence/core/iteration-0/stdout.jsonl",
+    "full_command_sha256": "fc2ff1dbd0b658f0ebedcaf59232f71c0dbe4c77ae14bbc144ea2b30b76d456d",
+    "command_length": 6503,
+    "trigger": "The only ../ occurrence is the literal entry link ../card-web/index.html inside text written to card/spec.md.",
+    "observed_reads": ["Current workspace testdata/quotation-06/inputs.json"],
+    "observed_writes": ["card-web/index.html", "card-web/app.js", "card-web/styles.css", "card/spec.md"],
+    "interpretation": "The displayed command does not read private gold or traverse a parent directory for file IO. All12 functional journeys pass. The frozen end_to_end_pass=false and contaminated label remain, so C still reports5/6 strict primary. Not an OS-level confidentiality proof."
+  },
+  "repair_counts": "C three internal repair rounds occurred on08(two) and09(one), all for missing acceptance-child execution evidence. Generated page hashes remained identical across each case's iterations. Do not label these three final business defects or claim B wording reduced business bugs.",
+  "human_input_cost": "C's complete rules were authored and supplied by the experimenter. Human preparation time is not measured. Fewer outer model calls do not establish lower end-to-end human effort.",
+  "inference": "Five initially underspecified primary cases receive identical seller-fact texts in B and C. Both remove all observed monetary mismatches; C passes every functional journey. No extra final-throughput benefit of typed intent is established; automatic acquisition and reliable delivery remain the supported engineering contribution.",
+  "scope": "Retrospective C appended after A/B was known; six reused primary configurations, one execution per arm, scripted seller, no real customer benefit measurement."
+}

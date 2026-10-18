@@ -1,0 +1,43 @@
+{
+  "schema_version": "quotation-fixtures-v1",
+  "case_id": "quotation-10",
+  "industry": "B2B",
+  "fixtures": {
+    "currency": "CNY",
+    "catalogue": [
+      {
+        "id": "A",
+        "name": "样例商品A",
+        "unit_price": "100"
+      },
+      {
+        "id": "B",
+        "name": "样例商品B",
+        "unit_price": "60"
+      },
+      {
+        "id": "C",
+        "name": "样例商品C",
+        "unit_price": "200"
+      }
+    ],
+    "customers": [
+      {
+        "id": "standard",
+        "name": "普通客户"
+      },
+      {
+        "id": "vip",
+        "name": "VIP客户"
+      },
+      {
+        "id": "partner",
+        "name": "合作客户"
+      }
+    ],
+    "initial_date": "2026-03-15"
+  },
+  "assets": [],
+  "engineering_conventions": "商品和客户原始样例稍后由本地testdata提供，不需向销售索要文件。两行商品合并报价，第二行数量可为0；不适用的优惠为0，除了明确说明的税之外不另加税。所有按数量门槛命中的折扣适用于该商品全部付费数量，不做分段计费。金额先整单汇总再保留两位小数，四舍五入；数量必须是整数，第一行至少1，第二行至少0；重复计算只重算当前报价，不累计历史优惠；没有真实支付或下单。",
+  "data_provenance": "Synthetic catalogue. No real customer, financial transaction, or production tax policy."
+}

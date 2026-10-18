@@ -1,0 +1,23 @@
+{
+  "status": "development_protocol_repair_before_heldout",
+  "heldout_model_runs": 0,
+  "preserved_pilot": "evaluation_sets/quotation-intent-v1/results/development-20261016",
+  "findings": [
+    {
+      "case_id": "quotation-01",
+      "stage": "seller_answer_completeness",
+      "observation": "Intent asked whether a quantity tier applies to all qualifying units or progressively to units in each band. Frozen seller answer did not resolve this; three turns ended before Core.",
+      "cause": "Ambiguous authored seller configuration, not demonstrated coding failure.",
+      "action": "Explicitly declare whole-quantity rules and aggregation rounding as shared conventions; clarify the development answer without changing its numerical gold."
+    },
+    {
+      "case_id": "quotation-02",
+      "stage": "engineering_measurement",
+      "observation": "Live recalculation already changed #total when quantity changed. The engineering gate then expected another change on click and rejected a correct CNY 200 result.",
+      "cause": "Action-timing assumption in the engineering assertion; valid live and button-triggered interfaces should both be accepted.",
+      "action": "Remove the click-only changed assertion. The independent business audit still compares exact numeric results after all actions and checks repeated calculations."
+    }
+  ],
+  "pilot_stop_policy": "Changed the runner freeze revision so the existing process completes its current arm, then stops at the frozen-context guard before another arm. No process duplicate, forced generated-page edit, or hidden score replacement.",
+  "next_action": "After observing clean pilot exit, repair shared conventions and gates, archive exact prior data, freeze development-v2, and run all eight development arms fresh."
+}

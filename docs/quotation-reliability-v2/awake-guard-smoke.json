@@ -1,0 +1,25 @@
+{
+  "schema_version": "local-process-idle-sleep-request-v1",
+  "started_at": "2026-10-17T01:56:42.417782+00:00",
+  "process_id": 30200,
+  "command": [
+    "D:\\worker\\DemoPilot\\backend\\.venv\\Scripts\\python.exe",
+    "-c",
+    "print('native idle-sleep request smoke')"
+  ],
+  "automatic_idle_sleep_request": true,
+  "display_required": false,
+  "manual_lid_or_button_sleep_prevented": false,
+  "global_power_plan_changed": false,
+  "heartbeat_gaps": [],
+  "status": "completed",
+  "source": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setthreadexecutionstate",
+  "previous_thread_state": 2147483648,
+  "confirmed_thread_state": 2147483649,
+  "child_process_id": 12708,
+  "last_heartbeat_at": "2026-10-17T01:56:42.497018+00:00",
+  "returncode": 0,
+  "thread_request_restored": true,
+  "finished_at": "2026-10-17T01:56:42.498023+00:00",
+  "child_returncode_at_wrapper_exit": 0
+}

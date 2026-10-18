@@ -1,0 +1,11 @@
+{
+  "stage": "intent-to-core-delivery",
+  "source": "evaluation_sets\\quotation-intent-v1\\results\\development-v2-20261016\\quotation-01\\clarify\\intent\\turn-02-output.json",
+  "observed_status": "ready",
+  "unresolved_questions": [],
+  "flow_steps": [],
+  "cause": "Prompt prohibits inventing business sequence, but delivery validator requires flow_steps nonempty even when the raw requirement specifies no sequence. Requirements and numerical rules are already answered.",
+  "planned_fix": "Allow a present empty flow_steps array; keep must_haves and visible acceptance nonempty, schema/identity/traceability valid, ready status and no questions mandatory. Builder plans UI operation using the common engineering contract.",
+  "heldout_model_runs": 0,
+  "model_coding_failure": false
+}

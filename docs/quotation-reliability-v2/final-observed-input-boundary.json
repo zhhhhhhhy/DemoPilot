@@ -1,0 +1,488 @@
+{
+  "development-v2-20261016": {
+    "scope": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016",
+    "calls_with_returned_traces": 14,
+    "commands_checked": 144,
+    "flags_requiring_manual_review": [],
+    "authored_source_flags": [],
+    "traces": [
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "fcfadf1761f56c2afabbce350e93d18ae66d6141958fa393029d059d1b591c23",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "7c0841375b71f626d7320d826d5cf360761c32d159af5ee10f0a752d977b705b",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "4f8363ae271fe23a77c44465e323791614d1a1146105553ec012def151ebdda9",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "8b516a945b93da17bb8af77fe63c7c700b6c072e84c5a5c317ab160b0027859c",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "7d21c92d27204f6874d8ed97e4ec37e331b6e30206ecfc4dcd575b3460c4b51b",
+        "command_events": 7,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "984c3fcaf9dc1bb444b2e93b03afbbc0e241cdc59ec159b0146eb83043c02536",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "9d6feb105918a33f500705807a99ae4c97eba37fd5da8b05756fa617998cb1b8",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "300610b73cf177630b844fb22ec5d514ca901a16e46e8758b67ea2671c49c1e0",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-02\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "95fae033cf18954979a5a73c1118e0e2fa053f3c240820988bdb27e75840986c",
+        "command_events": 15,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "58ba7bd1f629e6d31fc407e8d0f7f9b2f43011849ac91d7f50f4278d7ff9db28",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "d7c9a5925f18a2ed8913896c8974bab1962aec6a132dc12f158f7217a2824cda",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "4f717ac34c06b10e6b6d1a4847b5cef873481f2b009dcc1d7e76821b9261f1d2",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "19926268d7d82bcde7f20667c8736fc8ea86a559343eb1860fe72f5bd0f75d1b",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-03\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "22a3fb45786ffbd07c9162d35613b61bc048773eeaf04a28fc87695b632bc0b8",
+        "command_events": 7,
+        "malformed_lines": 0
+      }
+    ],
+    "boundary": "Only root CLI returned command events were inspected. Internal native child-agent reads and arbitrary OS reads are not exhaustively observable; no OS read-isolation claim. Running the explicitly supplied public probe is allowed. No audit feedback was supplied to the builder."
+  },
+  "heldout-v3-20261017": {
+    "scope": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017",
+    "calls_with_returned_traces": 31,
+    "commands_checked": 312,
+    "flags_requiring_manual_review": [],
+    "authored_source_flags": [],
+    "traces": [
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "271962ff9ac95a49f9eb6fcdaa3c403d7bf46615358fd21731bc46e41256a22f",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "ed207cc150698d42bb49f6b599136533552ef6ea6516892433955f5367465967",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "f686078be86c0386535e501abc90c82498cf1974a3ac7292cae8f153c46c4325",
+        "command_events": 7,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "756e28a8c9a670687794b8dcd9af2281c25c142e60d335670534e1a586f19423",
+        "command_events": 7,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "69a000c83e1ea744f235671c40b8fa16009e87d3b63439dc7cac40a85478a000",
+        "command_events": 16,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-04\\reliable\\v2\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "5c532fe57040779cfee7a36e52c91762bbfc2661d5c08e79633756d4cd07c4bb",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "a5ee3cdb648d5c4ee2458f39af7b2249b28c553d90fde0e6c0c5de702567496f",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "fc2d536f7bfe4a64ba49dbce57026224290b7b9ec1f95444e7f856f8c7422b77",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0fde07e4e5d7af95d5f666587009988aa5b22262f3b8cc64b2d9dc8b6e21b826",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-05\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0ca8d30a268d3ad4e0d16322564bc5b017fa73cc1a0010953ac91b63aed8d2e9",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "80b331237d0c3e95d4c2900ecf712880c58c2bdcf9938b128bda0f27d79961cc",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "cc0f0fd958e301f64bfcd70f3dcff819ebf21c5e2a0137524402157f01bdc3ec",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "858d24cf71db00a511b363847d4fbae44f97f26d8568f48968371cbcb321c430",
+        "command_events": 4,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "996bdeef27b0887a0567791d4a57787a32a64dece2ca0bfdb1674b13a6a07a3f",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-06\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "c2a7468095e9bfb261f87b785e0662eae42e7ce3a8d1b1f5a2d6dda8feaac5bb",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "c7057f6d05dfe470a9c116bb0f6ca3cbdf44e3ba9ab78150ccddeafb5a590af9",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "f4a2ae365d73cb3c6ecb9c840433c0c7ba69f1970a733bcde457d47d2557a34b",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "e808f05c6c12ca34e2b2550d51068f2213d2df7adcbad977e1fc1b496b316773",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-07\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "20710cdf44e950788ad83d948eaba3c4272d0f0de97cedffcbbb984a90028f7e",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "b2c5183ec923dd10333e152b61f464d8c4d0b5d3c209d300322631ee5bbac2dc",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "f94838f49869d469e9073c7c10605f71de43ce4a686bab89e9a319348c47d167",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "475aa8ff6a425f01e40729497b24572010fd8dfcca8ab77e466919931e45c4cd",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-08\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "615b2d7b576c42d67fedb598849d3f163cd197effdcc4565e33541b42c4b0e09",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "238a1e461d5abe2d043d9dcf6841af026ab0f5975e690475f5037638a2744225",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "3804b0df20248286303e5aa747ed210e864f8c6e97324b0ef8b773391e7ce00b",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "ca15a8180694decbc712c890e9bc07bd0a6027979eeff9d453ea94dffd01c120",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-09\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0630fb8292d0e32f1538457b968487f7348f2afa0d24bd531c6058db90ed87ba",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "6a30cf57a8883871874aae9c8b94bf05e0a81ec4c34a5b743abbfcff5c4ae212",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0836d22f68077d80628e5c0f5c2cf070b792ca13a06a77ee129bccc57f6eb8a5",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "9f0aae61f6b7cf814e088e8ea1b9d2823abf7477f5d4702524d115d1383c1367",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\qflow-10\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "c1621874c389337ff8412122c3d205840566209bd42d18433d433e4e1e3fce2e",
+        "command_events": 8,
+        "malformed_lines": 0
+      }
+    ],
+    "boundary": "Only root CLI returned command events were inspected. Internal native child-agent reads and arbitrary OS reads are not exhaustively observable; no OS read-isolation claim. Running the explicitly supplied public probe is allowed. No audit feedback was supplied to the builder."
+  },
+  "heldout-clean-v4-20261017": {
+    "scope": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017",
+    "calls_with_returned_traces": 31,
+    "commands_checked": 350,
+    "flags_requiring_manual_review": [],
+    "authored_source_flags": [],
+    "traces": [
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "c7dcc4a0af08b13f951eb83c50136a5f968491c581379019bf3f10c0b509320f",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "44d6bd09abd0f5375c9c5ca6853e284ff10c3e541a4eba9e62c2eb59362c470d",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "a15a993ef1db58545d370336e92d880d8ba09f9e89dc483c0decbd895998ad52",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-04\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "b0f98a5e138b402707dac1365e1e6b66313ee448a1bc0051a7711a7933405777",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "f01943d27217115b9c55e67253ffb0697b9a64f49590508fd53d08aff1eb56b7",
+        "command_events": 13,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "3f8f164b780a6c135d8a777eb26b2e8a7796d7767fa123757699e4b89692e7a9",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\direct\\v2\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "9568250c27b8e5256d416e224f2fc7f91792559ac2d84c8d293ef121844ac5dd",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "841e9e9d9ed482256a8848811bfa7b99de32d3ff4dd7dd4237615e14c8529113",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-05\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "252c8da3820a3903f5b6035879835bcf87989c4d706e7b5beb8f62395f52e72a",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "aa50c9ffebe2c03356e2493d11516a1ae66d4b7bc7aa2f6b1596dc83402b6626",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "65f4d3795e07209f2cf56a173a6cc44310634b25cce7a3a9c4f12a68b4797e93",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "ee5d870f88e3942061df316db3a323c581f1625ce676c624c3e10d3a86f903c7",
+        "command_events": 13,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "00acc29cf8dc51131fda40137b1f301e48498a1beefa52948aada20e27b88817",
+        "command_events": 13,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-06\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "72d2aef22b68f4a791dba1a942e69b8a746ac9f67e7e5aeb8daa131e7e5e7f69",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0bced3153bd75a9831029f13c6e7f8a10c2efec5252282bf5fd77f01e19b3ac0",
+        "command_events": 15,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "3fba5d9a85942e7a811fc2cfc7a99c6ac7874afd269fe617b1d4929e8d89aaa9",
+        "command_events": 16,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "48f9ca286d5ae619a094a0c69bb68e5a0c630820fb9292af2d14433d77b03244",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-07\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "efc890fdcab9a6ff23642ac68e5c83190e85c1e81b7db784f6b54b53aa420adf",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "53e833c9f3956a57a381bb84014ccaea0c4ff12889873ff10f7e202a28208c83",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "b07052c052d28ec5546f8010906ca68158c8cb43223c0913a856c755f0d7adaf",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "a350bea706def51547889b60df6f08250d91a99180fa5c7609a49694a0d5ec4b",
+        "command_events": 14,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-08\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "df6123b9f933c12bf421744bd172c705813564df27eb225b06e5fb0f2787a73f",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "527fc454dd4fad3fadda5d75435f63a881d5f047cf1d5676db466f32f525a20b",
+        "command_events": 9,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "51f724555a0efb1df8f3697dbab494e1b6f6c41982c5f20f6378d5f50387e743",
+        "command_events": 13,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "8890ad3c2573658fc2001fa516c1820857bb33d7236e5047b59e8b9936963e2d",
+        "command_events": 8,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-09\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "173c140f65abfe4a8a9812e89388a3d59401c4b7e23f80c72c473caa8d1fee0e",
+        "command_events": 12,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\direct\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "0569340a04ec2286410d7133e7dd287b96e69ba1b689843bd1da2b97a752ba86",
+        "command_events": 13,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\direct\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "67c43f37d1c72c3d5a75951418206f553a2969bdbd3761c9c39de9e815835bdb",
+        "command_events": 10,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v1\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "3dbc2fdbddcc29627912212f7a64492e8e17b307e95efe3f091dc7eeca79a073",
+        "command_events": 11,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v1\\iteration-1\\cli\\stdout.jsonl",
+        "sha256": "c06d561413c2e9e043ecd38526fba533a7d0dc5cb0aa65535225adb4d46aa930",
+        "command_events": 6,
+        "malformed_lines": 0
+      },
+      {
+        "trace": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017\\qflow-10\\reliable\\v2\\iteration-0\\cli\\stdout.jsonl",
+        "sha256": "6f1ad8cbe058af05bcfdcb96b006474bf6fcac0360f059c141c8617a4e6eef75",
+        "command_events": 7,
+        "malformed_lines": 0
+      }
+    ],
+    "boundary": "Only root CLI returned command events were inspected. Internal native child-agent reads and arbitrary OS reads are not exhaustively observable; no OS read-isolation claim. Running the explicitly supplied public probe is allowed. No audit feedback was supplied to the builder."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "independent_audit_sha256": "5c1e76c0712ba3e4eba3e8188dcec92b9858fb55d3ebddc4fe0ab3643d3b066d",
+  "context_sha256": "27f3bca375d416895e0757c96ae2d0cb1db16ca43a643fc7817a53995ca558a4",
+  "functional_paths": 1820,
+  "functional_passed": 1820,
+  "strict_published_versions": 26,
+  "total_versions": 28,
+  "environment_interrupted": true,
+  "do_not_replace": true
+}

@@ -41,6 +41,25 @@ def _assertions_pass(page: Any, assertions: dict[str, Any], before: dict[str, st
             )
 
 
+def _select_option(locator: Any, value: str) -> None:
+    # Preserve the contract's label-first semantics without waiting five
+    # seconds for a label when the supplied string is already an option value.
+    options = locator.locator("option").evaluate_all(
+        "options => options.map(option => ({label: option.label, value: option.value}))"
+    )
+    if any(option["label"] == value for option in options):
+        locator.select_option(label=value, timeout=5_000)
+    elif any(option["value"] == value for option in options):
+        locator.select_option(value=value, timeout=5_000)
+    else:
+        # Options can be populated asynchronously; keep the previous bounded
+        # wait behavior rather than failing on an initially empty selector.
+        try:
+            locator.select_option(label=value, timeout=5_000)
+        except Exception:
+            locator.select_option(value=value, timeout=5_000)
+
+
 def _run_browser(page: Any, page_uri: str, acceptance: dict[str, Any]) -> tuple[list[str], list[str], list[str]]:
     checks: list[str] = []
     issues: list[str] = []
@@ -73,10 +92,7 @@ def _run_browser(page: Any, page_uri: str, acceptance: dict[str, Any]) -> tuple[
                 elif action == "fill":
                     locator.fill(value, timeout=5_000)
                 elif action == "select":
-                    try:
-                        locator.select_option(label=value, timeout=5_000)
-                    except Exception:
-                        locator.select_option(value=value, timeout=5_000)
+                    _select_option(locator, value)
                 else:
                     raise ValueError(f"unsupported action: {action}")
                 deadline = time.monotonic() + 2.5
@@ -104,10 +120,12 @@ def run_acceptance(
     protected_hashes: dict[str, str] | None = None,
     trusted_paths: set[str] | None = None,
 ) -> dict[str, Any]:
-    """Run the authored, visible-UI contract against the latest workspace.
+    """Run the authored, visible-UI contract against a candidate workspace.
 
-    This function is the publication gate. It never trusts a Builder's final
-    message and returns a failed result when Chromium is unavailable.
+    This is the deterministic Builder Gate and the reusable functional audit
+    primitive. It never trusts a Builder's final message and returns a failed
+    result when Chromium is unavailable. The Core Builder loop invokes it once
+    before staging and once again from a fresh hidden candidate before release.
     """
 
     workspace = workspace.resolve()

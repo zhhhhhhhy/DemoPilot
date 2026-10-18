@@ -1,0 +1,57 @@
+{
+  "case_id": "quotation-04",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "discount_rates",
+      "question_aliases": [
+        "比例",
+        "折扣",
+        "优惠",
+        "价格",
+        "多少",
+        "几",
+        "门槛",
+        "数量",
+        "阶梯",
+        "threshold",
+        "discount",
+        "percent",
+        "rate",
+        "quantity"
+      ],
+      "text": "第一项优惠10%，第二项优惠20%，适用于所有商品。"
+    },
+    {
+      "topic": "composition",
+      "question_aliases": [
+        "叠加",
+        "顺序",
+        "折后",
+        "相加",
+        "计算",
+        "组合",
+        "同时",
+        "冲突",
+        "优先",
+        "更大",
+        "选择",
+        "precedence",
+        "priority",
+        "stack",
+        "compound"
+      ],
+      "text": "先减10%，再对第一次折后金额减20%；不能把百分比相加成30%。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "launch_registration_order",
+  "stage": "development",
+  "observed": "Re-recording preflight invalidated old route/execute gates. A PowerShell batch continued after nonzero controller exits and launched the development runner before Q002 could register.",
+  "quality_effect": "No treatment, dataset, gold, model, execution budget or scoring changed. This is a workflow-recording defect, not a model outcome.",
+  "recovery": "Inspected the in-flight run; did not launch a duplicate or hide its result. Repassed route and execute gates and registered Q002 as recovery of the actual original process.",
+  "prevent_recurrence": "Dependent controller calls are now sequential tool calls with explicit exit-code checks before subsequent launch.",
+  "status": "recorded_and_reconciled"
+}

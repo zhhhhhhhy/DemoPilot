@@ -1,0 +1,39 @@
+{
+  "schema_version": "quotation-measurement-notes-v1",
+  "primary_score_policy": "Keep the first complete held-out audit unchanged; diagnostic replay never replaces a scored failure.",
+  "primary_audit": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/business-audit.json",
+  "primary_audit_sha256": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2",
+  "findings": [
+    {
+      "case": "quotation-08",
+      "arm": "clarify",
+      "stage": "independent post-delivery browser measurement",
+      "observed": "9/10 journeys passed; change-and-return failed with a 2000 ms Locator.fill timeout at #second-quantity. No numerical mismatch recorded.",
+      "diagnostic": "One unchanged-source replay using the same 2000 ms action limit passed A-to-C-to-A, zero new model calls. Original audit hash unchanged.",
+      "interpretation": "Business defect unconfirmed. Still not a complete primary pass; clarify remains 5/6.",
+      "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/post-score-diagnostics/quotation-08-return-replay.json"
+    },
+    {
+      "case": "quotation-09",
+      "arm": "direct",
+      "stage": "retained-tool read-boundary observation",
+      "observed": "The frozen guard matched ../card-web and ../testdata links in a here-string written to card/spec.md.",
+      "interpretation": "The displayed command is an allowed documentation write, not an observed private-gold read. Original contaminated flag preserved. Eight separate monetary failures keep this case failed regardless of that flag.",
+      "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/business-audit/quotation-09/direct/audit.json"
+    },
+    {
+      "case": "quotation-10",
+      "arm": "direct",
+      "stage": "runner wall clock and subprocess lifecycle",
+      "elapsed_seconds": 11364.594,
+      "started_at": "2026-10-16T09:49:45.176+00:00",
+      "finished_at": "2026-10-16T12:59:09.767+00:00",
+      "observed": "A build iteration starts at 09:56:37 UTC; its next timeout is recorded at 12:56:48 UTC. The surrounding conversation was interrupted. The runner later exits zero with ignored BaseSubprocessTransport/Event loop is closed and closed-pipe destructor warnings.",
+      "interpretation": "Cause of the long wall-clock gap is unknown; do not infer OS sleep or intent-driven acceleration. Same configured call budgets do not imply normal actual elapsed execution in this row. Preserve timestamps, calls and final functional score; do not make an efficiency claim.",
+      "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/runtime/runs/12a12b3ca8ba/artifacts/evidence/core"
+    }
+  ],
+  "cost_scope": "Observed outer CLI invocations, not complete native child usage or billed cost. Core calls 14 vs 14; intent adds 11; repair rounds 1 vs 1.",
+  "isolation_scope": "Isolated run directories, prompt write policy and retained-tool audit; not OS-level confidentiality isolation.",
+  "sample_scope": "Six held-out authored configurations from four official ERPNext documents, with scripted sellers. One paired execution each, p=0.125. Not real customer validation."
+}

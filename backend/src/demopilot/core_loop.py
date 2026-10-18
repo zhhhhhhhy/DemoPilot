@@ -13,6 +13,12 @@ from .storage import RunStore
 
 CORE_AGENT_ROLE = "Core Builder（含验收子智能体）"
 ACCEPTANCE_AGENT_ROLE = "确定性验收 Runner"
+DATASET_ROOTS = {
+    "codex-cli-v1": Path("testdata"),
+    "codex-cli-v2-hard": Path("evaluation_sets") / "codex-cli-v2-hard" / "testdata",
+    "sales-business-v2": Path("evaluation_sets") / "sales-business-v2" / "testdata",
+    "quotation-intent-v1": Path("testdata"),
+}
 
 
 def _sha256(path: Path) -> str:
@@ -48,8 +54,11 @@ def _emit(
     store.save(run)
 
 
-def _copy_testdata(root: Path, workspace: Path, case_id: str) -> tuple[dict[str, str], str]:
-    source = (root / "testdata" / case_id).resolve()
+def _copy_testdata(root: Path, workspace: Path, case_id: str, dataset: str) -> tuple[dict[str, str], str]:
+    dataset_root = DATASET_ROOTS.get(dataset)
+    if dataset_root is None:
+        raise RuntimeError(f"unsupported evaluation dataset: {dataset}")
+    source = (root / dataset_root / case_id).resolve()
     if not source.is_dir():
         raise RuntimeError(f"testdata case is missing: {source}")
     target = workspace / "testdata" / case_id
@@ -88,7 +97,13 @@ def _unauthorized_files(workspace: Path, allowed_roots: list[Path]) -> list[str]
 
 
 class CoreBuilderLoop:
-    """Intent -> restricted CLI Builder -> deterministic acceptance -> publish."""
+    """Intent -> restricted CLI Builder -> two independent gates -> publish.
+
+    The Builder gate verifies the authored contract before a candidate is
+    staged.  A fresh post-publish functional audit then exercises that staged
+    candidate before the public artifact is marked ``published``.  This keeps
+    an agent's self-report separate from the release decision.
+    """
 
     def __init__(
         self,
@@ -114,7 +129,21 @@ class CoreBuilderLoop:
         request = run.request
         acceptance_path = f"testdata/{case_id}/acceptance.json"
         inputs_path = f"testdata/{case_id}/inputs.json"
-        return f"""You are DemoPilot's Core Builder. This is iteration {iteration} of an evidence-driven goal loop.
+        if request.evaluation_prompt_profile == "control-legacy":
+            prompt_header = f"""You are DemoPilot's Core Builder. This is iteration {iteration}.
+
+BUILD REQUEST
+- Scenario: {request.scenario}
+- Priority: {request.priority}
+- Must-have capabilities: {json.dumps(request.must_haves, ensure_ascii=False)}
+- Case id: {case_id}; evaluation dataset: {request.evaluation_dataset}
+
+Use the supplied local files and implement the visible workflow. Do not rely on a
+model self-report; the harness will run the authored acceptance contract and a
+real browser after this turn. Treat failures from the previous iteration as
+repair advice, while preserving behavior that already works."""
+        else:
+            prompt_header = f"""You are DemoPilot's Core Builder. This is iteration {iteration} of an evidence-driven goal loop.
 
 GOAL
 - Intent: {request.evaluation_intent or request.scenario}
@@ -123,19 +152,26 @@ GOAL
 - Expected result: {json.dumps(request.acceptance_criteria, ensure_ascii=False)}
 - Must-have capabilities: {json.dumps(request.must_haves, ensure_ascii=False)}
 - Case id: {case_id}; difficulty: {request.evaluation_difficulty or 'unspecified'}
+- Evaluation dataset: {request.evaluation_dataset}
+"""
+        return f"""{prompt_header}
 
 AUTHORITATIVE INPUTS AND ACCEPTANCE
 - Read the local fixture data at {inputs_path}.
 - Read the executable visible-UI acceptance contract at {acceptance_path}.
 - The contract contains the exact selectors, actions, values, and expected visible results. Treat it as the acceptance source of truth; do not invent a weaker test.
 - Test data is part of this run and must be used from the stated relative paths. Never call an external OCR, database, API, or network resource.
+- The fixture-loading rule is strict: copy the needed values from {inputs_path} into a JSON-serializable constant in `card-web/app.js` (for example `const FIXTURE = {{...}}`) and render it with DOM APIs. Do not use `fetch`, XHR, WebSocket, `import`, a service worker, or any other runtime file/network read; the browser may run from `file://` and must work offline.
+- `card-web/index.html` may contain exactly one external `<script src="app.js"></script>` reference. Do not add `<script type="application/json">`, inline JavaScript, inline event attributes such as `onclick`, or HTML string injection. Bind events with `addEventListener`; create visible nodes with `textContent`, `createElement`, `replaceChildren`, or other DOM APIs.
 - A project-local `acceptance_checker` agent definition is available under `.codex/agents/acceptance_checker.toml`. Before you report success, explicitly call the collaboration tool **`spawn_agent`** with `task_name=acceptance_checker` and wait for that child thread to finish (the display role is acceptance-checker; the underscore is required by the CLI agent-name contract). Do not call `wait` without first spawning the child, and do not treat your own check as a substitute. The subagent must inspect card-web, run `python "{self.project_root / 'scripts' / 'core_acceptance_cli.py'}" --workspace "{workspace}" --case-id {case_id}`, and report every failed selector or expected-result mismatch back to you. Repair the files and ask the same subagent to rerun when it fails. If spawning is unavailable, record that fact as a failed acceptance attempt; do not claim that a subagent test happened.
 
 WRITE PERMISSION (HARD BOUNDARY)
 - You may create or modify files only below {workspace / 'card'}, {workspace / 'card-web'}, and {workspace / 'testdata' / case_id}.
 - Do not edit the repository, backend, frontend, evaluation_sets, acceptance.json, inputs.json, or pinned fixture bytes. Do not create files outside those three allowed roots.
+- This is a controlled child run. Do not invoke or apply any repository workflow skill that creates orchestration state. In particular, never create or edit `work/`, `WORKFLOW_STATE.json`, `WORKFLOW_STATE.md`, or any other workflow/status file; those are outside the allowed roots even if a skill or tool suggests them.
 - The acceptance script and publication decision are trusted harness code. You cannot mark a demo published and you cannot replace an acceptance result with a self-report.
 - Build a runnable static card under card-web/index.html, card-web/styles.css, and card-web/app.js. Use relative local paths to the supplied testdata. Keep card/ for a readable card specification if useful.
+- When a previous iteration has a functionally passing browser path, preserve that behavior while fixing static safety checks. After each safety change, rerun the full authored acceptance path; never replace a working embedded fixture with a runtime `fetch` just to move data out of HTML.
 
 ITERATION RULE
 - Inspect the existing card-web from the previous iteration and repair it in place; preserve working behavior.
@@ -148,13 +184,15 @@ Previous authoritative failures to repair:
 
     def _acceptance_child_prompt(self, *, workspace: Path, case_id: str) -> str:
         script = self.project_root / "scripts" / "core_acceptance_cli.py"
+        acceptance_python = self.project_root / "backend" / ".venv" / "Scripts" / "python.exe"
         return f"""You are the read-only acceptance_checker child inside DemoPilot's Core Builder loop.
 
 Do not edit, create, delete, or rename any file. Do not publish anything and do not use a self-reported result.
 Inspect the current card-web files and the authored contract under testdata/{case_id}. You MUST execute this exact
-command with the command tool before answering:
+command with the command tool before answering. Use the project virtualenv with site-package discovery disabled so a
+user-level Python installation cannot break the acceptance probe:
 
-python "{script}" --workspace "{workspace}" --case-id "{case_id}"
+"{acceptance_python}" -S "{script}" --workspace "{workspace}" --case-id "{case_id}"
 
 Return a short JSON object containing status, the command exit result, unresolved selectors, and repair advice. If the
 command fails or cannot be run, return status=failed. The parent harness will verify the command_execution event and
@@ -171,10 +209,22 @@ exit code from your JSONL transcript, so a narrative claim cannot substitute for
         run.current_agent = "core-builder"
         run.progress = max(run.progress, 10)
         run.outputs["core_pipeline"] = {
-            "stages": ["intent_acquisition", "core_builder_loop", "frontend_display"],
+            "stages": [
+                "intent_acquisition",
+                "core_builder_loop",
+                "pre_publish_acceptance",
+                "post_publish_functional_audit",
+                "frontend_display",
+            ],
             "harness": self.harness.name,
+            "evaluation_dataset": request.evaluation_dataset,
+            "prompt_profile": request.evaluation_prompt_profile,
+            "intent_profile": request.evaluation_intent_profile,
             "independent_reviewer": False,
-            "publication_rule": "publish only after deterministic Chromium acceptance passes",
+            "publication_rule": (
+                "stage the candidate after Builder acceptance; publish only after a "
+                "fresh post-publish functional audit also passes"
+            ),
         }
         run.outputs.setdefault("core_builder", {"adapter": self.harness.name, "iterations": []})
         run.checkpoint = "core:intent_acquired"
@@ -186,7 +236,9 @@ exit code from your JSONL transcript, so a narrative claim cannot substitute for
         testdata = core_root / "testdata" / case_id
         card.mkdir(parents=True, exist_ok=True)
         card_web.mkdir(parents=True, exist_ok=True)
-        protected, testdata_rel = _copy_testdata(self.project_root, core_root, case_id)
+        protected, testdata_rel = _copy_testdata(
+            self.project_root, core_root, case_id, request.evaluation_dataset
+        )
         baseline_acceptance_hash = protected["acceptance.json"]
         allowed_roots = [card, card_web, testdata]
         # A project-local agent definition makes the requested acceptance
@@ -201,7 +253,7 @@ sandbox_mode = "read-only"
 model_reasoning_effort = "low"
 developer_instructions = '''
 You are the acceptance_checker child. Do not edit any files. Inspect the current card-web files and run:
-python "{self.project_root / 'scripts' / 'core_acceptance_cli.py'}" --workspace "{core_root}" --case-id "{case_id}"
+"{self.project_root / 'backend' / '.venv' / 'Scripts' / 'python.exe'}" -S "{self.project_root / 'scripts' / 'core_acceptance_cli.py'}" --workspace "{core_root}" --case-id "{case_id}"
 Return the command result, every failed selector or expected-result mismatch, and the exact repair advice to the parent.
 '''
 """,
@@ -222,6 +274,8 @@ Return the command result, every failed selector or expected-result mismatch, an
             "relative_root": str(core_root.relative_to(self.store.run_dir(run.id))),
             "allowed_roots": [str(path.relative_to(core_root).as_posix()) for path in allowed_roots],
             "testdata_path": testdata_rel,
+            "evaluation_dataset": request.evaluation_dataset,
+            "prompt_profile": request.evaluation_prompt_profile,
             "acceptance_agent": str(acceptance_agent_file.relative_to(core_root).as_posix()),
             "acceptance_agent_sha256": acceptance_agent_hash,
             "protected_core_sha256": protected_core_hash,
@@ -416,8 +470,50 @@ Return the command result, every failed selector or expected-result mismatch, an
             self._sync_evidence_artifacts(run)
             self.store.save(run)
             if acceptance["status"] == "passed":
-                self._publish(run, core_root, protected_core_hash, iteration, acceptance)
-                return
+                post_publish_audit = await self._run_post_publish_audit(
+                    run=run,
+                    core_root=core_root,
+                    case_id=case_id,
+                    protected_hashes=protected,
+                    iteration=iteration,
+                    pre_publish_acceptance=acceptance,
+                )
+                run.outputs["post_publish_audit"] = post_publish_audit
+                run.outputs[f"post_publish_audit_iteration_{iteration}"] = post_publish_audit
+                run.outputs["core_builder"]["iterations"][-1]["post_publish_audit"] = post_publish_audit
+                self._sync_evidence_artifacts(run)
+                self.store.save(run)
+                if post_publish_audit["status"] == "passed":
+                    self._publish(
+                        run,
+                        core_root,
+                        protected_core_hash,
+                        iteration,
+                        acceptance,
+                        post_publish_audit,
+                    )
+                    return
+                run.publication_status = "hidden"
+                run.quality_gate = "pending"
+                run.checkpoint = f"core:post_publish_audit_failed:iteration:{iteration}"
+                feedback = [
+                    "post-publish functional audit failed: "
+                    + str(item)
+                    for item in post_publish_audit.get("issues", [])
+                ] or ["post-publish functional audit produced no passing evidence"]
+                if iteration < self.max_revision_rounds:
+                    _emit(
+                        self.store,
+                        run,
+                        "core-builder",
+                        CORE_AGENT_ROLE,
+                        AgentStatus.FAILED,
+                        "发布后功能复核未通过，候选已撤回并进入返工",
+                        iteration,
+                        event_type="gate",
+                        payload={"feedback": feedback[:8], "stage": "post_publish_functional_audit"},
+                    )
+                continue
             feedback = [str(item) for item in acceptance.get("issues", [])]
             if not feedback:
                 feedback = ["No acceptance evidence was produced; inspect the card-web files and rerun the contract."]
@@ -439,7 +535,114 @@ Return the command result, every failed selector or expected-result mismatch, an
         if event_type in {"process.started", "thread.started", "process.exited", "process.timeout"} or "collab" in event_type or "spawn" in event_type:
             _emit(self.store, run, "core-builder", CORE_AGENT_ROLE, AgentStatus.RUNNING, f"Codex CLI: {event_type}", iteration, payload={key: value for key, value in event.items() if key != "text"})
 
-    def _publish(self, run: DemoRun, core_root: Path, protected_core_hash: dict[str, str], iteration: int, acceptance: dict[str, Any]) -> None:
+    async def _run_post_publish_audit(
+        self,
+        *,
+        run: DemoRun,
+        core_root: Path,
+        case_id: str,
+        protected_hashes: dict[str, str],
+        iteration: int,
+        pre_publish_acceptance: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Audit a staged candidate with a fresh browser context before release.
+
+        The candidate is copied out of the Builder workspace so the audit reads
+        the exact files that would be released.  It remains inaccessible from
+        the public artifact route while ``publication_status`` is ``candidate``.
+        A failure returns to the Core Builder loop with the candidate hidden.
+        """
+
+        run_dir = self.store.run_dir(run.id)
+        candidate_root = run_dir / "artifacts" / "candidate-workspace" / f"iteration-{iteration}"
+        if candidate_root.exists():
+            shutil.rmtree(candidate_root)
+        candidate_root.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(core_root / "card-web", candidate_root / "card-web")
+        shutil.copytree(
+            core_root / "testdata" / case_id,
+            candidate_root / "testdata" / case_id,
+        )
+
+        evidence_dir = (
+            run_dir
+            / "artifacts"
+            / "evidence"
+            / "core"
+            / f"iteration-{iteration}"
+            / "post-publish-audit"
+        )
+        evidence_path = evidence_dir / "browser-evidence.png"
+        run.publication_status = "candidate"
+        run.quality_gate = "pending"
+        run.current_agent = "post-publish-audit"
+        run.checkpoint = f"core:post_publish_audit:iteration:{iteration}"
+        _emit(
+            self.store,
+            run,
+            "post-publish-audit",
+            "发布后功能验收",
+            AgentStatus.RUNNING,
+            "候选产物已隔离，开始用全新浏览器上下文执行发布后功能复核",
+            iteration,
+            event_type="gate",
+            payload={"stage": "post_publish_functional_audit", "candidate_hidden": True},
+        )
+        try:
+            audit = await __import__("asyncio").to_thread(
+                run_acceptance,
+                candidate_root,
+                case_id,
+                evidence_path,
+                protected_hashes,
+                set(),
+            )
+        except Exception as exc:  # pragma: no cover - defensive boundary
+            audit = {
+                "status": "failed",
+                "case_id": case_id,
+                "checks": [],
+                "issues": [f"post-publish audit crashed: {str(exc)[:240]}"],
+                "console_errors": [],
+                "changed_paths": [],
+                "source_sha256": {},
+                "acceptance_sha256": None,
+                "evidence": None,
+            }
+        audit.update(
+            {
+                "stage": "post_publish_functional_audit",
+                "candidate_root": str(candidate_root.relative_to(run_dir).as_posix()),
+                "pre_publish_acceptance_status": pre_publish_acceptance.get("status"),
+                "fresh_browser_context": True,
+                "agent_self_report_used": False,
+            }
+        )
+        audit_path = evidence_dir / "post-publish-audit.json"
+        audit_path.parent.mkdir(parents=True, exist_ok=True)
+        audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        _emit(
+            self.store,
+            run,
+            "post-publish-audit",
+            "发布后功能验收",
+            AgentStatus.COMPLETED if audit["status"] == "passed" else AgentStatus.FAILED,
+            "发布后功能复核通过" if audit["status"] == "passed" else "发布后功能复核发现缺陷，候选保持隐藏",
+            iteration,
+            event_type="gate",
+            payload={"stage": "post_publish_functional_audit", "status": audit["status"]},
+        )
+        return audit
+
+    def _publish(
+        self,
+        run: DemoRun,
+        core_root: Path,
+        protected_core_hash: dict[str, str],
+        iteration: int,
+        acceptance: dict[str, Any],
+        post_publish_audit: dict[str, Any],
+    ) -> None:
         run_dir = self.store.run_dir(run.id)
         demo_root = run_dir / "artifacts" / "demo"
         demo_root.mkdir(parents=True, exist_ok=True)
@@ -451,9 +654,12 @@ Return the command result, every failed selector or expected-result mismatch, an
             "case_id": run.request.evaluation_case_id,
             "iteration": iteration,
             "acceptance_status": acceptance["status"],
+            "post_publish_audit_status": post_publish_audit["status"],
             "tested_source_sha256": acceptance.get("source_sha256", {}),
+            "post_publish_source_sha256": post_publish_audit.get("source_sha256", {}),
             "protected_core_sha256": protected_core_hash,
             "harness": self.harness.name,
+            "independent_functional_audit": True,
             "reviewer": "not_used_in_core_loop",
         }
         publication_path = run_dir / "artifacts" / "evidence" / "core" / "publication.json"

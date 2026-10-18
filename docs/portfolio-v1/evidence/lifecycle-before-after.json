@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-16",
+  "scope": "Codex subprocess completion, output drain, timeout and cancellation",
+  "before": {
+    "source": "backend/src/demopilot/providers/codex_cli.py before this task's patch",
+    "reproduction": "backend/tests/test_codex_cli_lifecycle.py::test_deadline_also_bounds_output_drain_after_wrapper_exits",
+    "observed": "The process wait finished, but stream gather had no deadline. The outer 5-second guard cancelled the scenario and pytest failed.",
+    "historical_symptom": "Historical runs also retained concurrent stream-read errors from cleanup calling communicate while stream readers existed.",
+    "result": "failed"
+  },
+  "action": {
+    "changes": [
+      "One deadline now covers stdin, process completion and stdout/stderr EOF.",
+      "Cleanup no longer calls communicate against active stream readers.",
+      "Process-tree termination and bounded final drain apply to timeout and cancellation.",
+      "Intent experiment stdout/stderr are saved incrementally, including interrupted calls."
+    ]
+  },
+  "after": {
+    "lifecycle_regressions": "3 passed, including real timeout and cancellation child processes",
+    "combined_targeted_validation": "30 passed; evidence/targeted-validation.txt",
+    "terminal_resume_validation": "1 passed; evidence/terminal-resume-validation.txt",
+    "real_cli_smoke": "passed; evidence/cli-smoke/result.json",
+    "live_api_metrics": "A new generated task published; metrics endpoint returned its two retained Core sessions and zero revisions.",
+    "boundary": "This demonstrates lifecycle handling and observed local runs; it does not remove external transport outages or establish production SLA."
+  }
+}

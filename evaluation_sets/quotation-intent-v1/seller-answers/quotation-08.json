@@ -1,0 +1,43 @@
+{
+  "case_id": "quotation-08",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "tax_rate",
+      "question_aliases": [
+        "税率",
+        "比例",
+        "百分",
+        "多少",
+        "tax rate"
+      ],
+      "text": "本题只有一项10%的演示税，没有优惠。"
+    },
+    {
+      "topic": "tax_basis",
+      "question_aliases": [
+        "含税",
+        "未税",
+        "税前",
+        "税后",
+        "税额",
+        "拆",
+        "计算",
+        "口径",
+        "inclusive",
+        "basis"
+      ],
+      "text": "目录单价均为含税价。未税金额为含税金额除以1.10，税额为两者差，最终应付保持原含税金额，不能重复加税。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

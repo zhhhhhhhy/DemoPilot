@@ -1,0 +1,112 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "quotation-03",
+  "intent": "Implement the supplied sales request using the supplied catalogue.",
+  "goal": "A usable local quotation demo with stable observable controls.",
+  "expected_result": [
+    "All documented controls are operable",
+    "CNY total changes with quantity",
+    "Invalid first quantity is rejected",
+    "No production connection"
+  ],
+  "controls": {
+    "#product": "native select; option values A, B, C",
+    "#quantity": "number input; first paid quantity, integer >=1",
+    "#second-product": "native select; option values A, B, C",
+    "#second-quantity": "number input; second paid quantity, integer >=0",
+    "#customer": "native select; option values standard, vip, partner",
+    "#quote-date": "date input; YYYY-MM-DD",
+    "#calculate": "button; recalculate without accumulating prior calculations",
+    "#subtotal": "visible original catalogue amount before price adjustments; for tax-inclusive prices show the extracted original net amount; only one monetary number",
+    "#discount": "visible total monetary price adjustment, including negotiated-rate difference and discounts; only one monetary number",
+    "#tax": "visible tax amount; only one monetary number",
+    "#total": "visible final payable amount; include CNY and only one monetary number",
+    "#free-quantity": "visible number of additional free units; one integer, zero when none",
+    "#rule": "visible explanation of selected pricing behavior",
+    "#validation": "empty after valid calculation; show a visible error mentioning 数量 for invalid quantity, preserve the last valid quote outputs and clear error after recovery"
+  },
+  "tests": [
+    {
+      "id": "operable-quotation",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#product",
+          "value": "A"
+        },
+        {
+          "action": "fill",
+          "selector": "#quantity",
+          "value": "1"
+        },
+        {
+          "action": "fill",
+          "selector": "#second-quantity",
+          "value": "0"
+        },
+        {
+          "action": "select",
+          "selector": "#customer",
+          "value": "standard"
+        },
+        {
+          "action": "fill",
+          "selector": "#quote-date",
+          "value": "2026-03-15"
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "CNY"
+              ]
+            }
+          }
+        },
+        {
+          "action": "fill",
+          "selector": "#quantity",
+          "value": "2"
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#total": {
+              "contains": [
+                "CNY"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "invalid-quantity",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#quantity",
+          "value": "0"
+        },
+        {
+          "action": "click",
+          "selector": "#calculate",
+          "value": "",
+          "assertions": {
+            "#validation": {
+              "contains": [
+                "数量"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scope_note": "Engineering publication gate only. Customer-specific pricing correctness is scored offline after terminal publication and never returned as repair feedback."
+}

@@ -1,0 +1,15 @@
+# Inspect or reproduce the full-information control evidence
+
+Objective: finish the authorized added C arm and state whether the measured benefit comes from acquiring missing information or from the intent-processing method; update truthful resume claims.
+
+Root: D:/worker/DemoPilot. Canonical state: docs/quotation-information-ablation-v1/WORKFLOW_STATE.json, transaction TX-863c8a9846cc. Python: backend/.venv/Scripts/python.exe. Generation session17973 and audit session35553 both finished with exit0. All ten C cases completed; all112 functional journeys passed, but strict score9/10overall and5/6primary remains because of C06's frozen read-guard false positive. Final reports and resume wording are saved; no model run should be restarted merely to inspect them.
+
+Original A/B: evaluation_sets/quotation-intent-v1/results/development-v2-20261016 and heldout-20261016. Primary original scores remain A1/6, B5/6. B08 contains one action timeout; its unchanged-source diagnostic passed, but original score is not replaced. Original A10 has a long unexplained wall-clock interval; no speed claim.
+
+New C: evaluation_sets/quotation-intent-v1/results/full-rules-20261016, ten cases, four development and six primary. C receives all verbatim original seller rules in evaluation_intent, every other input field identical to A. Same frozen Core, modelgpt-6.1-sol, medium, call limit300s, two repair rounds, two cases in parallel. No intent calls, typed-goal generation, hidden expected vectors or postscore repair. Five underspecified primary cases have exactly the same seller-fact texts as B; seventh case's original brief already contains the business policy.
+
+Never edit any frozen original source/data, new adapter/report scripts, original scores or generated pages during this run. Read current result/progress/run files before resuming; never duplicate a nonterminal run. Input/code snapshots and historical hashes in context.json must match.
+
+The original audit ran once and refuses overwrite. To recompute counts only, run scripts/report_quotation_three_arms.py --full-rules-dir evaluation_sets/quotation-intent-v1/results/full-rules-20261016. This regenerates the baseline count presentation; manually reviewed measurement explanations remain independently recorded in measurement-notes.json/.md and should be retained in any user-facing report. Do not alter5/6 into6/6, feed score failures back to Core or overwrite archived outputs.
+
+Reconcile original hashes, new complete denominator, zero intent calls, ordinary mounted data and source immutability. Update resume/interview/current report links from observed three-arm results, append IT016 result, check owned process cleanup, verify all acceptance and report gate. Explain in plain Chinese: contribution is question-driven acquisition and reliable delivery of missing business facts plus independent verification; claim an additional intent-processing benefit only if supported. Later C is retrospective, not concurrent randomized or fresh unseen evaluation. Do not infer real-sales productivity or billed cost.

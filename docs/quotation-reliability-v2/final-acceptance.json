@@ -1,0 +1,250 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "explicit_grouped_100_combinations",
+      "passed": true,
+      "detail": {
+        "application_groups": 10,
+        "combinations": 100,
+        "independent_primary_groups": 7
+      }
+    },
+    {
+      "name": "source_backed_authored_rules",
+      "passed": true,
+      "detail": {
+        "public_sources": 11,
+        "real_customer_claim": false
+      }
+    },
+    {
+      "name": "all_frozen_data_unchanged",
+      "passed": true,
+      "detail": {
+        "files": 73,
+        "drift": []
+      }
+    },
+    {
+      "name": "explicit_independent_public_and_final_plans",
+      "passed": true,
+      "detail": {
+        "plan_pairs": 20,
+        "drift": [],
+        "identical_vectors": []
+      }
+    },
+    {
+      "name": "original_runtime_preserved",
+      "passed": true,
+      "detail": {
+        "files": 18,
+        "drift": []
+      }
+    },
+    {
+      "name": "original_business_inputs_preserved",
+      "passed": true,
+      "detail": {
+        "files": 41,
+        "drift": []
+      }
+    },
+    {
+      "name": "interrupted_original_score_not_replaced",
+      "passed": true,
+      "detail": {
+        "independent_audit_sha256": "5c1e76c0712ba3e4eba3e8188dcec92b9858fb55d3ebddc4fe0ab3643d3b066d",
+        "context_sha256": "27f3bca375d416895e0757c96ae2d0cb1db16ca43a643fc7817a53995ca558a4",
+        "functional_paths": 1820,
+        "functional_passed": 1820,
+        "strict_published_versions": 26,
+        "total_versions": 28,
+        "environment_interrupted": true,
+        "do_not_replace": true
+      }
+    },
+    {
+      "name": "development-v2-20261016_complete_original_audit",
+      "passed": true,
+      "detail": {
+        "terminal_versions": 12,
+        "expected": 12,
+        "final_browser_paths": 780,
+        "modified_candidates": [],
+        "snapshot_drift": []
+      }
+    },
+    {
+      "name": "development-v2-20261016_dialogue_retained",
+      "passed": true,
+      "detail": {
+        "outer_calls": 14,
+        "traces": 14
+      }
+    },
+    {
+      "name": "heldout-v3-20261017_complete_original_audit",
+      "passed": true,
+      "detail": {
+        "terminal_versions": 28,
+        "expected": 28,
+        "final_browser_paths": 1820,
+        "modified_candidates": [],
+        "snapshot_drift": []
+      }
+    },
+    {
+      "name": "heldout-v3-20261017_dialogue_retained",
+      "passed": true,
+      "detail": {
+        "outer_calls": 31,
+        "traces": 31
+      }
+    },
+    {
+      "name": "heldout-clean-v4-20261017_complete_original_audit",
+      "passed": true,
+      "detail": {
+        "terminal_versions": 28,
+        "expected": 28,
+        "final_browser_paths": 1820,
+        "modified_candidates": [],
+        "snapshot_drift": []
+      }
+    },
+    {
+      "name": "heldout-clean-v4-20261017_dialogue_retained",
+      "passed": true,
+      "detail": {
+        "outer_calls": 31,
+        "traces": 31
+      }
+    },
+    {
+      "name": "latest_runtime_matches_frozen_clean_cohort",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "delivery_uses_exact_independent_accepted_bytes",
+      "passed": true,
+      "detail": {
+        "created_at": "2026-10-17T04:06:10.495360+00:00",
+        "application_groups": 10,
+        "current_visible": 10,
+        "current_hidden": 0,
+        "imports": [
+          {
+            "source": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016",
+            "split": "development",
+            "accepted_versions": 6,
+            "context_sha256": "34a06fa938b1549e3e5a223cc255766b2b698030b561eba89861f22b8b71e105",
+            "audit_sha256": "904f31995173385b0640328be11eb144e6e19af3f11069624b6815ce1a120ce3",
+            "original_db_unchanged": true
+          },
+          {
+            "source": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-clean-v4-20261017",
+            "split": "heldout",
+            "accepted_versions": 14,
+            "context_sha256": "4d3df368f6de33c754677961a2b28f3b0b260b4dfea8d9a57f6a2707594f4be6",
+            "audit_sha256": "e9f14abf11a6b8881b04cef034db2fe0f88a14c039264f8797340ff6d216d34d",
+            "original_db_unchanged": true
+          }
+        ],
+        "excluded": [],
+        "private_audit_feedback_to_builder": false,
+        "manual_page_repairs": false,
+        "original_experiment_scores_changed": false,
+        "boundary": "Separate delivery copy. Only byte-identical releases accepted in original terminal independent scoring are exposed; any originally incorrect publication remains a failure in the immutable experiment."
+      }
+    },
+    {
+      "name": "exact_actual_goal_and_fixture_parity",
+      "passed": true,
+      "detail": {
+        "cohorts": [
+          "development-v2-20261016",
+          "heldout-v3-20261017",
+          "heldout-clean-v4-20261017"
+        ]
+      }
+    },
+    {
+      "name": "clean_replication_run_conditions_recorded",
+      "passed": true,
+      "detail": {
+        "recorded_large_heartbeat_gaps": [
+          [],
+          []
+        ],
+        "manual_sleep_prevented": false
+      }
+    },
+    {
+      "name": "actual_live_delivery_routes_and_browsers",
+      "passed": true,
+      "detail": {
+        "visible_projects": 10,
+        "actual_pinned_assets": 30
+      }
+    },
+    {
+      "name": "public_gate_controlled_fault_detection",
+      "passed": true,
+      "detail": {
+        "seeded_faults": 8,
+        "structural": 0,
+        "business": 8,
+        "boundary": "Controlled diagnostic, not natural model accuracy."
+      }
+    },
+    {
+      "name": "actual_cli_internal_repair_before_publication",
+      "passed": true,
+      "detail": {
+        "status": "passed",
+        "kind": "controlled_real_cli_repair_integration_not_generation_accuracy",
+        "actual_cli_calls": 3,
+        "configured_cap": 3,
+        "timeout_seconds": 300,
+        "error_origin": "Deliberate test-driver corruption after a real CLI return; no natural model failure claim.",
+        "initial_candidate_hidden_before_repair": true,
+        "trusted_business_rejections": 1,
+        "final_publication": "published",
+        "independent_planned": 60,
+        "independent_passed": 60,
+        "benchmark_artifacts_modified": false,
+        "primary_scores_changed": false,
+        "source_fixture": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\terminal-v1",
+        "seed_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+        "terminal_sha256": "8e663247a0ec7b73d9487cf337b3e0f795015c1d47a61332a8b7953db3191118"
+      }
+    }
+  ],
+  "cohorts": [
+    {
+      "name": "development-v2-20261016",
+      "independent_audit_sha256": "904f31995173385b0640328be11eb144e6e19af3f11069624b6815ce1a120ce3",
+      "context_sha256": "34a06fa938b1549e3e5a223cc255766b2b698030b561eba89861f22b8b71e105",
+      "executed_journeys": 780
+    },
+    {
+      "name": "heldout-v3-20261017",
+      "independent_audit_sha256": "5c1e76c0712ba3e4eba3e8188dcec92b9858fb55d3ebddc4fe0ab3643d3b066d",
+      "context_sha256": "27f3bca375d416895e0757c96ae2d0cb1db16ca43a643fc7817a53995ca558a4",
+      "executed_journeys": 1820
+    },
+    {
+      "name": "heldout-clean-v4-20261017",
+      "independent_audit_sha256": "e9f14abf11a6b8881b04cef034db2fe0f88a14c039264f8797340ff6d216d34d",
+      "context_sha256": "4d3df368f6de33c754677961a2b28f3b0b260b4dfea8d9a57f6a2707594f4be6",
+      "executed_journeys": 1820
+    }
+  ],
+  "synthetic_combinations": 100,
+  "workflow_groups": 10,
+  "original_customer_datasets": 0,
+  "boundary": "Observed declared contracts only. Interrupted original cohort and reused clean replication remain separately scored. No claim of arbitrary business correctness, production scale or intent-processing accuracy gain."
+}

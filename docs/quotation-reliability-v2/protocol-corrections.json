@@ -1,0 +1,16 @@
+{
+  "stage": "development-only-before-formal-freeze",
+  "corrections": [
+    "Parent owns workflow ledger; CLI worker returns execution result instead of duplicating orchestration.",
+    "Formal cap300 seconds for both arms; prototype180 seconds retained separately.",
+    "Explicit subtotal semantics for customer-specific prices.",
+    "Model reload reference resets record and identity as specified.",
+    "Add per-policy boundaries to cover partner-only rates and invalid promotion dates.",
+    "Require freight only in new-feature scoring so old-function regressions remain distinct.",
+    "One concurrent CLI job due local free RAM observed below500MB.",
+    "Disable plugins and configured external MCP servers only in each CLI process; preserve desktop config. Official reference https://developers.openai.com/codex/config-reference/ plus installed features list confirms names.",
+    "Single coherent visible DOM snapshot instead of sequential reads; genuine browser actions retained.",
+    "Reproduced HTML/JS cross-revision bundle race; immutable accepted URLs pin all assets to one tested revision."
+  ],
+  "historical_prototype_manifest_sha256": "484a98f91bbea29b5f1804e7ca96b3232d647c63a6a409864f3319621f5dbe35"
+}

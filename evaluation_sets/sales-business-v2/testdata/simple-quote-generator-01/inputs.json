@@ -1,0 +1,22 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "simple-quote-generator-01",
+  "industry": "B2B 销售",
+  "audience": "售前顾问",
+  "scenario": "售前顾问选择一个套餐和席位数，希望看到即时的演示报价。",
+  "fixtures": {
+    "prices_per_seat": {
+      "基础": 100,
+      "专业": 200
+    },
+    "discount": 0,
+    "formula": "price_per_seat * seats",
+    "boundary": "演示估算"
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/simple-quote-generator-01/acceptance.json",
+    "inputs": "testdata/simple-quote-generator-01/inputs.json",
+    "asset_root": "testdata/simple-quote-generator-01/assets"
+  }
+}

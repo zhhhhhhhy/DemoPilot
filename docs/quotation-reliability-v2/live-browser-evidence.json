@@ -1,0 +1,15 @@
+{
+  "visible_browser": "Codex in-app browser; actual CUA fill/select/click and AX reread observed1250.00, PendingFinance before customer denial, Approved after finance approval.",
+  "screenshot_channel": "Separate local headless Chromium reproduction of the same immutable served artifact for a downloadable image.",
+  "url": "http://127.0.0.1:5188/accepted/qflow-03/2/ec773a321bc318c6a50f02189b45afb5bd42216e78592d883e8566ec9a329436/index.html",
+  "observed": {
+    "total": "1250.00",
+    "state": "Approved",
+    "history-count": "4",
+    "revision": "1",
+    "approved-revision": "1"
+  },
+  "image": "D:\\worker\\DemoPilot\\docs\\quotation-reliability-v2\\assets\\verified-quote.png",
+  "scope": "Development application only, supplementary delivery/UI proof; not a replacement or extra success in primary score.",
+  "original_score_unchanged": true
+}

@@ -106,6 +106,8 @@ async def _terminate_process_tree(process: asyncio.subprocess.Process) -> None:
     bounded wait keeps a stuck child from wedging the DemoPilot run forever.
     """
 
+    if process.stdin is not None:
+        process.stdin.close()
     if os.name == "nt":
         try:
             await asyncio.to_thread(
@@ -126,11 +128,9 @@ async def _terminate_process_tree(process: asyncio.subprocess.Process) -> None:
         await asyncio.wait_for(process.wait(), timeout=5)
     except (TimeoutError, ProcessLookupError):
         pass
-    try:
-        await asyncio.wait_for(process.communicate(), timeout=2)
-    except (BrokenPipeError, ConnectionResetError, ProcessLookupError, TimeoutError):
-        if process.stdin is not None:
-            process.stdin.close()
+    # Output pipes have a single owner: the streaming readers. Calling
+    # communicate() here races those readers and can replace a useful timeout
+    # with "read() called while another coroutine is already waiting".
 
 
 @dataclass(slots=True)
@@ -321,8 +321,6 @@ class CodexCliAgentProvider:
                 mode=mode,
             )
         except TimeoutError as exc:
-            if process is not None:
-                await _terminate_process_tree(process)
             if on_event:
                 on_event({"type": "process.timeout", "mode": mode})
             raise WorkspaceProcessTimeout(
@@ -331,8 +329,6 @@ class CodexCliAgentProvider:
                 stderr_path=transcript_dir / "stderr.log",
             ) from exc
         except asyncio.CancelledError:
-            if process is not None:
-                await _terminate_process_tree(process)
             if on_event:
                 on_event({"type": "process.cancelled", "mode": mode})
             raise
@@ -447,24 +443,27 @@ class CodexCliAgentProvider:
             if is_stdout and pending:
                 self._emit_jsonl_event(bytes(pending), on_event, started, len(buffer))
 
-        if process.stdin is not None:
-            process.stdin.write(prompt)
-            await process.stdin.drain()
-            process.stdin.close()
         stdout_task = asyncio.create_task(read_stream(process.stdout, is_stdout=True))
         stderr_task = asyncio.create_task(read_stream(process.stderr, is_stdout=False))
+        completion = asyncio.gather(process.wait(), stdout_task, stderr_task)
         try:
-            await asyncio.wait_for(process.wait(), timeout=self.timeout_seconds)
-            await asyncio.gather(stdout_task, stderr_task)
-        except TimeoutError:
+            # The deadline includes output EOF: an exited Windows wrapper
+            # can leave descendants holding its inherited pipes open.
+            async with asyncio.timeout(self.timeout_seconds):
+                if process.stdin is not None:
+                    process.stdin.write(prompt)
+                    await process.stdin.drain()
+                    process.stdin.close()
+                await asyncio.shield(completion)
+        except BaseException as exc:
             await _terminate_process_tree(process)
-            await asyncio.gather(stdout_task, stderr_task, return_exceptions=True)
-            on_event({"type": "process.timeout", "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
-            raise
-        except BaseException:
-            stdout_task.cancel()
-            stderr_task.cancel()
-            await asyncio.gather(stdout_task, stderr_task, return_exceptions=True)
+            try:
+                await asyncio.wait_for(asyncio.shield(completion), timeout=2)
+            except BaseException:
+                completion.cancel()
+                await asyncio.gather(completion, return_exceptions=True)
+            event_type = "process.timeout" if isinstance(exc, TimeoutError) else "process.cancelled" if isinstance(exc, asyncio.CancelledError) else "process.failed"
+            on_event({"type": event_type, "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
             raise
         on_event({"type": "process.exited", "returncode": process.returncode, "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
         return bytes(stdout_buffer), bytes(stderr_buffer)
@@ -655,8 +654,10 @@ class CodexCliAgentProvider:
         stderr_task = asyncio.create_task(read_stream(process.stderr, is_stdout=False))
         heartbeat_task = asyncio.create_task(heartbeat())
         try:
-            await asyncio.wait_for(process.wait(), timeout=self.timeout_seconds)
-            stdout, stderr = await asyncio.gather(stdout_task, stderr_task)
+            _, stdout, stderr = await asyncio.wait_for(
+                asyncio.gather(process.wait(), stdout_task, stderr_task),
+                timeout=self.timeout_seconds,
+            )
         except BaseException:
             for task in (stdout_task, stderr_task, heartbeat_task):
                 task.cancel()

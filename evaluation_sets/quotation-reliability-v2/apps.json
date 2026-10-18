@@ -1,0 +1,128 @@
+{
+  "apps": [
+    {
+      "id": "qflow-01",
+      "workflow": "single_manager",
+      "title": "单级审批",
+      "split": "development",
+      "testdata_path": "testdata/qflow-01",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-02",
+      "workflow": "two_stage",
+      "title": "经理及财务两级审批",
+      "split": "development",
+      "testdata_path": "testdata/qflow-02",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-03",
+      "workflow": "threshold",
+      "title": "按报价金额分流审批",
+      "split": "development",
+      "testdata_path": "testdata/qflow-03",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-04",
+      "workflow": "dual_manager",
+      "title": "两个不同经理会签",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-04",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-05",
+      "workflow": "rejection_reason",
+      "title": "驳回原因及修改重提",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-05",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258"
+      ]
+    },
+    {
+      "id": "qflow-06",
+      "workflow": "cancel_amend",
+      "title": "取消后修订重提",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-06",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642"
+      ]
+    },
+    {
+      "id": "qflow-07",
+      "workflow": "customer_owner",
+      "title": "指定客户确认及越权拦截",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-07",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297"
+      ]
+    },
+    {
+      "id": "qflow-08",
+      "workflow": "expiry",
+      "title": "有效期内客户确认",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-08",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-09",
+      "workflow": "record_persistence",
+      "title": "多报价隔离及刷新恢复",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-09",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions"
+      ]
+    },
+    {
+      "id": "qflow-10",
+      "workflow": "manual_override",
+      "title": "手工价格与定价规则协同",
+      "split": "heldout",
+      "testdata_path": "testdata/qflow-10",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787"
+      ]
+    }
+  ]
+}

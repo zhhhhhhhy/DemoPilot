@@ -1,0 +1,7 @@
+{
+  "scope": "Observed returned CLI command events only; not an OS read-isolation proof. Active primary is partial.",
+  "commands_checked": 219,
+  "completed_calls": 19,
+  "flags_requiring_review": [],
+  "private_score_feedback": false
+}

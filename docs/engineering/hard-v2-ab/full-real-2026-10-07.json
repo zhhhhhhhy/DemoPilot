@@ -1,0 +1,49 @@
+{
+  "schema_version": "demopilot-hard-v2-full-real",
+  "transaction_id": "hard-v2-completion-2026-10-07",
+  "created_at": "2026-10-07T15:23:29Z",
+  "dataset": "codex-cli-v2-hard",
+  "case_count": 8,
+  "terminal_results": {
+    "published": 8,
+    "hidden": 0,
+    "quality_gate_passed": 8,
+    "chromium_passed": 8,
+    "post_publish_audit_passed": 8,
+    "fresh_browser_context_passed": 8
+  },
+  "aggregate": {
+    "published_rate": "8/8",
+    "total_agent_calls": 34,
+    "total_revision_rounds": 9,
+    "cases_with_revision": 6,
+    "cases_without_revision": 2,
+    "terminal_infrastructure_failures": 0,
+    "terminal_measurement_failures": 0,
+    "terminal_builder_failures": 0,
+    "terminal_release_failures": 0,
+    "intermediate_cli_timeout_events": 12,
+    "intermediate_acceptance_evidence_failures": 14,
+    "intermediate_chromium_failures": 7
+  },
+  "cases": [
+    {"case_id": "hard-invoice-reconciliation-01", "run_id": "d7e4e51c5724", "publication_status": "published", "agent_calls": 4, "revision_count": 1, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-access-review-01", "run_id": "d63cc2cfeb5e", "publication_status": "published", "agent_calls": 2, "revision_count": 0, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-refund-dispute-01", "run_id": "bec5afcf2e0e", "publication_status": "published", "agent_calls": 2, "revision_count": 0, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-release-gate-01", "run_id": "90e8e08b091e", "publication_status": "published", "agent_calls": 6, "revision_count": 2, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-data-pipeline-recovery-01", "run_id": "231e7b839f74", "publication_status": "published", "agent_calls": 4, "revision_count": 1, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-employee-onboarding-01", "run_id": "cdb56bec1a60", "publication_status": "published", "agent_calls": 6, "revision_count": 2, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-product-recall-01", "run_id": "3cd160e6104d", "publication_status": "published", "agent_calls": 4, "revision_count": 1, "browser_status": "passed", "post_publish_audit_status": "passed"},
+    {"case_id": "hard-budget-control-01", "run_id": "d3bbbba9066a", "publication_status": "published", "agent_calls": 6, "revision_count": 2, "browser_status": "passed", "post_publish_audit_status": "passed"}
+  ],
+  "evidence_boundary": {
+    "what_this_proves": "All eight cases reached published only after the real Codex CLI Core loop, acceptance child evidence, Chromium contract checks, and fresh post-publish audit.",
+    "what_intermediate_failures_mean": "Timeouts, missing acceptance evidence, and browser failures were caught and repaired before publication; they are preserved in each run directory.",
+    "business_semantic_limitation": "The current generator uses structurally valid but largely generic fixtures and journeys. It does not yet prove realistic numeric thresholds, multi-role approvals, business-record aggregation, or cross-entity mutation isolation for each named scenario.",
+    "ab_boundary": "All eight cases used the treatment/current prompt. The control/treatment 20-case A/B remains unrun, so this is not a causal prompt comparison."
+  },
+  "run_files": [
+    "evaluation_sets/codex-cli-v2-hard/results/pilot-treatment-20261007.json",
+    "evaluation_sets/codex-cli-v2-hard/results/completion-remaining-6-20261007.json"
+  ]
+}

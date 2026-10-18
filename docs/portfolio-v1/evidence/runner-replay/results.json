@@ -1,0 +1,60 @@
+{
+  "rows": [
+    {
+      "case_id": "simple-quote-generator-01",
+      "run_id": "74f82dbc4215",
+      "status": "passed",
+      "checks": [
+        "Chromium acceptance passed: plan-0-seats-1",
+        "Chromium acceptance passed: plan-0-seats-3",
+        "Chromium acceptance passed: plan-0-seats-4",
+        "Chromium acceptance passed: plan-0-seats-7",
+        "Chromium acceptance passed: plan-1-seats-1",
+        "Chromium acceptance passed: plan-1-seats-3",
+        "Chromium acceptance passed: plan-1-seats-4",
+        "Chromium acceptance passed: plan-1-seats-7",
+        "Chromium acceptance passed: subtotal-discount"
+      ],
+      "issues": [],
+      "seconds": 34.62,
+      "original_card_unchanged": true
+    },
+    {
+      "case_id": "medium-lead-followup-01",
+      "run_id": "ee6a88df8c26",
+      "status": "passed",
+      "checks": [
+        "Chromium acceptance passed: lead-0-owner-0",
+        "Chromium acceptance passed: lead-0-owner-1",
+        "Chromium acceptance passed: lead-1-owner-0",
+        "Chromium acceptance passed: lead-1-owner-1"
+      ],
+      "issues": [],
+      "seconds": 38.558,
+      "original_card_unchanged": true
+    },
+    {
+      "case_id": "hard-procurement-approval-01",
+      "run_id": "b84668047c06",
+      "status": "passed",
+      "checks": [
+        "Chromium acceptance passed: entity-0-owner-0-main",
+        "Chromium acceptance passed: entity-0-owner-1-main",
+        "Chromium acceptance passed: entity-0-out-of-order",
+        "Chromium acceptance passed: entity-0-missing-reason",
+        "Chromium acceptance passed: entity-0-reject",
+        "Chromium acceptance passed: entity-1-owner-0-main",
+        "Chromium acceptance passed: entity-1-owner-1-main",
+        "Chromium acceptance passed: entity-1-out-of-order",
+        "Chromium acceptance passed: entity-1-missing-reason",
+        "Chromium acceptance passed: entity-1-reject",
+        "Chromium acceptance passed: three-suppliers-and-chosen-B"
+      ],
+      "issues": [],
+      "seconds": 34.267,
+      "original_card_unchanged": true
+    }
+  ],
+  "passed_journeys": 24,
+  "model_calls": 0
+}

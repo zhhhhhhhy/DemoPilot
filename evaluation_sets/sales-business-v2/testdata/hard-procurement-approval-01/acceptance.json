@@ -1,0 +1,1644 @@
+{
+  "schema_version": "core-acceptance-v2",
+  "case_id": "hard-procurement-approval-01",
+  "difficulty": "hard",
+  "intent": "构造包含比较、提交、审批分支和审计追踪的采购演示。",
+  "goal": "让供应商方案、采购申请、审批结果和时间线形成一致的状态机。；比较指定三家供应商的报价和交期，并可观察所选名称；覆盖全部申请与负责人，重置清除所有记录。",
+  "flow_steps": [
+    "需求已创建",
+    "已比较",
+    "方案已选",
+    "待审批",
+    "已批准",
+    "订单已下达",
+    "已验收"
+  ],
+  "expected_result": [
+    "只有选择方案并填写理由后可提交",
+    "批准和驳回产生不同可见状态",
+    "审计记录包含方案、结果和操作人",
+    "三家供应商与所选名称可见；全部申请/负责人、乱序、缺理由、拒绝、终态锁和重置均正确"
+  ],
+  "evaluation_method": [
+    "先比较并选择供应商再提交",
+    "分别验证批准和驳回分支",
+    "验证缺少理由时提交被阻断",
+    "检查时间线和重置后的初始状态"
+  ],
+  "controls": {
+    "#create-request": "button: execute the named business transition",
+    "#compare": "button: execute the named business transition",
+    "#choose": "button: execute the named business transition",
+    "#submit": "button: execute the named business transition",
+    "#approve": "button: execute the named business transition",
+    "#order": "button: execute the named business transition",
+    "#receive": "button: execute the named business transition",
+    "#entity": "select: P-01/P-02",
+    "#owner": "select: 林澄/周岚",
+    "#reason": "textarea",
+    "#status": "visible current entity, owner, state and reason",
+    "#timeline": "visible per-entity audit",
+    "#reject": "button: return request to start with reason",
+    "#illegal": "button: illegal rollback after terminal state",
+    "#reset": "button: reset all entities",
+    "#errors": "visible rejection reason",
+    "#supplier": "select: 供应商 A/供应商 B/供应商 C",
+    "#suppliers": "visible comparison table with one row per supplier"
+  },
+  "tests": [
+    {
+      "id": "entity-0-owner-0-main",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：采购演示理由",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "需求已创建"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已比较"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "方案已选"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "待审批"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已批准"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#order",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "订单已下达"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "林澄",
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-0-owner-1-main",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "周岚",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：采购演示理由",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "需求已创建"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "已比较"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "方案已选"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "待审批"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "已批准"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#order",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "订单已下达"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "周岚",
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-0-out-of-order",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "前置步骤未完成"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-0-missing-reason",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "需求已创建"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "理由"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-0-reject",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：预算需要复核",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#reject",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已退回",
+                "独立验收：预算需要复核"
+              ],
+              "excludes": [
+                "已批准"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "已退回",
+                "林澄",
+                "独立验收：预算需要复核"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-1-owner-0-main",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：采购演示理由",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "需求已创建"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "已比较"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "方案已选"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "待审批"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "已批准"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#order",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "订单已下达"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "林澄",
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "林澄"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-1-owner-1-main",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "周岚",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：采购演示理由",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "需求已创建"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "已比较"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "方案已选"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "待审批"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#approve",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "已批准"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#order",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "订单已下达"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-02",
+                "周岚",
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#timeline": {
+              "contains": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "周岚"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#illegal",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已验收"
+              ],
+              "excludes": []
+            },
+            "#errors": {
+              "contains": [
+                "不可回退"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "P-01",
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "click",
+          "selector": "#reset",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-01",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#timeline": {
+              "contains": [],
+              "excludes": [
+                "需求已创建",
+                "已比较",
+                "方案已选",
+                "待审批",
+                "已批准",
+                "订单已下达",
+                "已验收",
+                "独立验收：采购演示理由"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-1-out-of-order",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#receive",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "已验收"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "前置步骤未完成"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-1-missing-reason",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "待处理"
+              ],
+              "excludes": [
+                "需求已创建"
+              ]
+            },
+            "#errors": {
+              "contains": [
+                "理由"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "entity-1-reject",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#entity",
+          "value": "P-02",
+          "assertions": {}
+        },
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "周岚",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "独立验收：预算需要复核",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#submit",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#reject",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "已退回",
+                "独立验收：预算需要复核"
+              ],
+              "excludes": [
+                "已批准"
+              ]
+            },
+            "#timeline": {
+              "contains": [
+                "已退回",
+                "周岚",
+                "独立验收：预算需要复核"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "three-suppliers-and-chosen-B",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "#owner",
+          "value": "林澄",
+          "assertions": {}
+        },
+        {
+          "action": "fill",
+          "selector": "#reason",
+          "value": "比较供应商",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#create-request",
+          "value": "",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#compare",
+          "value": "",
+          "assertions": {
+            "#suppliers": {
+              "contains": [
+                "供应商 A",
+                "供应商 B",
+                "供应商 C",
+                "100",
+                "110",
+                "95"
+              ],
+              "excludes": []
+            }
+          }
+        },
+        {
+          "action": "select",
+          "selector": "#supplier",
+          "value": "供应商 B",
+          "assertions": {}
+        },
+        {
+          "action": "click",
+          "selector": "#choose",
+          "value": "",
+          "assertions": {
+            "#status": {
+              "contains": [
+                "方案已选",
+                "供应商 B"
+              ],
+              "excludes": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "policy": "All test assertions refer to visible UI. Reset page for each independent journey; missing evidence is a failure.",
+  "runner": {
+    "command": "python scripts/core_acceptance_cli.py --workspace <run-workspace> --case-id hard-procurement-approval-01",
+    "authoritative_runner": "DemoPilot Core Acceptance Runner",
+    "publish_only_after": "all tests passed and the latest source hash matches the tested source"
+  },
+  "coverage_revision": "sales-business-v2"
+}

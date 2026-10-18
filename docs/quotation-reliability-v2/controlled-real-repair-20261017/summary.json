@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "kind": "controlled_real_cli_repair_integration_not_generation_accuracy",
+  "actual_cli_calls": 3,
+  "configured_cap": 3,
+  "timeout_seconds": 300,
+  "error_origin": "Deliberate test-driver corruption after a real CLI return; no natural model failure claim.",
+  "initial_candidate_hidden_before_repair": true,
+  "trusted_business_rejections": 1,
+  "final_publication": "published",
+  "independent_planned": 60,
+  "independent_passed": 60,
+  "benchmark_artifacts_modified": false,
+  "primary_scores_changed": false,
+  "source_fixture": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\development-v2-20261016\\qflow-01\\reliable\\terminal-v1",
+  "seed_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+  "terminal_sha256": "8e663247a0ec7b73d9487cf337b3e0f795015c1d47a61332a8b7953db3191118"
+}

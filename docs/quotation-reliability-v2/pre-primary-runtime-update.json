@@ -1,0 +1,58 @@
+{
+  "applied": true,
+  "business_reference_ast_identical": true,
+  "original_development_audit_sha256": "904f31995173385b0640328be11eb144e6e19af3f11069624b6815ce1a120ce3",
+  "files": {
+    "backend/src/demopilot/quotation_api.py": {
+      "before": "09b80a64c072adf6c59ca946a0e16c771bc49d7e35546c209723047a5d21c518",
+      "after": "13f5398a3b8fae6b9d3d38677d4acc8d14982d7d8b5c8ea312cc34a13ccb5ecb"
+    },
+    "backend/src/demopilot/quotation_browser.py": {
+      "before": "3c14b7862514759f79b09c875c06de83b9000cef0e97e1b6032a2929ca456201",
+      "after": "c6325ada4550ab3294740cfb70d7f633cefa0526823e15a9cdc11df9523dd212"
+    },
+    "backend/src/demopilot/quotation_cli.py": {
+      "before": "cc1c28363c7cec72a540513f61052e02c52b040a98139e9640cf1f68b431e031",
+      "after": "524429ff8ea8556861f08ce5767aaccab21d9d3b4b2b2277b74a467356837a6c"
+    },
+    "backend/src/demopilot/quotation_contract.py": {
+      "before": "c39d007fee2e56c6e99f589958fc986975670811d9f15f4e4b64646dc038e9b8",
+      "after": "f7cb7a6fbf7a4bb8e7240e88b1f5f2325f7f4488152185be86bead37ea618022"
+    },
+    "backend/src/demopilot/quotation_loop.py": {
+      "before": "83beab09340a6345dd6b0decf9f0755b05fdab072163616232f6fe6628414c4f",
+      "after": "fdeafb9a72dd5d2c1dc4f0ba3422e3a947ec096e770a4394756bf50898ada051"
+    },
+    "backend/src/demopilot/quotation_release.py": {
+      "before": "91e2321ad5937809c98ee4f76eef5fbebe39a3bd74ca7692947fdab45011cc13",
+      "after": "f9e843a7373bf4115e4c00a8d72f28d6635f791a94b681a2f238a02169bd83d5"
+    },
+    "backend/tests/test_quotation_reliability.py": {
+      "before": "b3cb187cfe68bd7fee3d5b9dde4310e26f202c0925b71ed4366ca326b1e8cb58",
+      "after": "3342c5d569c1923a738736e7bf053d57c6b1ce1060bea8c186374cbbef721383"
+    },
+    "scripts/run_quotation_reliability.py": {
+      "before": "59ee38c0370c311f9843e7b2d9cbc6da6c67f0ce019355e00acb0a7c4e771391",
+      "after": "5663620fb27319c0169965a4d73c1c06aebcb948f00767677fe79621d8ba41ae"
+    }
+  },
+  "changes": [
+    "Backend formatting/import cleanup",
+    "Bind page-error collector to the individual page",
+    "Close HTTP server asynchronously before allowing two concurrent independent application audits",
+    "Verify owned staging paths before rename/cleanup",
+    "Explain existing full-precision final-aggregate rounding with12.35 outside benchmark inputs; no expected values change"
+  ],
+  "primary_output_seen": false,
+  "old_unexecuted_primary_context": "results/heldout-v2-20261016 retained; never a model trial",
+  "validation": {
+    "backend_lint": "passed",
+    "focused_tests": 6,
+    "hand_calculated_examples": 12,
+    "concurrent_browser_smoke": {
+      "valid_control": "passed",
+      "runtime_error": "rejected",
+      "executed": 28
+    }
+  }
+}

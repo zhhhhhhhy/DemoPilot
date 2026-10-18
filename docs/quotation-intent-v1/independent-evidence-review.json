@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-10-16T13:06:40Z",
+  "transaction_id": "TX-b059e0b20f36",
+  "parent_attempt": "Q005",
+  "reviewer": "quotation_public_sources independent worker",
+  "review_mode": "Read-only reconciliation of recorded evidence; no model calls, browser reruns, primary rescoring or frozen artifact edits.",
+  "status": "counts_verified_with_interpretation_caveats",
+  "evidence_paths": [
+    "evaluation_sets/quotation-intent-v1/results/heldout-20261016/context.json",
+    "evaluation_sets/quotation-intent-v1/results/heldout-20261016/results.json",
+    "evaluation_sets/quotation-intent-v1/results/heldout-20261016/business-audit.json",
+    "evaluation_sets/quotation-intent-v1/results/heldout-20261016/post-score-diagnostics/quotation-08-return-replay.json",
+    "docs/quotation-intent-v1/development-decision.json"
+  ],
+  "primary_audit_sha256": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2",
+  "independently_aggregated_counts": {
+    "independent_heldout_cases": 6,
+    "unique_case_arm_rows": 12,
+    "direct": {
+      "cases": 6,
+      "engineering_published": 6,
+      "business_pass": 1,
+      "planned_journeys": 68,
+      "executed_journeys": 68,
+      "passed_journeys": 36,
+      "not_run_journeys": 0,
+      "total_cli_calls": 14,
+      "core_cli_calls": 14,
+      "intent_cli_calls": 0,
+      "core_revisions": 1
+    },
+    "clarify": {
+      "cases": 6,
+      "engineering_published": 6,
+      "business_pass": 5,
+      "planned_journeys": 68,
+      "executed_journeys": 68,
+      "passed_journeys": 67,
+      "not_run_journeys": 0,
+      "total_cli_calls": 25,
+      "core_cli_calls": 14,
+      "intent_cli_calls": 11,
+      "core_revisions": 1
+    },
+    "clarification_only_wins": 4,
+    "direct_only_wins": 0,
+    "both_pass": 1,
+    "both_fail": 1,
+    "observed_business_pass_difference_percentage_points": 66.66666666666667,
+    "recorded_exact_paired_two_sided_p_verified_from_four_discordant_pairs": 0.125,
+    "audit_records_original_generated_files_unchanged_for_all_rows": true
+  },
+  "findings": [
+    {
+      "id": "counts",
+      "status": "verified",
+      "detail": "Counts independently recomputed from per-run rows and per-journey records agree with the stored summary. All six planned cases and both arms remain in the denominator; no duplicate case-arm records or missing journeys were found."
+    },
+    {
+      "id": "quotation-08-clarify",
+      "status": "primary_failure_preserved_business_defect_unconfirmed",
+      "detail": "The original audit records nine passing journeys and one change-and-return failure: a 2000 ms Locator.fill timeout at #second-quantity. The separate unchanged-source, zero-new-model-call replay records the same return sequence passing with matching values. Its before/after primary-audit hash equals the currently observed primary-audit hash. The original 5/6 score must remain; this evidence does not establish a pricing-logic defect or an OS-level cause."
+    },
+    {
+      "id": "quotation-09-direct-private-read-guard",
+      "status": "guard_false_positive_for_displayed_command",
+      "detail": "The stored boundary finding matches parent-directory text inside a PowerShell here-string written to card/spec.md. The referenced ../card-web/index.html and ../testdata paths are README-style links in the written content, not an observed private-file read in that command. The frozen contaminated label remains untouched. Independently, this row has eight monetary mismatch journeys, so excluding that guard interpretation would not turn the case into a business pass."
+    },
+    {
+      "id": "quotation-10-direct-duration",
+      "status": "efficiency_claim_not_supported",
+      "detail": "The 11364.594-second row spans 09:49:45 to 12:59:09 UTC and dominates direct-arm total elapsed time. These scoped artifacts do not identify whether the long interval was OS sleep, interruption, process stall or another cause. Do not attribute the aggregate elapsed-time difference to the intent module or claim a speed benefit."
+    },
+    {
+      "id": "development-test-boundary",
+      "status": "recorded_lock_precedes_heldout_start",
+      "detail": "The development decision is timestamped 09:26:16 UTC and records zero primary test model runs. The first held-out rows start at 09:26:26 UTC. The decision preserves the original development score and labels the focused regression separately. This checks the available recorded sequence, not unobserved human access to task definitions."
+    }
+  ],
+  "recommended_contribution_claim": "Designed a source-derived quotation benchmark and a question-driven requirements acquisition plus context-delivery method. Under the same Core model and repair budget, the six held-out synthetic business configurations improved from 1/6 to 5/6 complete delivery in the recorded paired run; four cases improved and none reversed. This is preliminary evidence of improved requirements fidelity, not proof of general salesperson productivity.",
+  "limits": [
+    "Six authored held-out requirements from one vendor's public rule families and scripted sellers are not real customer interviews or deployments.",
+    "The treatment includes acquiring missing facts and delivering structured/verbatim context, so the result cannot isolate wording quality or model intelligence.",
+    "The 136 browser journeys are dependent checks within six paired tasks, not 136 independent samples.",
+    "The exact paired p-value is 0.125; describe an observed small-sample improvement rather than a statistically established population effect.",
+    "Core revisions are equal at one per arm; total CLI calls increase by eleven for clarification. This run does not support a lower-cost, lower-rework or faster claim.",
+    "Engineering publication was 6/6 in both arms; the improvement is in final business acceptance after publication, not the UI engineering gate.",
+    "Input-boundary safeguards are prompt policy plus retained-tool audit, not operating-system read isolation.",
+    "The primary score remains 5/6 even though the separate timeout diagnostic replay passed."
+  ]
+}

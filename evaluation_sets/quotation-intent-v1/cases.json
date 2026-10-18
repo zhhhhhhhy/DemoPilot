@@ -1,0 +1,178 @@
+{
+  "schema_version": "quotation-intent-v1",
+  "cases": [
+    {
+      "id": "quotation-01",
+      "split": "development",
+      "title": "按数量门槛分档优惠",
+      "raw_sales_brief": "我是销售，帮我做一个可切换商品和数量、按购买量阶梯优惠的报价演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "quantity_tiers",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-01",
+      "seller_script": "seller-answers/quotation-01.json",
+      "private_acceptance": "private/quotation-01.json",
+      "positive_vector_count": 7,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-02",
+      "split": "development",
+      "title": "不同客户享受不同商品折扣",
+      "raw_sales_brief": "我是销售，帮我做一个切换客户后，能按客户优惠重新算价的报价演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "customer_scope",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-02",
+      "seller_script": "seller-answers/quotation-02.json",
+      "private_acceptance": "private/quotation-02.json",
+      "positive_vector_count": 6,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-03",
+      "split": "development",
+      "title": "优惠有效期及日期边界",
+      "raw_sales_brief": "我是销售，帮我做一个改日期检查活动价的报价演示：A商品在2026年3月1日至31日优惠25%，包含起止当天，其他日期及商品用原价。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "validity_dates",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "sufficient",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-03",
+      "seller_script": "seller-answers/quotation-03.json",
+      "private_acceptance": "private/quotation-03.json",
+      "positive_vector_count": 6,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-04",
+      "split": "development",
+      "title": "两项优惠按折后金额连续计算",
+      "raw_sales_brief": "我是销售，帮我做一个能解释两项优惠叠加后实际报价的演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "compound_discounts",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-04",
+      "seller_script": "seller-answers/quotation-04.json",
+      "private_acceptance": "private/quotation-04.json",
+      "positive_vector_count": 5,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-05",
+      "split": "heldout",
+      "title": "重叠规则采用指定优先级",
+      "raw_sales_brief": "我是销售，帮我做一个客户优惠和批量优惠同时命中时能处理冲突的报价演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "overlap_priority",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-05",
+      "seller_script": "seller-answers/quotation-05.json",
+      "private_acceptance": "private/quotation-05.json",
+      "positive_vector_count": 7,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-06",
+      "split": "heldout",
+      "title": "跨商品合并数量达到优惠门槛",
+      "raw_sales_brief": "我是销售，帮我做一个把多种商品放进同一报价、合并数量判断优惠的演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "mixed_threshold",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-06",
+      "seller_script": "seller-answers/quotation-06.json",
+      "private_acceptance": "private/quotation-06.json",
+      "positive_vector_count": 7,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-07",
+      "split": "heldout",
+      "title": "客户协议单价覆盖目录价",
+      "raw_sales_brief": "我是销售，帮我做一个协议价报价演示：合作客户买A用88元单价替代目录价，其他客户和商品用目录价，展示目录原金额、协议价差额和应付金额。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "rate_override",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "sufficient",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-07",
+      "seller_script": "seller-answers/quotation-07.json",
+      "private_acceptance": "private/quotation-07.json",
+      "positive_vector_count": 6,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-08",
+      "split": "heldout",
+      "title": "含税价反算未税金额和税额",
+      "raw_sales_brief": "我是销售，帮我做一个把报价的未税金额、税额和最终应付金额分别显示的演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "tax_inclusive",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-08",
+      "seller_script": "seller-answers/quotation-08.json",
+      "private_acceptance": "private/quotation-08.json",
+      "positive_vector_count": 5,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-09",
+      "split": "heldout",
+      "title": "未税金额减固定优惠后重新计算税额",
+      "raw_sales_brief": "我是销售，帮我做一个带整单固定优惠、同时展示税额和最终金额的报价演示。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "net_total_discount",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-09",
+      "seller_script": "seller-answers/quotation-09.json",
+      "private_acceptance": "private/quotation-09.json",
+      "positive_vector_count": 6,
+      "negative_vector_count": 3
+    },
+    {
+      "id": "quotation-10",
+      "split": "heldout",
+      "title": "买赠数量与收费商品分开计算",
+      "raw_sales_brief": "我是销售，帮我做一个买赠报价演示，让客户看到收费数量、免费数量和应付金额。只用给定商品和客户样例做本地离线演示，金额用人民币，未提到的额外优惠或税不添加，页面样式自行决定。",
+      "family": "free_items",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "initial_information": "underspecified",
+      "provenance": "documentation-derived requirement; synthetic configured business preferences",
+      "testdata_path": "testdata/quotation-10",
+      "seller_script": "seller-answers/quotation-10.json",
+      "private_acceptance": "private/quotation-10.json",
+      "positive_vector_count": 7,
+      "negative_vector_count": 3
+    }
+  ],
+  "split_policy": "4 development / 6 heldout, declared before any model generation",
+  "provenance": "Public business rule families plus synthetic parameters; no actual customer interviews."
+}

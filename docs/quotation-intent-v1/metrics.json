@@ -1,0 +1,203 @@
+{
+  "generated_at": "2026-10-16T13:17:28.737167+00:00",
+  "primary_split": "heldout",
+  "independent_task_count": 10,
+  "development_count": 4,
+  "heldout_count": 6,
+  "heldout": {
+    "arms": {
+      "direct": {
+        "planned_cases": 6,
+        "published": 6,
+        "business_pass": 1,
+        "published_but_business_failed": 5,
+        "core_revisions": 1,
+        "first_pass_business": 1,
+        "total_cli_calls": 14,
+        "intent_cli_calls": 0,
+        "total_elapsed_seconds": 12470.125,
+        "median_elapsed_seconds": 191.641,
+        "planned_journeys": 68,
+        "passed_journeys": 36,
+        "not_run_journeys": 0
+      },
+      "clarify": {
+        "planned_cases": 6,
+        "published": 6,
+        "business_pass": 5,
+        "published_but_business_failed": 1,
+        "core_revisions": 1,
+        "first_pass_business": 4,
+        "total_cli_calls": 25,
+        "intent_cli_calls": 11,
+        "total_elapsed_seconds": 1711.453,
+        "median_elapsed_seconds": 238.406,
+        "planned_journeys": 68,
+        "passed_journeys": 67,
+        "not_run_journeys": 0
+      }
+    },
+    "paired": [
+      {
+        "case_id": "quotation-05",
+        "direct_pass": false,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-06",
+        "direct_pass": false,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-07",
+        "direct_pass": true,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-08",
+        "direct_pass": false,
+        "clarify_pass": false
+      },
+      {
+        "case_id": "quotation-09",
+        "direct_pass": false,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-10",
+        "direct_pass": false,
+        "clarify_pass": true
+      }
+    ],
+    "clarification_only_wins": 4,
+    "direct_only_wins": 0,
+    "exact_paired_two_sided_p": 0.125,
+    "observed_pass_difference": 4,
+    "uncertainty": "Small authored task set, single vendor rule families, single paired execution; journeys are dependent checks, not independent customer samples."
+  },
+  "heldout_by_initial_information": {
+    "sufficient": {
+      "cases": [
+        "quotation-07"
+      ],
+      "planned": 1,
+      "direct": 1,
+      "clarify": 1
+    },
+    "underspecified": {
+      "cases": [
+        "quotation-05",
+        "quotation-06",
+        "quotation-08",
+        "quotation-09",
+        "quotation-10"
+      ],
+      "planned": 5,
+      "direct": 0,
+      "clarify": 4
+    }
+  },
+  "observed_absolute_pass_difference_pp": 66.66666666666667,
+  "development": {
+    "arms": {
+      "direct": {
+        "planned_cases": 4,
+        "published": 4,
+        "business_pass": 1,
+        "published_but_business_failed": 3,
+        "core_revisions": 0,
+        "first_pass_business": 1,
+        "total_cli_calls": 8,
+        "intent_cli_calls": 0,
+        "total_elapsed_seconds": 760.094,
+        "median_elapsed_seconds": 200.336,
+        "planned_journeys": 44,
+        "passed_journeys": 28,
+        "not_run_journeys": 0
+      },
+      "clarify": {
+        "planned_cases": 4,
+        "published": 3,
+        "business_pass": 3,
+        "published_but_business_failed": 0,
+        "core_revisions": 0,
+        "first_pass_business": 3,
+        "total_cli_calls": 13,
+        "intent_cli_calls": 7,
+        "total_elapsed_seconds": 741.407,
+        "median_elapsed_seconds": 223.368,
+        "planned_journeys": 44,
+        "passed_journeys": 32,
+        "not_run_journeys": 12
+      }
+    },
+    "paired": [
+      {
+        "case_id": "quotation-01",
+        "direct_pass": false,
+        "clarify_pass": false
+      },
+      {
+        "case_id": "quotation-02",
+        "direct_pass": false,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-03",
+        "direct_pass": true,
+        "clarify_pass": true
+      },
+      {
+        "case_id": "quotation-04",
+        "direct_pass": false,
+        "clarify_pass": true
+      }
+    ],
+    "clarification_only_wins": 2,
+    "direct_only_wins": 0,
+    "exact_paired_two_sided_p": 0.5,
+    "observed_pass_difference": 2,
+    "uncertainty": "Small authored task set, single vendor rule families, single paired execution; journeys are dependent checks, not independent customer samples."
+  },
+  "provenance": "Official documentation-derived requirements and synthetic seller preferences; not real customer feedback.",
+  "attribution": "Clarification context, relevant question/answer release, typed intent and source-fact delivery are one intervention. Same Core. Does not isolate prompt wording or improve the base model.",
+  "measurement_notes": {
+    "schema_version": "quotation-measurement-notes-v1",
+    "primary_score_policy": "Keep the first complete held-out audit unchanged; diagnostic replay never replaces a scored failure.",
+    "primary_audit": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/business-audit.json",
+    "primary_audit_sha256": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2",
+    "findings": [
+      {
+        "case": "quotation-08",
+        "arm": "clarify",
+        "stage": "independent post-delivery browser measurement",
+        "observed": "9/10 journeys passed; change-and-return failed with a 2000 ms Locator.fill timeout at #second-quantity. No numerical mismatch recorded.",
+        "diagnostic": "One unchanged-source replay using the same 2000 ms action limit passed A-to-C-to-A, zero new model calls. Original audit hash unchanged.",
+        "interpretation": "Business defect unconfirmed. Still not a complete primary pass; clarify remains 5/6.",
+        "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/post-score-diagnostics/quotation-08-return-replay.json"
+      },
+      {
+        "case": "quotation-09",
+        "arm": "direct",
+        "stage": "retained-tool read-boundary observation",
+        "observed": "The frozen guard matched ../card-web and ../testdata links in a here-string written to card/spec.md.",
+        "interpretation": "The displayed command is an allowed documentation write, not an observed private-gold read. Original contaminated flag preserved. Eight separate monetary failures keep this case failed regardless of that flag.",
+        "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/business-audit/quotation-09/direct/audit.json"
+      },
+      {
+        "case": "quotation-10",
+        "arm": "direct",
+        "stage": "runner wall clock and subprocess lifecycle",
+        "elapsed_seconds": 11364.594,
+        "started_at": "2026-10-16T09:49:45.176+00:00",
+        "finished_at": "2026-10-16T12:59:09.767+00:00",
+        "observed": "A build iteration starts at 09:56:37 UTC; its next timeout is recorded at 12:56:48 UTC. The surrounding conversation was interrupted. The runner later exits zero with ignored BaseSubprocessTransport/Event loop is closed and closed-pipe destructor warnings.",
+        "interpretation": "Cause of the long wall-clock gap is unknown; do not infer OS sleep or intent-driven acceleration. Same configured call budgets do not imply normal actual elapsed execution in this row. Preserve timestamps, calls and final functional score; do not make an efficiency claim.",
+        "evidence": "evaluation_sets/quotation-intent-v1/results/heldout-20261016/runtime/runs/12a12b3ca8ba/artifacts/evidence/core"
+      }
+    ],
+    "cost_scope": "Observed outer CLI invocations, not complete native child usage or billed cost. Core calls 14 vs 14; intent adds 11; repair rounds 1 vs 1.",
+    "isolation_scope": "Isolated run directories, prompt write policy and retained-tool audit; not OS-level confidentiality isolation.",
+    "sample_scope": "Six held-out authored configurations from four official ERPNext documents, with scripted sellers. One paired execution each, p=0.125. Not real customer validation."
+  }
+}

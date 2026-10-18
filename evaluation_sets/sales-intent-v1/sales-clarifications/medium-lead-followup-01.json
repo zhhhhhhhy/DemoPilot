@@ -1,0 +1,12 @@
+{
+  "schema_version": "sales-clarification-v1",
+  "case_id": "medium-lead-followup-01",
+  "answers": [
+    {
+      "question_topic": "线索和跟进演示数据",
+      "answer": "请使用本地虚构样例：星港制造属于制造行业，云帆零售属于零售行业；负责人可选林澄或周岚。筛选后要能打开当前线索详情，选择负责人并创建一条跟进行动，页面显示带负责人的跟进记录和待跟进状态；不连接真实 CRM。",
+      "required_before_core": true,
+      "allowed_question_aliases": ["样例数据", "数据", "线索", "行业", "详情", "负责人", "跟进", "状态", "CRM"]
+    }
+  ]
+}

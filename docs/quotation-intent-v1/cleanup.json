@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-16T13:16:32.4646380Z",
+  "scope": "Only runner, audit and CLI processes identifiable by this experiment path or script names",
+  "matching_running_processes": [],
+  "matching_count": 0,
+  "terminated_processes": [],
+  "excluded": "Unrelated apps, generic MCP tool servers without experiment ownership evidence, and other project servers left untouched",
+  "result": "No identifiable experiment runner or CLI remains active"
+}

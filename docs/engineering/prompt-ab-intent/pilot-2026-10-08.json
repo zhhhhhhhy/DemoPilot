@@ -1,0 +1,84 @@
+{
+  "schema_version": "prompt-ab-intent-pilot-report",
+  "experiment": "codex-cli-ab-v1",
+  "run_date": "2026-10-08",
+  "question": "在同一 Codex CLI、同一测试数据和同一确定性验收门禁下，结构化意图/Goal Prompt 是否减少 Core Builder 的返工？",
+  "design": {
+    "control": "control-legacy：仅传递场景、优先级和 must-have 能力，并保留共享安全规则、测试数据、验收契约和迭代规则。",
+    "treatment": "treatment-current：传递 Intent、Goal、业务流程、预期结果、验收方式和数据集上下文，并保留同一组共享门禁。",
+    "paired_cases": 4,
+    "cases": [
+      "simple-invoice-ocr-01",
+      "simple-sku-lookup-01",
+      "medium-invoice-review-01",
+      "hard-procurement-approval-01"
+    ],
+    "real_codex_cli": true,
+    "same_testdata_and_gates": true,
+    "fresh_workspace_per_run": true,
+    "post_publish_audit": true,
+    "order": "control-legacy 全部运行后再运行 treatment-current；因此本报告是 pilot 信号，不是无偏因果估计。"
+  },
+  "metrics": {
+    "control_legacy": {
+      "final_published": "4/4",
+      "terminal_builder_failures": 0,
+      "first_pass_acceptance_proxy": "0/4",
+      "revision_total": 5,
+      "revision_average": 1.25,
+      "agent_calls_total": 18,
+      "final_browser_pass": "4/4",
+      "fresh_post_publish_audit_pass": "4/4"
+    },
+    "treatment_current": {
+      "final_published": "4/4",
+      "terminal_builder_failures": 0,
+      "first_pass_acceptance_proxy": "3/4",
+      "revision_total": 1,
+      "revision_average": 0.25,
+      "agent_calls_total": 10,
+      "final_browser_pass": "4/4",
+      "fresh_post_publish_audit_pass": "4/4"
+    },
+    "change": {
+      "final_publication_rate": "0 percentage points; both 4/4",
+      "revision_total": "5 -> 1, down 80%",
+      "revision_average": "1.25 -> 0.25, down 1.0 round per case",
+      "first_pass_acceptance_proxy": "0/4 -> 3/4",
+      "agent_calls_total": "18 -> 10, down 44.4%"
+    }
+  },
+  "paired_observations": [
+    {
+      "case_id": "simple-invoice-ocr-01",
+      "control": "1 revision; first Chromium run failed and acceptance-child evidence was missing; final publish passed.",
+      "treatment": "1 revision; first Chromium run failed because the generated page did not reference the invoice fixture files; final publish passed.",
+      "classification": "Core output was repairable; failure appeared at acceptance/release gate, not as terminal Builder failure."
+    },
+    {
+      "case_id": "simple-sku-lookup-01",
+      "control": "1 revision; first run had CLI timeout, missing acceptance-child evidence and Chromium failure; final publish passed.",
+      "treatment": "0 revisions; CLI timeout/fallback was recorded as an intermediate process event, then acceptance and fresh-browser audit passed.",
+      "classification": "Control had a gate failure requiring Builder repair; treatment had an infrastructure/process event without final product failure."
+    },
+    {
+      "case_id": "medium-invoice-review-01",
+      "control": "2 revisions; first Chromium assertion missed the required reason text, then one acceptance-child evidence issue; final publish passed.",
+      "treatment": "0 revisions; acceptance and fresh-browser audit passed on the first candidate.",
+      "classification": "Control required two external gate-triggered repair rounds; treatment reached a passing candidate directly."
+    },
+    {
+      "case_id": "hard-procurement-approval-01",
+      "control": "1 revision; first run had CLI timeout, missing acceptance-child evidence and Chromium failure; final publish passed.",
+      "treatment": "0 revisions; acceptance and all three Chromium journeys passed on the first candidate.",
+      "classification": "Control had a gate failure requiring repair; treatment had no terminal or release failure."
+    }
+  ],
+  "failure_boundary": {
+    "valid_pilot_terminal_builder_failure": "0/8",
+    "valid_pilot_final_release_failure": "0/8",
+    "intermediate_cli_or_acceptance_events": "存在；它们只有在导致验收/发布不通过时才形成返工次数。",
+    "invalid_attempt": "A-002 因 API 未重启加载新 schema，控制请求被旧服务默认成 treatment；已排除，不计入 A/B。"
+  },
+  "conclusion": "本 pilot 支持一个初步信号：结构化 Intent/Goal Prompt 让同一套 Core Builder 门禁下的返工显著减少，但没有证明最终发布率提升，因为两组均为 4/4。由于运行顺序未随机交错、样本只有 4 对，不能把 80% 返工下降写成稳定因果结论。正式结论需要在 20 个 case 上随机交错重复运行。"
+}

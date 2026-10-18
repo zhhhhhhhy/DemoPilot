@@ -53,7 +53,15 @@ class DemoRequest(BaseModel):
     # the intent, goal, flow and acceptance method instead of hiding them in a
     # free-form scenario string. These fields are optional for normal runs.
     evaluation_case_id: str | None = Field(default=None, max_length=100)
+    evaluation_dataset: Literal["codex-cli-v1", "codex-cli-v2-hard", "sales-business-v2", "quotation-intent-v1"] = "codex-cli-v1"
     evaluation_mode: Literal["full_pipeline", "core_generation"] = "full_pipeline"
+    # Prompt A/B experiments change only this profile; all deterministic
+    # acceptance and publication gates remain identical.
+    evaluation_prompt_profile: Literal["control-legacy", "treatment-current"] = "treatment-current"
+    # Intent-evaluation experiments record whether Core received the raw sales
+    # brief or a confirmed structured intent package. This is separate from
+    # the prompt-profile experiment so the two effects are not conflated.
+    evaluation_intent_profile: Literal["raw-sales", "intent-confirmed", "intent-agent"] = "intent-confirmed"
     evaluation_difficulty: Literal["simple", "medium", "hard"] | None = None
     evaluation_intent: str | None = Field(default=None, max_length=1200)
     evaluation_goal: str | None = Field(default=None, max_length=1200)
@@ -115,7 +123,10 @@ def build_intent_statement(request: DemoRequest) -> dict[str, Any]:
         "must_haves": list(request.must_haves),
         "evaluation": {
             "case_id": request.evaluation_case_id,
+            "dataset": request.evaluation_dataset,
             "mode": request.evaluation_mode,
+            "prompt_profile": request.evaluation_prompt_profile,
+            "intent_profile": request.evaluation_intent_profile,
             "difficulty": request.evaluation_difficulty,
             "intent": request.evaluation_intent,
             "goal": request.evaluation_goal,
@@ -194,9 +205,10 @@ class DemoRun(BaseModel):
     agent_calls: int = Field(default=0, ge=0)
     revision_count: int = Field(default=0, ge=0)
     quality_gate: Literal["pending", "passed", "passed_with_open_gates", "failed"] = "pending"
-    # Core-generation publication is fail-closed: a completed run can still be
-    # hidden/cannot_complete when the independent acceptance gate failed.
-    publication_status: Literal["hidden", "published", "cannot_complete"] = "hidden"
+    # Core-generation publication is fail-closed. ``candidate`` is an internal
+    # staging state: the artifact is still hidden from the download route while
+    # the post-publish functional audit runs.
+    publication_status: Literal["hidden", "candidate", "published", "cannot_complete"] = "hidden"
     error: str | None = None
     checkpoint: str | None = None
     cancel_requested: bool = False

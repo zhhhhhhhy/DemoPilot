@@ -1,0 +1,1558 @@
+{
+  "cases": [
+    {
+      "id": "qflow-01-p01",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "quantity_tiers",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p02",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "customer_scope",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p03",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "validity_dates",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p04",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "compound_discounts",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p05",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "overlap_priority",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p06",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "mixed_threshold",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p07",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "rate_override",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p08",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "tax_inclusive",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p09",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "net_total_discount",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-01-p10",
+      "app_id": "qflow-01",
+      "workflow": "single_manager",
+      "pricing_profile": "free_items",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-01"
+    },
+    {
+      "id": "qflow-02-p01",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "quantity_tiers",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p02",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "customer_scope",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p03",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "validity_dates",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p04",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "compound_discounts",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p05",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "overlap_priority",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p06",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "mixed_threshold",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p07",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "rate_override",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p08",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "tax_inclusive",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p09",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "net_total_discount",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-02-p10",
+      "app_id": "qflow-02",
+      "workflow": "two_stage",
+      "pricing_profile": "free_items",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-02"
+    },
+    {
+      "id": "qflow-03-p01",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "quantity_tiers",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p02",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "customer_scope",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p03",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "validity_dates",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p04",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "compound_discounts",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p05",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "overlap_priority",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p06",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "mixed_threshold",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p07",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "rate_override",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p08",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "tax_inclusive",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p09",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "net_total_discount",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-03-p10",
+      "app_id": "qflow-03",
+      "workflow": "threshold",
+      "pricing_profile": "free_items",
+      "split": "development",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-03"
+    },
+    {
+      "id": "qflow-04-p01",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p02",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p03",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p04",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p05",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p06",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p07",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p08",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p09",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-04-p10",
+      "app_id": "qflow-04",
+      "workflow": "dual_manager",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-04"
+    },
+    {
+      "id": "qflow-05-p01",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p02",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p03",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p04",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p05",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p06",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p07",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p08",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p09",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-05-p10",
+      "app_id": "qflow-05",
+      "workflow": "rejection_reason",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/workflow-for-quotation-approval/34258",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-05"
+    },
+    {
+      "id": "qflow-06-p01",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p02",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p03",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p04",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p05",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p06",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p07",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p08",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p09",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-06-p10",
+      "app_id": "qflow-06",
+      "workflow": "cancel_amend",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/i-need-amend-button-when-cancel-the-document-for-quotation-doctype-when-in-workflow/144642",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-06"
+    },
+    {
+      "id": "qflow-07-p01",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p02",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p03",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p04",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p05",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p06",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p07",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p08",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p09",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-07-p10",
+      "app_id": "qflow-07",
+      "workflow": "customer_owner",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/client-approval-workflow-for-quotations/148297",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-07"
+    },
+    {
+      "id": "qflow-08-p01",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p02",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p03",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p04",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p05",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p06",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p07",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p08",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p09",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-08-p10",
+      "app_id": "qflow-08",
+      "workflow": "expiry",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-08"
+    },
+    {
+      "id": "qflow-09-p01",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p02",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p03",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p04",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p05",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p06",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p07",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p08",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p09",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-09-p10",
+      "app_id": "qflow-09",
+      "workflow": "record_persistence",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-09"
+    },
+    {
+      "id": "qflow-10-p01",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "quantity_tiers",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p02",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "customer_scope",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p03",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "validity_dates",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p04",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "compound_discounts",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p05",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "overlap_priority",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p06",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "mixed_threshold",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p07",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "rate_override",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p08",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "tax_inclusive",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p09",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "net_total_discount",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/applying-discount"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    },
+    {
+      "id": "qflow-10-p10",
+      "app_id": "qflow-10",
+      "workflow": "manual_override",
+      "pricing_profile": "free_items",
+      "split": "heldout",
+      "source_urls": [
+        "https://docs.frappe.io/erpnext/workflows",
+        "https://docs.frappe.io/erpnext/quotation",
+        "https://docs.frappe.io/erpnext/role-based-permissions",
+        "https://discuss.frappe.io/t/how-to-override-pricing-rule-for-individual-quotation-items/146787",
+        "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+        "https://docs.frappe.io/erpnext/pricing-rule"
+      ],
+      "acceptance": "Exact visible price + normal approval/acceptance + edit-invalidates-approval regression + invalid input/role preservation + workflow-specific sequence; v2 additionally shipping with regression of v1.",
+      "independence_group": "qflow-10"
+    }
+  ],
+  "combination_count": 100,
+  "independent_application_groups": 10,
+  "development_groups": 3,
+  "heldout_groups": 7
+}

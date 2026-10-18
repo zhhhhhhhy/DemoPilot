@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-product-recall-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "171fc32ddf260b28cdcdfd9b2f3eff4968b52484c8ef9be83c96c6150c9c2401"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "950edf96c87d70776e4ed5a12ae76dfe34033bb0b85bbb9d16795009168a8d84"
+    }
+  ],
+  "status": "authored_not_run"
+}

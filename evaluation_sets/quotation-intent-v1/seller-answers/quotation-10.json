@@ -1,0 +1,58 @@
+{
+  "case_id": "quotation-10",
+  "response_kind": "frozen_synthetic_seller",
+  "answers": [
+    {
+      "topic": "eligible_product",
+      "question_aliases": [
+        "适用",
+        "范围",
+        "商品",
+        "产品",
+        "哪些",
+        "对象",
+        "客户",
+        "scope",
+        "item",
+        "customer"
+      ],
+      "text": "只有A参与买赠，B和C不参与。"
+    },
+    {
+      "topic": "gift_ratio",
+      "question_aliases": [
+        "比例",
+        "折扣",
+        "优惠",
+        "价格",
+        "多少",
+        "几",
+        "门槛",
+        "数量",
+        "阶梯",
+        "threshold",
+        "discount",
+        "percent",
+        "rate",
+        "quantity",
+        "赠",
+        "买",
+        "重复",
+        "免费",
+        "gift",
+        "free"
+      ],
+      "text": "每买2件付费商品，额外赠1件同款，可重复，赠送数量向下取整。付费数量不含赠品，赠品单价0，应付只算付费商品。"
+    }
+  ],
+  "complete_rule_question_aliases": [
+    "完整规则",
+    "所有规则",
+    "具体业务规则",
+    "完整定价",
+    "具体定价规则",
+    "full pricing rules",
+    "complete rules"
+  ],
+  "fallback": "页面布局与文案按常规自行决定。商品和客户样例由本地testdata提供。只需澄清影响计算结果的业务规则；未规定的其他优惠均不适用。"
+}

@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-16T16:14:11.530568+00:00",
+  "development_result": "Both arms3/3 apps and30/30 combinations in each version;780 independent paths passed; no observed increment.",
+  "primary_result": "not_run",
+  "primary_context": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\context.json",
+  "change_boundary": "Formatting and explicit existing rounding explanation for both arms; business AST/data/expected values unchanged. All primary outputs unseen; never pool development with primary as one clean rerun.",
+  "superseded_unexecuted_freezes": [
+    "results/development-20261016",
+    "results/heldout-20261016",
+    "results/heldout-v2-20261016"
+  ]
+}

@@ -32,6 +32,7 @@ from .providers import (
     MockAgentProvider,
     OpenAICompatibleAgentProvider,
 )
+from .run_metrics import run_metrics
 from .runtime import RunManager
 from .storage import RunStore
 
@@ -387,6 +388,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if run.status not in {RunStatus.FAILED, RunStatus.CANCELLED}:
             raise HTTPException(status_code=409, detail="Only failed or cancelled runs can resume")
         return manager.resume(run)
+
+    @app.get("/api/runs/{run_id}/metrics")
+    async def get_run_metrics(run_id: str) -> dict[str, object]:
+        run = store.get(run_id)
+        if not run:
+            raise HTTPException(status_code=404, detail="Run not found")
+        return await asyncio.to_thread(run_metrics, run, store.run_dir(run_id))
 
     @app.get("/api/runs/{run_id}/files/{file_path:path}")
     async def get_file(run_id: str, file_path: str) -> FileResponse:

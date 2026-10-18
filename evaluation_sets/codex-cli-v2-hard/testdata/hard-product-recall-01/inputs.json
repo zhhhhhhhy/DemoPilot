@@ -1,0 +1,34 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-product-recall-01",
+  "industry": "供应链质量",
+  "audience": "质量经理",
+  "scenario": "从产品批次识别受影响订单，隔离库存并按换货或退款分支追踪客户响应。",
+  "fixtures": {
+    "entities": [
+      {
+        "id": "entity-01",
+        "label": "对象一"
+      },
+      {
+        "id": "entity-02",
+        "label": "对象二"
+      },
+      {
+        "id": "entity-03",
+        "label": "对象三"
+      }
+    ],
+    "subentities": [
+      "sub-01",
+      "sub-02",
+      "sub-03"
+    ],
+    "rules": "换货和退款互斥，未响应订单必须升级不能直接关闭",
+    "terminal": "召回已关闭"
+  },
+  "paths": {
+    "acceptance": "testdata/hard-product-recall-01/acceptance.json",
+    "inputs": "testdata/hard-product-recall-01/inputs.json"
+  }
+}

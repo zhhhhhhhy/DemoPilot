@@ -1,0 +1,21 @@
+{
+  "schema_version": "demopilot-hard-v2-semantic-gap",
+  "dataset": "codex-cli-v2-hard",
+  "status": "needs_dataset_revision",
+  "finding": "The eight contracts are executable and internally consistent, but their business fixtures and journeys are mostly generic.",
+  "evidence": {
+    "fixtures": "Each inputs.json mainly contains three generic entities, three generic subentities, one text rule, and terminal metadata; assets are empty.",
+    "journeys": "The four journeys cover linear progression, a generic invalid terminal action, a generic branch/reject action, and an initial isolation check, but do not exercise case-specific records or aggregates.",
+    "unused_controls": ["#filter", "#approve"],
+    "weak_assertions": ["No concrete numeric threshold comparison", "No multi-role approval sequence", "No business-record aggregation assertion", "No mutate-entity-A-then-check-entity-B isolation assertion"]
+  },
+  "impact": "The 8/8 published result is valid evidence for the executable UI loop and release gates, but is insufficient evidence that eight named business scenarios are genuinely hard.",
+  "required_revision": [
+    "Add case-specific records, numeric thresholds, roles, approval records, and derived aggregates to inputs.json.",
+    "Use #filter and #approve in executable journeys where the case declares them.",
+    "Assert branch outcomes from concrete inputs rather than generic status text.",
+    "Mutate one entity, switch to another, and assert that state does not leak.",
+    "Add terminal-lock and audit-immutability assertions with observable UI evidence."
+  ],
+  "decision": "Do not use hard-v2 as a business-difficulty benchmark until a semantic revision is materialized and rerun."
+}

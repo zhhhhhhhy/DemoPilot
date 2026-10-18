@@ -1,0 +1,33 @@
+{
+  "schema_version": "sales-intent-v1",
+  "cases": [
+    {
+      "id": "simple-quote-generator-01",
+      "source_case_id": "simple-quote-generator-01",
+      "difficulty": "simple",
+      "raw_sales_brief": "我是售前顾问，现在要给客户演示一个B2B 销售场景。客户希望售前顾问选择一个套餐和席位数，希望看到即时的演示报价。。先做一个能在浏览器里完整讲清楚的本地演示，不要接真实系统，具体页面和步骤请你先帮我梳理。",
+      "dataset": "codex-cli-v1",
+      "acceptance_case_ref": "testdata/simple-quote-generator-01/acceptance.json",
+      "intent_module_status": "scripted-interview-runner-only"
+    },
+    {
+      "id": "medium-lead-followup-01",
+      "source_case_id": "medium-lead-followup-01",
+      "difficulty": "medium",
+      "raw_sales_brief": "我是销售经理，现在要给客户演示一个B2B 销售场景。客户希望销售经理按行业筛选线索，查看详情，分配负责人并创建一次跟进行动。。先做一个能在浏览器里完整讲清楚的本地演示，不要接真实系统，具体页面和步骤请你先帮我梳理。",
+      "dataset": "codex-cli-v1",
+      "acceptance_case_ref": "testdata/medium-lead-followup-01/acceptance.json",
+      "intent_module_status": "scripted-interview-runner-only"
+    },
+    {
+      "id": "hard-procurement-approval-01",
+      "source_case_id": "hard-procurement-approval-01",
+      "difficulty": "hard",
+      "raw_sales_brief": "我是采购经理，现在要给客户演示一个供应链采购场景。客户希望采购经理比较三家供应商，选择方案，填写理由，提交审批，审批人可批准或驳回并留下审计记录。。先做一个能在浏览器里完整讲清楚的本地演示，不要接真实系统，具体页面和步骤请你先帮我梳理。",
+      "dataset": "codex-cli-v1",
+      "acceptance_case_ref": "testdata/hard-procurement-approval-01/acceptance.json",
+      "intent_module_status": "scripted-interview-runner-only"
+    }
+  ],
+  "gold_policy": "gold/intent-gold.json is evaluator-only and is not mounted into Core workspace"
+}

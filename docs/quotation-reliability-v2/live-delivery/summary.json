@@ -1,0 +1,267 @@
+{
+  "status": "passed",
+  "base_url": "http://127.0.0.1:5189",
+  "visible_projects": 10,
+  "intent_projects": 10,
+  "token_exposed": false,
+  "real_local_chromium": true,
+  "screenshots_are_actual_live_server": true,
+  "production_customer_data": false,
+  "rows": [
+    {
+      "project": "qflow-01",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-01/2/f4493cedb3ff7f40d0fd9c6f433f144dc5a1174d2da71442becf41abccd1d003/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "5817b7e09b41745ba41bc19cfde065185ebce70c9f95989561c48aa53ac6050d"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "83322341e0ef2b2ed5a3a419e7ad8449f7ca05d8add8ddeb8339833299f0290e"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "5b02ca4205d09abba17ef33f59993ad11b7ef935f20330029ce8b708382310e3"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-02",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-02/2/0dbccce2e4457ccf1a1be911536291f088a8a48dc27425257f7fb5621571d2d7/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "974d0c20891acc829ac01da2a0a58b68393ab5651014d63098c361f23ab7f2dc"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "c149ac584e7fc4a0a0bd46d0232c559a50c3f646ae3d6671ffdf3b70ef205624"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "b18ee1a4707ca2f71e139dafba64b2bba87d8ad582274131ab0aae83988ba084"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-03",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-03/2/ec773a321bc318c6a50f02189b45afb5bd42216e78592d883e8566ec9a329436/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "f8611890348f4c2d0f20ca4f4278b12a96ce81b35d33bbf41d1682f36cd30fd5"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "6248de00503eb6e4569a5bf821e5a4a7ee311e5b1d3140e73c18f75e5eecbb18"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "95f0384ab461c7bfd56e10df37d2f5c26a67a9b9f727b530aa12231ba6e2ee20"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-04",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-04/2/e93a2b9daf28ae8746ce75d5854eb9905570dc23407a5ca2f47d9af3d14a08ee/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "3ac237d9e0f114cfaaa2119007e67dea6f994f3e71d8a76a41025f9d47800619"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "406715d8750751c69b92d4fae62016340d541188a1db4f97792d2e3e3c3b4710"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "d3a8edd5367ffe7cb5a3f21f828c5a7e2d44c975b4c24d664e25cdcefcd8511f"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": {
+        "total": "930.00",
+        "same_manager_cannot_approve_twice": true,
+        "two_distinct_managers_required": true,
+        "edit_invalidates_approval": true
+      }
+    },
+    {
+      "project": "qflow-05",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-05/2/788b67fec77548ad55aa964372221349504f6d8c5cab35a2864090c71a740a15/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "1914263c0a79ca8550e47ce438acf9e7bb240a006152b58ab4143f9fa7333309"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "05b9dd759d924b20418003937bf413e777f88c1d0dce99c598156ba9b305cb19"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "2b05d12d110b42496b80efa1764af6ffc141a3d497ac7c86e6ee0f34764ab3d2"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-06",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-06/2/18ed9943ca3e2aa968003833e25933c8122371e7f76dd7a924530390bbaffbda/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "54f88604a983942ca9bbf3d9d721af6664c2637b051dbb90b0540af7e3595462"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "d81ba67bc28727462615f44367089dcf3e51ed2ea5157381f3c46118d22b7859"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "dc1e1a74a5cdfaf60db3d24bb67ca97449adc03ca5b2fbc9efdafc1aceb9f675"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-07",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-07/2/2db1ee0344e963c17aef5f63889396a6d63febc7c6d3bc8e213c6cad5fee284e/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "1b547100f84644ce151983023a755903f6fbf1439effe347890c8b8848905332"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "2cce0735a71695a6531346b03843f59eeecb3ecc2f371e0a809da3d57cc6b73e"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "cb3a7009ec9b56ecd7a880a18d93b16be09ae4324bdeccc08ec3246ad9b5805c"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-08",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-08/2/aefd14e64e1ed1da5d98fc552ae6a67e1ecbdb71a36490083501b15445ab1a78/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "2b0bb75660e052c4b9f06168b8684cfbd0a674af5182db9d4dc79fea43ce0b77"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "ce33c5ef179dfe73b4e7887593fc8d9cf9348de9afc20678c8486733e9460b22"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "1a9a93bbfa6f5aac24e44e9d2287b3ab486a3812ede928e99aeaf339f95c60dc"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-09",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-09/2/1576e25e6438d8b270d6bf09cb4c22600092c1dc9518b07a008fd170198b2ba3/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "9bd4ed66469c330d5f286a9559e8c92e4eefe2ab0a66f07b41ade3cbbcf3c27d"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "e013c2a55e32b056f13041a2773f78fc380c1647df7e49cef50e80140070aebf"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "c02b44d95b1ffd5b74ee53427886ba78e6bb1ba62c3135ea3580b09fb9ac9f70"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    },
+    {
+      "project": "qflow-10",
+      "pinned_url": "http://127.0.0.1:5189/accepted/qflow-10/2/1c282d251d307f54f78fa81be005ac0d4686d5bb0995eb7de2bb65292aac14b8/index.html",
+      "initial_visible_snapshot_passed": true,
+      "exact_assets": [
+        {
+          "file": "index.html",
+          "exact_bytes": true,
+          "sha256": "922ff960aeb4120c506434b573b9f18b56963200ede54a12572a969a101331ea"
+        },
+        {
+          "file": "app.js",
+          "exact_bytes": true,
+          "sha256": "c5082ac250870780d264e38c495ca7116367cd52f813692d7c70ee316c7f393d"
+        },
+        {
+          "file": "styles.css",
+          "exact_bytes": true,
+          "sha256": "d9a2ae2211351af86a06cc075785db5ccb15c4f24fcf32ba4543f0a8c7551268"
+        }
+      ],
+      "browser_errors": [],
+      "failed_http_responses": [],
+      "detailed": null
+    }
+  ]
+}

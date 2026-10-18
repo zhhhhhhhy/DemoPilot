@@ -1,0 +1,13 @@
+{
+  "case_id": "simple-quote-generator-01",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "77560cc09d2084f0419d94cb624cda4757a0fcb338e27683b7672b9aad1325d3"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "4d77bb5dd156eb565d4232510ce20903523c149f2e8e014b66f09732b8e73c07"
+    }
+  ]
+}

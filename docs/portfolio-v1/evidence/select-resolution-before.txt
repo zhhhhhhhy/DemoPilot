@@ -1,0 +1,17 @@
+selection='L-02', elapsed=5.192s
+F
+================================== FAILURES ===================================
+______________ test_value_does_not_wait_for_a_nonexistent_label _______________
+
+tmp_path = WindowsPath('C:/Users/֣����/AppData/Local/Temp/pytest-of-֣����/pytest-206/test_value_does_not_wait_for_a0')
+
+    def test_value_does_not_wait_for_a_nonexistent_label(tmp_path):
+        duration = exercise(tmp_path, '<option value="L-01">�Ǹ�����</option><option value="L-02">�Ʒ�����</option>', "L-02", "L-02")
+>       assert duration < 3.0, "Known option values must not incur the five-second label timeout"
+E       AssertionError: Known option values must not incur the five-second label timeout
+E       assert 5.192420300008962 < 3.0
+
+backend\tests\test_browser_select_resolution.py:26: AssertionError
+=========================== short test summary info ===========================
+FAILED backend\tests\test_browser_select_resolution.py::test_value_does_not_wait_for_a_nonexistent_label
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!

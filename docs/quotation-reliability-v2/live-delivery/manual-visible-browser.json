@@ -1,0 +1,35 @@
+{
+  "recorded_at": "2026-10-17T04:11:57.637440+00:00",
+  "status": "passed",
+  "channel": "visible Codex in-app browser operated through cua_repl",
+  "browser_id": "2",
+  "tab_id": "1",
+  "url": "http://127.0.0.1:5189/accepted/qflow-04/2/e93a2b9daf28ae8746ce75d5854eb9905570dc23407a5ca2f47d9af3d14a08ee/index.html",
+  "application": "qflow-04",
+  "requirement_version": 2,
+  "operations": [
+    "Open final release desk and observe ten accepted v2 links",
+    "Open qflow04 via its visible link",
+    "Set A quantity11,second quantity0,express shipping;Calculate",
+    "Submit;manager1 approves",
+    "Same manager1 repeats approval and receives explicit rejection",
+    "Manager2 approves"
+  ],
+  "observed": {
+    "total": "930.00",
+    "freight": "50.00",
+    "first_manager_state": "PendingManager",
+    "first_manager_history": "3",
+    "duplicate_manager_message": "同一经理不能重复会签，请另一位经理审批。",
+    "final_state": "Approved",
+    "quote_revision": "1",
+    "approved_revision": "1",
+    "history": "4",
+    "approvers": [
+      "manager1",
+      "manager2"
+    ]
+  },
+  "tab_marked_deliverable": true,
+  "screenshot_boundary": "Actual IAB screenshot emitted in the CUA tool result. Saved quote-approved.png is a separate local headless capture of the same served immutable URL, same inputs and approved result, not a claim of literal IAB pixels."
+}

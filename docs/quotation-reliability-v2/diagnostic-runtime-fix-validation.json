@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "six_targeted_backend_tests": true,
+  "backend_lint": true,
+  "changed_scripts_compile": true,
+  "forced_verbose_browser_log_routed": true,
+  "candidate_valid_paths": 7,
+  "candidate_runtime_fault_paths": 7,
+  "public_probe_cwd_under_allowed_card": true,
+  "goal_loop_byte_identical": true,
+  "monetary_and_state_reference_byte_identical": true,
+  "cli_adapter_byte_identical": true,
+  "all_data_files_unchanged": 73,
+  "arbitrary_outside_file_guard_unchanged": true,
+  "manual_sleep_prevented": false,
+  "global_power_settings_changed": false,
+  "original_interrupted_scores_replaced": false
+}

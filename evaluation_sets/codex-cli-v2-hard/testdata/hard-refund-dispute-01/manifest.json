@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-refund-dispute-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "f48afdf19bff29f92380ffcede43e715634a702f1b8f6c53b6d5c91b573300c2"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "aa21cece1a05318ffe50b0620c86aba1da363fc13e33b63dd3e25bf54fdcf793"
+    }
+  ],
+  "status": "authored_not_run"
+}

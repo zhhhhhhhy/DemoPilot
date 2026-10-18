@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-data-pipeline-recovery-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "86e256ccd7660d125d8b9189b9aa14327b9bc5bf55dc082b3d0b410281a51996"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "fbf5bacad424d65b3d40d0ebe8dc89c766bf10dfbcca6a48346adbe19b55da4a"
+    }
+  ],
+  "status": "authored_not_run"
+}

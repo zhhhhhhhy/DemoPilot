@@ -1,0 +1,12 @@
+{
+  "schema_version": "sales-clarification-v1",
+  "case_id": "simple-quote-generator-01",
+  "answers": [
+    {
+      "question_topic": "报价规则",
+      "answer": "这是本地演示样例：基础套餐每席位 100，专业套餐每席位 200，折扣为 0。报价页需要同时展示单价乘席位数得到的小计、折扣和总价，切换套餐或席位数后立即更新，并把价格标注为演示估算。",
+      "required_before_core": true,
+      "allowed_question_aliases": ["价格", "报价", "套餐", "套餐单价", "席位", "折扣", "计算规则"]
+    }
+  ]
+}

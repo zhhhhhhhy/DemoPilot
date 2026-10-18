@@ -1,0 +1,55 @@
+{
+  "development-v2-20261016": {
+    "split": "development",
+    "all_equal": true,
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "call_cap": 3,
+    "timeout": 300,
+    "rows": [
+      {
+        "app_id": "qflow-01",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-01",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-02",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-02",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-03",
+        "version": 1,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-03",
+        "version": 2,
+        "identical_goal_after_workspace_normalization": true
+      },
+      {
+        "app_id": "qflow-01",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-02",
+        "identical_public_fixture_bytes": true
+      },
+      {
+        "app_id": "qflow-03",
+        "identical_public_fixture_bytes": true
+      }
+    ],
+    "boundary": "Goal and public fixture parity; subsequent generated code differs naturally. Equal configured caps do not force identical consumed tokens or internal subagent use."
+  }
+}

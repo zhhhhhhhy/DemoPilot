@@ -1,0 +1,173 @@
+{
+  "report_id": "demopilot-failure-analysis-2026-10-07",
+  "baseline_result": "evaluation_sets/codex-cli-v1/results/full-real-post-audit-20261006.json",
+  "baseline": {
+    "case_count": 20,
+    "tier_counts": {"simple": 10, "medium": 5, "hard": 5},
+    "published": 15,
+    "hidden_cannot_complete": 5,
+    "publication_rate": 0.75,
+    "post_publish_audit_passed": 15,
+    "post_publish_audit_not_run": 5
+  },
+  "record_audit": {
+    "raw_evidence_present": true,
+    "dedicated_before_action_after_record_before_this_iteration": false,
+    "raw_evidence_pattern": ".data/runs/<run-id>/run.json and artifacts/evidence/core/iteration-{0,1,2}/{prompt.txt,stdout.jsonl,stderr.log,acceptance.json,browser-evidence.png}",
+    "trusted_after_source": "acceptance.json and run.json written by the DemoPilot harness"
+  },
+  "failures": [
+    {
+      "case_id": "simple-receipt-summary-01",
+      "run_id": "b1c719b74fb3",
+      "class": "harness_cli_routing",
+      "baseline_status": "failed",
+      "baseline_publication_status": "cannot_complete",
+      "iterations": [
+        {"iteration": 0, "browser_checks": 0, "issues": ["connection/TLS failure", "missing generated card"], "result": "transport failed"},
+        {"iteration": 1, "browser_checks": 0, "issues": ["workspace routing discovery failed", "missing generated card"], "result": "transport failed"},
+        {"iteration": 2, "browser_checks": 0, "issues": ["workspace routing discovery failed", "missing generated card"], "result": "transport failed"}
+      ],
+      "action": "Retry after verifying Codex CLI workspace routing; do not classify as a UI defect.",
+      "follow_up": {
+        "run_id": "3b22e1b8ca95",
+        "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+        "status": "completed",
+        "publication_status": "published",
+        "post_publish_audit_status": "passed",
+        "fresh_browser_context": true,
+        "revision_count": 1,
+        "improvement": "recovered from Harness routing failure to published"
+      }
+    },
+    {
+      "case_id": "simple-appointment-card-01",
+      "run_id": "1866980561b0",
+      "class": "harness_cli_routing",
+      "baseline_status": "failed",
+      "baseline_publication_status": "cannot_complete",
+      "iterations": [
+        {"iteration": 0, "browser_checks": 0, "issues": ["workspace routing discovery failed"], "result": "transport failed"},
+        {"iteration": 1, "browser_checks": 0, "issues": ["workspace routing discovery failed"], "result": "transport failed"},
+        {"iteration": 2, "browser_checks": 0, "issues": ["workspace routing discovery failed"], "result": "transport failed"}
+      ],
+      "action": "Retry after verifying Codex CLI workspace routing; do not classify as a UI defect.",
+      "follow_up": {
+        "run_id": "a42f544a552b",
+        "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+        "status": "completed",
+        "publication_status": "published",
+        "post_publish_audit_status": "passed",
+        "fresh_browser_context": true,
+        "revision_count": 0,
+        "improvement": "recovered from Harness routing failure to published"
+      }
+    },
+    {
+      "case_id": "medium-replenishment-01",
+      "run_id": "878ff813cfe8",
+      "class": "builder_offline_fixture_regression",
+      "baseline_status": "failed",
+      "baseline_publication_status": "cannot_complete",
+      "iterations": [
+        {"iteration": 0, "browser_checks": 0, "issues": ["external fetch", "unsafe HTML injection", "low-stock list missing 无线鼠标", "2 console errors"], "result": "failed"},
+        {"iteration": 1, "browser_checks": 1, "issues": ["HTML inline script"], "result": "functional path improved but safety gate failed"},
+        {"iteration": 2, "browser_checks": 0, "issues": ["external fetch", "low-stock list missing 无线鼠标", "1 console error"], "result": "regressed and failed"}
+      ],
+      "action": "Require an embedded app.js fixture constant; keep DOM API rendering and rerun all checks after safety edits.",
+      "follow_up": {
+        "attempts": [
+          {
+            "run_id": "68a832e536d0",
+            "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+            "status": "failed",
+            "publication_status": "cannot_complete",
+            "reason": "old server prompt allowed fetch; final browser path regressed"
+          },
+          {
+            "run_id": "a6b3d832a92c",
+            "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-replenishment-v2-20261007.json",
+            "status": "failed",
+            "publication_status": "cannot_complete",
+            "reason": "browser passed but acceptance child was blocked by Python SRE module mismatch"
+          },
+          {
+            "run_id": "a856b40f7c20",
+            "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-replenishment-v3-20261007.json",
+            "status": "completed",
+            "publication_status": "published",
+            "post_publish_audit_status": "passed",
+            "fresh_browser_context": true,
+            "revision_count": 0,
+            "reason": "new offline fixture prompt and fixed acceptance-child interpreter"
+          }
+        ],
+        "status": "completed",
+        "publication_status": "published",
+        "improvement": "recovered after prompt and acceptance-child environment fixes"
+      }
+    },
+    {
+      "case_id": "medium-content-calendar-01",
+      "run_id": "738f81cdfc9e",
+      "class": "builder_offline_fixture_regression",
+      "baseline_status": "failed",
+      "baseline_publication_status": "cannot_complete",
+      "iterations": [
+        {"iteration": 0, "browser_checks": 2, "issues": ["external fetch", "unsafe HTML injection", "2 console errors"], "result": "functional checks passed but safety failed"},
+        {"iteration": 1, "browser_checks": 2, "issues": ["HTML inline script"], "result": "functional checks preserved but safety failed"},
+        {"iteration": 2, "browser_checks": 2, "issues": ["external fetch", "2 console errors"], "result": "functional checks passed but runtime/safety failed"}
+      ],
+      "action": "Require an embedded app.js fixture constant and full static plus browser recheck.",
+      "follow_up": {
+        "run_id": "d2a7dc99391c",
+        "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+        "status": "completed",
+        "publication_status": "published",
+        "post_publish_audit_status": "passed",
+        "fresh_browser_context": true,
+        "revision_count": 1,
+        "improvement": "recovered after preserving the two functional paths and removing unsafe loading"
+      }
+    },
+    {
+      "case_id": "hard-incident-response-01",
+      "run_id": "7d43cf6e3b86",
+      "class": "builder_state_machine_regression",
+      "baseline_status": "failed",
+      "baseline_publication_status": "cannot_complete",
+      "iterations": [
+        {"iteration": 0, "browser_checks": 2, "issues": ["external fetch", "inline event", "unsafe HTML injection", "out-of-order message mismatch", "3 console errors"], "result": "partial functional pass"},
+        {"iteration": 1, "browser_checks": 3, "issues": ["inline event handler"], "result": "functional path improved but safety gate failed"},
+        {"iteration": 2, "browser_checks": 0, "issues": ["external fetch", "inline event", "3 console errors", "state-machine assertions failed"], "result": "regressed and failed"}
+      ],
+      "action": "Preserve the iteration-1 state machine, remove only unsafe event binding, embed fixture data in app.js, then rerun all negative and positive paths.",
+      "follow_up": {
+        "run_id": "2a2aff7b3598",
+        "result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+        "status": "completed",
+        "publication_status": "published",
+        "post_publish_audit_status": "passed",
+        "fresh_browser_context": true,
+        "revision_count": 1,
+        "improvement": "recovered all three positive/negative state-machine paths while satisfying safety gates"
+      }
+    }
+  ],
+  "follow_up": {
+    "primary_result_file": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+    "supplemental_result_files": [
+      "evaluation_sets/codex-cli-v1/results/failure-followup-replenishment-v2-20261007.json",
+      "evaluation_sets/codex-cli-v1/results/failure-followup-replenishment-v3-20261007.json"
+    ],
+    "primary_batch": {"case_count": 5, "published": 4, "failed": 1, "publication_rate": 0.8},
+    "final_recovery_case": {"case_id": "medium-replenishment-01", "run_id": "a856b40f7c20", "published": true, "post_publish_audit_status": "passed"},
+    "recovered_failed_cases": 5,
+    "combined_current_published": 20,
+    "combined_current_case_count": 20,
+    "combined_current_publication_rate": 1.0,
+    "baseline_to_combined_delta_percentage_points": 25,
+    "full_fresh_20_case_rerun_after_change": false,
+    "interpretation": "The 15 baseline published cases are carried forward unchanged; all five previously hidden cases now have new published evidence. This is an incremental recovery result, not a claim that a new single process reran all 20 after the prompt change."
+  }
+}

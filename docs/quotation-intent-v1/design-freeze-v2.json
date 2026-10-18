@@ -1,0 +1,12 @@
+{
+  "stage": "development-v2-before-fresh-run",
+  "private_gold_unchanged": true,
+  "heldout_model_runs": 0,
+  "changes": [
+    "shared full-quantity and aggregation conventions",
+    "unbiased live-update engineering gate",
+    "exact current-workspace exception in private-read audit",
+    "two simultaneous independent case pairs with alternating within-pair order"
+  ],
+  "manifest_sha256": "5b2b1a146f278e1bbdb4848e024044e05676faffcd03f1a4e9c484befcc2f35a"
+}

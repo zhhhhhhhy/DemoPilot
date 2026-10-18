@@ -1,0 +1,4369 @@
+{
+  "schema_version": "demopilot-portfolio-evidence-v1",
+  "generated_at": "2026-10-16T08:08:29.472206+00:00",
+  "baseline": {
+    "case_count": 20,
+    "publication_and_known_contract_pass_count": 15,
+    "revision_total": 23,
+    "cases_with_revisions": 18,
+    "zero_revision_pass_count": 2,
+    "recorded_core_cli_calls": 86,
+    "run_ids": [
+      "2b0df80406b6",
+      "b1c719b74fb3",
+      "1866980561b0",
+      "c15ca4f28f6f",
+      "dc00aa3fad05",
+      "b3f5716bc2c0",
+      "a414baf89ece",
+      "fd675be066f0",
+      "f55c7128f9b5",
+      "359b9ec8bdc0",
+      "46c58a500e0c",
+      "90d338aefd05",
+      "878ff813cfe8",
+      "f6e9c13a5f89",
+      "738f81cdfc9e",
+      "16f2a0e4ecd0",
+      "7d43cf6e3b86",
+      "2bfea92ba5c7",
+      "a83a4b7e3d04",
+      "1f5ebd6582a9"
+    ]
+  },
+  "incremental_recovery": {
+    "case_count": 20,
+    "publication_and_known_contract_pass_count": 20,
+    "revision_total": 16,
+    "cases_with_revisions": 16,
+    "zero_revision_pass_count": 4,
+    "recorded_core_cli_calls": 72,
+    "run_ids": [
+      "2b0df80406b6",
+      "3b22e1b8ca95",
+      "a42f544a552b",
+      "c15ca4f28f6f",
+      "dc00aa3fad05",
+      "b3f5716bc2c0",
+      "a414baf89ece",
+      "fd675be066f0",
+      "f55c7128f9b5",
+      "359b9ec8bdc0",
+      "46c58a500e0c",
+      "90d338aefd05",
+      "a856b40f7c20",
+      "f6e9c13a5f89",
+      "d2a7dc99391c",
+      "16f2a0e4ecd0",
+      "2a2aff7b3598",
+      "2bfea92ba5c7",
+      "a83a4b7e3d04",
+      "1f5ebd6582a9"
+    ],
+    "single_fresh_full_batch": false
+  },
+  "hard_v2": {
+    "case_count": 8,
+    "publication_and_known_contract_pass_count": 8,
+    "revision_total": 9,
+    "cases_with_revisions": 6,
+    "zero_revision_pass_count": 2,
+    "recorded_core_cli_calls": 34,
+    "run_ids": [
+      "d7e4e51c5724",
+      "d63cc2cfeb5e",
+      "bec5afcf2e0e",
+      "90e8e08b091e",
+      "231e7b839f74",
+      "cdb56bec1a60",
+      "3cd160e6104d",
+      "d3bbbba9066a"
+    ],
+    "business_semantics": "generic fixtures; known-contract behavior only"
+  },
+  "prompt_pilot": {
+    "variants": {
+      "control-legacy": {
+        "case_count": 4,
+        "publication_and_known_contract_pass_count": 4,
+        "revision_total": 5,
+        "cases_with_revisions": 4,
+        "zero_revision_pass_count": 0,
+        "recorded_core_cli_calls": 18,
+        "run_ids": [
+          "8d08d6d20a46",
+          "b34754282ae2",
+          "16004994e288",
+          "5ab991e03abc"
+        ]
+      },
+      "treatment-current": {
+        "case_count": 4,
+        "publication_and_known_contract_pass_count": 4,
+        "revision_total": 1,
+        "cases_with_revisions": 1,
+        "zero_revision_pass_count": 3,
+        "recorded_core_cli_calls": 10,
+        "run_ids": [
+          "577b71603115",
+          "c1f3d5e009e0",
+          "84ca8bd5203b",
+          "755b304c8112"
+        ]
+      }
+    },
+    "pair_count": 4,
+    "randomized": false,
+    "meaning": "prompt organization; this is not the seller-interview experiment"
+  },
+  "sources": {
+    "baseline": "evaluation_sets/codex-cli-v1/results/full-real-post-audit-20261006.json",
+    "recovery": "evaluation_sets/codex-cli-v1/results/failure-followup-20261007.json",
+    "last_recovery": "evaluation_sets/codex-cli-v1/results/failure-followup-replenishment-v3-20261007.json",
+    "hard": "docs/engineering/hard-v2-ab/full-real-2026-10-07.json",
+    "prompt_pilot": "evaluation_sets/codex-cli-ab-v1/results/pilot-20261008/prompt-ab-pilot-20261008.json"
+  },
+  "source_sha256": {
+    "baseline": "6bc70452cd3ea557e0353f4116941e97702e342e594fff7aa9fd90f7ce07d4ae",
+    "recovery": "42198efb68908a68c37c630b687bea94f0719b7197aa08f0ab7f69c9eb28daa4",
+    "last_recovery": "5c97f9ada989f2fa814a416c657d86b3b9a84ec1ba73e31bee4849d8ed9954ed",
+    "hard": "a869cdd6d51c645b298de33d5aaa26ca0475719454dfff91374d32328411f63c",
+    "prompt_pilot": "76f07ce76ac20c52c15c91b22d61a00e41fdab0e42b576ad996ba7c4a937ea27"
+  },
+  "limitations": [
+    "Historical scores are reaggregated, not a fresh browser rerun of every old artifact.",
+    "Incremental recovery combines baseline successes with subsequent retries and is not causal A/B evidence.",
+    "No real customer adoption, conversion, production scale or sales-time saving has been measured.",
+    "CLI-reported usage omits sessions without usage records; unknown usage is never zero."
+  ],
+  "dataset_audit": {
+    "definition_count": 20,
+    "tiers": {
+      "simple": 10,
+      "medium": 5,
+      "hard": 5
+    },
+    "baseline_case_ids_match": true,
+    "missing_required_files": [],
+    "manifest_hash_conflicts": [],
+    "read_only": true
+  },
+  "intent_pilot": {
+    "source": "evaluation_sets\\sales-intent-v1\\results\\portfolio-20261016\\paired-results.json",
+    "all_selected_terminal": true,
+    "arms": {
+      "raw-sales": {
+        "case_count": 3,
+        "publication_and_known_contract_pass_count": 3,
+        "revision_total": 1,
+        "cases_with_revisions": 1,
+        "zero_revision_pass_count": 2,
+        "recorded_core_cli_calls": 8,
+        "run_ids": [
+          "6ba9414d84b5",
+          "a97e8a63b93b",
+          "cb2ecd9f94ff"
+        ],
+        "final_gate_pass_count": 3,
+        "intent_cli_calls": 0,
+        "total_cli_calls": 8,
+        "seller_answer_release_count": 0,
+        "median_end_to_end_seconds": 219.662,
+        "intent_sessions": []
+      },
+      "intent-agent": {
+        "case_count": 3,
+        "publication_and_known_contract_pass_count": 2,
+        "revision_total": 2,
+        "cases_with_revisions": 2,
+        "zero_revision_pass_count": 0,
+        "recorded_core_cli_calls": 8,
+        "run_ids": [
+          "6d3baee70338",
+          "56b546934e42",
+          "c212a9051e04"
+        ],
+        "final_gate_pass_count": 2,
+        "intent_cli_calls": 6,
+        "total_cli_calls": 14,
+        "seller_answer_release_count": 3,
+        "median_end_to_end_seconds": 472.789,
+        "intent_sessions": [
+          {
+            "stdout": "simple-quote-generator-01/intent-agent/intent/turn-01-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 25028,
+              "cached_input_tokens": 0,
+              "output_tokens": 652,
+              "reasoning_output_tokens": 106
+            },
+            "observed_failure_signals": []
+          },
+          {
+            "stdout": "simple-quote-generator-01/intent-agent/intent/turn-02-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 24873,
+              "cached_input_tokens": 0,
+              "output_tokens": 961,
+              "reasoning_output_tokens": 113
+            },
+            "observed_failure_signals": []
+          },
+          {
+            "stdout": "medium-lead-followup-01/intent-agent/intent/turn-01-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 24254,
+              "cached_input_tokens": 0,
+              "output_tokens": 795,
+              "reasoning_output_tokens": 287
+            },
+            "observed_failure_signals": []
+          },
+          {
+            "stdout": "medium-lead-followup-01/intent-agent/intent/turn-02-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 24854,
+              "cached_input_tokens": 0,
+              "output_tokens": 867,
+              "reasoning_output_tokens": 170
+            },
+            "observed_failure_signals": []
+          },
+          {
+            "stdout": "hard-procurement-approval-01/intent-agent/intent/turn-01-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 25058,
+              "cached_input_tokens": 0,
+              "output_tokens": 852,
+              "reasoning_output_tokens": 119
+            },
+            "observed_failure_signals": []
+          },
+          {
+            "stdout": "hard-procurement-approval-01/intent-agent/intent/turn-02-stdout.jsonl",
+            "role": "intent",
+            "completed_turns": 1,
+            "usage_events": 1,
+            "usage": {
+              "input_tokens": 25187,
+              "cached_input_tokens": 0,
+              "output_tokens": 1315,
+              "reasoning_output_tokens": 122
+            },
+            "observed_failure_signals": []
+          }
+        ]
+      }
+    },
+    "external_business_audit": {
+      "raw-sales": {
+        "planned_cases": 3,
+        "fixture_coverage_pass_count": 2,
+        "fixture_coverage_pass_rate": "2/3",
+        "business_pass_count": 1,
+        "business_pass_rate": "1/3",
+        "missing_cases": [],
+        "published_defect_cases": [
+          "simple-quote-generator-01",
+          "hard-procurement-approval-01"
+        ],
+        "unverified_business_cases": []
+      },
+      "intent-agent": {
+        "planned_cases": 3,
+        "fixture_coverage_pass_count": 1,
+        "fixture_coverage_pass_rate": "1/3",
+        "business_pass_count": 0,
+        "business_pass_rate": "0/3",
+        "missing_cases": [],
+        "published_defect_cases": [
+          "medium-lead-followup-01"
+        ],
+        "unverified_business_cases": [
+          "hard-procurement-approval-01"
+        ]
+      }
+    }
+  },
+  "business_gate_regression": {
+    "case_count": 3,
+    "publication_and_known_contract_pass_count": 3,
+    "revision_total": 1,
+    "cases_with_revisions": 1,
+    "zero_revision_pass_count": 2,
+    "recorded_core_cli_calls": 8,
+    "run_ids": [
+      "74f82dbc4215",
+      "ee6a88df8c26",
+      "b84668047c06"
+    ],
+    "source": "evaluation_sets\\sales-business-v2\\results\\20261016",
+    "not_an_ab_rerun": true,
+    "interventions": [
+      "clarified business goals",
+      "full-fixture gates before publication"
+    ],
+    "independent_business_pass_count": 3,
+    "independent_journey_count": 24
+  },
+  "run_evidence_audit": {
+    "referenced_run_count": 50,
+    "readable_run_count": 50,
+    "missing_run_ids": [],
+    "manifest_state_mismatches": []
+  },
+  "run_metrics": [
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "16004994e288",
+      "case_id": "medium-invoice-review-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 884.867,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 2,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 5,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 1012669,
+        "cached_input_tokens": 902912,
+        "output_tokens": 7773,
+        "reasoning_output_tokens": 2968
+      },
+      "observed_failure_signals": [
+        "timeout",
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91655,
+            "cached_input_tokens": 78848,
+            "output_tokens": 935,
+            "reasoning_output_tokens": 369
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 65292,
+            "cached_input_tokens": 55552,
+            "output_tokens": 843,
+            "reasoning_output_tokens": 403
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 455636,
+            "cached_input_tokens": 410368,
+            "output_tokens": 3119,
+            "reasoning_output_tokens": 986
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87546,
+            "cached_input_tokens": 76800,
+            "output_tokens": 791,
+            "reasoning_output_tokens": 314
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 312540,
+            "cached_input_tokens": 281344,
+            "output_tokens": 2085,
+            "reasoning_output_tokens": 896
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "16f2a0e4ecd0",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 912.17,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 737033,
+        "cached_input_tokens": 677376,
+        "output_tokens": 12830,
+        "reasoning_output_tokens": 1260
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90990,
+            "cached_input_tokens": 88064,
+            "output_tokens": 658,
+            "reasoning_output_tokens": 131
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 242102,
+            "cached_input_tokens": 223232,
+            "output_tokens": 5325,
+            "reasoning_output_tokens": 395
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 113477,
+            "cached_input_tokens": 102144,
+            "output_tokens": 666,
+            "reasoning_output_tokens": 162
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 290464,
+            "cached_input_tokens": 263936,
+            "output_tokens": 6181,
+            "reasoning_output_tokens": 572
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "1866980561b0",
+      "case_id": "simple-appointment-card-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 692.283,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 3,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 1,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 65382,
+        "cached_input_tokens": 49408,
+        "output_tokens": 459,
+        "reasoning_output_tokens": 126
+      },
+      "observed_failure_signals": [
+        "cli_error",
+        "transport"
+      ],
+      "final_failure_stage": "core_or_execution",
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 65382,
+            "cached_input_tokens": 49408,
+            "output_tokens": 459,
+            "reasoning_output_tokens": 126
+          },
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "1f5ebd6582a9",
+      "case_id": "hard-clinic-followup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 467.613,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 678438,
+        "cached_input_tokens": 564480,
+        "output_tokens": 9379,
+        "reasoning_output_tokens": 1102
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42620,
+            "cached_input_tokens": 33280,
+            "output_tokens": 241,
+            "reasoning_output_tokens": 73
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 352180,
+            "cached_input_tokens": 304384,
+            "output_tokens": 6804,
+            "reasoning_output_tokens": 536
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42624,
+            "cached_input_tokens": 40448,
+            "output_tokens": 283,
+            "reasoning_output_tokens": 118
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 241014,
+            "cached_input_tokens": 186368,
+            "output_tokens": 2051,
+            "reasoning_output_tokens": 375
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "231e7b839f74",
+      "case_id": "hard-data-pipeline-recovery-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1257.89,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 747429,
+        "cached_input_tokens": 632832,
+        "output_tokens": 5435,
+        "reasoning_output_tokens": 1564
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 293837,
+            "cached_input_tokens": 260096,
+            "output_tokens": 2113,
+            "reasoning_output_tokens": 644
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 141382,
+            "cached_input_tokens": 123392,
+            "output_tokens": 1112,
+            "reasoning_output_tokens": 409
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 312210,
+            "cached_input_tokens": 249344,
+            "output_tokens": 2210,
+            "reasoning_output_tokens": 511
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "2a2aff7b3598",
+      "case_id": "hard-incident-response-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 420.853,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 732376,
+        "cached_input_tokens": 634368,
+        "output_tokens": 8931,
+        "reasoning_output_tokens": 1088
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 95109,
+            "cached_input_tokens": 72704,
+            "output_tokens": 581,
+            "reasoning_output_tokens": 107
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 341081,
+            "cached_input_tokens": 312576,
+            "output_tokens": 5931,
+            "reasoning_output_tokens": 479
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 92849,
+            "cached_input_tokens": 75776,
+            "output_tokens": 665,
+            "reasoning_output_tokens": 148
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 203337,
+            "cached_input_tokens": 173312,
+            "output_tokens": 1754,
+            "reasoning_output_tokens": 354
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "2b0df80406b6",
+      "case_id": "simple-invoice-ocr-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 454.181,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 666849,
+        "cached_input_tokens": 577536,
+        "output_tokens": 8428,
+        "reasoning_output_tokens": 1103
+      },
+      "observed_failure_signals": [
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90166,
+            "cached_input_tokens": 65536,
+            "output_tokens": 617,
+            "reasoning_output_tokens": 172
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 202864,
+            "cached_input_tokens": 176384,
+            "output_tokens": 4809,
+            "reasoning_output_tokens": 298
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 65070,
+            "cached_input_tokens": 60672,
+            "output_tokens": 461,
+            "reasoning_output_tokens": 175
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 308749,
+            "cached_input_tokens": 274944,
+            "output_tokens": 2541,
+            "reasoning_output_tokens": 458
+          },
+          "observed_failure_signals": [
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "2bfea92ba5c7",
+      "case_id": "hard-contract-renewal-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1134.195,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 1102337,
+        "cached_input_tokens": 971136,
+        "output_tokens": 23035,
+        "reasoning_output_tokens": 1832
+      },
+      "observed_failure_signals": [
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 94049,
+            "cached_input_tokens": 80896,
+            "output_tokens": 654,
+            "reasoning_output_tokens": 173
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 394731,
+            "cached_input_tokens": 322176,
+            "output_tokens": 9532,
+            "reasoning_output_tokens": 682
+          },
+          "observed_failure_signals": [
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 97936,
+            "cached_input_tokens": 87040,
+            "output_tokens": 612,
+            "reasoning_output_tokens": 126
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 515621,
+            "cached_input_tokens": 481024,
+            "output_tokens": 12237,
+            "reasoning_output_tokens": 851
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "359b9ec8bdc0",
+      "case_id": "simple-faq-answer-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 458.656,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 552618,
+        "cached_input_tokens": 505344,
+        "output_tokens": 6233,
+        "reasoning_output_tokens": 1243
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42686,
+            "cached_input_tokens": 40448,
+            "output_tokens": 329,
+            "reasoning_output_tokens": 130
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 178429,
+            "cached_input_tokens": 160000,
+            "output_tokens": 3079,
+            "reasoning_output_tokens": 229
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87627,
+            "cached_input_tokens": 80896,
+            "output_tokens": 553,
+            "reasoning_output_tokens": 166
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 243876,
+            "cached_input_tokens": 224000,
+            "output_tokens": 2272,
+            "reasoning_output_tokens": 718
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "3b22e1b8ca95",
+      "case_id": "simple-receipt-summary-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 346.734,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 619489,
+        "cached_input_tokens": 524288,
+        "output_tokens": 7152,
+        "reasoning_output_tokens": 1189
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89789,
+            "cached_input_tokens": 62464,
+            "output_tokens": 578,
+            "reasoning_output_tokens": 142
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 253306,
+            "cached_input_tokens": 225024,
+            "output_tokens": 4775,
+            "reasoning_output_tokens": 539
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88061,
+            "cached_input_tokens": 75776,
+            "output_tokens": 510,
+            "reasoning_output_tokens": 130
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 188333,
+            "cached_input_tokens": 161024,
+            "output_tokens": 1289,
+            "reasoning_output_tokens": 378
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "3cd160e6104d",
+      "case_id": "hard-product-recall-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 808.198,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 795371,
+        "cached_input_tokens": 724736,
+        "output_tokens": 4374,
+        "reasoning_output_tokens": 1286
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 98461,
+            "cached_input_tokens": 67584,
+            "output_tokens": 773,
+            "reasoning_output_tokens": 219
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87438,
+            "cached_input_tokens": 76800,
+            "output_tokens": 952,
+            "reasoning_output_tokens": 442
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 609472,
+            "cached_input_tokens": 580352,
+            "output_tokens": 2649,
+            "reasoning_output_tokens": 625
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "46c58a500e0c",
+      "case_id": "medium-invoice-review-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 884.389,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 883794,
+        "cached_input_tokens": 784128,
+        "output_tokens": 16344,
+        "reasoning_output_tokens": 1351
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42651,
+            "cached_input_tokens": 28160,
+            "output_tokens": 263,
+            "reasoning_output_tokens": 90
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 222316,
+            "cached_input_tokens": 194560,
+            "output_tokens": 5265,
+            "reasoning_output_tokens": 325
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91219,
+            "cached_input_tokens": 81920,
+            "output_tokens": 686,
+            "reasoning_output_tokens": 172
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 527608,
+            "cached_input_tokens": 479488,
+            "output_tokens": 10130,
+            "reasoning_output_tokens": 764
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "56b546934e42",
+      "case_id": "medium-lead-followup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 588.985,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 644007,
+        "cached_input_tokens": 525312,
+        "output_tokens": 6628,
+        "reasoning_output_tokens": 127
+      },
+      "observed_failure_signals": [
+        "cli_error",
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 82259,
+            "cached_input_tokens": 50304,
+            "output_tokens": 417,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 254099,
+            "cached_input_tokens": 225408,
+            "output_tokens": 4924,
+            "reasoning_output_tokens": 96
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 79875,
+            "cached_input_tokens": 48768,
+            "output_tokens": 398,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 227774,
+            "cached_input_tokens": 200832,
+            "output_tokens": 889,
+            "reasoning_output_tokens": 31
+          },
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "577b71603115",
+      "case_id": "simple-invoice-ocr-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 768.473,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 505960,
+        "cached_input_tokens": 450048,
+        "output_tokens": 5263,
+        "reasoning_output_tokens": 1127
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87811,
+            "cached_input_tokens": 82944,
+            "output_tokens": 842,
+            "reasoning_output_tokens": 273
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 137479,
+            "cached_input_tokens": 121344,
+            "output_tokens": 1253,
+            "reasoning_output_tokens": 318
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 280670,
+            "cached_input_tokens": 245760,
+            "output_tokens": 3168,
+            "reasoning_output_tokens": 536
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "5ab991e03abc",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 763.676,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 457475,
+        "cached_input_tokens": 416256,
+        "output_tokens": 7646,
+        "reasoning_output_tokens": 929
+      },
+      "observed_failure_signals": [
+        "cli_error",
+        "timeout",
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 135806,
+            "cached_input_tokens": 121344,
+            "output_tokens": 1335,
+            "reasoning_output_tokens": 433
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87714,
+            "cached_input_tokens": 83968,
+            "output_tokens": 756,
+            "reasoning_output_tokens": 215
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 233955,
+            "cached_input_tokens": 210944,
+            "output_tokens": 5555,
+            "reasoning_output_tokens": 281
+          },
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "6ba9414d84b5",
+      "case_id": "simple-quote-generator-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 202.638,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 332406,
+        "cached_input_tokens": 254464,
+        "output_tokens": 4883,
+        "reasoning_output_tokens": 91
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 109243,
+            "cached_input_tokens": 67072,
+            "output_tokens": 471,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 223163,
+            "cached_input_tokens": 187392,
+            "output_tokens": 4412,
+            "reasoning_output_tokens": 91
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "6d3baee70338",
+      "case_id": "simple-quote-generator-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 64.881,
+      "recorded_agent_calls": 0,
+      "core_iteration_count": 0,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 0,
+      "sessions_with_usage": 0,
+      "usage_complete": false,
+      "observed_usage": null,
+      "observed_failure_signals": [],
+      "final_failure_stage": "intent",
+      "sessions": [],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "738f81cdfc9e",
+      "case_id": "medium-content-calendar-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1051.667,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 3,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 6,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 1468876,
+        "cached_input_tokens": 1289984,
+        "output_tokens": 14927,
+        "reasoning_output_tokens": 2373
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": "core_or_execution",
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 92394,
+            "cached_input_tokens": 65152,
+            "output_tokens": 345,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 350319,
+            "cached_input_tokens": 295424,
+            "output_tokens": 6413,
+            "reasoning_output_tokens": 397
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42626,
+            "cached_input_tokens": 40448,
+            "output_tokens": 283,
+            "reasoning_output_tokens": 103
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 603616,
+            "cached_input_tokens": 552576,
+            "output_tokens": 5250,
+            "reasoning_output_tokens": 1297
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90874,
+            "cached_input_tokens": 80896,
+            "output_tokens": 622,
+            "reasoning_output_tokens": 123
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 289047,
+            "cached_input_tokens": 255488,
+            "output_tokens": 2014,
+            "reasoning_output_tokens": 453
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "74f82dbc4215",
+      "case_id": "simple-quote-generator-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 239.996,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 269948,
+        "cached_input_tokens": 199040,
+        "output_tokens": 3512,
+        "reasoning_output_tokens": 64
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 81665,
+            "cached_input_tokens": 64128,
+            "output_tokens": 417,
+            "reasoning_output_tokens": 17
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 188283,
+            "cached_input_tokens": 134912,
+            "output_tokens": 3095,
+            "reasoning_output_tokens": 47
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "755b304c8112",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 245.345,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 456608,
+        "cached_input_tokens": 406528,
+        "output_tokens": 6913,
+        "reasoning_output_tokens": 975
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 139578,
+            "cached_input_tokens": 120320,
+            "output_tokens": 1283,
+            "reasoning_output_tokens": 442
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 317030,
+            "cached_input_tokens": 286208,
+            "output_tokens": 5630,
+            "reasoning_output_tokens": 533
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "7d43cf6e3b86",
+      "case_id": "hard-incident-response-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 919.19,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 3,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 6,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 1277025,
+        "cached_input_tokens": 1162240,
+        "output_tokens": 16239,
+        "reasoning_output_tokens": 2776
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": "core_or_execution",
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90140,
+            "cached_input_tokens": 81920,
+            "output_tokens": 641,
+            "reasoning_output_tokens": 207
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 269400,
+            "cached_input_tokens": 244480,
+            "output_tokens": 5782,
+            "reasoning_output_tokens": 597
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90449,
+            "cached_input_tokens": 75776,
+            "output_tokens": 790,
+            "reasoning_output_tokens": 207
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 325448,
+            "cached_input_tokens": 297472,
+            "output_tokens": 5429,
+            "reasoning_output_tokens": 622
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88131,
+            "cached_input_tokens": 81920,
+            "output_tokens": 557,
+            "reasoning_output_tokens": 143
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 413457,
+            "cached_input_tokens": 380672,
+            "output_tokens": 3040,
+            "reasoning_output_tokens": 1000
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "84ca8bd5203b",
+      "case_id": "medium-invoice-review-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 287.9,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 372509,
+        "cached_input_tokens": 332288,
+        "output_tokens": 7214,
+        "reasoning_output_tokens": 746
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 136953,
+            "cached_input_tokens": 121344,
+            "output_tokens": 1065,
+            "reasoning_output_tokens": 310
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 235556,
+            "cached_input_tokens": 210944,
+            "output_tokens": 6149,
+            "reasoning_output_tokens": 436
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "878ff813cfe8",
+      "case_id": "medium-replenishment-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 964.418,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 3,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 6,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 1262509,
+        "cached_input_tokens": 1156864,
+        "output_tokens": 16176,
+        "reasoning_output_tokens": 2652
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": "core_or_execution",
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91179,
+            "cached_input_tokens": 82944,
+            "output_tokens": 599,
+            "reasoning_output_tokens": 131
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 463652,
+            "cached_input_tokens": 419328,
+            "output_tokens": 7972,
+            "reasoning_output_tokens": 828
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42625,
+            "cached_input_tokens": 39424,
+            "output_tokens": 235,
+            "reasoning_output_tokens": 61
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 427144,
+            "cached_input_tokens": 399360,
+            "output_tokens": 5502,
+            "reasoning_output_tokens": 1145
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42623,
+            "cached_input_tokens": 40448,
+            "output_tokens": 237,
+            "reasoning_output_tokens": 69
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 195286,
+            "cached_input_tokens": 175360,
+            "output_tokens": 1631,
+            "reasoning_output_tokens": 418
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "8d08d6d20a46",
+      "case_id": "simple-invoice-ocr-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 871.979,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 788110,
+        "cached_input_tokens": 738560,
+        "output_tokens": 7918,
+        "reasoning_output_tokens": 927
+      },
+      "observed_failure_signals": [
+        "timeout",
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 157091,
+            "cached_input_tokens": 149760,
+            "output_tokens": 1061,
+            "reasoning_output_tokens": 253
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 140420,
+            "cached_input_tokens": 133632,
+            "output_tokens": 1049,
+            "reasoning_output_tokens": 271
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 490599,
+            "cached_input_tokens": 455168,
+            "output_tokens": 5808,
+            "reasoning_output_tokens": 403
+          },
+          "observed_failure_signals": [
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "90d338aefd05",
+      "case_id": "medium-lead-followup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 725.412,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 973124,
+        "cached_input_tokens": 875264,
+        "output_tokens": 13475,
+        "reasoning_output_tokens": 1639
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91657,
+            "cached_input_tokens": 80896,
+            "output_tokens": 582,
+            "reasoning_output_tokens": 109
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 383930,
+            "cached_input_tokens": 337920,
+            "output_tokens": 6839,
+            "reasoning_output_tokens": 540
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91253,
+            "cached_input_tokens": 80896,
+            "output_tokens": 681,
+            "reasoning_output_tokens": 162
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 406284,
+            "cached_input_tokens": 375552,
+            "output_tokens": 5373,
+            "reasoning_output_tokens": 828
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "90e8e08b091e",
+      "case_id": "hard-release-gate-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1435.581,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 2,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 419602,
+        "cached_input_tokens": 349696,
+        "output_tokens": 4068,
+        "reasoning_output_tokens": 1460
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 142961,
+            "cached_input_tokens": 110080,
+            "output_tokens": 1227,
+            "reasoning_output_tokens": 358
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 140617,
+            "cached_input_tokens": 129536,
+            "output_tokens": 1547,
+            "reasoning_output_tokens": 606
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 136024,
+            "cached_input_tokens": 110080,
+            "output_tokens": 1294,
+            "reasoning_output_tokens": 496
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "a414baf89ece",
+      "case_id": "simple-shipment-status-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 570.597,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 714638,
+        "cached_input_tokens": 631424,
+        "output_tokens": 8470,
+        "reasoning_output_tokens": 1551
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89444,
+            "cached_input_tokens": 82944,
+            "output_tokens": 660,
+            "reasoning_output_tokens": 148
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 313907,
+            "cached_input_tokens": 296960,
+            "output_tokens": 3655,
+            "reasoning_output_tokens": 453
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89135,
+            "cached_input_tokens": 69248,
+            "output_tokens": 551,
+            "reasoning_output_tokens": 107
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 222152,
+            "cached_input_tokens": 182272,
+            "output_tokens": 3604,
+            "reasoning_output_tokens": 843
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "a42f544a552b",
+      "case_id": "simple-appointment-card-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 190.059,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 350030,
+        "cached_input_tokens": 319232,
+        "output_tokens": 4802,
+        "reasoning_output_tokens": 640
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88552,
+            "cached_input_tokens": 75776,
+            "output_tokens": 601,
+            "reasoning_output_tokens": 174
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 261478,
+            "cached_input_tokens": 243456,
+            "output_tokens": 4201,
+            "reasoning_output_tokens": 466
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "a83a4b7e3d04",
+      "case_id": "hard-logistics-exception-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 703.411,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 753919,
+        "cached_input_tokens": 662272,
+        "output_tokens": 13289,
+        "reasoning_output_tokens": 1277
+      },
+      "observed_failure_signals": [
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 93058,
+            "cached_input_tokens": 82944,
+            "output_tokens": 636,
+            "reasoning_output_tokens": 137
+          },
+          "observed_failure_signals": [
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 213119,
+            "cached_input_tokens": 193792,
+            "output_tokens": 6283,
+            "reasoning_output_tokens": 455
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 93548,
+            "cached_input_tokens": 70656,
+            "output_tokens": 653,
+            "reasoning_output_tokens": 128
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 354194,
+            "cached_input_tokens": 314880,
+            "output_tokens": 5717,
+            "reasoning_output_tokens": 557
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "a856b40f7c20",
+      "case_id": "medium-replenishment-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 274.158,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 419556,
+        "cached_input_tokens": 394496,
+        "output_tokens": 6983,
+        "reasoning_output_tokens": 691
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 86981,
+            "cached_input_tokens": 82944,
+            "output_tokens": 840,
+            "reasoning_output_tokens": 324
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 332575,
+            "cached_input_tokens": 311552,
+            "output_tokens": 6143,
+            "reasoning_output_tokens": 367
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "a97e8a63b93b",
+      "case_id": "medium-lead-followup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 219.658,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 476709,
+        "cached_input_tokens": 378624,
+        "output_tokens": 6370,
+        "reasoning_output_tokens": 240
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 114789,
+            "cached_input_tokens": 82048,
+            "output_tokens": 422,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 361920,
+            "cached_input_tokens": 296576,
+            "output_tokens": 5948,
+            "reasoning_output_tokens": 240
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "b1c719b74fb3",
+      "case_id": "simple-receipt-summary-01",
+      "status": "failed",
+      "publication_status": "cannot_complete",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1502.407,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 3,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 0,
+      "usage_complete": false,
+      "observed_usage": null,
+      "observed_failure_signals": [
+        "cli_error",
+        "transport"
+      ],
+      "final_failure_stage": "core_or_execution",
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "cli_error",
+            "transport"
+          ]
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "b34754282ae2",
+      "case_id": "simple-sku-lookup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 659.925,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 562194,
+        "cached_input_tokens": 496128,
+        "output_tokens": 7148,
+        "reasoning_output_tokens": 1551
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 134571,
+            "cached_input_tokens": 115200,
+            "output_tokens": 1325,
+            "reasoning_output_tokens": 446
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 164627,
+            "cached_input_tokens": 142592,
+            "output_tokens": 1700,
+            "reasoning_output_tokens": 620
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 262996,
+            "cached_input_tokens": 238336,
+            "output_tokens": 4123,
+            "reasoning_output_tokens": 485
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "b3f5716bc2c0",
+      "case_id": "simple-feedback-tag-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 274.513,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 245559,
+        "cached_input_tokens": 196096,
+        "output_tokens": 4213,
+        "reasoning_output_tokens": 362
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89518,
+            "cached_input_tokens": 80896,
+            "output_tokens": 536,
+            "reasoning_output_tokens": 136
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 156041,
+            "cached_input_tokens": 115200,
+            "output_tokens": 3677,
+            "reasoning_output_tokens": 226
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "b84668047c06",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 618.883,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 705294,
+        "cached_input_tokens": 576896,
+        "output_tokens": 6329,
+        "reasoning_output_tokens": 262
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 86037,
+            "cached_input_tokens": 50304,
+            "output_tokens": 397,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 244216,
+            "cached_input_tokens": 211968,
+            "output_tokens": 4458,
+            "reasoning_output_tokens": 207
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 83714,
+            "cached_input_tokens": 55936,
+            "output_tokens": 407,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 291327,
+            "cached_input_tokens": 258688,
+            "output_tokens": 1067,
+            "reasoning_output_tokens": 55
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "bec5afcf2e0e",
+      "case_id": "hard-refund-dispute-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 472.411,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 508647,
+        "cached_input_tokens": 450048,
+        "output_tokens": 6452,
+        "reasoning_output_tokens": 1042
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87193,
+            "cached_input_tokens": 81920,
+            "output_tokens": 916,
+            "reasoning_output_tokens": 325
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 421454,
+            "cached_input_tokens": 368128,
+            "output_tokens": 5536,
+            "reasoning_output_tokens": 717
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "c15ca4f28f6f",
+      "case_id": "simple-sku-lookup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 460.442,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 539585,
+        "cached_input_tokens": 484096,
+        "output_tokens": 7856,
+        "reasoning_output_tokens": 1083
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 42697,
+            "cached_input_tokens": 28160,
+            "output_tokens": 275,
+            "reasoning_output_tokens": 84
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 183135,
+            "cached_input_tokens": 163072,
+            "output_tokens": 3595,
+            "reasoning_output_tokens": 280
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88376,
+            "cached_input_tokens": 81920,
+            "output_tokens": 616,
+            "reasoning_output_tokens": 131
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 225377,
+            "cached_input_tokens": 210944,
+            "output_tokens": 3370,
+            "reasoning_output_tokens": 588
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "c1f3d5e009e0",
+      "case_id": "simple-sku-lookup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 368.037,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 1,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 91692,
+        "cached_input_tokens": 79872,
+        "output_tokens": 752,
+        "reasoning_output_tokens": 221
+      },
+      "observed_failure_signals": [
+        "timeout"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91692,
+            "cached_input_tokens": 79872,
+            "output_tokens": 752,
+            "reasoning_output_tokens": 221
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "c212a9051e04",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 472.772,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 731575,
+        "cached_input_tokens": 598400,
+        "output_tokens": 7606,
+        "reasoning_output_tokens": 461
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 81498,
+            "cached_input_tokens": 48896,
+            "output_tokens": 531,
+            "reasoning_output_tokens": 33
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 333549,
+            "cached_input_tokens": 295680,
+            "output_tokens": 5234,
+            "reasoning_output_tokens": 320
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 83904,
+            "cached_input_tokens": 57600,
+            "output_tokens": 481,
+            "reasoning_output_tokens": 31
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 232624,
+            "cached_input_tokens": 196224,
+            "output_tokens": 1360,
+            "reasoning_output_tokens": 77
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "cb2ecd9f94ff",
+      "case_id": "hard-procurement-approval-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 404.52,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 743117,
+        "cached_input_tokens": 614400,
+        "output_tokens": 8187,
+        "reasoning_output_tokens": 224
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 117411,
+            "cached_input_tokens": 83328,
+            "output_tokens": 451,
+            "reasoning_output_tokens": 10
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 262288,
+            "cached_input_tokens": 224640,
+            "output_tokens": 5561,
+            "reasoning_output_tokens": 146
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 81647,
+            "cached_input_tokens": 50432,
+            "output_tokens": 421,
+            "reasoning_output_tokens": 0
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 281771,
+            "cached_input_tokens": 256000,
+            "output_tokens": 1754,
+            "reasoning_output_tokens": 68
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "cdb56bec1a60",
+      "case_id": "hard-employee-onboarding-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1381.638,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 2,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 3,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 348049,
+        "cached_input_tokens": 295168,
+        "output_tokens": 3183,
+        "reasoning_output_tokens": 953
+      },
+      "observed_failure_signals": [
+        "timeout",
+        "transport"
+      ],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 138745,
+            "cached_input_tokens": 130560,
+            "output_tokens": 1399,
+            "reasoning_output_tokens": 469
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": [
+            "transport"
+          ]
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 118018,
+            "cached_input_tokens": 100096,
+            "output_tokens": 1034,
+            "reasoning_output_tokens": 275
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 91286,
+            "cached_input_tokens": 64512,
+            "output_tokens": 750,
+            "reasoning_output_tokens": 209
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "d2a7dc99391c",
+      "case_id": "medium-content-calendar-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 317.596,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 739886,
+        "cached_input_tokens": 654080,
+        "output_tokens": 8734,
+        "reasoning_output_tokens": 1273
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90983,
+            "cached_input_tokens": 75776,
+            "output_tokens": 656,
+            "reasoning_output_tokens": 143
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 285209,
+            "cached_input_tokens": 259072,
+            "output_tokens": 5997,
+            "reasoning_output_tokens": 642
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 92599,
+            "cached_input_tokens": 71680,
+            "output_tokens": 649,
+            "reasoning_output_tokens": 132
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 271095,
+            "cached_input_tokens": 247552,
+            "output_tokens": 1432,
+            "reasoning_output_tokens": 356
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "d3bbbba9066a",
+      "case_id": "hard-budget-control-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 1101.005,
+      "recorded_agent_calls": 6,
+      "core_iteration_count": 3,
+      "core_revision_count": 2,
+      "failed_core_acceptance_attempts": 2,
+      "observed_cli_session_count": 6,
+      "sessions_with_usage": 6,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 1443299,
+        "cached_input_tokens": 1281024,
+        "output_tokens": 14561,
+        "reasoning_output_tokens": 2927
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 135619,
+            "cached_input_tokens": 121344,
+            "output_tokens": 1141,
+            "reasoning_output_tokens": 324
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 393966,
+            "cached_input_tokens": 355584,
+            "output_tokens": 7510,
+            "reasoning_output_tokens": 1072
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 138388,
+            "cached_input_tokens": 112128,
+            "output_tokens": 1101,
+            "reasoning_output_tokens": 358
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 341278,
+            "cached_input_tokens": 312832,
+            "output_tokens": 1816,
+            "reasoning_output_tokens": 382
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 114157,
+            "cached_input_tokens": 88832,
+            "output_tokens": 978,
+            "reasoning_output_tokens": 332
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-2/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 319891,
+            "cached_input_tokens": 290304,
+            "output_tokens": 2015,
+            "reasoning_output_tokens": 459
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "d63cc2cfeb5e",
+      "case_id": "hard-access-review-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 519.411,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 1,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 139275,
+        "cached_input_tokens": 114176,
+        "output_tokens": 1326,
+        "reasoning_output_tokens": 474
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 139275,
+            "cached_input_tokens": 114176,
+            "output_tokens": 1326,
+            "reasoning_output_tokens": 474
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "d7e4e51c5724",
+      "case_id": "hard-invoice-reconciliation-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 862.007,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 2,
+      "usage_complete": false,
+      "observed_usage": {
+        "input_tokens": 199692,
+        "cached_input_tokens": 163584,
+        "output_tokens": 2379,
+        "reasoning_output_tokens": 980
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 112716,
+            "cached_input_tokens": 92928,
+            "output_tokens": 1334,
+            "reasoning_output_tokens": 438
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 86976,
+            "cached_input_tokens": 70656,
+            "output_tokens": 1045,
+            "reasoning_output_tokens": 542
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 0,
+          "usage_events": 0,
+          "usage": null,
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "dc00aa3fad05",
+      "case_id": "simple-expense-entry-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 500.615,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 612016,
+        "cached_input_tokens": 559104,
+        "output_tokens": 8685,
+        "reasoning_output_tokens": 1585
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 90426,
+            "cached_input_tokens": 83968,
+            "output_tokens": 697,
+            "reasoning_output_tokens": 193
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 210897,
+            "cached_input_tokens": 194560,
+            "output_tokens": 3887,
+            "reasoning_output_tokens": 513
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89678,
+            "cached_input_tokens": 81920,
+            "output_tokens": 835,
+            "reasoning_output_tokens": 136
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 221015,
+            "cached_input_tokens": 198656,
+            "output_tokens": 3266,
+            "reasoning_output_tokens": 743
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "ee6a88df8c26",
+      "case_id": "medium-lead-followup-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 261.387,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 341580,
+        "cached_input_tokens": 272640,
+        "output_tokens": 4487,
+        "reasoning_output_tokens": 65
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 114346,
+            "cached_input_tokens": 81920,
+            "output_tokens": 460,
+            "reasoning_output_tokens": 17
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 227234,
+            "cached_input_tokens": 190720,
+            "output_tokens": 4027,
+            "reasoning_output_tokens": 48
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "f55c7128f9b5",
+      "case_id": "simple-quote-generator-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 418.067,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 605585,
+        "cached_input_tokens": 550912,
+        "output_tokens": 6734,
+        "reasoning_output_tokens": 1003
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 87972,
+            "cached_input_tokens": 74752,
+            "output_tokens": 531,
+            "reasoning_output_tokens": 166
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 183631,
+            "cached_input_tokens": 171264,
+            "output_tokens": 3899,
+            "reasoning_output_tokens": 359
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 89888,
+            "cached_input_tokens": 74752,
+            "output_tokens": 601,
+            "reasoning_output_tokens": 118
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 244094,
+            "cached_input_tokens": 230144,
+            "output_tokens": 1703,
+            "reasoning_output_tokens": 360
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "f6e9c13a5f89",
+      "case_id": "medium-support-triage-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 432.527,
+      "recorded_agent_calls": 4,
+      "core_iteration_count": 2,
+      "core_revision_count": 1,
+      "failed_core_acceptance_attempts": 1,
+      "observed_cli_session_count": 4,
+      "sessions_with_usage": 4,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 550230,
+        "cached_input_tokens": 485120,
+        "output_tokens": 7875,
+        "reasoning_output_tokens": 1507
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88610,
+            "cached_input_tokens": 82944,
+            "output_tokens": 648,
+            "reasoning_output_tokens": 151
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 208409,
+            "cached_input_tokens": 169216,
+            "output_tokens": 4817,
+            "reasoning_output_tokens": 667
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 88963,
+            "cached_input_tokens": 81920,
+            "output_tokens": 669,
+            "reasoning_output_tokens": 178
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-1/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 164248,
+            "cached_input_tokens": 151040,
+            "output_tokens": 1741,
+            "reasoning_output_tokens": 511
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    },
+    {
+      "schema_version": "demopilot-run-metrics-v1",
+      "run_id": "fd675be066f0",
+      "case_id": "simple-profile-completion-01",
+      "status": "completed",
+      "publication_status": "published",
+      "terminal": true,
+      "persisted_elapsed_seconds": 335.874,
+      "recorded_agent_calls": 2,
+      "core_iteration_count": 1,
+      "core_revision_count": 0,
+      "failed_core_acceptance_attempts": 0,
+      "observed_cli_session_count": 2,
+      "sessions_with_usage": 2,
+      "usage_complete": true,
+      "observed_usage": {
+        "input_tokens": 344423,
+        "cached_input_tokens": 297600,
+        "output_tokens": 4266,
+        "reasoning_output_tokens": 318
+      },
+      "observed_failure_signals": [],
+      "final_failure_stage": null,
+      "sessions": [
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/acceptance-child/stdout.jsonl",
+          "role": "acceptance_child",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 66527,
+            "cached_input_tokens": 60672,
+            "output_tokens": 532,
+            "reasoning_output_tokens": 119
+          },
+          "observed_failure_signals": []
+        },
+        {
+          "stdout": "artifacts/evidence/core/iteration-0/stdout.jsonl",
+          "role": "builder",
+          "completed_turns": 1,
+          "usage_events": 1,
+          "usage": {
+            "input_tokens": 277896,
+            "cached_input_tokens": 236928,
+            "output_tokens": 3734,
+            "reasoning_output_tokens": 199
+          },
+          "observed_failure_signals": []
+        }
+      ],
+      "boundaries": [
+        "Usage is CLI-reported for retained Core sessions; absent usage remains unknown, not zero.",
+        "Intent transcripts stored outside the run directory are counted separately by experiment reports.",
+        "Observed transport warnings can occur in successful runs and are not terminal failure labels.",
+        "Persisted elapsed time measures recorded state lifetime, not a production latency SLA.",
+        "File permissions are CLI policy plus post-run audit; this does not establish container-level isolation."
+      ]
+    }
+  ]
+}

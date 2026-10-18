@@ -1,0 +1,296 @@
+{
+  "generated_at": "2026-10-16T14:10:54.405739+00:00",
+  "primary_cases": 6,
+  "total_cases": 10,
+  "primary": {
+    "direct": {
+      "cases": 6,
+      "published": 6,
+      "complete_pass": 1,
+      "core_calls": 14,
+      "intent_calls": 0,
+      "total_calls": 14,
+      "repairs": 1,
+      "planned_journeys": 68,
+      "executed_journeys": 68,
+      "passed_journeys": 36,
+      "not_run_journeys": 0,
+      "monetary_mismatch_journeys": 32,
+      "timeout_journeys": 0,
+      "total_wall_seconds": 12470.125
+    },
+    "clarify": {
+      "cases": 6,
+      "published": 6,
+      "complete_pass": 5,
+      "core_calls": 14,
+      "intent_calls": 11,
+      "total_calls": 25,
+      "repairs": 1,
+      "planned_journeys": 68,
+      "executed_journeys": 68,
+      "passed_journeys": 67,
+      "not_run_journeys": 0,
+      "monetary_mismatch_journeys": 0,
+      "timeout_journeys": 1,
+      "total_wall_seconds": 1711.453
+    },
+    "full-rules": {
+      "cases": 6,
+      "published": 6,
+      "complete_pass": 5,
+      "core_calls": 18,
+      "intent_calls": 0,
+      "total_calls": 18,
+      "repairs": 3,
+      "planned_journeys": 68,
+      "executed_journeys": 68,
+      "passed_journeys": 68,
+      "not_run_journeys": 0,
+      "monetary_mismatch_journeys": 0,
+      "timeout_journeys": 0,
+      "total_wall_seconds": 2028.67
+    }
+  },
+  "development": {
+    "direct": {
+      "cases": 4,
+      "published": 4,
+      "complete_pass": 1,
+      "core_calls": 8,
+      "intent_calls": 0,
+      "total_calls": 8,
+      "repairs": 0,
+      "planned_journeys": 44,
+      "executed_journeys": 44,
+      "passed_journeys": 28,
+      "not_run_journeys": 0,
+      "monetary_mismatch_journeys": 16,
+      "timeout_journeys": 0,
+      "total_wall_seconds": 760.094
+    },
+    "clarify": {
+      "cases": 4,
+      "published": 3,
+      "complete_pass": 3,
+      "core_calls": 6,
+      "intent_calls": 7,
+      "total_calls": 13,
+      "repairs": 0,
+      "planned_journeys": 44,
+      "executed_journeys": 32,
+      "passed_journeys": 32,
+      "not_run_journeys": 12,
+      "monetary_mismatch_journeys": 0,
+      "timeout_journeys": 0,
+      "total_wall_seconds": 741.407
+    },
+    "full-rules": {
+      "cases": 4,
+      "published": 4,
+      "complete_pass": 4,
+      "core_calls": 8,
+      "intent_calls": 0,
+      "total_calls": 8,
+      "repairs": 0,
+      "planned_journeys": 44,
+      "executed_journeys": 44,
+      "passed_journeys": 44,
+      "not_run_journeys": 0,
+      "monetary_mismatch_journeys": 0,
+      "timeout_journeys": 0,
+      "total_wall_seconds": 886.078
+    }
+  },
+  "information_parity": [
+    {
+      "case_id": "quotation-05",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "只有A参与客户和数量两种优惠，B、C用原价。",
+        "VIP优惠10%；商品合计数量至少5件时批量优惠20%。",
+        "同时命中时VIP规则优先，只用VIP的10%；不叠加，也不自动选更大的20%。"
+      ],
+      "b_released_facts": [
+        "只有A参与客户和数量两种优惠，B、C用原价。",
+        "VIP优惠10%；商品合计数量至少5件时批量优惠20%。",
+        "同时命中时VIP规则优先，只用VIP的10%；不叠加，也不自动选更大的20%。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-06",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "A和B属于同一优惠组，C不参与凑数也不享受优惠。",
+        "组内商品合计至少5件时，组内所有商品都优惠10%。"
+      ],
+      "b_released_facts": [
+        "A和B属于同一优惠组，C不参与凑数也不享受优惠。",
+        "组内商品合计至少5件时，组内所有商品都优惠10%。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-07",
+      "initial_information": "sufficient",
+      "c_facts": [
+        "协议价只适用合作客户购买A，其他客户和商品用目录价。",
+        "协议单价是88元，替代目录单价，不是减88或打88折；保留目录原金额，把价差计入价格调整金额。"
+      ],
+      "b_released_facts": [],
+      "all_c_facts_were_released_to_b": false,
+      "original_already_complete_control": true,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-08",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "本题只有一项10%的演示税，没有优惠。",
+        "目录单价均为含税价。未税金额为含税金额除以1.10，税额为两者差，最终应付保持原含税金额，不能重复加税。"
+      ],
+      "b_released_facts": [
+        "本题只有一项10%的演示税，没有优惠。",
+        "目录单价均为含税价。未税金额为含税金额除以1.10，税额为两者差，最终应付保持原含税金额，不能重复加税。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-09",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "每张报价从整单未税金额先减30元，最多减到0；不是从含税总价减。",
+        "目录单价不含税，先扣整单优惠，再对折后未税金额计算10%的演示税。"
+      ],
+      "b_released_facts": [
+        "每张报价从整单未税金额先减30元，最多减到0；不是从含税总价减。",
+        "目录单价不含税，先扣整单优惠，再对折后未税金额计算10%的演示税。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    },
+    {
+      "case_id": "quotation-10",
+      "initial_information": "underspecified",
+      "c_facts": [
+        "只有A参与买赠，B和C不参与。",
+        "每买2件付费商品，额外赠1件同款，可重复，赠送数量向下取整。付费数量不含赠品，赠品单价0，应付只算付费商品。"
+      ],
+      "b_released_facts": [
+        "只有A参与买赠，B和C不参与。",
+        "每买2件付费商品，额外赠1件同款，可重复，赠送数量向下取整。付费数量不含赠品，赠品单价0，应付只算付费商品。"
+      ],
+      "all_c_facts_were_released_to_b": true,
+      "original_already_complete_control": false,
+      "b_uses_typed_goal_and_requirements": true,
+      "c_uses_typed_goal_and_requirements": false
+    }
+  ],
+  "contrasts": {
+    "information": {
+      "left_arm": "direct",
+      "right_arm": "full-rules",
+      "right_only": 4,
+      "left_only": 0,
+      "net_complete_pass": 4,
+      "exact_paired_two_sided_p": 0.125,
+      "pairs": [
+        {
+          "case_id": "quotation-05",
+          "left": false,
+          "right": true
+        },
+        {
+          "case_id": "quotation-06",
+          "left": false,
+          "right": false
+        },
+        {
+          "case_id": "quotation-07",
+          "left": true,
+          "right": true
+        },
+        {
+          "case_id": "quotation-08",
+          "left": false,
+          "right": true
+        },
+        {
+          "case_id": "quotation-09",
+          "left": false,
+          "right": true
+        },
+        {
+          "case_id": "quotation-10",
+          "left": false,
+          "right": true
+        }
+      ],
+      "inference": "Descriptive retrospective small-sample comparison, not a controlled population causal estimate"
+    },
+    "processing": {
+      "left_arm": "full-rules",
+      "right_arm": "clarify",
+      "right_only": 1,
+      "left_only": 1,
+      "net_complete_pass": 0,
+      "exact_paired_two_sided_p": 1,
+      "pairs": [
+        {
+          "case_id": "quotation-05",
+          "left": true,
+          "right": true
+        },
+        {
+          "case_id": "quotation-06",
+          "left": false,
+          "right": true
+        },
+        {
+          "case_id": "quotation-07",
+          "left": true,
+          "right": true
+        },
+        {
+          "case_id": "quotation-08",
+          "left": true,
+          "right": false
+        },
+        {
+          "case_id": "quotation-09",
+          "left": true,
+          "right": true
+        },
+        {
+          "case_id": "quotation-10",
+          "left": true,
+          "right": true
+        }
+      ],
+      "inference": "Descriptive retrospective small-sample comparison, not a controlled population causal estimate"
+    }
+  },
+  "attribution": "完整规则直接交给Core也能取得提升；本轮没有显示意图整理比直接给完整规则带来更多完整通过。已有收益主要支持获取缺失信息的价值。",
+  "design": "C added after A/B outcomes were known; same frozen Core/scorer and configured budgets; original six primary cases reused, no new unseen claim.",
+  "limitations": [
+    "Scripted seller and one vendor's four public documents, not real sales feedback",
+    "Single execution per task/arm; no independent repeated seeds or concurrent randomization",
+    "B08 original timeout remains failed despite successful diagnostic replay",
+    "A10 long interruption makes timing comparisons unsuitable",
+    "Native child usage may be incomplete; outer CLI calls are not billed cost",
+    "No OS-level confidentiality isolation; frozen tool guard can misclassify documentation links"
+  ]
+}

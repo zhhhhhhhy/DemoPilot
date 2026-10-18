@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-release-gate-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "7a685f8a15ef846ddd7276b6cc8c9ad6e5343a81aa33a23404509cbb06b61574"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "0a10bc21f2f31abb8f459225a27127fe66df2134304c5aab48241108f8913cdb"
+    }
+  ],
+  "status": "authored_not_run"
+}

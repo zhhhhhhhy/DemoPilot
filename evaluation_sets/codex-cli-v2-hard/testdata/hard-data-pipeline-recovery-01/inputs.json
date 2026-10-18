@@ -1,0 +1,34 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-data-pipeline-recovery-01",
+  "industry": "数据平台",
+  "audience": "数据运维",
+  "scenario": "从异常批次定位受影响分区，执行隔离、部分重跑、质量校验和发布。",
+  "fixtures": {
+    "entities": [
+      {
+        "id": "entity-01",
+        "label": "对象一"
+      },
+      {
+        "id": "entity-02",
+        "label": "对象二"
+      },
+      {
+        "id": "entity-03",
+        "label": "对象三"
+      }
+    ],
+    "subentities": [
+      "sub-01",
+      "sub-02",
+      "sub-03"
+    ],
+    "rules": "部分分区可重跑，质量阈值不达标只能继续修复或放弃",
+    "terminal": "批次已发布"
+  },
+  "paths": {
+    "acceptance": "testdata/hard-data-pipeline-recovery-01/acceptance.json",
+    "inputs": "testdata/hard-data-pipeline-recovery-01/inputs.json"
+  }
+}

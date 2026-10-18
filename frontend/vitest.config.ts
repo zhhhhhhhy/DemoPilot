@@ -7,7 +7,8 @@ export default defineConfig({
     environment: 'jsdom',
     fileParallelism: false,
     maxWorkers: 1,
-    pool: 'forks',
+    // Keep unit tests in one worker thread; avoids Windows fork startup stalls.
+    pool: 'threads',
     setupFiles: ['./src/test/setup.ts'],
   },
 })

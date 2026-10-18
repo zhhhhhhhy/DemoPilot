@@ -1,0 +1,84 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-procurement-approval-01",
+  "industry": "供应链采购",
+  "audience": "采购经理",
+  "scenario": "采购经理比较三家供应商，选择方案，填写理由，提交审批，审批人可批准或驳回并留下审计记录。",
+  "fixtures": {
+    "entity_type": "采购申请",
+    "entities": [
+      {
+        "id": "P-01",
+        "title": "采购申请甲"
+      },
+      {
+        "id": "P-02",
+        "title": "采购申请乙"
+      }
+    ],
+    "owners": [
+      "林澄",
+      "周岚"
+    ],
+    "initial_state": "待处理",
+    "ordered_transitions": [
+      [
+        "create-request",
+        "需求已创建"
+      ],
+      [
+        "compare",
+        "已比较"
+      ],
+      [
+        "choose",
+        "方案已选"
+      ],
+      [
+        "submit",
+        "待审批"
+      ],
+      [
+        "approve",
+        "已批准"
+      ],
+      [
+        "order",
+        "订单已下达"
+      ],
+      [
+        "receive",
+        "已验收"
+      ]
+    ],
+    "validation": "Owner and reason required before first transition. Ordinary transitions must follow the order; terminal state rejects rollback; state and history are isolated by entity.",
+    "suppliers": [
+      {
+        "id": "A",
+        "name": "供应商 A",
+        "quote": 100,
+        "delivery_days": 5
+      },
+      {
+        "id": "B",
+        "name": "供应商 B",
+        "quote": 110,
+        "delivery_days": 3
+      },
+      {
+        "id": "C",
+        "name": "供应商 C",
+        "quote": 95,
+        "delivery_days": 7
+      }
+    ],
+    "comparison_ui": "Visible table #suppliers with one row per supplier; native #supplier select labels 供应商 A/供应商 B/供应商 C; show chosen name in #status or #timeline.",
+    "validation_ui": "Keep transition buttons enabled and show rejection messages. Rejection after submission is 已退回 with reason. Only approved requests may order/receive. Reset clears all entities."
+  },
+  "assets": [],
+  "paths": {
+    "acceptance": "testdata/hard-procurement-approval-01/acceptance.json",
+    "inputs": "testdata/hard-procurement-approval-01/inputs.json",
+    "asset_root": "testdata/hard-procurement-approval-01/assets"
+  }
+}

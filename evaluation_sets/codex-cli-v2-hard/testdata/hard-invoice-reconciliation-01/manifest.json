@@ -1,0 +1,15 @@
+{
+  "case_id": "hard-invoice-reconciliation-01",
+  "difficulty": "hard",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "301913b95680e266e14efcf58dfb58ee8f67e33a29b6c1494a3711a7f0addced"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "947f55084ab62ac3222d624413cabbbb9c4935344b084249dcd3aaae90926972"
+    }
+  ],
+  "status": "authored_not_run"
+}

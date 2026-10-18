@@ -1,0 +1,15 @@
+{
+  "controlled_checks_runtime": "v2.1 before IO correction",
+  "original_checker_sha256": "c6325ada4550ab3294740cfb70d7f633cefa0526823e15a9cdc11df9523dd212",
+  "archived_checker": "D:\\worker\\DemoPilot\\evaluation_sets\\quotation-reliability-v2\\results\\heldout-v3-20261017\\frozen-code\\backend\\src\\demopilot\\quotation_browser.py",
+  "current_checker_sha256": "3886792fb76fc3e665f7a059932442889cd1c5bbce6751067cd9f1b2b1e83eca",
+  "unchanged": {
+    "_set": true,
+    "_assert_snapshot": true,
+    "structural_check": true,
+    "tree_hash": true,
+    "audit_body_except_browser_launch_options": true
+  },
+  "reference_model_bytes_unchanged": true,
+  "boundary": "Original controlled scores and app copies unchanged. Only launch diagnostic routing differs in successor; valid/runtime-error browser smoke independently exercised new candidate."
+}

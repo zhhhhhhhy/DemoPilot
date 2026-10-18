@@ -1,0 +1,47 @@
+{
+  "rows": [
+    {
+      "case_id": "quotation-05",
+      "full_rule_count": 3,
+      "b_received_count": 3,
+      "identical_rule_texts": true,
+      "original_already_complete": false
+    },
+    {
+      "case_id": "quotation-06",
+      "full_rule_count": 2,
+      "b_received_count": 2,
+      "identical_rule_texts": true,
+      "original_already_complete": false
+    },
+    {
+      "case_id": "quotation-07",
+      "full_rule_count": 2,
+      "b_received_count": 0,
+      "identical_rule_texts": false,
+      "original_already_complete": true
+    },
+    {
+      "case_id": "quotation-08",
+      "full_rule_count": 2,
+      "b_received_count": 2,
+      "identical_rule_texts": true,
+      "original_already_complete": false
+    },
+    {
+      "case_id": "quotation-09",
+      "full_rule_count": 2,
+      "b_received_count": 2,
+      "identical_rule_texts": true,
+      "original_already_complete": false
+    },
+    {
+      "case_id": "quotation-10",
+      "full_rule_count": 2,
+      "b_received_count": 2,
+      "identical_rule_texts": true,
+      "original_already_complete": false
+    }
+  ],
+  "interpretation": "Five underspecified primary cases have identical seller-fact text in B and C. The sixth already states its rules in the original brief; C repeats that rule. No B compiled output is copied to C."
+}

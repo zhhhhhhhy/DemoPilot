@@ -1,0 +1,13 @@
+{
+  "case_id": "hard-procurement-approval-01",
+  "files": [
+    {
+      "path": "inputs.json",
+      "sha256": "ed49743f63299e255f76ea77af50c31a64700eb75f04be8e8aee45a1a265897d"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "b380529f854e93d5dea68492c3c4a23921b3c67a5d77076d52fd48fd15ae4f70"
+    }
+  ]
+}

@@ -3,7 +3,9 @@
 The script deliberately talks to DemoPilot's normal /api/runs endpoint. It
 does not call the Mock provider and it never sends invoice-gold.json to the
 model. A full run is sequential because each case can consume a long-lived
-Codex CLI session and the local provider serializes CLI processes.
+Codex CLI session and the local provider serializes CLI processes. A case is
+reported as publishable only when both the pre-publish Builder Gate and the
+fresh post-publish functional audit pass.
 """
 
 from __future__ import annotations
@@ -57,7 +59,11 @@ def resolve_assets(case: dict[str, Any]) -> tuple[list[str], dict[str, str]]:
 
 
 def request_payload(
-    set_payload: dict[str, Any], case: dict[str, Any], *, require_approval: bool
+    set_payload: dict[str, Any],
+    case: dict[str, Any],
+    *,
+    require_approval: bool,
+    prompt_profile: str,
 ) -> dict[str, Any]:
     assets, asset_sha256 = resolve_assets(case)
     return {
@@ -75,6 +81,7 @@ def request_payload(
         "primary_color": "#0071e3",
         "provider": "codex_cli",
         "evaluation_mode": "core_generation",
+        "evaluation_prompt_profile": prompt_profile,
         "require_execution_approval": require_approval,
         "evaluation_case_id": case["id"],
         "evaluation_difficulty": case["difficulty"],
@@ -137,6 +144,10 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         _, latest = max(core_acceptances, key=lambda item: item[0])
         validation = latest
         browser = latest
+    post_publish = outputs.get("post_publish_audit", {})
+    if not isinstance(post_publish, dict):
+        post_publish = {}
+    post_publish_browser = post_publish
     reviewer = outputs.get("reviewer", {})
     if not isinstance(reviewer, dict):
         reviewer = {}
@@ -155,12 +166,19 @@ def compact_result(case: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         "browser_status": browser.get("status", "not_run"),
         "browser_checks": browser.get("checks", []),
         "browser_issues": browser.get("issues", []),
+        "post_publish_audit_status": post_publish.get("status", "not_run"),
+        "post_publish_browser_status": post_publish_browser.get("status", "not_run"),
+        "post_publish_browser_checks": post_publish_browser.get("checks", []),
+        "post_publish_browser_issues": post_publish_browser.get("issues", []),
+        "post_publish_fresh_browser_context": post_publish.get("fresh_browser_context", False),
         "subagent_execution_mode": validation.get("subagent_execution_mode"),
         "subagent_spawn_count": validation.get("subagent_spawn_count"),
         "reviewer_decision": reviewer.get("decision"),
         "reviewer_score": reviewer.get("overall_score"),
         "artifact_count": len(run.get("artifacts", [])),
         "error": run.get("error"),
+        "prompt_profile": run.get("request", {}).get("evaluation_prompt_profile"),
+        "intent_profile": run.get("request", {}).get("evaluation_intent_profile"),
     }
 
 
@@ -175,6 +193,12 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Validate and print prompts without starting Codex")
     parser.add_argument("--real", action="store_true", help="Required to start real Codex CLI runs")
     parser.add_argument("--require-approval", action="store_true")
+    parser.add_argument(
+        "--prompt-profile",
+        choices=("control-legacy", "treatment-current"),
+        default="treatment-current",
+        help="Select the prompt variant without changing deterministic gates",
+    )
     args = parser.parse_args()
     set_payload, cases = load_cases()
     selected = list(cases.values())
@@ -198,7 +222,12 @@ def main() -> int:
         if not health.json().get("providers", {}).get("codex_cli"):
             raise RuntimeError("DemoPilot backend does not report codex_cli=true")
         for case in selected:
-            payload = request_payload(set_payload, case, require_approval=args.require_approval)
+            payload = request_payload(
+                set_payload,
+                case,
+                require_approval=args.require_approval,
+                prompt_profile=args.prompt_profile,
+            )
             if args.dry_run:
                 results.append(
                     {
@@ -206,6 +235,7 @@ def main() -> int:
                         "difficulty": case["difficulty"],
                         "flow_count": len(case["flow_steps"]),
                         "provider": payload["provider"],
+                        "prompt_profile": args.prompt_profile,
                         "evaluation_fields_present": all(
                             payload[key]
                             for key in (
@@ -232,6 +262,7 @@ def main() -> int:
         "schema_version": "codex-cli-v1-result",
         "created_at": datetime.now(UTC).isoformat(),
         "provider": "codex_cli",
+        "prompt_profile": args.prompt_profile,
         "real_runs": bool(args.real and not args.dry_run),
         "case_count": len(results),
         "tier_counts": dict(Counter(item["difficulty"] for item in results)),

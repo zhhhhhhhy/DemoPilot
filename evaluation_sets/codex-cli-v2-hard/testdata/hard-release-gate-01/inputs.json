@@ -1,0 +1,34 @@
+{
+  "schema_version": "core-inputs-v2",
+  "case_id": "hard-release-gate-01",
+  "industry": "研发交付",
+  "audience": "发布经理",
+  "scenario": "把版本变更、依赖、测试、风险、双人审批、金丝雀和回滚串成可审计发布流程。",
+  "fixtures": {
+    "entities": [
+      {
+        "id": "entity-01",
+        "label": "对象一"
+      },
+      {
+        "id": "entity-02",
+        "label": "对象二"
+      },
+      {
+        "id": "entity-03",
+        "label": "对象三"
+      }
+    ],
+    "subentities": [
+      "sub-01",
+      "sub-02",
+      "sub-03"
+    ],
+    "rules": "高风险版本需要技术和业务双签，金丝雀失败只能回滚",
+    "terminal": "发布已关闭"
+  },
+  "paths": {
+    "acceptance": "testdata/hard-release-gate-01/acceptance.json",
+    "inputs": "testdata/hard-release-gate-01/inputs.json"
+  }
+}

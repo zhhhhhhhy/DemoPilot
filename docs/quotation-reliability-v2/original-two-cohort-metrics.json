@@ -1,0 +1,168 @@
+{
+  "development-v2-20261016": {
+    "schema_version": "quotation-reliability-v2-summary",
+    "metrics": {
+      "direct": {
+        "v1": {
+          "application_groups": 3,
+          "complete_application_success": 3,
+          "combinations": 30,
+          "complete_combination_success": 30,
+          "published": 3,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 180,
+          "executed_journeys": 180,
+          "passed_journeys": 180,
+          "cli_calls": 4,
+          "internal_repair_rounds": 1
+        },
+        "v2": {
+          "application_groups": 3,
+          "complete_application_success": 3,
+          "combinations": 30,
+          "complete_combination_success": 30,
+          "published": 3,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 210,
+          "executed_journeys": 210,
+          "passed_journeys": 210,
+          "cli_calls": 3,
+          "internal_repair_rounds": 0
+        },
+        "change_regression": {
+          "previously_correct_combinations": 30,
+          "regressed_combinations": 0,
+          "regressed_ids": [],
+          "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+        }
+      },
+      "reliable": {
+        "v1": {
+          "application_groups": 3,
+          "complete_application_success": 3,
+          "combinations": 30,
+          "complete_combination_success": 30,
+          "published": 3,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 180,
+          "executed_journeys": 180,
+          "passed_journeys": 180,
+          "cli_calls": 4,
+          "internal_repair_rounds": 1
+        },
+        "v2": {
+          "application_groups": 3,
+          "complete_application_success": 3,
+          "combinations": 30,
+          "complete_combination_success": 30,
+          "published": 3,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 210,
+          "executed_journeys": 210,
+          "passed_journeys": 210,
+          "cli_calls": 3,
+          "internal_repair_rounds": 0
+        },
+        "change_regression": {
+          "previously_correct_combinations": 30,
+          "regressed_combinations": 0,
+          "regressed_ids": [],
+          "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+        }
+      }
+    },
+    "limitations": [
+      "Combinations within each workflow are correlated; application-group count is the independent task denominator.",
+      "Synthetic configured cases grounded in public docs/requests, not real customers or real financial transactions.",
+      "One trial per arm/group/version. No statistical significance, generalization or token-cost claim from this sample.",
+      "Equal configured caps do not imply equal consumed tokens, same service latency or same number of internal native tool turns."
+    ]
+  },
+  "heldout-v3-20261017": {
+    "schema_version": "quotation-reliability-v2-summary",
+    "metrics": {
+      "direct": {
+        "v1": {
+          "application_groups": 7,
+          "complete_application_success": 7,
+          "combinations": 70,
+          "complete_combination_success": 70,
+          "published": 7,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 420,
+          "executed_journeys": 420,
+          "passed_journeys": 420,
+          "cli_calls": 7,
+          "internal_repair_rounds": 0
+        },
+        "v2": {
+          "application_groups": 7,
+          "complete_application_success": 7,
+          "combinations": 70,
+          "complete_combination_success": 70,
+          "published": 7,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 0,
+          "planned_journeys": 490,
+          "executed_journeys": 490,
+          "passed_journeys": 490,
+          "cli_calls": 7,
+          "internal_repair_rounds": 0
+        },
+        "change_regression": {
+          "previously_correct_combinations": 70,
+          "regressed_combinations": 0,
+          "regressed_ids": [],
+          "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+        }
+      },
+      "reliable": {
+        "v1": {
+          "application_groups": 7,
+          "complete_application_success": 6,
+          "combinations": 70,
+          "complete_combination_success": 60,
+          "published": 6,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 1,
+          "planned_journeys": 420,
+          "executed_journeys": 420,
+          "passed_journeys": 420,
+          "cli_calls": 9,
+          "internal_repair_rounds": 2
+        },
+        "v2": {
+          "application_groups": 7,
+          "complete_application_success": 6,
+          "combinations": 70,
+          "complete_combination_success": 60,
+          "published": 6,
+          "incorrectly_published": 0,
+          "functionally_correct_but_hidden": 1,
+          "planned_journeys": 490,
+          "executed_journeys": 490,
+          "passed_journeys": 490,
+          "cli_calls": 8,
+          "internal_repair_rounds": 1
+        },
+        "change_regression": {
+          "previously_correct_combinations": 70,
+          "regressed_combinations": 0,
+          "regressed_ids": [],
+          "boundary": "Compare prior correct business behavior only; new shipping UI failures stay in new-feature metric, and all incomplete runs remain in overall denominator."
+        }
+      }
+    },
+    "limitations": [
+      "Combinations within each workflow are correlated; application-group count is the independent task denominator.",
+      "Synthetic configured cases grounded in public docs/requests, not real customers or real financial transactions.",
+      "One trial per arm/group/version. No statistical significance, generalization or token-cost claim from this sample.",
+      "Equal configured caps do not imply equal consumed tokens, same service latency or same number of internal native tool turns."
+    ]
+  }
+}

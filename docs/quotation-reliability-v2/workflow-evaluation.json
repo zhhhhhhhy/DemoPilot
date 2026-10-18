@@ -1,0 +1,15 @@
+{
+  "activation": {
+    "status": "indeterminate",
+    "selector_observable": false,
+    "detail": "controller initialization is present, but upstream Skill selection/loading is not exposed in the local state"
+  },
+  "process": {
+    "status": "passed",
+    "failures": []
+  },
+  "outcome": {
+    "status": "passed",
+    "failures": []
+  }
+}

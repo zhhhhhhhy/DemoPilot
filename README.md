@@ -2,11 +2,11 @@
 
 # DemoPilot
 
-### 由 Agent Team 亲手造出来的 Agent Team Demo 工厂
+### 业务验收驱动的 Agent Demo 构建与可靠发布系统
 
 **Human-directed. Agent-built. Evidence-verified.**
 
-人类负责目标、边界与最终验收；Agent Team 完成架构、前后端开发、浏览器测试、失败复盘与持续迭代。
+围绕销售报价场景，把需求交给 Codex CLI 持续构建和修复；通过实际业务测试后，才进入展示区。人类负责目标、边界与最终验收，过程保留可复查的生成、测试和修复记录。
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -16,9 +16,95 @@
 [![Codex CLI](https://img.shields.io/badge/Provider-Codex%20CLI-111111)](https://developers.openai.com/codex/cli/)
 [![Built by Agent Team](https://img.shields.io/badge/Built_by-Agent_Team-111111)](#built-by-an-agent-team)
 
-[快速开始](#快速开始) · [核心能力](#核心能力) · [运行架构](#运行架构) · [评测证据](#评测证据) · [API](#api) · [项目边界](#项目边界)
+[当前进展](#当前进展) · [数据与实测结果](#数据与实测结果) · [更新日志](#更新日志) · [查看已验收演示](#查看已验收演示) · [资料入口](#资料入口) · [早期模式与原控制台](#早期模式与原控制台)
 
 </div>
+
+## 当前进展
+
+**截至 2026-10-18，项目处于“报价 Core 专项验证完成，原销售入口集成待完成”的阶段。** 最近一轮生成、独立浏览器核验和交付整理于 2026-10-17 完成；没有新增评测批次，也没有在后台继续生成。2026-10-18 回看时，本机 `5189` 展示服务未启动，已保存的结果和验收产物仍在。
+
+目标流程是：**销售一句话 → 意图模块追问缺失信息 → Core Builder 构建、测试和返工 → 通过后展示**。意图问询已有单独的真实 CLI 实验；新的报价 Core 与发布台使用独立实验入口，尚未接入原 Vue 销售表单，不能视为整个产品入口已经贯通。
+
+| 环节 | 当前已做到 | 状态与边界 |
+| --- | --- | --- |
+| 意图获取 | 模型实际追问报价细节，保留问题、模拟销售回答和传给 Core 的内容 | 已做小样本实验；没有真实销售访谈，尚未证明意图整理本身的额外准确率收益 |
+| Core Builder 迭代 | 将目标、业务规则、数据位置和验收方式传给真实 Codex CLI；失败反馈给同一 Core 修复，未通过保持隐藏 | 已单独跑通；每版本最多 3 次外层 CLI 调用、每次 300 秒，完整保存输入、对话、检查和终态 |
+| 业务验收 | 实际操作 Chromium，核对金额、审批角色、修改后审批失效、记录隔离及改版后的旧功能 | 已完成初版和预先定义的配送改版评测；由程序检查决定是否发布，新 Core 不依赖独立模型 Reviewer |
+| 可靠发布与展示 | 用需求版本、任务所有权、验收记录和产物哈希绑定发布；页面和脚本固定到同一已验收版本 | 已交付 10 类应用的 20 个已验收版本；8 并发认领只有 1 个成功，30 个页面/脚本/样式资源完成逐字节核对 |
+| 产品集成与扩展 | 旧 Vue 控制台保留，新 Core 提供可替换 Harness 接口 | 原销售入口接入待完成；仅 Codex CLI 实测，其他 Harness、生产部署及真实客户收益未验证 |
+
+## 数据与实测结果
+
+当前主评测聚焦报价，数据依据 **11 个公开业务来源**编写，客户、商品、金额和规则组合为合成配置。它检验生成、改版和可靠交付，不代表真实客户使用效果。
+
+| 数据口径 | 数量与含义 |
+| --- | --- |
+| 独立应用流程 | **10 类**，覆盖单级审批、两级审批、多人会签等不同流程 |
+| 业务组合 | **100 个 = 10 类流程 × 10 种定价规则**；不是 100 个独立应用或客户需求 |
+| 开发 / 主评测 | **3 类流程、30 个组合 / 7 类流程、70 个组合**；后续完整复验复用了原 7 类主评测流程 |
+| 输入文件体积 | `testdata/qflow-01` 至 `qflow-10` 共 **50 个文件，5,571,774 字节，约 5.6 MB**；不含独立评测文件、产物和运行日志 |
+| 需求版本 | 每个应用先生成初版 v1，再在同一工作区完成配送改版 v2，并检查原功能；两版目标预先定义 |
+| 已保存的终态浏览器检查 | **4420 次**，其中 **1820 次是相同主评测需求的完整复验**；不能当作 4420 条独立需求 |
+
+以下三批分别保留结果，未用后来的成功覆盖原失败。“发布”与“功能检查通过”分别统计，正确但隐藏的版本仍不算成功交付。
+
+| 批次 | 应用版本发布 | 终态浏览器路径 | 结果说明 |
+| --- | ---: | ---: | --- |
+| 开发集 | 12/12 | 780/780 | 3 类应用 × 两种构建方式 × 两个版本 |
+| 原始主评测 | 26/28 | 1820/1820 | 电脑睡眠中断和日志写入归属检查使 2 个功能正确的版本保持隐藏；原分保留 |
+| 完整配对复验 | **28/28** | **1820/1820** | 修复运行环境后，重跑两种方式的全部 7 类应用；不是新增盲测需求 |
+
+**已经验证的提升：** 在同样 8 个故障注入副本上，文件结构检查发现 **0/8**，业务检查发现 **8/8**；在另一项受控测试中，真实 CLI 接收失败反馈后修复，最终 **60/60** 条独立浏览器路径通过。这证明错误拦截和返工接线有效，不是自然任务准确率提升。
+
+**仍未得到的结论：** 最新复验中，“完整规则＋自行测试”和“完整规则＋自行测试＋父级业务门禁”均为 **14/14 个版本交付**，未观察到最终通过率增益。历史三组实验的六条主比较是原话 **1/6**、询问后 **5/6**、完整规则直输 **5/6**，支持补齐业务信息的价值，尚不支持意图整理方式有独立增益；不能据此宣称稳定省钱、省时或生产准确率提升。
+
+## 更新日志
+
+这里持续记录 **遇到了什么问题 → 具体改了什么 → 验证后有什么变化**，最新记录在前。README 是进展与关键更新的统一入口；完整技术过程继续保存在 [工程迭代记录](docs/ITERATION_METHODS.md) 和 [失败与改进记录](docs/quotation-reliability-v2/失败与改进记录.md)，原始结果不覆盖。
+
+| 日期 / 环节 | 遇到的问题与原先表现 | 采取的动作 | 验证结果与仍有的限制 | 详细记录 |
+| --- | --- | --- | --- | --- |
+| 2026-10-18 · 版本同步与本地文件隔离 | 新 Core、README 和修复记录尚未进入提交，实验对话、运行数据库与本机环境混在工作区 | 补充忽略规则，检查实际提交内容；同步源码、公开输入和结果摘要，原始日志、凭据、私有评分计划及本机发布数据留在本地 | 仅进行版本整理与必要工程检查，不新增模型评测或更改历史分数；GitHub 副本不含原电脑的发布数据库，实际同步结果以提交记录为准 | [同步范围与新目录准备](docs/GITHUB_PUBLICATION.md) |
+| 2026-10-18 · 文档与进度 | 问题、修复和结果分散在多个文档；README 混用早期 Agent Team 与当前 Core 的说明，难以判断真实进展 | 将当前状态、数据口径、实测结果和本更新日志集中到 README，标出旧入口未接入等缺口 | 本次仅整理文档，未新增模型运行或改写历史评分；运行状态是 10-18 回看快照 | 本页；[完整迭代记录](docs/ITERATION_METHODS.md) |
+| 2026-10-17 · 执行环境与交付阻断 | 原始主评测 26/28 发布；qflow-08 两版业务检查 130/130 通过，但睡眠中断、CLI 超时及根目录诊断日志使其保持隐藏；日志具体写入进程未捕获 | 保留原分；把浏览器诊断输出放到工具证据目录，隔离探针工作目录，运行时申请防空闲睡眠并记录心跳；完整重跑两组全部主评测应用 | 复验 **28/28 发布、1820/1820 路径通过**；不是只重跑失败题，也不把环境恢复说成业务准确率提高；无法阻止手动合盖睡眠 | [失败记录 R26 及复验](docs/quotation-reliability-v2/失败与改进记录.md)；[三批结果](docs/quotation-reliability-v2/结果与贡献.md) |
+| 2026-10-17 · 业务验收覆盖 | 文件齐全、页面能打开，仍可能算错钱、使用过期审批或串用报价记录；8 个人为错误副本全部被结构检查接受 | 用独立 Decimal 金额计算和审批状态模型生成预期，Chromium 逐步操作并比较可见结果；对相同副本执行公开业务检查 | 结构检查 **0/8 发现 → 业务检查 8/8 发现**，正确副本仍被接受，共执行 126 条公开路径；仅为受控故障检验 | [失败记录 R27](docs/quotation-reliability-v2/失败与改进记录.md)；[原始对比](docs/quotation-reliability-v2/public-gate-calibration/structural-comparison.json) |
+| 2026-10-17 · Core 自动返工 | 需要证明检查发现错误后，产物保持隐藏，而且由真实 CLI 修好；不能用人工修改页面证明闭环 | 在隔离测试中，CLI 返回后注入“点击后总价变 0”的错误，再由业务检查拒绝并反馈给下一次 CLI | 共 **3 次真实 CLI 调用**，包含首轮超时；完成隐藏、拒绝、CLI 修复和发布，终态 **60/60** 路径通过；没有人工修复页面，不计入自然生成成功率 | [失败记录 R28](docs/quotation-reliability-v2/失败与改进记录.md)；[返工测试结果](docs/quotation-reliability-v2/controlled-real-repair-20261017/summary.json) |
+| 2026-10-17 · 并发发布与页面一致性 | 旧任务晚完成可能覆盖新需求；浏览器在发布切换时可能拿到旧 HTML 和新 JS | SQLite 事务及唯一认领绑定任务所有权，发布核对最新需求、验收记录和产物哈希，资源 URL 固定到版本及哈希 | **8 并发认领仅 1 个成功**；6 项后端检查覆盖旧版本、失败检查、篡改、幂等和固定资源；HTTP 交错实验复现并解决跨版本混用，不是生产事故统计 | [后端机制](docs/quotation-reliability-v2/后端机制.md)；[资源交错实验](docs/quotation-reliability-v2/bundle-race/result.json) |
+| 2026-10-16—17 · 评测规模与业务复杂度 | 早期报价只有 10 条需求，6 条主比较，难以支撑更复杂的审批和改版验证 | 构建 **10 类流程 × 10 种定价的 100 组合**；冻结开发/主评测分组，给每组配置初版、配送改版及旧功能检查，保留公开来源和精确预期 | 完成开发、原始主评测及完整复验三批，累计 **4420 次终态浏览器检查（含复验）**；独立流程仍为 10 类，未变成 100 个真实客户 | [100 组合一览](docs/quotation-reliability-v2/评测集一览.md)；[最终指标](docs/quotation-reliability-v2/final-metrics.json) |
+| 2026-10-16 · 区分信息补全与意图整理 | 只比较“原话”和“询问后”无法判断提升来自补充规则，还是整理方式本身 | 保留原 A/B，再增加“原话＋全部业务规则直接交 Core”的 C 组，保留相同 Core 配置和独立浏览器评分 | 六条主比较完整评分 **1/6、5/6、5/6**；功能路径 **36/68、67/68、68/68**；支持信息补全，未发现整理方式额外增益；C 为已知原结果后追加的对照，读取误报原分保留 | [三组结果与贡献](docs/quotation-information-ablation-v1/结果与简历贡献.md)；[测量说明](docs/quotation-information-ablation-v1/measurement-notes.md) |
+| 2026-10-16 · 意图交给 Core 的校验 | 模型已问清报价规则，但没有编造业务步骤；空步骤列表被校验拒绝，合法需求进不了 Core | 允许明确存在的空步骤列表，同时保留业务能力、类型、未解决问题及来源检查；不修改生成页面或金额答案 | **11 项定向检查通过**；实际被拒输出回放通过，受影响任务重新执行并通过 **12/12** 浏览器路径；原实验失败保留，不替换 A/B 成绩 | [IT-014](docs/ITERATION_METHODS.md)；[交接诊断](docs/quotation-intent-v1/intent-delivery-contract-diagnosis.json) |
+| 2026-10-07 · 首批 20 题失败归因 | 首批仅 **15/20 发布**：2 题在 CLI 工作区路由阶段失败，3 题生成页面未通过功能或离线安全检查 | 分开记录调用环境与生成缺陷；要求本地数据内嵌、禁止运行时外部获取，并修正验收子进程使用的 Python 环境；对失败题定向复验 | 先恢复 4/5，再恢复最后 1 题；合并证据 **15/20 → 20/20**，属于原 15 题加 5 题补测的增量恢复，不是修复后全量重跑，也不是全部由 Prompt 带来的提升 | [首批失败分析](docs/engineering/failure-analysis-2026-10-07.md)；[IT-005](docs/ITERATION_METHODS.md) |
+| 2026-10-06 · 早期 Core 验收证据 | 非交互 CLI 声称验收子智能体通过，但没有真实 `spawn_agent` 事件，不能据此发布 | 在早期 Core 加入只读 CLI 验收子进程兜底，要求保留实际命令完成事件，并联合 Chromium 检查 | 真实任务在第一次浏览器检查失败后内部修复，下一轮通过并发布；该旧适配流程单独保留，新的报价 Core 直接使用程序业务检查 | [IT-004 及真实任务记录](docs/ITERATION_METHODS.md) |
+
+### 后续如何持续更新
+
+每次解决一个实质问题、完成一批评测或发现最终缺陷，都在本表顶部追加一条，写明 **日期、出问题的环节、修复前表现、具体动作、修复后结果和证据路径**，并同步上方当前进展。只有文档整理就标明“仅文档”，尚未验证就写“待验证”；Core 中途返工、最终未发布、发布后仍有缺陷分别记录。复验另开批次，不覆盖旧结果，也不把重复路径或同流程的规则组合算成新增独立样本。
+
+## 查看已验收演示
+
+发布台展示已经保存且通过验收的产物，**启动和打开页面不会重新调用模型**。2026-10-18 回看时服务未运行；在项目根目录启动后访问 [本机报价发布台](http://127.0.0.1:5189/)：
+
+```powershell
+Set-Location D:\worker\DemoPilot
+& .\backend\.venv\Scripts\python.exe -X utf8 scripts\serve_quotation_reliability.py --registry docs\quotation-reliability-v2\delivery --port 5189
+```
+
+可选择 `qflow-04`：商品 A 数量 11、第二项 0、加急配送，总价应为 **930.00**；同一经理不能重复完成会签，第二位不同经理批准后才显示 `Approved`。再修改数量，旧审批应失效。详细启动、结果重算和证据核对方式见 [运行与复现](docs/quotation-reliability-v2/运行与复现.md)。
+
+## 资料入口
+
+- 当前结果：[结果与贡献](docs/quotation-reliability-v2/结果与贡献.md) · [最终验收记录](docs/quotation-reliability-v2/final-acceptance.json)
+- GitHub 同步：[上传范围、仅本机保留的证据与新目录准备](docs/GITHUB_PUBLICATION.md)
+- 问题与处理：[完整工程迭代记录](docs/ITERATION_METHODS.md) · [报价专项失败与改进](docs/quotation-reliability-v2/失败与改进记录.md)
+- 数据与实现：[100 个业务组合](docs/quotation-reliability-v2/评测集一览.md) · [后端机制](docs/quotation-reliability-v2/后端机制.md)
+- 当前简历与面试：[三条项目描述](docs/quotation-reliability-v2/简历项目描述.md) · [面试讲稿与追问](docs/quotation-reliability-v2/面试讲稿与追问.md)
+- 历史实验：[10 条公开来源需求与验收](evaluation_sets/quotation-intent-v1/需求与验收.md) · [实际追问案例](docs/quotation-intent-v1/案例说明.md) · [信息补全三组比较](docs/quotation-information-ablation-v1/结果与简历贡献.md)
+- 历史项目材料：[早期项目总览](docs/portfolio-v1/项目总览.md) · [早期个人贡献](docs/portfolio-v1/项目说明与个人贡献.md)，原始结果保留，不与当前批次合并
+
+## 早期模式与原控制台
+
+以下保留早期 9 节点 Agent Team、Vue 控制台、DeepSeek 成果和相关 API 的说明，方便维护原功能。**它们与上方的新报价 Core 并存，不代表两条入口已经接通。** 下方的独立 Reviewer、只读验收子进程、30 条工程用例和 Provider 配置均属于对应的早期模式，不能与当前 100 组合报价实验混为同一流程或同一统计结果。
 
 ## Built by an Agent Team
 
@@ -52,11 +138,11 @@ DemoPilot 不只是一个“内部调用多个模型”的项目。**这个项�
 
 ## 核心能力
 
-### Core Builder 评测模式
+### 早期 Core Builder 评测模式
 
-针对 Agent Core 生成评测，项目另有一条简化链路：`意图获取 → Core Builder loop → 前端展示`。它使用根目录 [`testdata/`](testdata/) 下按用例隔离的 `inputs.json`、`acceptance.json`、`manifest.json` 和公开素材。Goal Prompt 会把意图、目标、流程、预期结果、验收方式以及准确路径传给本地 Codex CLI；CLI 只可写运行目录内的 `card/`、`card-web/` 和当前用例的 `testdata/`。
+早期针对 Agent Core 生成评测，项目另有一条简化链路：`意图获取 → Core Builder loop → 前端展示`。它使用根目录 [`testdata/`](testdata/) 下按用例隔离的 `inputs.json`、`acceptance.json`、`manifest.json` 和公开素材。Goal Prompt 会把意图、目标、流程、预期结果、验收方式以及准确路径传给本地 Codex CLI；该早期流程允许 CLI 写运行目录内的 `card/`、`card-web/` 和当前用例的 `testdata/`。新的报价专项仅允许写产物目录，测试数据作为只读输入并核对完整性。
 
-每轮都保留完整 CLI prompt、JSONL 对话、stderr、确定性验收 JSON 和 Chromium 截图。Core Builder 优先使用 CLI 原生 `spawn_agent` 调用 `acceptance_checker`；如果非交互 CLI 没有真实 spawn 事件，Harness 会启动一个只读 Codex CLI acceptance child，并要求它实际执行 `scripts/core_acceptance_cli.py`。静态安全检查与真实 Playwright Chromium 全部通过后才发布；失败继续返工，超过轮次则保持隐藏并标记 `cannot_complete`。该模式不使用独立 Reviewer，Harness 通过 `HarnessAdapter` 保留后续接入其他 CLI/Agent 框架的边界。
+每轮都保留完整 CLI prompt、JSONL 对话、stderr、确定性验收 JSON 和 Chromium 截图。Core Builder 优先使用 CLI 原生 `spawn_agent` 调用 `acceptance_checker`；如果非交互 CLI 没有真实 spawn 事件，Harness 会启动一个只读 Codex CLI acceptance child，并要求它实际执行 `scripts/core_acceptance_cli.py`。通过 Builder Gate 后，产物先进入隐藏的 `candidate` 候选区，再由独立的新浏览器上下文执行一次 `post_publish_functional_audit`；只有两道门都通过才写入 `published`。发布后复核失败会撤回候选、保持隐藏并把缺陷送回下一轮；超过轮次则标记 `cannot_complete`。该模式不使用主观 Reviewer，Harness 通过 `HarnessAdapter` 保留后续接入其他 CLI/Agent 框架的边界。
 
 - **9 节点 Agent Team**：Brief、Manager、Discovery、Product、Experience、Contract、Builder、Runner、Reviewer 分工协作。
 - **共享交互契约**：每项 must-have 被转换为稳定操作路径、选择器与可见断言，返工期间不得修改验收标准。
@@ -204,7 +290,7 @@ manifest.json
 
 ### 工程验证
 
-当前仓库快照已完成以下本地验证：
+早期工程快照曾完成以下本地验证；这些是历史留存结果，不是本次 README 整理重新运行的全仓库检查：
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -229,7 +315,7 @@ npm.cmd run build
 
 ### 真实 DeepSeek Demo 清单
 
-当前正式目录包含 **23 个真实成功 Demo**，覆盖 23 个不重复行业，并分为 9 个简单要求与 14 个复杂要求。每个 Demo 都对应独立的 DeepSeek Agent Team 任务，并通过文件落盘、Chromium 真实点击和 Reviewer Quality Gate；每项均保留 8 个文件产物与 ZIP。
+早期正式目录记录了 **23 个真实成功 Demo**，覆盖 23 个不重复行业，并分为 9 个简单要求与 14 个复杂要求。每个 Demo 都对应独立的 DeepSeek Agent Team 任务，并通过当时的文件落盘、Chromium 真实点击和 Reviewer Quality Gate；每项均保留 8 个文件产物与 ZIP。这份历史目录不计入当前报价 Core 的 10 类流程或 100 个业务组合。
 
 | 指标 | 当前正式成果 |
 | --- | ---: |
@@ -245,6 +331,8 @@ npm.cmd run build
 
 工程与实验记录：
 
+- [项目影响与简历证据](docs/PROJECT_IMPACT.md)
+- [简历证据卡](docs/RESUME_EVIDENCE.md)
 - [Builder 确定性预检报告](BUILDER_PREFLIGHT_REPORT.md)
 - [共享交互契约报告](SHARED_CONTRACT_REPORT.md)
 - [工程 Skill A/B 报告](SKILL_AB_REPORT.md)
@@ -312,7 +400,7 @@ DemoPilot/
 ├── frontend/
 │   ├── src/components/
 │   └── package.json
-├── testdata/                   # 20 个 Core Builder 用例的输入与可执行验收
+├── testdata/                   # 按用例 ID 隔离的输入；含 qflow-01 至 qflow-10 报价数据
 ├── scripts/                    # 评测集、testdata 物化与验收 Runner
 ├── evaluation_sets/            # 10/5/5 分层用例与公开素材清单
 ├── .env.example
@@ -353,7 +441,7 @@ uv run uvicorn --env-file ../.env --app-dir src demopilot.main:app --host 127.0.
 ## 项目边界
 
 - Mock 是确定性的受控基线，不代表真实大模型效果。
-- 30 条固定用例用于工程回归，不是客户真实数据集；当前正式 DeepSeek 成果覆盖 11 个不重复行业，仍不能代表模型总体质量或随机任务成功率。
+- 早期 30 条固定用例用于工程回归，23 个 DeepSeek Demo 为历史成果；当前报价专项的 100 个组合依据公开模式合成。它们都不是客户真实数据集，不能合并推算模型总体质量或随机任务成功率。
 - Builder 只生成 `index.html`、`styles.css`、`app.js`，沙箱不开放 Bash、任意文件读写、包安装或外部网络。
 - Chromium E2E 证明受控页面在当前环境可加载和点击，不等于完成跨浏览器、无障碍、性能、部署或生产验收。
 - 本地 JSON 适合单机 MVP；多实例与多租户部署仍需要数据库、对象存储、任务队列、权限与租户隔离。

@@ -1,0 +1,258 @@
+{
+  "checked_at": "2026-10-16T13:17:31.264990+00:00",
+  "status": "passed",
+  "method": "Read-only reconciliation of hashes, retained runs, first-turn contexts, scored journeys and delivered report. No new generation or browser rerun.",
+  "model": "gpt-6.1-sol",
+  "checks": [
+    {
+      "name": "ten_distinct_source_backed_tasks",
+      "passed": true,
+      "detail": {
+        "tasks": 10,
+        "rule_families": 10,
+        "official_sources": 4
+      }
+    },
+    {
+      "name": "fixed_development_holdout_split",
+      "passed": true,
+      "detail": {
+        "development": [
+          "quotation-01",
+          "quotation-02",
+          "quotation-03",
+          "quotation-04"
+        ],
+        "heldout": [
+          "quotation-05",
+          "quotation-06",
+          "quotation-07",
+          "quotation-08",
+          "quotation-09",
+          "quotation-10"
+        ]
+      }
+    },
+    {
+      "name": "all_manifest_artifacts_unchanged",
+      "passed": true,
+      "detail": {
+        "files": 41,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "final_runtime_code_still_frozen",
+      "passed": true,
+      "detail": {
+        "files": 18,
+        "changed": []
+      }
+    },
+    {
+      "name": "dataset_and_sources_match_freeze",
+      "passed": true,
+      "detail": "Current manifest and sources match held-out context"
+    },
+    {
+      "name": "numerical_gold_unchanged_since_initial_pilot",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "twenty_unique_planned_terminal_arms",
+      "passed": true,
+      "detail": {
+        "planned": 20,
+        "terminal": 20,
+        "separate_pilot_and_regression_excluded": true
+      }
+    },
+    {
+      "name": "freeze_precedes_every_heldout_run",
+      "passed": true,
+      "detail": "2026-10-16T09:26:16.633723+00:00"
+    },
+    {
+      "name": "same_raw_sales_text",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ordinary_fixtures_delivered_without_mutation",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "core_prompts_and_outputs_retained",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "first_intent_turn_does_not_contain_answers",
+      "passed": true,
+      "detail": 6
+    },
+    {
+      "name": "all_twelve_arms_independently_scored",
+      "passed": true,
+      "detail": {
+        "rows": 12,
+        "feedback_to_builder": false
+      }
+    },
+    {
+      "name": "direct_full_browser_denominator",
+      "passed": true,
+      "detail": {
+        "cases": 6,
+        "complete_pass": 1,
+        "planned": 68,
+        "executed": 68,
+        "passed": 36
+      }
+    },
+    {
+      "name": "quotation-05_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "quotation-06_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "quotation-07_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "quotation-08_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "quotation-09_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "quotation-10_direct_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "clarify_full_browser_denominator",
+      "passed": true,
+      "detail": {
+        "cases": 6,
+        "complete_pass": 5,
+        "planned": 68,
+        "executed": 68,
+        "passed": 67
+      }
+    },
+    {
+      "name": "quotation-06_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "quotation-05_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "quotation-08_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": false
+      }
+    },
+    {
+      "name": "quotation-07_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "quotation-10_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "quotation-09_clarify_outcome_consistent",
+      "passed": true,
+      "detail": {
+        "complete_pass": true
+      }
+    },
+    {
+      "name": "all_original_pages_unchanged_and_images_present",
+      "passed": true,
+      "detail": {
+        "modified_demos": [],
+        "missing_images": []
+      }
+    },
+    {
+      "name": "primary_effect_recomputed_from_rows",
+      "passed": true,
+      "detail": {
+        "direct": {
+          "cases": 6,
+          "complete_pass": 1,
+          "planned": 68,
+          "executed": 68,
+          "passed": 36
+        },
+        "clarify": {
+          "cases": 6,
+          "complete_pass": 5,
+          "planned": 68,
+          "executed": 68,
+          "passed": 67
+        }
+      }
+    },
+    {
+      "name": "report_uses_primary_audit",
+      "passed": true,
+      "detail": "No replacement by diagnostic replay or development regression"
+    },
+    {
+      "name": "diagnostic_preserves_primary_score_and_source",
+      "passed": true,
+      "detail": {
+        "primary_audit_sha256": "da9377cc75b4155c8d4320f62c2c1477e5369fcdc5e0bc8d1f932486677161e2",
+        "diagnostic_not_merged": true
+      }
+    },
+    {
+      "name": "delivery_document_links_resolve",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "boundaries": "AC completion means the requested evaluation and reporting are complete. It does not mean every generated demo passed or real-world sales benefit was proven."
+}
