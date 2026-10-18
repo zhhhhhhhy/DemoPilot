@@ -4,6 +4,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App.vue'
 import type { DemoRun } from './types'
 
+vi.mock('./components/SalesWorkbench.vue', () => ({ default: { template: '<div />' } }))
+
 const mocks = vi.hoisted(() => ({
   listRuns: vi.fn(),
   templates: vi.fn(),

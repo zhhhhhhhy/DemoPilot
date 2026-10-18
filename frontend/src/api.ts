@@ -1,4 +1,5 @@
 import type { DemoRequest, DemoRun, DemoTemplate, EvaluationCase, EvaluationRequest, EvaluationRun } from './types'
+import type { SalesSession } from './salesTypes'
 
 const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '')
 
@@ -15,6 +16,19 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  salesSessions: () => request<SalesSession[]>('/api/sales-core/sessions'),
+  salesSession: (id: string) => request<SalesSession>(`/api/sales-core/sessions/${id}`),
+  createSalesSession: (brief: string, requestKey: string) => request<SalesSession>('/api/sales-core/sessions', {
+    method: 'POST', body: JSON.stringify({ brief, request_key: requestKey }),
+  }),
+  answerSalesSession: (id: string, answer: string) => request<SalesSession>(`/api/sales-core/sessions/${id}/answers`, {
+    method: 'POST', body: JSON.stringify({ answer }),
+  }),
+  confirmSalesSession: (id: string, draftHash: string) => request<SalesSession>(`/api/sales-core/sessions/${id}/confirm`, {
+    method: 'POST', body: JSON.stringify({ draft_hash: draftHash }),
+  }),
+  cancelSalesSession: (id: string) => request<SalesSession>(`/api/sales-core/sessions/${id}/cancel`, { method: 'POST' }),
+  retrySalesSession: (id: string) => request<SalesSession>(`/api/sales-core/sessions/${id}/retry`, { method: 'POST' }),
   listRuns: () => request<DemoRun[]>('/api/runs'),
   getRun: (id: string) => request<DemoRun>(`/api/runs/${id}`),
   createRun: (payload: DemoRequest) =>

@@ -1,0 +1,119 @@
+{
+  "status": "passed",
+  "session": "a117516b35694b33",
+  "revision": 1,
+  "requirement_revision": 1,
+  "contract_feature_version": 1,
+  "cli_calls": 2,
+  "internal_repair_rounds": 1,
+  "artifact_sha256": "914eb940d78eb4c1e2d78919ab02e700256b1fb4c8b5a8eb305fd4190ea34163",
+  "exact_served_assets": [
+    "index.html",
+    "app.js",
+    "styles.css"
+  ],
+  "private_paths": {
+    "planned": 6,
+    "executed": 6,
+    "passed": 6
+  },
+  "served_operations": 4,
+  "expected_five_item_total": "425.00",
+  "source_unchanged": true,
+  "boundary": "Synthetic seller, fresh product interaction. Private audit after terminal publication; no feedback or source repair during final scoring. Headless screenshots are separate from visible CUA browser interaction.",
+  "controlled_fault": true,
+  "count_as_natural_accuracy_sample": false,
+  "iterations": [
+    {
+      "round": 1,
+      "injected": true,
+      "status": "failed",
+      "planned": 6,
+      "passed": 0,
+      "artifact": "74033467f92702b99791df7c794e26cf2854db0e6545c44b3ec5431156171325"
+    },
+    {
+      "round": 2,
+      "injected": false,
+      "status": "passed",
+      "planned": 6,
+      "passed": 6,
+      "artifact": "914eb940d78eb4c1e2d78919ab02e700256b1fb4c8b5a8eb305fd4190ea34163"
+    }
+  ],
+  "published_versions": 1,
+  "events": [
+    {
+      "sequence": 1,
+      "time": "2026-10-18T15:34:29.183776+00:00",
+      "kind": "created",
+      "message": "已收到一句话需求，等待模型识别缺失信息"
+    },
+    {
+      "sequence": 2,
+      "time": "2026-10-18T15:34:29.205482+00:00",
+      "kind": "analyzing",
+      "message": "模型正在核对商品、计价和审批规则"
+    },
+    {
+      "sequence": 3,
+      "time": "2026-10-18T15:34:46.207227+00:00",
+      "kind": "ready",
+      "message": "业务规则已整理，等待用户确认；尚未调用 Builder"
+    },
+    {
+      "sequence": 4,
+      "time": "2026-10-18T15:39:16.817347+00:00",
+      "kind": "confirmed",
+      "message": "已确认需求第 1 版，未通过测试前保持隐藏"
+    },
+    {
+      "sequence": 5,
+      "time": "2026-10-18T15:39:16.905300+00:00",
+      "kind": "building",
+      "message": "Core Builder 第 1 轮构建"
+    },
+    {
+      "sequence": 6,
+      "time": "2026-10-18T15:42:10.449190+00:00",
+      "kind": "testing",
+      "message": "正在真实浏览器中检查金额、审批和负向操作"
+    },
+    {
+      "sequence": 7,
+      "time": "2026-10-18T15:42:18.636340+00:00",
+      "kind": "checked",
+      "message": "第 1 轮检查：未通过"
+    },
+    {
+      "sequence": 8,
+      "time": "2026-10-18T15:42:18.658281+00:00",
+      "kind": "building",
+      "message": "检查未通过，问题已反馈给同一 Core 修复；页面保持隐藏"
+    },
+    {
+      "sequence": 9,
+      "time": "2026-10-18T15:42:18.685209+00:00",
+      "kind": "building",
+      "message": "Core Builder 第 2 轮构建"
+    },
+    {
+      "sequence": 10,
+      "time": "2026-10-18T15:44:05.348532+00:00",
+      "kind": "testing",
+      "message": "正在真实浏览器中检查金额、审批和负向操作"
+    },
+    {
+      "sequence": 11,
+      "time": "2026-10-18T15:44:15.519817+00:00",
+      "kind": "checked",
+      "message": "第 2 轮检查：通过"
+    },
+    {
+      "sequence": 12,
+      "time": "2026-10-18T15:44:15.630329+00:00",
+      "kind": "published",
+      "message": "需求第 1 版已发布，页面与脚本固定到同一验收版本"
+    }
+  ]
+}

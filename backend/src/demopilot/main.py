@@ -34,10 +34,12 @@ from .providers import (
 )
 from .run_metrics import run_metrics
 from .runtime import RunManager
+from .sales_api import sales_router
+from .sales_core import SalesCoreManager
 from .storage import RunStore
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(settings: Settings | None = None, *, sales_core: SalesCoreManager | None = None) -> FastAPI:
     settings = settings or Settings()
     store = RunStore(settings.data_dir)
     providers: dict[str, AgentProvider] = {
@@ -70,12 +72,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     manager = RunManager(store, orchestrator)
     evaluation_store = EvaluationStore(settings.data_dir)
     evaluation_manager = EvaluationManager(evaluation_store, store, manager)
+    sales_manager = sales_core or SalesCoreManager(settings)
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI):
         manager.recover()
         evaluation_manager.recover()
+        sales_manager.recover()
         yield
+        await sales_manager.shutdown()
         await evaluation_manager.shutdown()
         await manager.shutdown()
 
@@ -97,6 +102,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.run_manager = manager
     app.state.evaluation_store = evaluation_store
     app.state.evaluation_manager = evaluation_manager
+    app.state.sales_core = sales_manager
+    app.include_router(sales_router(sales_manager))
 
     @app.get("/api/health", response_model=HealthResponse)
     async def health() -> HealthResponse:

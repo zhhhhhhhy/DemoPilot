@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { api } from './api'
 import AgentTimeline from './components/AgentTimeline.vue'
 import EvaluationCenter from './components/EvaluationCenter.vue'
+import SalesWorkbench from './components/SalesWorkbench.vue'
 import type { DemoRequest, DemoRun, DemoTemplate, IntentStatement, ProviderName } from './types'
 
 interface ReviewerIssue {
@@ -358,6 +359,11 @@ function formatTime(value: string) {
   return new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(value))
 }
 
+function startSalesDemo() {
+  window.dispatchEvent(new Event('demopilot:new-sales-demo'))
+  document.getElementById('sales-core')?.scrollIntoView({ behavior: 'smooth' })
+}
+
 function statusLabel(status: DemoRun['status']) {
   return { queued: '排队中', running: '生成中', waiting_approval: '待审批', completed: '已完成', failed: '失败', cancelled: '已取消' }[status]
 }
@@ -384,11 +390,16 @@ onBeforeUnmount(stopLiveUpdates)
 
     <main id="workspace" class="workspace">
       <header class="topbar">
-        <div><span class="section-kicker">AGENT TEAM WORKSPACE</span><h1>上午好，销售团队。</h1><p>把客户的一段需求，变成一套可以讲、可以点、可以交付的 Demo。</p></div>
-        <button class="new-demo-button" type="button" @click="formElement?.scrollIntoView({ behavior: 'smooth' })"><span>＋</span> 新建 Demo</button>
+        <div><span class="section-kicker">SALES CORE WORKSPACE</span><h1>把需求说清楚，把 Demo 做可靠。</h1><p>一句话开始，问清业务规则，再生成经过测试的报价 Demo。</p></div>
+        <button class="new-demo-button" type="button" @click="startSalesDemo"><span>＋</span> 新建 Demo</button>
       </header>
 
       <div v-if="loadError" class="error-banner" role="alert"><span>连接提示</span>{{ loadError }}<button type="button" @click="loadError = ''">关闭</button></div>
+
+      <SalesWorkbench />
+
+      <details class="legacy-workspace">
+      <summary style="cursor:pointer;padding:20px 0;color:#64748b;font-size:14px">其他场景 / 原 Agent Team 工作台</summary>
 
       <section class="summary-grid" aria-label="工作台概览">
         <article class="summary-card featured"><span>本月已生成</span><strong>{{ completedCount || 0 }}</strong><p>套可交付客户 Demo</p><div class="summary-orb"></div></article>
@@ -485,6 +496,7 @@ onBeforeUnmount(stopLiveUpdates)
           </div>
         </article>
       </section>
+      </details>
     </main>
   </div>
 </template>

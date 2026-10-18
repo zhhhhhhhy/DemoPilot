@@ -124,6 +124,9 @@ class QuoteModel:
             for k in ("Q1", "Q2")
         }
         self.record = "Q1"
+        if "quantity_tiers" not in contract["profiles"]:
+            for record in self.records.values():
+                record["values"]["profile"] = next(iter(contract["profiles"]))
         self.role = "seller"
         self.actor = "seller1"
         self.reason = ""
@@ -408,6 +411,7 @@ def journeys(contract, profile, *, private=False):
             for offset in (-1, 0, 1)
         ],
     }[kind]
+    edge_values = contract.get("boundary_vectors", {}).get(profile, edge_values)
     if private:
         edge_values = list(reversed(edge_values))
     edges = [dict(action="calculate", values=dict(profile=profile, **v)) for v in edge_values] + [

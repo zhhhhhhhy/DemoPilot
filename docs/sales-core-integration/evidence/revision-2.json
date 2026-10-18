@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "session": "9c0bc147a5d3429c",
+  "revision": 2,
+  "requirement_revision": 2,
+  "contract_feature_version": 1,
+  "cli_calls": 1,
+  "internal_repair_rounds": 0,
+  "artifact_sha256": "5912dba57cea5f9132e6dad9149d6cc6976ae7b18e6d78930d82bd0b3de38321",
+  "exact_served_assets": [
+    "index.html",
+    "app.js",
+    "styles.css"
+  ],
+  "private_paths": {
+    "planned": 6,
+    "executed": 6,
+    "passed": 6
+  },
+  "served_operations": 6,
+  "expected_five_item_total": "675.00",
+  "source_unchanged": true,
+  "boundary": "Synthetic seller, fresh product interaction. Private audit after terminal publication; no feedback or source repair during final scoring. Headless screenshots are separate from visible CUA browser interaction."
+}
