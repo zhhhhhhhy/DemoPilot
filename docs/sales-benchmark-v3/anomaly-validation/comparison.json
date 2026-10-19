@@ -1,0 +1,337 @@
+{
+  "schema_version": "anomaly40-retained-comparison-v1",
+  "baseline": {
+    "automated": 32,
+    "strict": 31,
+    "denominator": 40
+  },
+  "batches": [
+    {
+      "name": "baseline40",
+      "planned": 40,
+      "passed": 32,
+      "elapsed_seconds": 742.56,
+      "cost": {
+        "cli_process_calls": 23,
+        "calls_with_reported_usage": 19,
+        "calls_without_reported_usage": 4,
+        "reported_root_tokens": {
+          "input_tokens": 523670,
+          "cached_input_tokens": 321152,
+          "output_tokens": 4129
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "name": "targeted9",
+      "planned": 9,
+      "passed": 7,
+      "elapsed_seconds": 471.92,
+      "cost": {
+        "cli_process_calls": 8,
+        "calls_with_reported_usage": 7,
+        "calls_without_reported_usage": 1,
+        "reported_root_tokens": {
+          "input_tokens": 168494,
+          "cached_input_tokens": 78976,
+          "output_tokens": 1413
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "name": "remaining39-40",
+      "planned": 2,
+      "passed": 2,
+      "elapsed_seconds": 92.55,
+      "cost": {
+        "cli_process_calls": 1,
+        "calls_with_reported_usage": 1,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 81930,
+          "cached_input_tokens": 79488,
+          "output_tokens": 315
+        },
+        "monetary_cost": null
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "directory": ".data\\sales-benchmark-v3\\anomaly-intent-policy-probe-20261019-v1",
+      "passed": false,
+      "elapsed_seconds": 0.66,
+      "cost": {
+        "cli_process_calls": 1,
+        "calls_with_reported_usage": 0,
+        "calls_without_reported_usage": 1,
+        "reported_root_tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "directory": ".data\\sales-benchmark-v3\\anomaly-intent-policy-probe-20261019-v2",
+      "passed": false,
+      "elapsed_seconds": 7.97,
+      "cost": {
+        "cli_process_calls": 1,
+        "calls_with_reported_usage": 0,
+        "calls_without_reported_usage": 1,
+        "reported_root_tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "directory": ".data\\sales-benchmark-v3\\anomaly-intent-policy-probe-20261019-v3",
+      "passed": true,
+      "elapsed_seconds": 19.61,
+      "cost": {
+        "cli_process_calls": 1,
+        "calls_with_reported_usage": 1,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 9931,
+          "cached_input_tokens": 0,
+          "output_tokens": 136
+        },
+        "monetary_cost": null
+      }
+    }
+  ],
+  "positive_control": {
+    "summary": {
+      "planned": 1,
+      "terminal": 1,
+      "published": 1,
+      "delivered": 1,
+      "failure_stages": {},
+      "published_functional_defects": 0,
+      "final_browser_paths": {
+        "planned": 6,
+        "executed": 6,
+        "passed": 6
+      },
+      "actual_cli_calls": 3,
+      "intake_calls": 2,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "calls_with_usage": 3,
+      "reported_root_tokens": {
+        "input_tokens": 286224,
+        "cached_input_tokens": 225152,
+        "output_tokens": 7185
+      },
+      "median_task_elapsed_seconds": 294.7,
+      "sum_task_elapsed_seconds": 294.7,
+      "model": "gpt-6.1-sol",
+      "monetary_cost": null,
+      "billing_boundary": "CLI ChatGPT login gives no per-task monetary bill; reported root tokens may not exhaust native-child usage.",
+      "observed_input_flags": 0,
+      "heldout_executed": 0,
+      "execution_split": "development",
+      "validation_executed": 0,
+      "comparison": "Fixed full-product cohort, not A/B/C method-effect evidence; development regression and validation reported separately, original failures never replaced."
+    },
+    "cost": {
+      "cli_process_calls": 3,
+      "calls_with_reported_usage": 3,
+      "calls_without_reported_usage": 0,
+      "reported_root_tokens": {
+        "input_tokens": 286224,
+        "cached_input_tokens": 225152,
+        "output_tokens": 7185
+      },
+      "monetary_cost": null
+    }
+  },
+  "cumulative_covered_passed": 40,
+  "cumulative_denominator": 40,
+  "cumulative_rows": {
+    "sales-v3-anomaly-01": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\01\\result.json"
+    },
+    "sales-v3-anomaly-02": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\02\\result.json"
+    },
+    "sales-v3-anomaly-03": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\03\\result.json"
+    },
+    "sales-v3-anomaly-04": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\04\\result.json"
+    },
+    "sales-v3-anomaly-05": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\05\\result.json"
+    },
+    "sales-v3-anomaly-06": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\06\\result.json"
+    },
+    "sales-v3-anomaly-07": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\07\\result.json"
+    },
+    "sales-v3-anomaly-08": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\08\\result.json"
+    },
+    "sales-v3-anomaly-09": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\09\\result.json"
+    },
+    "sales-v3-anomaly-10": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\10\\result.json"
+    },
+    "sales-v3-anomaly-11": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\11\\result.json"
+    },
+    "sales-v3-anomaly-12": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\12\\result.json"
+    },
+    "sales-v3-anomaly-13": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\13\\result.json"
+    },
+    "sales-v3-anomaly-14": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\14\\result.json"
+    },
+    "sales-v3-anomaly-15": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\15\\result.json"
+    },
+    "sales-v3-anomaly-16": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\16\\result.json"
+    },
+    "sales-v3-anomaly-17": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\17\\result.json"
+    },
+    "sales-v3-anomaly-18": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\18\\result.json"
+    },
+    "sales-v3-anomaly-19": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\19\\result.json"
+    },
+    "sales-v3-anomaly-20": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\20\\result.json"
+    },
+    "sales-v3-anomaly-21": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\21\\result.json"
+    },
+    "sales-v3-anomaly-22": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\22\\result.json"
+    },
+    "sales-v3-anomaly-23": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\23\\result.json"
+    },
+    "sales-v3-anomaly-24": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\24\\result.json"
+    },
+    "sales-v3-anomaly-25": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\25\\result.json"
+    },
+    "sales-v3-anomaly-26": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\26\\result.json"
+    },
+    "sales-v3-anomaly-27": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\27\\result.json"
+    },
+    "sales-v3-anomaly-28": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\28\\result.json"
+    },
+    "sales-v3-anomaly-29": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\29\\result.json"
+    },
+    "sales-v3-anomaly-30": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\30\\result.json"
+    },
+    "sales-v3-anomaly-31": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\31\\result.json"
+    },
+    "sales-v3-anomaly-32": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\32\\result.json"
+    },
+    "sales-v3-anomaly-33": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\33\\result.json"
+    },
+    "sales-v3-anomaly-34": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\34\\result.json"
+    },
+    "sales-v3-anomaly-35": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\35\\result.json"
+    },
+    "sales-v3-anomaly-36": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\36\\result.json"
+    },
+    "sales-v3-anomaly-37": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly9-retest-20261019-v2\\cases\\37\\result.json"
+    },
+    "sales-v3-anomaly-38": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly40-baseline-20261019-v1\\cases\\38\\result.json"
+    },
+    "sales-v3-anomaly-39": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly2-final-20261019-v3\\cases\\39\\result.json"
+    },
+    "sales-v3-anomaly-40": {
+      "passed": true,
+      "evidence": ".data\\sales-benchmark-v3\\anomaly2-final-20261019-v3\\cases\\40\\result.json"
+    }
+  },
+  "heldout_executed": 0,
+  "cost_total": {
+    "cli_process_calls": 38,
+    "calls_with_reported_usage": 31,
+    "calls_without_reported_usage": 7,
+    "reported_root_tokens": {
+      "input_tokens": 1070249,
+      "cached_input_tokens": 704768,
+      "output_tokens": 13178
+    },
+    "monetary_cost": null
+  },
+  "improvement_boundary": "Incremental recovery of fixed anomalies, not a clean new-version full40 rerun or model/intent causal accuracy.27 was a measurement-scope error.40 required an additional callback repair.",
+  "security_boundary": "Synthetic canaries and observed root tool events only; no real credential reads, real final answers or OS/native-child isolation claim.",
+  "cost_boundary": "Historical fixture generation excluded from new cost. Root usage can omit native children. Missing usage is unknown, not zero; no currency bill.",
+  "process_boundary": "One route-gate ordering deviation retained in process-deviation.json; local controller audit does not erase it."
+}

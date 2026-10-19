@@ -1,0 +1,264 @@
+{
+  "phase": "baseline",
+  "all40_executed": true,
+  "automated_passed": 32,
+  "strict_passed": 31,
+  "denominator": 40,
+  "strict_failed": [
+    "sales-v3-anomaly-11",
+    "sales-v3-anomaly-12",
+    "sales-v3-anomaly-13",
+    "sales-v3-anomaly-14",
+    "sales-v3-anomaly-15",
+    "sales-v3-anomaly-27",
+    "sales-v3-anomaly-37",
+    "sales-v3-anomaly-39",
+    "sales-v3-anomaly-40"
+  ],
+  "qualification": "Case37 requires no tool capability, not only zero observed tool calls. Automated original remains immutable.",
+  "baseline_result_sha256": "c3d4af5afef799cfb22d3f564e3b119b3d0c34841a235d42721386d27276d868",
+  "cost": {
+    "cli_process_calls": 23,
+    "intake_calls": 0,
+    "core_calls": 1,
+    "calls_with_reported_usage": 19,
+    "calls_without_reported_usage": 4,
+    "reported_root_tokens": {
+      "input_tokens": 523670,
+      "cached_input_tokens": 321152,
+      "output_tokens": 4129
+    },
+    "monetary_cost": null,
+    "billing": "ChatGPT CLI login provides no per-task bill; tokens/calls/seconds are proxies, not money.",
+    "observed_input_flags": [
+      {
+        "trace": "cases/39/observed-inputs/qflow-039/direct/v1/iteration-0/cli/stdout.jsonl",
+        "reason": "possible evaluator/private/dataset access; manually review retained raw command",
+        "command_sha256": "ac717af9e077dc87d440d7793fd9a590b14bff3aee5829d75ace12a2ba2a3fe2"
+      }
+    ],
+    "read_isolation": "Returned root command events only; native child/OS reads not exhaustively observable.",
+    "calls": [
+      {
+        "trace": "cases/26/cancel-cli/call-1/stdout.jsonl",
+        "reported_usage": null,
+        "completed": false,
+        "commands": 0
+      },
+      {
+        "trace": "cases/27/timeout-cli/call-1/stdout.jsonl",
+        "reported_usage": null,
+        "completed": false,
+        "commands": 1
+      },
+      {
+        "trace": "cases/28/child-state/call-1/stdout.jsonl",
+        "reported_usage": null,
+        "completed": false,
+        "commands": 0
+      },
+      {
+        "trace": "cases/28/child-state/call-2/stdout.jsonl",
+        "reported_usage": null,
+        "completed": false,
+        "commands": 0
+      },
+      {
+        "trace": "cases/39/observed-inputs/qflow-039/direct/v1/iteration-0/cli/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 82173,
+          "cached_input_tokens": 68096,
+          "output_tokens": 303
+        },
+        "completed": true,
+        "commands": 3
+      },
+      {
+        "trace": "sales-core/sessions/031061ac86a54c02/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24506,
+          "cached_input_tokens": 11520,
+          "output_tokens": 169
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/18a8450fcf6a4eae/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24528,
+          "cached_input_tokens": 18816,
+          "output_tokens": 158
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/1c93f69ea844423c/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24530,
+          "cached_input_tokens": 18816,
+          "output_tokens": 204
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/266c80c5612748d1/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24519,
+          "cached_input_tokens": 18816,
+          "output_tokens": 148
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/2778c977a42b4915/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24519,
+          "cached_input_tokens": 11520,
+          "output_tokens": 188
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/2891269076684784/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24503,
+          "cached_input_tokens": 18816,
+          "output_tokens": 213
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/483d6090313c4edd/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24578,
+          "cached_input_tokens": 11520,
+          "output_tokens": 368
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/5671232f26a04e0b/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24530,
+          "cached_input_tokens": 0,
+          "output_tokens": 224
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/6297a70267954b52/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24509,
+          "cached_input_tokens": 11520,
+          "output_tokens": 208
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/798c4d3efe124e5c/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24523,
+          "cached_input_tokens": 18816,
+          "output_tokens": 232
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/981e82522ecd46ab/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24530,
+          "cached_input_tokens": 18816,
+          "output_tokens": 196
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/a8e2b843707641ba/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24516,
+          "cached_input_tokens": 18816,
+          "output_tokens": 259
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/a93cdfb836b246e1/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24561,
+          "cached_input_tokens": 18816,
+          "output_tokens": 219
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/af00726a562646ad/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24501,
+          "cached_input_tokens": 18816,
+          "output_tokens": 194
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/c3c71e85b7d84635/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24584,
+          "cached_input_tokens": 18816,
+          "output_tokens": 210
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/cad25e58b4284977/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24507,
+          "cached_input_tokens": 0,
+          "output_tokens": 155
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/d7334de363fe4911/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24525,
+          "cached_input_tokens": 0,
+          "output_tokens": 207
+        },
+        "completed": true,
+        "commands": 0
+      },
+      {
+        "trace": "sales-core/sessions/e8f8bbb916f04f1e/intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24528,
+          "cached_input_tokens": 18816,
+          "output_tokens": 274
+        },
+        "completed": true,
+        "commands": 0
+      }
+    ]
+  },
+  "elapsed_seconds": 742.56,
+  "heldout_executed": 0,
+  "measurement_issues": {
+    "27": "Global registry comparison observed other concurrently authorized fixture publications; true300s timeout/killtree/partialtrace all passed. Rerun with project scope.",
+    "40": "Unsafe candidate actually passed business check and published in disposable registry; later CSP DOM read encountered pending form navigation, separate harness correction required."
+  }
+}

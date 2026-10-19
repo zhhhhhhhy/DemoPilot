@@ -72,3 +72,8 @@ docs/quotation-reliability-v2/public-gate-calibration/*
 !docs/quotation-reliability-v2/public-gate-calibration/structural-comparison.json
 docs/quotation-reliability-v2/controlled-real-repair-20261017/*
 !docs/quotation-reliability-v2/controlled-real-repair-20261017/summary.json
+
+# Anomaly validation machine receipts stay local; publish result summaries.
+docs/sales-benchmark-v3/anomaly-validation/initial-source.json
+docs/sales-benchmark-v3/anomaly-validation/cli-features-*.txt
+docs/sales-benchmark-v3/anomaly-validation/main-*-activation.json

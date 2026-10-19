@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "method": "Path.read_text forbidden during isolation_flags(include_mcp=False)",
+  "model_calls": 0,
+  "behavior": "No user configuration read; official transport flags preserved"
+}

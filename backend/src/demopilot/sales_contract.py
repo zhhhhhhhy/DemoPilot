@@ -282,7 +282,17 @@ class IntakeResult(ClosedModel):
             self.proposal is None or self.questions or not self.source_quotes
         ):
             raise ValueError("可确认的意图必须包含完整规则、引用来源且没有未解决问题")
-        if self.status != "ready" and not self.questions:
+        if self.status == "unsupported":
+            if self.proposal is not None:
+                raise ValueError("无法支持的需求不能携带可构建方案")
+            if not self.questions:
+                # A refusal is a valid terminal decision, not missing output.
+                # Preserve the model's reason and show the actual product scope.
+                self.questions = [
+                    f"{self.title}。当前仅支持 A/B/C 三款商品、一个定价方案及一个审批流程的本地演示，"
+                    "不提供真实支付或生产身份鉴权。是否愿意在保留这些限制的前提下调整需求？"
+                ]
+        if self.status == "needs_details" and not self.questions:
             raise ValueError("信息不足时必须指出需要用户回答的问题")
         return self
 

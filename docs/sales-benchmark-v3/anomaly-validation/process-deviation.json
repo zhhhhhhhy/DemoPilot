@@ -1,0 +1,8 @@
+{
+  "deviation": "PowerShell combined command continued after route-dependent execute gate rejection; first part of9 ran before attempt registration.",
+  "scope": "anomaly9-retest-20261019-v2",
+  "cause": "preflight reset route gate; caller did not stop on nonzero external exitcode",
+  "correction": "re-run route thenexecute gates with explicit LASTEXITCODE throw; register recovery of existing job without repeating sideeffects",
+  "history_preserved": true,
+  "effect": "Measurement/source freeze remain valid, process-order deviation must not be called strict clean workflow pass"
+}

@@ -131,15 +131,39 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                 for profile in contract["profiles"]:
                     for label, ops in journeys(contract, profile, private=private):
                         context = await browser.new_context()
-                        # No authenticated browser, network service or live transaction.
-                        await context.route(
-                            "**/*",
-                            lambda route: (
-                                route.continue_()
-                                if route.request.url.startswith(base_url)
-                                else route.abort()
-                            ),
-                        )
+                        # Aborting an outgoing request keeps the test safe; it
+                        # does not make an application that attempted it valid.
+                        network_attempts = []
+
+                        async def offline_request(route, *, attempts=network_attempts):
+                            request = route.request
+                            local = request.url.startswith(base_url)
+                            read_only = request.method in {"GET", "HEAD"}
+                            if local and read_only:
+                                await route.continue_()
+                                return
+                            attempts.append(dict(
+                                kind="http_request",
+                                url=request.url,
+                                method=request.method,
+                                resource_type=request.resource_type,
+                                navigation=request.is_navigation_request(),
+                                reason="external_request" if not local else "submission_attempt",
+                                action="aborted_before_destination",
+                            ))
+                            await route.abort()
+
+                        def csp_violation(_source, detail, *, attempts=network_attempts):
+                            attempts.append(dict(kind="csp_violation", **detail))
+
+                        await context.expose_binding("__demopilotCspViolation", csp_violation)
+                        await context.add_init_script("""document.addEventListener('securitypolicyviolation', e => {
+                            window.__demopilotCspViolation({
+                                url:e.blockedURI, directive:e.effectiveDirective,
+                                action:'blocked_by_csp'
+                            }).catch(() => {});
+                        });""")
+                        await context.route("**/*", offline_request)
                         page = await context.new_page()
                         page.set_default_timeout(3000)
                         errors = []
@@ -207,6 +231,11 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                                         observed=actual,
                                     )
                                 )
+                            if network_attempts:
+                                raise AssertionError(
+                                    "Generated application attempted prohibited network/submission actions: "
+                                    + json.dumps(network_attempts[:8], ensure_ascii=False)
+                                )
                             if errors:
                                 raise AssertionError("Browser script errors: " + str(errors))
                         except Exception as exc:
@@ -226,6 +255,8 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                             failure=failure,
                             steps=trace,
                             browser_errors=errors,
+                            network_attempts=network_attempts,
+                            network_attempt_count=len(network_attempts),
                         )
                         rows.append(row)
                         (evidence_dir / f"{profile}-{label}.json").write_text(
@@ -255,6 +286,7 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
         source_unchanged=before == after,
         source_sha256=before,
         rows=rows,
+        network_attempt_count=sum(r["network_attempt_count"] for r in rows),
         issues=[f"{r['profile']}/{r['journey']}: {r['failure']}" for r in rows if not r["passed"]][
             :12
         ],

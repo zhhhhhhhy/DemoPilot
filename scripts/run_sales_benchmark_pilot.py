@@ -359,6 +359,8 @@ def trace_cost(directory):
                     )
                 )
     usage = [c["reported_usage"] for c in calls if c["reported_usage"] is not None]
+    from audit_quotation_observed_inputs import inspect as inspect_observed_inputs
+    audit = inspect_observed_inputs(directory)
     return dict(
         cli_process_calls=len(calls),
         intake_calls=sum(c["trace"].startswith("intent/") for c in calls),
@@ -373,6 +375,9 @@ def trace_cost(directory):
         billing="ChatGPT CLI login provides no per-task bill; tokens/calls/seconds are proxies, not money.",
         observed_input_flags=flags,
         read_isolation="Returned root command events only; native child/OS reads not exhaustively observable.",
+        contaminated=audit["contaminated"],
+        excluded_from_effect_claims=audit["excluded_from_effect_claims"],
+        observed_input_audit=audit,
         calls=calls,
     )
 

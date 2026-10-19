@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from .core_harness import CodexCliHarness
-from .quotation_cli import IsolatedCodexProvider
+from .quotation_cli import IntentCodexProvider, IsolatedCodexProvider
 from .quotation_contract import compile_acceptance, price
 from .quotation_loop import QuotationGoalLoop, write_json
 from .quotation_release import ReleaseRegistry, canonical_hash
@@ -141,6 +141,11 @@ class SalesCoreManager:
             reasoning_effort=settings.codex_reasoning_effort,
             timeout_seconds=settings.codex_timeout_seconds,
         )
+        self.intent_provider = IntentCodexProvider(
+            command=settings.codex_command, model=settings.codex_model,
+            reasoning_effort=settings.codex_reasoning_effort,
+            timeout_seconds=settings.codex_timeout_seconds,
+        )
         self.harness = harness or CodexCliHarness(self.provider)
         self.interviewer = interviewer
         self.checker = checker
@@ -225,7 +230,7 @@ class SalesCoreManager:
                 if self.interviewer:
                     raw = await self.interviewer(prompt, history, transcript)
                 else:
-                    raw = final_object(await self.provider.run_workspace_acceptance(
+                    raw = final_object(await self.intent_provider.run_workspace_acceptance(
                         prompt=prompt, workspace=workspace, transcript_dir=transcript,
                         readable_roots=[workspace], on_event=lambda e: self._activity(identifier, e),
                     ))

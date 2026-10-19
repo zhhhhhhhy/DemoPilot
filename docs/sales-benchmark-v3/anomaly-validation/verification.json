@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "input_integrity": {
+    "sales-benchmark-v3": {
+      "files": 1687,
+      "drift": [],
+      "manifest_sha256": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65"
+    },
+    "quotation-reliability-v2": {
+      "files": 73,
+      "drift": [],
+      "manifest_sha256": "d728ba74f3ff2c9acb3afe47dc6ea8751f2073c04c7ce83bff5383963013472f"
+    }
+  },
+  "historical_score_drift": [],
+  "baseline_score_unchanged": true,
+  "heldout_executed": 0,
+  "distinct_business_requirements_attempted": 60,
+  "anomaly_distinct_cases": 40,
+  "anomaly_case_executions": 51,
+  "positive_control_reuses_original001": true,
+  "cumulative_anomaly_passed": 40,
+  "latest_final_sources_unchanged": true,
+  "owned_test_ports_closed": {
+    "8095": true,
+    "8094": true
+  },
+  "power_requests": [
+    {
+      "run": "anomaly40-baseline-20261019-v1",
+      "restored": true,
+      "heartbeat_gaps": []
+    },
+    {
+      "run": "anomaly9-retest-20261019-v2",
+      "restored": true,
+      "heartbeat_gaps": []
+    },
+    {
+      "run": "anomaly2-final-20261019-v3",
+      "restored": true,
+      "heartbeat_gaps": []
+    },
+    {
+      "run": "anomaly-positive001-20261019-v3",
+      "restored": true,
+      "heartbeat_gaps": []
+    }
+  ],
+  "main_api_healthy": true,
+  "frontend_healthy": true,
+  "exact_old_assets_preserved": 6,
+  "cost": {
+    "cli_process_calls": 38,
+    "calls_with_reported_usage": 31,
+    "calls_without_reported_usage": 7,
+    "reported_root_tokens": {
+      "input_tokens": 1070249,
+      "cached_input_tokens": 704768,
+      "output_tokens": 13178
+    },
+    "monetary_cost": null
+  },
+  "workflow_process_deviation_retained": true
+}
