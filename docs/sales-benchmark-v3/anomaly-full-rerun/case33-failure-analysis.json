@@ -1,0 +1,22 @@
+{
+  "case_id": "sales-v3-anomaly-33",
+  "classification": "browser_acceptance_infrastructure_failure",
+  "failure_stage": "prepare_revision2_fixture_before_stale_completion_assertions",
+  "observed_error": "Page.goto: net::ERR_UNSAFE_PORT at http://127.0.0.1:10080/",
+  "code_location": "backend/src/demopilot/quotation_browser.py:123",
+  "cause_supported_by_source": "ThreadingHTTPServer binds port0 and uses the assigned port without checking whether Chromium permits it. In this run Windows assigned10080; actual Chromium rejected navigation.",
+  "target_assertions_reached": false,
+  "unsafe_old_completion_or_publication_observed": false,
+  "functional_correctness_conclusion": "Unverified in this run: neither a demonstrated stale-overwrite product defect nor a pass.",
+  "scoring": "Keep this case failed in the complete40 denominator. No retry, code change, bypassed browser protection or replacement score.",
+  "baseline_case33_pass_retained": true,
+  "local_evidence": [
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/33/result.json",
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/33/browser-case-evidence.json",
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/33/revision-2-audit/report.json"
+  ],
+  "possible_next_repair_not_applied": "Select an actually bindable browser-permitted local port while retaining the bound socket; use a bounded selection procedure and fail clearly if none is available. Do not disable Chromium port protections. Validate in a separately versioned run and retain this score.",
+  "production_and_test_sources_modified_in_this_rerun": false,
+  "extra_model_calls_for_diagnosis": 0,
+  "heldout_executed": 0
+}

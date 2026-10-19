@@ -1,0 +1,38 @@
+{
+  "case_id": "sales-v3-anomaly-28",
+  "classification": "recovery_test_measurement_failure_with_insufficient_boundary_snapshots",
+  "failure_stage": "after_owned_service_restart_before_manual_resume_click",
+  "failed_check": "restart_does_not_repeat_cli_automatically",
+  "current_assertion": "events_recovered == events_before",
+  "supported_observations": {
+    "service_and_owned_cli_stopped": true,
+    "recovered_session_interrupted_and_hidden": true,
+    "old_lease_failed_and_cannot_publish": true,
+    "manual_resume_clicked_in_real_browser": true,
+    "manual_resume_uses_new_revision": true,
+    "resumed_candidate_hidden": true,
+    "old_accepted_page_preserved": true,
+    "final_recorded_process_starts": 2,
+    "saved_root_cli_transcripts": 2,
+    "final_event_types": [
+      "process.started",
+      "thread.started",
+      "turn.started",
+      "process.started",
+      "process.cancelled",
+      "process.cancelled"
+    ]
+  },
+  "diagnosis": "The check compares the entire asynchronous event list rather than CLI starts. Ordinary original-call thread/turn progress can change that list between its first snapshot and stopping the service. The saved record shows the expected two starts for initial and manually resumed calls, not a demonstrated extra automatic call.",
+  "remaining_evidence_gap": "The separate events_before and events_recovered snapshots were not persisted. Exact boundary delta cannot be reconstructed conclusively from the final list; retain failure rather than retroactively turning it into a pass.",
+  "scoring": "Original automatic and strict complete-run score remains38/40. No repeated test or changed assertion in this run.",
+  "possible_next_repair_not_applied": "Persist both timestamped boundary snapshots and compare process.started IDs/counts, requiring no new startup until the actual resume click. Validate this measurement separately without weakening the original no-automatic-call acceptance.",
+  "local_evidence": [
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/28/result.json",
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/28/runtime-result.json",
+    ".data/sales-benchmark-v3/anomaly40-full-rerun-20261019-v4/cases/28/child-state/events.json"
+  ],
+  "extra_model_calls_for_diagnosis": 0,
+  "production_and_test_sources_modified_in_this_rerun": false,
+  "heldout_executed": 0
+}

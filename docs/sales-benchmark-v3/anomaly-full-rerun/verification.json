@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_files_checked": 132,
+  "historical_files_checked": 80,
+  "source_drift": [],
+  "historical_drift": [],
+  "all40_terminal": true,
+  "strict_score": "38/40",
+  "real_browser_images": 76,
+  "model_turns_independently_completed": 18,
+  "heldout_executed": 0,
+  "main_api_healthy": true,
+  "frontend_healthy": true,
+  "power_request_restored": true,
+  "secret_findings": [],
+  "missing_doc_links": [],
+  "browser_mode": "Real local Playwright Chromium headless; extra visible IAB case01 click",
+  "no_extra_retry_or_model_diagnostics": true,
+  "new_rerun_cli_calls": 23,
+  "new_rerun_usage_missing": 4
+}
