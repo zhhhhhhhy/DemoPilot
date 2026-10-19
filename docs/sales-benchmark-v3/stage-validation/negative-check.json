@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "purpose": "One real intake negative; not part of frozen200 or validation40 score",
+  "brief": "做本地离线三商品报价。A=0.03元、B=0.06元、C=0.09元，目录已含20%税，无其他优惠或配送。经理审批后客户确认。未税小计先四舍五入两位，税额为含税金额减已显示小计；同时每个金额字段都必须各自独立四舍五入。A买1件时必须未税0.03、税0.01、总价0.03，而且显示未税加显示税必须严格等于总价。",
+  "status": "needs_details",
+  "questions": [
+    "A买1件时，您要求未税0.03元、税0.01元、总价0.03元，但0.03+0.01=0.04，与显示金额相加必须等于总价冲突。按20%含税拆分，未税精确值为0.025元，先四舍五入显示0.03元，再用含税总价减显示未税，税额应为0.00元；若税额按精确值0.005元独立四舍五入，则为0.01元。是否确认采用前述拆分顺序，将本例确定为未税0.03元、税0.00元、总价0.03元，并取消税额从精确值独立舍入的要求？"
+  ],
+  "draft_absent": true,
+  "no_core_or_publication": true,
+  "cost": {
+    "cli_process_calls": 1,
+    "intake_calls": 1,
+    "core_calls": 0,
+    "calls_with_reported_usage": 1,
+    "calls_without_reported_usage": 0,
+    "reported_root_tokens": {
+      "input_tokens": 24565,
+      "cached_input_tokens": 18816,
+      "output_tokens": 397
+    },
+    "monetary_cost": null,
+    "billing": "ChatGPT CLI login provides no per-task bill; tokens/calls/seconds are proxies, not money.",
+    "observed_input_flags": [],
+    "read_isolation": "Returned root command events only; native child/OS reads not exhaustively observable.",
+    "calls": [
+      {
+        "trace": "intent/turn-1/stdout.jsonl",
+        "reported_usage": {
+          "input_tokens": 24565,
+          "cached_input_tokens": 18816,
+          "output_tokens": 397
+        },
+        "completed": true,
+        "commands": 0
+      }
+    ]
+  },
+  "elapsed_seconds": 27.23,
+  "case_data_changed": false
+}

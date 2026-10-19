@@ -1,0 +1,492 @@
+{
+  "schema_version": "sales-v3-validation40-infrastructure-attribution-v1",
+  "created_at": "2026-10-19T08:48:43.887056+00:00",
+  "strict_delivery": "23/40",
+  "failure_domain": "CLI transport or workspace routing discovery",
+  "stage_counts": {
+    "intake": 15,
+    "core": 2
+  },
+  "failed_cli_calls": 21,
+  "cases": [
+    {
+      "case_id": "sales-v3-109",
+      "execution_stage": "core",
+      "classification": "cli_transport",
+      "actual_root_calls": 4,
+      "intake_calls": 1,
+      "core_calls": 3,
+      "final_independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "revision-1/evidence/v1/iteration-0/cli/stdout.jsonl",
+          "sha256": "c1d79b3bc51d47c9160dae2a659e09d46b9f6ea8fce5ffc4a60b2617252d9872",
+          "transport_signatures": [
+            "tls_handshake_eof"
+          ]
+        },
+        {
+          "trace": "revision-1/evidence/v1/iteration-1/cli/stdout.jsonl",
+          "sha256": "c7a0d0bf5132223097c1b895b3866a2d233549b34e3fd83130f0534de1a7db19",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        },
+        {
+          "trace": "revision-1/evidence/v1/iteration-2/cli/stdout.jsonl",
+          "sha256": "b68f6f69b87aeb22f99ac7d20e6d945ae472b3a0078c2680cad1a73eed211876",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "请查看检查结果，补充或修改需求后可从页面重新生成"
+    },
+    {
+      "case_id": "sales-v3-110",
+      "execution_stage": "core",
+      "classification": "cli_transport",
+      "actual_root_calls": 5,
+      "intake_calls": 2,
+      "core_calls": 3,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "revision-1/evidence/v2/iteration-0/cli/stdout.jsonl",
+          "sha256": "c435962958325656fc2fbc9702a3f9cdb17d57f830199571127f139afd68cf6f",
+          "transport_signatures": [
+            "request_transport_failure",
+            "tls_handshake_eof"
+          ]
+        },
+        {
+          "trace": "revision-1/evidence/v2/iteration-1/cli/stdout.jsonl",
+          "sha256": "feb839c3ea6575a474616ae58311b96c954e61b72d58c204158abcdac66f73d1",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        },
+        {
+          "trace": "revision-1/evidence/v2/iteration-2/cli/stdout.jsonl",
+          "sha256": "a77a591581470d89e4c1e93d7935ccddc35819a10691e2e52599ffc575d90b73",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "请查看检查结果，补充或修改需求后可从页面重新生成"
+    },
+    {
+      "case_id": "sales-v3-121",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "a70a056eeba259fab7f60bd3cce6880f05ab996ecd30ff2d103a034ce400433d",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-122",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "238d63e85befa5e42459f5de488f5b9bc8090b50322a2d9791588af68f3f1a98",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-123",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "a7fe49db817a3cbc5712a6f603592d866e46724fefb4d853996ecfb6293e3e50",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-124",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "99635c155ad3c875d6de934d80850c0c46916e0cd59a41dfbc311e26936a046c",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-125",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "2a7e9fc96d95c518a61709e35ae3d88a21e082fc70ec29df24855b86dc1c9573",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-146",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "35380f30e03864471dc5725a9f6e765735908923552c930e8eba8b46729df100",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-147",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "c77fa919c719bb80eb67a3b8aba69fac19ffe1a9f3360d8e3c9719523de926cb",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-148",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "8f49ec8130a10e9273d2c79b6f2bc34e0401471b5c6f106149611fc24fb3ff92",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-149",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "7bbdba5d8f3c7955c3101363aa365f36aa679f9e8e3202877b9ce4461655a682",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-150",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "e6cd289806b05d20d61677d2dff0c51edc1d5ff66f476197bb1e1c89773bbf1c",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-186",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "513b1646df8dc046c466674ae1800841c94ace6f8a2dc4afe7075756e4c1c8a6",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-187",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "58702f2486bd6f94590acb36291935596b2fe24ac5254f0be6b50ffd0953f625",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-188",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "19430eefa661f3d43473bd106ac15aac6cc73adbb536c2c2240d543cc629c44b",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-189",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "e77ac2a09405f65084d4a1d073ec4771e14367f8f4b6681a8329125e47c83639",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    },
+    {
+      "case_id": "sales-v3-190",
+      "execution_stage": "intake",
+      "classification": "cli_transport",
+      "actual_root_calls": 1,
+      "intake_calls": 1,
+      "core_calls": 0,
+      "final_independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "status": "failed",
+      "published": false,
+      "failed_cli_traces": [
+        {
+          "trace": "intent/turn-1/stdout.jsonl",
+          "sha256": "aa3b8c0d6dd4cf6b5a9e86b697965fb507edecf07fa12bdcfba033c99f7e3d4e",
+          "transport_signatures": [
+            "workspace_routing_discovery_failed"
+          ]
+        }
+      ],
+      "raw_failure_reason_preserved": "Intake not ready within declared3calls"
+    }
+  ],
+  "known": "Failed stdout logs record TLS disconnects and/or workspace routing discovery failures.15intake sessions failed on the first call; original generic3call-limit wording is not the true cause.",
+  "unknown": "Underlying local proxy, network path or remote-service cause is not localized; no claim of current restored connectivity, quota exhaustion or model semantic failure.",
+  "behavior": "109generatedapp independently6/6correctbutCLIunfinishedstayshidden;110noapp;15intakenoresponse.23publishedfinal143/143pass; allgeneratedincluding109total149/149pass,109plannedpathsnotrun.",
+  "additional_model_calls": 0,
+  "raw_result_sha256": "2ea694d11c1082ee1b524e108f6989ebe6433f6cfa05cdbda1db9003c2ac6f82",
+  "no_repair_or_replay_after_scoring": true
+}

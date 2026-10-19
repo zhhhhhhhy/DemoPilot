@@ -1,0 +1,8 @@
+{
+  "checks": 2,
+  "status": "passed",
+  "purpose": "A recovered transient must not be reported as terminal transport failure; a failed routing call must remain missing usage, not zero-cost.",
+  "model_calls": 0,
+  "original_raw_results_modified": false,
+  "reporter_sha256": "2a986e501761a86cf4742cca3bc10a024378458c46f8649006dbd089b5ac1c90"
+}

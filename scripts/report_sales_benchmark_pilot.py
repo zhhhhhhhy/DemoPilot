@@ -20,6 +20,7 @@ def audit_cost(directory):
     for path in sorted(directory.rglob("stdout.jsonl")):
         usage = []
         events = []
+        transport_signals = set()
         for line in path.read_text("utf-8", errors="replace").splitlines():
             try:
                 event = json.loads(line)
@@ -28,6 +29,20 @@ def audit_cost(directory):
             if isinstance(event.get("usage"), dict):
                 usage.append(event["usage"])
             events.append(event.get("type"))
+            message = str(event.get("message", "")) + str(event.get("error", ""))
+            for signature, category in (
+                (
+                    "workspace routing discovery failed",
+                    "workspace_routing_discovery_failed",
+                ),
+                ("tls handshake eof", "tls_handshake_eof"),
+                (
+                    "Connection failed: error sending request",
+                    "request_transport_failure",
+                ),
+            ):
+                if signature in message:
+                    transport_signals.add(category)
         relative = path.relative_to(directory).as_posix()
         totals = {
             k: sum(u.get(k, 0) for u in usage)
@@ -43,6 +58,7 @@ def audit_cost(directory):
                 else "other",
                 usage=totals if usage else None,
                 completed="turn.completed" in events,
+                transport_signals=sorted(transport_signals),
             )
         )
     return dict(
@@ -50,6 +66,13 @@ def audit_cost(directory):
         intake=sum(c["kind"] == "intake" for c in calls),
         core=sum(c["kind"] == "core" for c in calls),
         usage_complete=sum(c["usage"] is not None for c in calls),
+        missing_usage=sum(c["usage"] is None for c in calls),
+        failed_root_calls=sum(not c["completed"] for c in calls),
+        last_failed_cli_transport_signals=(
+            calls[-1]["transport_signals"]
+            if calls and not calls[-1]["completed"]
+            else []
+        ),
         tokens={
             k: sum((c["usage"] or {}).get(k, 0) for c in calls)
             for k in ("input_tokens", "cached_input_tokens", "output_tokens")
@@ -61,6 +84,7 @@ def audit_cost(directory):
 def report(output, destination):
     raw = read(output / "results.json")
     context = read(output / "context.json")
+    execution_split = context.get("execution_split", "development")
     rows = raw["rows"]
     out = []
     assert len(rows) == len(context["pilot_ids"]) and {
@@ -128,6 +152,25 @@ def report(output, destination):
             "core": "Core终态未发布",
             "publication": "已发布，按最终检查评分",
         }.get(row["stage"], row["stage"])
+        r["failure_domain"] = None
+        if not r["delivery_pass"]:
+            if r["cost"].get("last_failed_cli_transport_signals"):
+                r["failure_domain"] = "cli_transport"
+                location = "意图调用" if row["stage"] == "intake" else "Core调用"
+                r["stage_in_chinese"] = f"{location}：CLI连接或路由失败"
+            elif row["status"] == "published":
+                r["failure_domain"] = (
+                    "final_function"
+                    if not row["final_functional_pass"]
+                    else "served_assets"
+                )
+                r["stage_in_chinese"] = (
+                    "发布后功能检查失败"
+                    if not row["final_functional_pass"]
+                    else "发布资源不一致"
+                )
+            else:
+                r["failure_domain"] = row["stage"]
         out.append(r)
     costs = [r["cost"] for r in out]
     elapsed = sorted(r["elapsed_seconds"] for r in out)
@@ -146,6 +189,12 @@ def report(output, destination):
         intake_calls=sum(c["intake"] for c in costs),
         core_calls=sum(c["core"] for c in costs),
         calls_with_reported_usage=sum(c["usage_complete"] for c in costs),
+        calls_without_reported_usage=sum(
+            c["calls"] - c["usage_complete"] for c in costs
+        ),
+        final_failure_domains=dict(
+            Counter(r["failure_domain"] for r in out if not r["delivery_pass"])
+        ),
         reported_root_tokens={
             k: sum(c["tokens"].get(k, 0) for c in costs)
             for k in ("input_tokens", "cached_input_tokens", "output_tokens")
@@ -160,9 +209,11 @@ def report(output, destination):
         else None,
         final_browser_paths=raw["summary"]["final_browser_paths"],
         heldout_executed=0,
+        validation_executed=len(rows) if execution_split == "validation" else 0,
+        execution_split=execution_split,
         anomalies_live_executed=0,
         monetary_cost=None,
-        boundary="Development current-product calibration, not A/B/C, no human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+        boundary=f"Fixed {execution_split} product cohort, not A/B/C, human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
         measurement_note="Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected.",
     )
     destination.mkdir(parents=True, exist_ok=True)
@@ -172,7 +223,7 @@ def report(output, destination):
         "utf-8",
     )
     lines = [
-        f"# {len(rows)}题开发试跑结果",
+        f"# {len(rows)}题{'阶段验收' if execution_split == 'validation' else '开发复测'}结果",
         "",
         f"完整交付：{summary['delivered']}/{summary['planned']}；发布：{summary['published']}/{summary['planned']}。",
         "",
@@ -189,6 +240,7 @@ def report(output, destination):
         "## 消耗",
         f"根CLI进程{summary['root_cli_calls']}次，其中意图{summary['intake_calls']}次、Core{summary['core_calls']}次。",
         f"报告输入token {t['input_tokens']}（其中缓存{t['cached_input_tokens']}），输出{t['output_tokens']}；货币账单未知。",
+        f"{summary['calls_without_reported_usage']}次根调用缺少用量；缺失不代表零消耗，有缺失时以上token不是完整总成本。CLI连接/路由归因依据最后一次失败根轨迹的传输签名，未定位本地代理还是远端服务。",
         f"任务耗时中位数{summary['median_elapsed_seconds']}秒；各任务耗时之和{summary['sum_elapsed_seconds']}秒，不等于并行运行的墙钟耗时。",
         "",
         "100条最终题未运行；40异常仅构造。本轮分母和原始失败不因后续修复改变。成功任务耗时另列，不能用大量提前失败题的整体中位数估算生成速度。",

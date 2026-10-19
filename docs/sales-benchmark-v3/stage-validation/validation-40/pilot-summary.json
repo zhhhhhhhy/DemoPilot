@@ -1,0 +1,2207 @@
+{
+  "summary": {
+    "planned": 40,
+    "delivered": 23,
+    "published": 23,
+    "final_failure_stages": {
+      "Core调用：CLI连接或路由失败": 2,
+      "意图调用：CLI连接或路由失败": 15
+    },
+    "published_defects": 0,
+    "root_cli_calls": 90,
+    "intake_calls": 61,
+    "core_calls": 29,
+    "calls_with_reported_usage": 69,
+    "calls_without_reported_usage": 21,
+    "final_failure_domains": {
+      "cli_transport": 17
+    },
+    "reported_root_tokens": {
+      "input_tokens": 7897384,
+      "cached_input_tokens": 6445696,
+      "output_tokens": 171147
+    },
+    "median_elapsed_seconds": 205.38,
+    "sum_elapsed_seconds": 8029.82,
+    "delivered_task_elapsed_seconds": [
+      181.81,
+      184.53,
+      200.11,
+      201.97,
+      202.53,
+      208.23,
+      212.14,
+      212.33,
+      215.95,
+      218.2,
+      218.53,
+      222.72,
+      223.31,
+      224.62,
+      231.28,
+      234.34,
+      252.16,
+      252.42,
+      252.67,
+      256.11,
+      261.73,
+      266.45,
+      290.64
+    ],
+    "delivered_median_seconds": 222.72,
+    "final_browser_paths": {
+      "planned": 258,
+      "executed": 149,
+      "passed": 149
+    },
+    "heldout_executed": 0,
+    "validation_executed": 40,
+    "execution_split": "validation",
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Fixed validation product cohort, not A/B/C, human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  },
+  "cases": [
+    {
+      "case_id": "sales-v3-006",
+      "difficulty": "simple",
+      "family": "family-02",
+      "session_id": "1684b5dfd3784cf5",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 184.53,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 240852,
+          "cached_input_tokens": 166784,
+          "output_tokens": 6387
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-007",
+      "difficulty": "simple",
+      "family": "family-02",
+      "session_id": "8f6ad852723c4257",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 218.53,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 455760,
+          "cached_input_tokens": 390784,
+          "output_tokens": 6558
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-008",
+      "difficulty": "simple",
+      "family": "family-02",
+      "session_id": "a418837f3c064ab5",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 212.14,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 336326,
+          "cached_input_tokens": 279424,
+          "output_tokens": 7043
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-009",
+      "difficulty": "simple",
+      "family": "family-02",
+      "session_id": "7e0a0ab404ed4b62",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 181.81,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 2,
+        "intake": 1,
+        "core": 1,
+        "usage_complete": 2,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 284558,
+          "cached_input_tokens": 244352,
+          "output_tokens": 6440
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-010",
+      "difficulty": "simple",
+      "family": "family-02",
+      "session_id": "ad9ebf38b0914c17",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 201.97,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 299211,
+          "cached_input_tokens": 231040,
+          "output_tokens": 6811
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-036",
+      "difficulty": "simple",
+      "family": "family-08",
+      "session_id": "83016934ab8e49f6",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 234.34,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 307446,
+          "cached_input_tokens": 237312,
+          "output_tokens": 7544
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-037",
+      "difficulty": "simple",
+      "family": "family-08",
+      "session_id": "d5b94add859947e7",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 252.67,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 377120,
+          "cached_input_tokens": 309376,
+          "output_tokens": 7666
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-038",
+      "difficulty": "simple",
+      "family": "family-08",
+      "session_id": "f6308b043c53490d",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 290.64,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 539664,
+          "cached_input_tokens": 469504,
+          "output_tokens": 9251
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-039",
+      "difficulty": "simple",
+      "family": "family-08",
+      "session_id": "a76e80ac771b4f04",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 223.31,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 2,
+        "intake": 1,
+        "core": 1,
+        "usage_complete": 2,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 298283,
+          "cached_input_tokens": 255744,
+          "output_tokens": 7084
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-040",
+      "difficulty": "simple",
+      "family": "family-08",
+      "session_id": "1d3c6c9b9b7e49bf",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 200.11,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 297715,
+          "cached_input_tokens": 248704,
+          "output_tokens": 5822
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-066",
+      "difficulty": "medium",
+      "family": "family-14",
+      "session_id": "9b237cb0b05c4c4e",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 222.72,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 301632,
+          "cached_input_tokens": 242304,
+          "output_tokens": 7534
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-067",
+      "difficulty": "medium",
+      "family": "family-14",
+      "session_id": "645c2ba5a8f24179",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 212.33,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 313685,
+          "cached_input_tokens": 261120,
+          "output_tokens": 7569
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-068",
+      "difficulty": "medium",
+      "family": "family-14",
+      "session_id": "a70b8c7c7acf4dc5",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 215.95,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 260733,
+          "cached_input_tokens": 180608,
+          "output_tokens": 7313
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-069",
+      "difficulty": "medium",
+      "family": "family-14",
+      "session_id": "a969497cc9134b23",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 252.42,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 446179,
+          "cached_input_tokens": 349184,
+          "output_tokens": 8707
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-070",
+      "difficulty": "medium",
+      "family": "family-14",
+      "session_id": "063f0eaaef1e44c2",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 218.2,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 264829,
+          "cached_input_tokens": 207104,
+          "output_tokens": 7205
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-081",
+      "difficulty": "medium",
+      "family": "family-17",
+      "session_id": "dfdd4f69f00a4ac3",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 266.45,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 405155,
+          "cached_input_tokens": 348288,
+          "output_tokens": 8983
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-082",
+      "difficulty": "medium",
+      "family": "family-17",
+      "session_id": "4234b7a328e645ba",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 252.16,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 429856,
+          "cached_input_tokens": 375424,
+          "output_tokens": 8036
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-083",
+      "difficulty": "medium",
+      "family": "family-17",
+      "session_id": "321705066486464a",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 256.11,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 416005,
+          "cached_input_tokens": 334080,
+          "output_tokens": 8182
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-084",
+      "difficulty": "medium",
+      "family": "family-17",
+      "session_id": "67ebbfca1013459c",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 231.28,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 2,
+        "intake": 1,
+        "core": 1,
+        "usage_complete": 2,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 282989,
+          "cached_input_tokens": 244480,
+          "output_tokens": 7703
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-085",
+      "difficulty": "medium",
+      "family": "family-17",
+      "session_id": "dcbda18bcb7d4563",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 261.73,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 399266,
+          "cached_input_tokens": 334336,
+          "output_tokens": 7957
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-106",
+      "difficulty": "medium",
+      "family": "family-22",
+      "session_id": "d35ea4de090c40b6",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 202.53,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 260815,
+          "cached_input_tokens": 201472,
+          "output_tokens": 6247
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-107",
+      "difficulty": "medium",
+      "family": "family-22",
+      "session_id": "f1d3b675f45b4b63",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 208.23,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 295147,
+          "cached_input_tokens": 246912,
+          "output_tokens": 6187
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "approval_threshold",
+          "actual": "922.0",
+          "expected": "922.00"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-108",
+      "difficulty": "medium",
+      "family": "family-22",
+      "session_id": "209173d82f184870",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 224.62,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 309877,
+          "cached_input_tokens": 245504,
+          "output_tokens": 7491
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "approval_threshold",
+          "actual": "1002",
+          "expected": "1002.00"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分",
+      "failure_domain": null
+    },
+    {
+      "case_id": "sales-v3-109",
+      "difficulty": "medium",
+      "family": "family-22",
+      "session_id": "96c84e3c481c43f3",
+      "status": "failed",
+      "stage": "core",
+      "delivery_pass": false,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 571.64,
+      "core_calls": 3,
+      "internal_core_repairs": 2,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": {
+            "type": "WorkspaceProcessTimeout",
+            "message": "Codex CLI Core Builder timed out"
+          },
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "failed",
+          "issues": [
+            "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+          ]
+        },
+        {
+          "round": 2,
+          "cli_error": {
+            "type": "RuntimeError",
+            "message": "Codex CLI Core Builder exited with code 1: 2026-10-19T06:05:07.265802Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)"
+          },
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "failed",
+          "issues": [
+            "CLI did not complete: {'type': 'RuntimeError', 'message': 'Codex CLI Core Builder exited with code 1: 2026-10-19T06:05:07.265802Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)'}"
+          ]
+        },
+        {
+          "round": 3,
+          "cli_error": {
+            "type": "RuntimeError",
+            "message": "Codex CLI Core Builder exited with code 1: 2026-10-19T06:07:08.706970Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)"
+          },
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "failed",
+          "issues": [
+            "CLI did not complete: {'type': 'RuntimeError', 'message': 'Codex CLI Core Builder exited with code 1: 2026-10-19T06:07:08.706970Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)'}"
+          ]
+        }
+      ],
+      "cost": {
+        "calls": 4,
+        "intake": 1,
+        "core": 3,
+        "usage_complete": 1,
+        "missing_usage": 3,
+        "failed_root_calls": 3,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 24706,
+          "cached_input_tokens": 11520,
+          "output_tokens": 454
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "请查看检查结果，补充或修改需求后可从页面重新生成",
+      "stage_in_chinese": "Core调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-110",
+      "difficulty": "medium",
+      "family": "family-22",
+      "session_id": "33adadaa616c491a",
+      "status": "failed",
+      "stage": "core",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 575.66,
+      "core_calls": 3,
+      "internal_core_repairs": 2,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": {
+            "type": "WorkspaceProcessTimeout",
+            "message": "Codex CLI Core Builder timed out"
+          },
+          "engineering": {
+            "status": "failed",
+            "issues": [
+              "missing index.html",
+              "missing app.js",
+              "missing styles.css"
+            ]
+          },
+          "check_status": "failed",
+          "issues": [
+            "missing index.html",
+            "missing app.js",
+            "missing styles.css",
+            "CLI did not complete: {'type': 'WorkspaceProcessTimeout', 'message': 'Codex CLI Core Builder timed out'}"
+          ]
+        },
+        {
+          "round": 2,
+          "cli_error": {
+            "type": "RuntimeError",
+            "message": "Codex CLI Core Builder exited with code 1: 2026-10-19T06:06:35.951349Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)"
+          },
+          "engineering": {
+            "status": "failed",
+            "issues": [
+              "missing index.html",
+              "missing app.js",
+              "missing styles.css"
+            ]
+          },
+          "check_status": "failed",
+          "issues": [
+            "missing index.html",
+            "missing app.js",
+            "missing styles.css",
+            "CLI did not complete: {'type': 'RuntimeError', 'message': 'Codex CLI Core Builder exited with code 1: 2026-10-19T06:06:35.951349Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)'}"
+          ]
+        },
+        {
+          "round": 3,
+          "cli_error": {
+            "type": "RuntimeError",
+            "message": "Codex CLI Core Builder exited with code 1: 2026-10-19T06:08:21.855280Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)"
+          },
+          "engineering": {
+            "status": "failed",
+            "issues": [
+              "missing index.html",
+              "missing app.js",
+              "missing styles.css"
+            ]
+          },
+          "check_status": "failed",
+          "issues": [
+            "missing index.html",
+            "missing app.js",
+            "missing styles.css",
+            "CLI did not complete: {'type': 'RuntimeError', 'message': 'Codex CLI Core Builder exited with code 1: 2026-10-19T06:08:21.855280Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)'}"
+          ]
+        }
+      ],
+      "cost": {
+        "calls": 5,
+        "intake": 2,
+        "core": 3,
+        "usage_complete": 2,
+        "missing_usage": 3,
+        "failed_root_calls": 3,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 49575,
+          "cached_input_tokens": 30336,
+          "output_tokens": 973
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "请查看检查结果，补充或修改需求后可从页面重新生成",
+      "stage_in_chinese": "Core调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-121",
+      "difficulty": "medium",
+      "family": "family-25",
+      "session_id": "35dbd08962e34ff0",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 113.19,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-122",
+      "difficulty": "medium",
+      "family": "family-25",
+      "session_id": "28b3f52d6e6d4d97",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 107.09,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-123",
+      "difficulty": "medium",
+      "family": "family-25",
+      "session_id": "0bbd83fb55a3445f",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 109.12,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-124",
+      "difficulty": "medium",
+      "family": "family-25",
+      "session_id": "d26f14e108ee4a3a",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 111.12,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-125",
+      "difficulty": "medium",
+      "family": "family-25",
+      "session_id": "d72ec061fcde4746",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 111.02,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-146",
+      "difficulty": "hard",
+      "family": "family-30",
+      "session_id": "dc9fd1beb32a4414",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 111.14,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-147",
+      "difficulty": "hard",
+      "family": "family-30",
+      "session_id": "f2f5b1b083c64823",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 107.19,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-148",
+      "difficulty": "hard",
+      "family": "family-30",
+      "session_id": "8ffa1a754fc543ca",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 113.11,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-149",
+      "difficulty": "hard",
+      "family": "family-30",
+      "session_id": "652d5560e6284bff",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 111.14,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-150",
+      "difficulty": "hard",
+      "family": "family-30",
+      "session_id": "7b44133e3e4a40e6",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 108.89,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-186",
+      "difficulty": "hard",
+      "family": "family-38",
+      "session_id": "37d890a45523428e",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 118.86,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-187",
+      "difficulty": "hard",
+      "family": "family-38",
+      "session_id": "beace31c2d234a74",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 109.0,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-188",
+      "difficulty": "hard",
+      "family": "family-38",
+      "session_id": "4b1855d5f92a46c1",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 110.94,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-189",
+      "difficulty": "hard",
+      "family": "family-38",
+      "session_id": "9a103f30bfbb480b",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 106.95,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    },
+    {
+      "case_id": "sales-v3-190",
+      "difficulty": "hard",
+      "family": "family-38",
+      "session_id": "3f19486968aa43a7",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 108.98,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "意图调用：CLI连接或路由失败",
+      "failure_domain": "cli_transport"
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "schema_version": "sales-v3-191-and-fixed40-final-v1",
+  "created_at": "2026-10-19T08:53:19.656217+00:00",
+  "original19of20_unchanged": true,
+  "protected_original_sha256": {
+    ".data/sales-benchmark-v3/pilot-20261019-v1/results.json": "e15813a420917c9d1816e5fbbc7b9538f1a8146892dbedc3660783946f420a7b",
+    ".data/sales-benchmark-v3/full-rerun-20261019-v3/results.json": "56d6ff9385bbed3f872f91c80a600747d86bda51e7aba69c8ab7cf11d15b079a",
+    "docs/sales-benchmark-v3/full-rerun/comparison.json": "db5c1ca1893cf46ec30121fc6a79db4d0244296cbbf98074dc7ecd226f06c67e",
+    "docs/sales-benchmark-v3/full-rerun/pilot-summary.json": "4934ae6be8b8d964e088801cb34ed22bfd67357432c14ac360303b952e52dd43",
+    "evaluation_sets/sales-benchmark-v3/manifest.json": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65",
+    "evaluation_sets/quotation-reliability-v2/manifest.json": "d728ba74f3ff2c9acb3afe47dc6ea8751f2073c04c7ce83bff5383963013472f"
+  },
+  "input_integrity": {
+    "new_v3": {
+      "files": 1687,
+      "mismatches": [],
+      "manifest_sha256": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65"
+    },
+    "historical_v2": {
+      "files": 73,
+      "mismatches": [],
+      "manifest_sha256": "d728ba74f3ff2c9acb3afe47dc6ea8751f2073c04c7ce83bff5383963013472f"
+    }
+  },
+  "development_regression": {
+    "case_id": "sales-v3-191",
+    "before": "not_delivered_pre_core",
+    "after": "delivered",
+    "summary": {
+      "planned": 1,
+      "delivered": 1,
+      "published": 1,
+      "final_failure_stages": {},
+      "published_defects": 0,
+      "root_cli_calls": 3,
+      "intake_calls": 2,
+      "core_calls": 1,
+      "calls_with_reported_usage": 3,
+      "reported_root_tokens": {
+        "input_tokens": 462993,
+        "cached_input_tokens": 398976,
+        "output_tokens": 9374
+      },
+      "median_elapsed_seconds": 248.11,
+      "sum_elapsed_seconds": 248.11,
+      "delivered_task_elapsed_seconds": [
+        248.11
+      ],
+      "delivered_median_seconds": 248.11,
+      "final_browser_paths": {
+        "planned": 7,
+        "executed": 7,
+        "passed": 7
+      },
+      "heldout_executed": 0,
+      "validation_executed": 0,
+      "execution_split": "development",
+      "anomalies_live_executed": 0,
+      "monetary_cost": null,
+      "boundary": "Fixed development product cohort, not A/B/C, human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+      "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+    },
+    "wall_seconds": 258.56
+  },
+  "validation_summary": {
+    "planned": 40,
+    "delivered": 23,
+    "published": 23,
+    "final_failure_stages": {
+      "Core调用：CLI连接或路由失败": 2,
+      "意图调用：CLI连接或路由失败": 15
+    },
+    "published_defects": 0,
+    "root_cli_calls": 90,
+    "intake_calls": 61,
+    "core_calls": 29,
+    "calls_with_reported_usage": 69,
+    "calls_without_reported_usage": 21,
+    "final_failure_domains": {
+      "cli_transport": 17
+    },
+    "reported_root_tokens": {
+      "input_tokens": 7897384,
+      "cached_input_tokens": 6445696,
+      "output_tokens": 171147
+    },
+    "median_elapsed_seconds": 205.38,
+    "sum_elapsed_seconds": 8029.82,
+    "delivered_task_elapsed_seconds": [
+      181.81,
+      184.53,
+      200.11,
+      201.97,
+      202.53,
+      208.23,
+      212.14,
+      212.33,
+      215.95,
+      218.2,
+      218.53,
+      222.72,
+      223.31,
+      224.62,
+      231.28,
+      234.34,
+      252.16,
+      252.42,
+      252.67,
+      256.11,
+      261.73,
+      266.45,
+      290.64
+    ],
+    "delivered_median_seconds": 222.72,
+    "final_browser_paths": {
+      "planned": 258,
+      "executed": 149,
+      "passed": 149
+    },
+    "heldout_executed": 0,
+    "validation_executed": 40,
+    "execution_split": "validation",
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Fixed validation product cohort, not A/B/C, human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  },
+  "validation_details": {
+    "families": 8,
+    "by_family": {
+      "family-02": {
+        "planned": 5,
+        "delivered": 5
+      },
+      "family-08": {
+        "planned": 5,
+        "delivered": 5
+      },
+      "family-14": {
+        "planned": 5,
+        "delivered": 5
+      },
+      "family-17": {
+        "planned": 5,
+        "delivered": 5
+      },
+      "family-22": {
+        "planned": 5,
+        "delivered": 3
+      },
+      "family-25": {
+        "planned": 5,
+        "delivered": 0
+      },
+      "family-30": {
+        "planned": 5,
+        "delivered": 0
+      },
+      "family-38": {
+        "planned": 5,
+        "delivered": 0
+      }
+    },
+    "by_difficulty": {
+      "simple": {
+        "planned": 10,
+        "delivered": 10
+      },
+      "medium": {
+        "planned": 20,
+        "delivered": 13
+      },
+      "hard": {
+        "planned": 10,
+        "delivered": 0
+      }
+    },
+    "by_information_pattern": {
+      "underspecified": 8,
+      "catalogue_given": 8,
+      "pricing_given": 8,
+      "complete": 8,
+      "explicit_no_guess": 8
+    },
+    "published_paths": {
+      "planned": 143,
+      "executed": 143,
+      "passed": 143
+    },
+    "correct_but_hidden": [
+      "sales-v3-109"
+    ],
+    "no_generated_app": 16,
+    "planned_paths": 258,
+    "executed_paths": 149,
+    "unrun_paths": 109,
+    "served_assets_exact": 69,
+    "wall_seconds": 4364.81,
+    "heartbeat_gaps": []
+  },
+  "scope": {
+    "validation_ids": [
+      "sales-v3-006",
+      "sales-v3-007",
+      "sales-v3-008",
+      "sales-v3-009",
+      "sales-v3-010",
+      "sales-v3-036",
+      "sales-v3-037",
+      "sales-v3-038",
+      "sales-v3-039",
+      "sales-v3-040",
+      "sales-v3-066",
+      "sales-v3-067",
+      "sales-v3-068",
+      "sales-v3-069",
+      "sales-v3-070",
+      "sales-v3-081",
+      "sales-v3-082",
+      "sales-v3-083",
+      "sales-v3-084",
+      "sales-v3-085",
+      "sales-v3-106",
+      "sales-v3-107",
+      "sales-v3-108",
+      "sales-v3-109",
+      "sales-v3-110",
+      "sales-v3-121",
+      "sales-v3-122",
+      "sales-v3-123",
+      "sales-v3-124",
+      "sales-v3-125",
+      "sales-v3-146",
+      "sales-v3-147",
+      "sales-v3-148",
+      "sales-v3-149",
+      "sales-v3-150",
+      "sales-v3-186",
+      "sales-v3-187",
+      "sales-v3-188",
+      "sales-v3-189",
+      "sales-v3-190"
+    ],
+    "heldout_model_executed": 0,
+    "heldout_count": 100,
+    "anomaly_live_executed": 0,
+    "distinct_requirement_ids_executed": 60,
+    "dataset_task_trials": 84,
+    "extra_negative_probes": 1
+  },
+  "source": {
+    "regression_and_validation_identical": true,
+    "current_runtime_identical": true,
+    "gate191_evidence_sha256": "c5603e902fcb10b39a93fabbe9f94144ef6b5be0302c6eae4f5278d40ab584ee",
+    "runtime_code_sha256": {
+      "backend/src/demopilot/__init__.py": "314987143f168ba0e6c9437f3e555cf832e08d660a955bd9e96f655db8e369b3",
+      "backend/src/demopilot/browser_qa.py": "a5bc2cfccfc9b1074ac59a1dd9dab200f1e6c612740c27db4f883ae824b2b309",
+      "backend/src/demopilot/builder_preflight.py": "ee090264278066412cb4c2f5a7fa847df977413ec73294695801968ec887fe1a",
+      "backend/src/demopilot/config.py": "ecc3969660e34f87eb6d95c2bd39ee931e16b64c999c2c9fc4ae8688b74aa638",
+      "backend/src/demopilot/core_acceptance.py": "62c7ed2b012f58ecff6869f7322d6de6ec871f86d736ee5d92d2960c0ce43caa",
+      "backend/src/demopilot/core_harness.py": "c1bc5f6efda959efcf612d649a0c788f3bd9165bfc00e34f250a4177cb81e512",
+      "backend/src/demopilot/core_loop.py": "0a8b8ab6470dfa0a0335a065457bdb25afb1bc7df9c599808e790fcb966d9c55",
+      "backend/src/demopilot/evaluation_cases.py": "3813d4f6f736e5dfcd8e66313b1c9b34e35b2e09da400811b9e8eeb05008fc6f",
+      "backend/src/demopilot/evaluation_models.py": "5851bc3e40c3bf1ef1f56f7d7529d6ff1a793a587fac3bced2765402efd13154",
+      "backend/src/demopilot/evaluation_store.py": "b7d088f23cc85f3fa2d58934cb21f34d078cf96007181e10ccefaddf9352e2e3",
+      "backend/src/demopilot/evaluator.py": "363fa5fb83ca36b21e4bd1401bd2dd8ad33e3b0041006c02383487c3d1f29f6f",
+      "backend/src/demopilot/generator.py": "8b2dea657893084aa3b639aca536f21e5c8cd0d5957bc824bd70d23991581ff5",
+      "backend/src/demopilot/harness.py": "8d49dc43d15e62651609384a949cb078aabc4eab480e255305699760c658d0a5",
+      "backend/src/demopilot/interaction_contract.py": "e205617140076cb0841fbbb72df232d3d825040680cb6a7149b123c31af40bc0",
+      "backend/src/demopilot/main.py": "68d35f35a77adc5a7813989de57eddef68de32dbd495c654debe6dd18be1526a",
+      "backend/src/demopilot/models.py": "7219890d9722db006f90da279f4e7618818de7a14dcf9958ee2b2bc35a04ef45",
+      "backend/src/demopilot/orchestrator.py": "580b2dc641d38e82fc42f637097acf93fc5c39f5847889639b8b340a922c5cca",
+      "backend/src/demopilot/prompts.py": "5ce8ba4282df6091c0dcbe107a619b355efd4b4628174380595e98f75fadaddc",
+      "backend/src/demopilot/providers/__init__.py": "adf396a18889159148fc79abd364bdcff8a2e482b6cee0e8039629e30c847b9f",
+      "backend/src/demopilot/providers/base.py": "2e3951c2e43b67dc395b50c76288b747a0bdd18d2760f2665315043b18cf6f25",
+      "backend/src/demopilot/providers/claude.py": "fc8211a1cf2ce04a2d364f17982d84607f956fa7d3a38dead5f3f76cec74f02f",
+      "backend/src/demopilot/providers/codex_cli.py": "f4e6260596d1fcf103c12e6532d107cfce00e669c9673491c266e35dbdb8951e",
+      "backend/src/demopilot/providers/compatible.py": "2a37b1c43053344d3b32af2b247ddc8630baa111c8cf34f9cfd7976d97b8091a",
+      "backend/src/demopilot/providers/mock.py": "5cbd422b752bb891d2f7874633bb9595a6ea9cd139dbae778d3e0026dbffb48e",
+      "backend/src/demopilot/quotation_api.py": "13f5398a3b8fae6b9d3d38677d4acc8d14982d7d8b5c8ea312cc34a13ccb5ecb",
+      "backend/src/demopilot/quotation_browser.py": "3886792fb76fc3e665f7a059932442889cd1c5bbce6751067cd9f1b2b1e83eca",
+      "backend/src/demopilot/quotation_cli.py": "524429ff8ea8556861f08ce5767aaccab21d9d3b4b2b2277b74a467356837a6c",
+      "backend/src/demopilot/quotation_contract.py": "46daee08e0eaf391d4ca134ba0d1f035184d9f2f9baf7571be6c42ce33120b7e",
+      "backend/src/demopilot/quotation_loop.py": "dcb1b7283d2e517bb8a261fe37c32318c10ccf5a5f607435f78ac03966d242f9",
+      "backend/src/demopilot/quotation_release.py": "f9e843a7373bf4115e4c00a8d72f28d6635f791a94b681a2f238a02169bd83d5",
+      "backend/src/demopilot/reviewer.py": "c178cd92cbc037fad1d06e86ac678da4109f3ba1250c6c68f8879ab3b7d77f40",
+      "backend/src/demopilot/run_metrics.py": "97e7fd127f7576db52955f58cce7423dad027bfa0db9837fbc582454ca9f757a",
+      "backend/src/demopilot/runtime.py": "bf6bdce61a478d8a85145bdaa2634ebd0d7b52d13fdc2f9ae7ccd7d3621e839f",
+      "backend/src/demopilot/sales_api.py": "23171c2bd645df9c707d38d9414516108443044b37489053eeadc5d90571512a",
+      "backend/src/demopilot/sales_contract.py": "94cd8a193661beb909fa23ffe2d2bc82eac6e3a5702643ffc5c3581ce5e95a80",
+      "backend/src/demopilot/sales_core.py": "912aaf54bb3b8d8f620e127eb178299bdff7cedb5beadd0376f9608c498d06b5",
+      "backend/src/demopilot/skill_runtime.py": "43e075049ba803826a181b888bb1d8875e57d8d32861d3ded40fd5de509c4fad",
+      "backend/src/demopilot/storage.py": "d43dd0219e3ae728e8e9e6539b58070b05eed4e06577a1fb8a18c1cbe6383925",
+      "backend/src/demopilot/verifier.py": "327fb8c5e664d3697c04d6acf79d8933695b74d80c0d878b1c19a2d7186e8f2f",
+      "scripts/quotation_business_probe.py": "d8f63cb53914dff804abd3e4ddbc0da6f32a9e170d54fd9567a0295edaad3b0b",
+      "scripts/run_sales_benchmark_pilot.py": "9db947861dc6aca3d6296243570180e749469e8b280c07235acb991e7388e5fc",
+      "scripts/sales_benchmark_data.py": "c16c41eb2993d73943812d018ac6dba9d914c18bef7160489a2c88dda887a2bb",
+      "scripts/run_with_awake.py": "b6815cc3b7e8adc704d671071f8bb4e13cb832c62d4c4910d522142d9c691c36"
+    }
+  },
+  "cost": {
+    "new_root_cli_calls": 94,
+    "with_usage": 73,
+    "without_usage": 21,
+    "known_reported_root_tokens": {
+      "input_tokens": 8384942,
+      "cached_input_tokens": 6863488,
+      "output_tokens": 180918
+    },
+    "monetary_cost": null,
+    "boundary": "21failedcalls provide no usage; reported tokens are incomplete, cachedinput is subset, nativechildusage mayalso be missing."
+  },
+  "recovery": {
+    "additional_validation_model_calls": 0,
+    "first23of40_preserved": true,
+    "underlying_transport_cause_unresolved": true,
+    "full40_functional_acceptance_not_achieved": true
+  },
+  "raw_evidence_hashes": {
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/results.json": "2ea694d11c1082ee1b524e108f6989ebe6433f6cfa05cdbda1db9003c2ac6f82",
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/context.json": "f7404775bb14a52633e5a7b956b1b08ae014afd2bd97314b9087824028f2ec2e",
+    ".data/sales-benchmark-v3/191-regression-20261019-v4/results.json": "c5603e902fcb10b39a93fabbe9f94144ef6b5be0302c6eae4f5278d40ab584ee",
+    ".data/sales-benchmark-v3/191-regression-20261019-v4/context.json": "8c6197fdd9f7eb2656a549efc5c917c14ccd26aafa0f46f31173ff4a450cdb14",
+    "docs/sales-benchmark-v3/stage-validation/failure-attribution.json": "22a1efe888f97b4081f175f52d7cba1743c213b12a61fcb6fc033ff2fa8e7604"
+  }
+}

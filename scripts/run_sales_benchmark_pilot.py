@@ -1,4 +1,4 @@
-"""Bounded real-product B-arm pilot; refuses every ID outside the sealed20.
+"""Real product development pilot or gated fixed40 validation; never heldout100.
 
 Same production HTTP API, interview, Core and release registry. The scripted
 seller releases facts only in response to matching actual questions. Independent
@@ -27,14 +27,13 @@ from fastapi.staticfiles import StaticFiles
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend/src"))
 
-from sales_benchmark_data import DATASET, read, sha, validate
-
 from demopilot.config import Settings
 from demopilot.main import create_app
 from demopilot.quotation_browser import audit_application, tree_hash
 from demopilot.quotation_loop import write_json
 from demopilot.sales_contract import QuotePlan
 from demopilot.sales_core import SalesCoreManager
+from sales_benchmark_data import DATASET, read, sha, validate
 
 
 def semantics(value):
@@ -58,7 +57,8 @@ def semantics(value):
 def answers_for(questions, case, released):
     text = " ".join(questions)
     all_requested = any(
-        x in text for x in ["完整业务规则", "全部规则", "所有规则", "完整需求", "所有业务信息"]
+        x in text
+        for x in ["完整业务规则", "全部规则", "所有规则", "完整需求", "所有业务信息"]
     )
     selected = []
     common_manager = {
@@ -71,7 +71,9 @@ def answers_for(questions, case, released):
         "customer_owner",
     }
     for answer in case["seller_answers"]:
-        matched = all_requested or any(x.lower() in text.lower() for x in answer["aliases"])
+        matched = all_requested or any(
+            x.lower() in text.lower() for x in answer["aliases"]
+        )
         if not matched:
             continue
         item = dict(answer)
@@ -91,6 +93,17 @@ def answers_for(questions, case, released):
                 and "workflow_common" not in released
             ):
                 item["topic"] = "workflow_common"
+        if item["topic"] in released and any(
+            x in text for x in ("确认", "哪种", "哪一种", "冲突", "口径", "再次")
+        ):
+            # Repeat only the already supplied fact for this matched topic.
+            # A request to confirm a proposed change is NOT seller approval.
+            item["topic"] += "_clarification"
+            item["answer"] = (
+                "这不是同意修改规则，请以我此前给出的原始业务事实为准："
+                + item["answer"]
+                + " 如仍存在会改变金额或流程的实际冲突，请指出具体差异继续确认，不要替我选择新规则。"
+            )
         if item["topic"] not in released:
             selected.append(item)
     return selected
@@ -107,6 +120,46 @@ def code_manifest():
     return {p.relative_to(ROOT).as_posix(): sha(p) for p in files}
 
 
+def validation_unlock(evidence, model):
+    """Only a passed current-source191 run can unlock the separate fixed40."""
+    if not evidence or not Path(evidence).is_file():
+        raise ValueError("Validation40 requires completed passed191 evidence")
+    evidence = Path(evidence).resolve()
+    result = read(evidence)
+    context = read(evidence.parent / "context.json")
+    rows = result.get("rows", [])
+    if (
+        context.get("pilot_ids") != ["sales-v3-191"]
+        or not context.get("targeted_regression")
+        or context.get("execution_split", "development") != "development"
+        or context.get("model") != model
+        or context.get("dataset_manifest_sha256") != sha(DATASET / "manifest.json")
+        or context.get("code_sha256") != code_manifest()
+        or len(rows) != 1
+        or rows[0].get("case_id") != "sales-v3-191"
+        or not rows[0].get("delivery_pass")
+        or not rows[0].get("confirmation_semantics_match")
+        or rows[0].get("status") != "published"
+        or not rows[0].get("final_functional_pass")
+        or set(rows[0].get("exact_served_assets", []))
+        != {"index.html", "app.js", "styles.css"}
+        or rows[0].get("independent_check", {}).get("status") != "passed"
+        or rows[0].get("independent_check", {}).get("planned") != 7
+        or rows[0].get("independent_check", {}).get("executed") != 7
+        or rows[0].get("independent_check", {}).get("passed") != 7
+        or not rows[0].get("independent_check", {}).get("source_unchanged")
+        or not rows[0].get("cost", {}).get("core_calls")
+    ):
+        raise ValueError(
+            "Validation40 requires passed191 with unchanged source/model/data and all7finalchecks"
+        )
+    return dict(
+        evidence=str(evidence.relative_to(ROOT)),
+        sha256=sha(evidence),
+        source_verified=True,
+    )
+
+
 def freeze(output, args):
     if (output / "context.json").exists():
         raise RuntimeError("Use a fresh cohort; never overwrite/relaunch an old pilot")
@@ -120,7 +173,26 @@ def freeze(output, args):
     )
     original_pilot = list(pilot)
     regression = getattr(args, "regression_ids", None)
-    if regression:
+    cohort = getattr(args, "cohort", "development")
+    unlock = None
+    if cohort == "validation":
+        if regression:
+            raise ValueError("Validation40 cannot select or replace cases")
+        pilot = list(split["validation"])
+        if (
+            len(pilot) != 40
+            or len(set(pilot)) != 40
+            or set(pilot) & (set(split["development"]) | set(split["heldout"]))
+        ):
+            raise ValueError(
+                "Validation40 must be the unchanged disjoint fixed40 split"
+            )
+        unlock = validation_unlock(getattr(args, "unlock_evidence", None), args.model)
+    elif cohort != "development":
+        raise ValueError(
+            "Only development or fixed40 validation may execute; heldout is forbidden"
+        )
+    elif regression:
         if (
             not 1 <= len(regression) <= 3
             or len(set(regression)) != len(regression)
@@ -131,12 +203,14 @@ def freeze(output, args):
             )
         pilot = list(regression)
     context = dict(
-        schema_version="sales-benchmark-v3-product-pilot2",
+        schema_version="sales-benchmark-v3-product-pilot3",
         created_at=datetime.now(UTC).isoformat(),
         pilot_ids=pilot,
         original_sealed_pilot_ids=original_pilot,
         targeted_regression=bool(regression),
-        change_boundary="General workflow capability context and complete delivery of existing shared approval semantics; original dataset/gold unchanged. Two integration fixes together, not isolated prompt attribution.",
+        execution_split=cohort,
+        validation_unlock=unlock,
+        change_boundary="General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution.",
         dataset_manifest_sha256=sha(DATASET / "manifest.json"),
         code_sha256=code_manifest(),
         model=args.model,
@@ -148,7 +222,7 @@ def freeze(output, args):
         case_deadline_seconds=2100,
         arm="current-product-clarify-only",
         information_policy="Scripted seller releases only facts matched by actual questions; ready draft must match seller contract before scripted confirmation.",
-        denominator="All20preselected development tasks, including pre-Core and infrastructure failures. Intermediate Core repairs are separate.",
+        denominator=f"All{len(pilot)}fixed {cohort} tasks, including pre-Core and infrastructure failures; intermediate Core repairs are separate.",
         independent_scoring="After all terminal outcomes, fresh Chromium against frozen expected seller contract; no final-score feedback or manual app edits.",
         holdout_policy="100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed.",
         cost_boundary="Configured caps are equal ceilings, not forced consumption. Actual root CLI token reports/counts are retained; billing and exhaustive native-child cost are unavailable.",
@@ -247,7 +321,9 @@ async def run_cases(args):
     output.mkdir(parents=True, exist_ok=True)
     frozen = freeze(output, args)
     cases_by_id = {
-        c["id"]: c for c in read(DATASET / "cases.json")["cases"] if c["id"] in frozen["pilot_ids"]
+        c["id"]: c
+        for c in read(DATASET / "cases.json")["cases"]
+        if c["id"] in frozen["pilot_ids"]
     }
     settings = Settings(
         data_dir=output,
@@ -261,13 +337,17 @@ async def run_cases(args):
     )  # Explicit isolated pilot config; production default remains1.
     app = create_app(settings, sales_core=manager)
     app.mount(
-        "/", StaticFiles(directory=ROOT / "frontend/dist", html=True), name="isolated-pilot-ui"
+        "/",
+        StaticFiles(directory=ROOT / "frontend/dist", html=True),
+        name="isolated-pilot-ui",
     )
     sock = socket.socket()
     sock.bind(("127.0.0.1", args.port))
     sock.listen(128)
     server = uvicorn.Server(
-        uvicorn.Config(app, host="127.0.0.1", port=args.port, log_level="warning", access_log=False)
+        uvicorn.Config(
+            app, host="127.0.0.1", port=args.port, log_level="warning", access_log=False
+        )
     )
     service = asyncio.create_task(server.serve(sockets=[sock]))
     while not server.started:
@@ -291,9 +371,9 @@ async def run_cases(args):
             verify_frozen(output)
             if (
                 identifier not in frozen["pilot_ids"]
-                or cases_by_id[identifier]["split"] != "development"
+                or cases_by_id[identifier]["split"] != frozen["execution_split"]
             ):
-                raise RuntimeError("Forbidden non-pilot case")
+                raise RuntimeError("Forbidden case outside frozen execution split")
             case = cases_by_id[identifier]
             started = time.monotonic()
             deadline = started + frozen["case_deadline_seconds"]
@@ -323,14 +403,17 @@ async def run_cases(args):
             try:
                 response = await client.post(
                     "/api/sales-core/sessions",
-                    json=dict(brief=case["raw_sales_brief"], request_key="pilot-" + identifier),
+                    json=dict(
+                        brief=case["raw_sales_brief"], request_key="pilot-" + identifier
+                    ),
                 )
                 response.raise_for_status()
                 s = response.json()
                 session_id = s["id"]
                 row["session_id"] = session_id
                 write_json(
-                    target / "session-link.json", dict(session_id=session_id, case_id=identifier)
+                    target / "session-link.json",
+                    dict(session_id=session_id, case_id=identifier),
                 )
                 released = {
                     a["topic"]
@@ -344,7 +427,9 @@ async def run_cases(args):
                     selected = answers_for(s["questions"], case, released)
                     answer = "\n".join(a["answer"] for a in selected)
                     if not answer:
-                        answer = "请具体询问仍缺少的价格、优惠、审批或配送信息；不要猜测。"
+                        answer = (
+                            "请具体询问仍缺少的价格、优惠、审批或配送信息；不要猜测。"
+                        )
                     else:
                         answer += "\n" + case["common_conventions"]
                     row["question_rounds"].append(
@@ -356,7 +441,8 @@ async def run_cases(args):
                     )
                     released.update(a["topic"] for a in selected)
                     response = await client.post(
-                        f"/api/sales-core/sessions/{session_id}/answers", json=dict(answer=answer)
+                        f"/api/sales-core/sessions/{session_id}/answers",
+                        json=dict(answer=answer),
                     )
                     response.raise_for_status()
                     s = await wait_idle(client, session_id, deadline)
@@ -369,12 +455,16 @@ async def run_cases(args):
                         remaining_questions=s["questions"],
                     )
                 else:
-                    actual = QuotePlan.model_validate(s["draft"]).model_dump(mode="json")
+                    actual = QuotePlan.model_validate(s["draft"]).model_dump(
+                        mode="json"
+                    )
                     match = semantics(actual) == semantics(case["expected_plan"])
                     row["confirmation_semantics_match"] = match
                     write_json(
                         target / "confirmation.json",
-                        dict(match=match, actual=actual, expected=case["expected_plan"]),
+                        dict(
+                            match=match, actual=actual, expected=case["expected_plan"]
+                        ),
                     )
                     if not match:
                         row.update(
@@ -420,8 +510,12 @@ async def run_cases(args):
                                 ],
                             )
                         row.update(
-                            status="published" if s["status"] == "published" else "failed",
-                            stage="publication" if s["status"] == "published" else "core",
+                            status="published"
+                            if s["status"] == "published"
+                            else "failed",
+                            stage="publication"
+                            if s["status"] == "published"
+                            else "core",
                             session_status=s["status"],
                             demo_url=s["demo_url"],
                         )
@@ -436,7 +530,9 @@ async def run_cases(args):
                 )
                 if session_id:
                     try:
-                        await client.post(f"/api/sales-core/sessions/{session_id}/cancel")
+                        await client.post(
+                            f"/api/sales-core/sessions/{session_id}/cancel"
+                        )
                     except Exception:
                         pass
             row["elapsed_seconds"] = round(time.monotonic() - started, 2)
@@ -492,7 +588,10 @@ async def run_cases(args):
                 artifact = None
                 if row["session_id"]:
                     session = read(
-                        output / "sales-core/sessions" / row["session_id"] / "session.json"
+                        output
+                        / "sales-core/sessions"
+                        / row["session_id"]
+                        / "session.json"
                     )
                     if session["status"] == "published":
                         artifact = (
@@ -545,7 +644,9 @@ async def run_cases(args):
                 else:
                     row["independent_check"] = dict(
                         status="not_run_no_generated_app",
-                        planned=len(read(DATASET / "private" / f"{case['id']}.json")["journeys"]),
+                        planned=len(
+                            read(DATASET / "private" / f"{case['id']}.json")["journeys"]
+                        ),
                         executed=0,
                         passed=0,
                     )
@@ -587,7 +688,9 @@ def summarize(rows, context):
         terminal=len(rows),
         published=sum(r["status"] == "published" for r in rows),
         delivered=sum(r["delivery_pass"] for r in rows),
-        failure_stages=dict(Counter(r["stage"] for r in rows if not r["delivery_pass"])),
+        failure_stages=dict(
+            Counter(r["stage"] for r in rows if not r["delivery_pass"])
+        ),
         published_functional_defects=sum(
             r["status"] == "published" and not r["final_functional_pass"] for r in rows
         ),
@@ -615,7 +718,11 @@ def summarize(rows, context):
         billing_boundary="CLI ChatGPT login gives no per-task monetary bill; reported root tokens may not exhaust native-child usage.",
         observed_input_flags=sum(len(c.get("observed_input_flags", [])) for c in costs),
         heldout_executed=0,
-        comparison="Development calibration of current full product only, not A/B/C effect evidence; original failures never replaced.",
+        execution_split=context.get("execution_split", "development"),
+        validation_executed=len(rows)
+        if context.get("execution_split") == "validation"
+        else 0,
+        comparison="Fixed full-product cohort, not A/B/C method-effect evidence; development regression and validation reported separately, original failures never replaced.",
     )
 
 
@@ -625,9 +732,17 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--port", type=int, default=8093)
     parser.add_argument(
+        "--cohort", choices=("development", "validation"), default="development"
+    )
+    parser.add_argument(
+        "--unlock-evidence",
+        type=Path,
+        help="Passed current-source191 results.json, required for fixed40validation",
+    )
+    parser.add_argument(
         "--regression-ids",
         nargs="+",
-        help="At most3 observed failing development IDs from the original frozen20; no other batch allowed",
+        help="At most3 observed failing development IDs from original20; cannot combine with validation",
     )
     args = parser.parse_args()
     asyncio.run(run_cases(args))
