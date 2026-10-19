@@ -1,0 +1,340 @@
+{
+  "case_id": "sales-v3-191",
+  "kind": "read-only diagnosis, not a model rerun or score repair",
+  "observed_terminal": "Intake not ready after3calls; no Core called; UI awaits clarification.",
+  "observed_question": "Model asks whether tax should be independently rounded or subtracted from displayed rounded net.",
+  "seller_reply": "Pricing topic had already been released; scripted seller returned generic ask-for-missing-info fallback, not a policy confirmation.",
+  "arithmetic": {
+    "assumptions": [
+      "6percent included tax",
+      "integer-cent gross from two-decimal catalogue and integer quantities",
+      "shipping added after tax"
+    ],
+    "residues_checked": 53,
+    "all_equivalent": true,
+    "proof": "If gross has N cents, net cents=50N/53 and tax cents=3N/53. Denominator53 is odd, so neither fraction is exactly half a cent; half-up rounded parts complement to N. All53 residues checked. This does not apply to arbitrary rates or precision.",
+    "rows": [
+      {
+        "gross": "0",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.01",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.02",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.03",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.04",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.05",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.06",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.07",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.08",
+        "tax_independent": "0.00",
+        "tax_from_displayed_net": "0.00",
+        "same": true
+      },
+      {
+        "gross": "0.09",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.1",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.11",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.12",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.13",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.14",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.15",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.16",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.17",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.18",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.19",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.2",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.21",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.22",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.23",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.24",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.25",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.26",
+        "tax_independent": "0.01",
+        "tax_from_displayed_net": "0.01",
+        "same": true
+      },
+      {
+        "gross": "0.27",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.28",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.29",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.3",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.31",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.32",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.33",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.34",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.35",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.36",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.37",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.38",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.39",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.4",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.41",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.42",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.43",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.44",
+        "tax_independent": "0.02",
+        "tax_from_displayed_net": "0.02",
+        "same": true
+      },
+      {
+        "gross": "0.45",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.46",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.47",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.48",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.49",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.5",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.51",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      },
+      {
+        "gross": "0.52",
+        "tax_independent": "0.03",
+        "tax_from_displayed_net": "0.03",
+        "same": true
+      }
+    ]
+  },
+  "conclusion": "Two wording/procedure descriptions prompted a clarification; no numerical gold defect demonstrated for this fixed6percent case. Remaining bottleneck is semantic clarification plus simulated-seller followup, not Core coding or a published functional defect.",
+  "changes_to_fixture_or_runtime": false,
+  "additional_model_calls": 0
+}

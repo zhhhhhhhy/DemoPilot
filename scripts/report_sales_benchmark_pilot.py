@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import statistics
 from collections import Counter
 from pathlib import Path
 
@@ -62,9 +63,9 @@ def report(output, destination):
     context = read(output / "context.json")
     rows = raw["rows"]
     out = []
-    assert len(rows) == len(context["pilot_ids"]) and {r["case_id"] for r in rows} == set(
-        context["pilot_ids"]
-    )
+    assert len(rows) == len(context["pilot_ids"]) and {
+        r["case_id"] for r in rows
+    } == set(context["pilot_ids"])
     for row in sorted(rows, key=lambda r: r["case_id"]):
         r = {
             k: row.get(k)
@@ -106,14 +107,20 @@ def report(output, destination):
                 if c["actual"].get(key) != c["expected"].get(key):
                     r["observed_differences"].append(
                         dict(
-                            field=key, actual=c["actual"].get(key), expected=c["expected"].get(key)
+                            field=key,
+                            actual=c["actual"].get(key),
+                            expected=c["expected"].get(key),
                         )
                     )
         if terminal.exists():
             s = read(terminal)
             r["remaining_questions"] = s["questions"]
-            dialogue = "\n".join(m["content"] for m in s["messages"] if m["role"] == "user")
-            r["manager_actor_absent_from_delivered_sales_facts"] = "经理" not in dialogue
+            dialogue = "\n".join(
+                m["content"] for m in s["messages"] if m["role"] == "user"
+            )
+            r["manager_actor_absent_from_delivered_sales_facts"] = (
+                "经理" not in dialogue
+            )
         r["failure_reason"] = row.get("failure_reason")
         r["stage_in_chinese"] = {
             "intent_contract": "意图整理后规则不符，未启动Core",
@@ -148,7 +155,7 @@ def report(output, destination):
         ),
         sum_elapsed_seconds=round(sum(elapsed), 2),
         delivered_task_elapsed_seconds=delivered_elapsed,
-        delivered_median_seconds=delivered_elapsed[len(delivered_elapsed) // 2]
+        delivered_median_seconds=round(statistics.median(delivered_elapsed), 2)
         if delivered_elapsed
         else None,
         final_browser_paths=raw["summary"]["final_browser_paths"],
@@ -160,7 +167,9 @@ def report(output, destination):
     )
     destination.mkdir(parents=True, exist_ok=True)
     (destination / "pilot-summary.json").write_text(
-        json.dumps(dict(summary=summary, cases=out), ensure_ascii=False, indent=2) + "\n", "utf-8"
+        json.dumps(dict(summary=summary, cases=out), ensure_ascii=False, indent=2)
+        + "\n",
+        "utf-8",
     )
     lines = [
         f"# {len(rows)}题开发试跑结果",
@@ -185,7 +194,9 @@ def report(output, destination):
         "100条最终题未运行；40异常仅构造。本轮分母和原始失败不因后续修复改变。成功任务耗时另列，不能用大量提前失败题的整体中位数估算生成速度。",
         "原始日志、完整对话、确认差异、每轮检查和源文件快照保留在本机结果目录。",
     ]
-    (destination / f"{len(rows)}题逐题结果.md").write_text("\n".join(lines) + "\n", "utf-8")
+    (destination / f"{len(rows)}题逐题结果.md").write_text(
+        "\n".join(lines) + "\n", "utf-8"
+    )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 

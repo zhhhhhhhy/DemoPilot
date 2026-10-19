@@ -1,0 +1,401 @@
+{
+  "schema_version": "sales-v3-paired-full20-replay-v1",
+  "before": {
+    "planned": 20,
+    "delivered": 3,
+    "published": 3,
+    "delivery_rate": 0.15,
+    "terminal_stages": {
+      "intent_contract": 5,
+      "intake": 12,
+      "delivered": 3
+    },
+    "core_reached": 3,
+    "published_defects": 0,
+    "root_cli_calls": 55,
+    "intake_calls": 52,
+    "core_calls": 3,
+    "internal_core_repairs": 0,
+    "calls_with_reported_usage": 55,
+    "reported_root_tokens": {
+      "input_tokens": 2363188,
+      "cached_input_tokens": 1311360,
+      "output_tokens": 38727
+    },
+    "task_elapsed_median_seconds": 72.41,
+    "successful_task_elapsed_median_seconds": 264.17,
+    "successful_task_elapsed_seconds": [
+      255.16,
+      264.17,
+      270.53
+    ],
+    "sum_task_elapsed_seconds": 1924.94,
+    "wall": {
+      "seconds": 1039.87,
+      "heartbeat_gaps": []
+    },
+    "final_browser_paths": {
+      "planned": 126,
+      "executed": 19,
+      "passed": 19
+    },
+    "exact_served_assets": 9,
+    "observed_input_flags": 0,
+    "per_delivered": {
+      "root_cli_calls": 18.33,
+      "input_tokens": 787729.33,
+      "output_tokens": 12909.0
+    },
+    "monetary_cost": null
+  },
+  "after": {
+    "planned": 20,
+    "delivered": 19,
+    "published": 19,
+    "delivery_rate": 0.95,
+    "terminal_stages": {
+      "delivered": 19,
+      "intake": 1
+    },
+    "core_reached": 19,
+    "published_defects": 0,
+    "root_cli_calls": 60,
+    "intake_calls": 41,
+    "core_calls": 19,
+    "internal_core_repairs": 0,
+    "calls_with_reported_usage": 60,
+    "reported_root_tokens": {
+      "input_tokens": 6627856,
+      "cached_input_tokens": 5281664,
+      "output_tokens": 138263
+    },
+    "task_elapsed_median_seconds": 230.52,
+    "successful_task_elapsed_median_seconds": 231.38,
+    "successful_task_elapsed_seconds": [
+      196.53,
+      198.83,
+      206.53,
+      213.47,
+      213.76,
+      220.92,
+      223.16,
+      223.75,
+      229.66,
+      231.38,
+      237.09,
+      237.2,
+      238.17,
+      240.86,
+      242.45,
+      255.66,
+      261.28,
+      274.22,
+      323.77
+    ],
+    "sum_task_elapsed_seconds": 4534.0,
+    "wall": {
+      "seconds": 2485.02,
+      "heartbeat_gaps": []
+    },
+    "final_browser_paths": {
+      "planned": 126,
+      "executed": 119,
+      "passed": 119
+    },
+    "exact_served_assets": 57,
+    "observed_input_flags": 0,
+    "per_delivered": {
+      "root_cli_calls": 3.16,
+      "input_tokens": 348834.53,
+      "output_tokens": 7277.0
+    },
+    "monetary_cost": null
+  },
+  "absolute_gain_percentage_points": 80.0,
+  "additional_delivered": 16,
+  "transitions": {
+    "improved": 16,
+    "both_pass": 3,
+    "both_fail": 1
+  },
+  "paired": [
+    {
+      "case_id": "sales-v3-001",
+      "difficulty": "simple",
+      "family": "family-01",
+      "before": "intent_contract",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 2,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-002",
+      "difficulty": "simple",
+      "family": "family-01",
+      "before": "intent_contract",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 2,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-011",
+      "difficulty": "simple",
+      "family": "family-03",
+      "before": "intent_contract",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 2,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-012",
+      "difficulty": "simple",
+      "family": "family-03",
+      "before": "intent_contract",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 2,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-026",
+      "difficulty": "simple",
+      "family": "family-06",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-046",
+      "difficulty": "simple",
+      "family": "family-10",
+      "before": "intent_contract",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 2,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-061",
+      "difficulty": "medium",
+      "family": "family-13",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-062",
+      "difficulty": "medium",
+      "family": "family-13",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-086",
+      "difficulty": "medium",
+      "family": "family-18",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-087",
+      "difficulty": "medium",
+      "family": "family-18",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-101",
+      "difficulty": "medium",
+      "family": "family-21",
+      "before": "delivered",
+      "after": "delivered",
+      "transition": "both_pass",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-102",
+      "difficulty": "medium",
+      "family": "family-21",
+      "before": "delivered",
+      "after": "delivered",
+      "transition": "both_pass",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-126",
+      "difficulty": "medium",
+      "family": "family-26",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-127",
+      "difficulty": "medium",
+      "family": "family-26",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-141",
+      "difficulty": "hard",
+      "family": "family-29",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-142",
+      "difficulty": "hard",
+      "family": "family-29",
+      "before": "delivered",
+      "after": "delivered",
+      "transition": "both_pass",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-156",
+      "difficulty": "hard",
+      "family": "family-32",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-171",
+      "difficulty": "hard",
+      "family": "family-35",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-172",
+      "difficulty": "hard",
+      "family": "family-35",
+      "before": "intake",
+      "after": "delivered",
+      "transition": "improved",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": null
+    },
+    {
+      "case_id": "sales-v3-191",
+      "difficulty": "hard",
+      "family": "family-39",
+      "before": "intake",
+      "after": "intake",
+      "transition": "both_fail",
+      "before_calls": 3,
+      "after_calls": 3,
+      "after_failure_reason": "Intake not ready within declared3calls"
+    }
+  ],
+  "by_difficulty": {
+    "simple": {
+      "planned": 6,
+      "before_delivered": 0,
+      "after_delivered": 6
+    },
+    "medium": {
+      "planned": 8,
+      "before_delivered": 2,
+      "after_delivered": 8
+    },
+    "hard": {
+      "planned": 6,
+      "before_delivered": 1,
+      "after_delivered": 5
+    }
+  },
+  "fixed_budget": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "cli_timeout_seconds": 300,
+    "core_call_cap": 3,
+    "intake_call_cap": 3,
+    "max_parallel": 2,
+    "case_deadline_seconds": 2100
+  },
+  "changed_runtime_source": [
+    "backend/src/demopilot/sales_contract.py",
+    "scripts/run_sales_benchmark_pilot.py"
+  ],
+  "protected_original_sha256": {
+    ".data\\sales-benchmark-v3\\pilot-20261019-v1\\results.json": "e15813a420917c9d1816e5fbbc7b9538f1a8146892dbedc3660783946f420a7b",
+    ".data\\sales-benchmark-v3\\pilot-20261019-v1\\context.json": "cc797131481341c5d3d68e6130823266c82c0636d2b460e01d1b43da396af243",
+    "docs\\sales-benchmark-v3\\baseline\\pilot-summary.json": "f81f4da3a85e7d988b5a1f5bad4fca30f5d495fab7596c88845ec08fee19d9cf",
+    "evaluation_sets\\sales-benchmark-v3\\manifest.json": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65"
+  },
+  "input_integrity": {
+    "v3": {
+      "files": 1687,
+      "mismatches": [],
+      "manifest_sha256": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65"
+    },
+    "historical_v2": {
+      "files": 73,
+      "mismatches": [],
+      "manifest_sha256": "d728ba74f3ff2c9acb3afe47dc6ea8751f2073c04c7ce83bff5383963013472f"
+    }
+  },
+  "heldout_model_executed": 0,
+  "validation_model_executed": 0,
+  "anomalies_live_executed": 0,
+  "evidence_hashes": {
+    ".data/sales-benchmark-v3/pilot-20261019-v1/results.json": "e15813a420917c9d1816e5fbbc7b9538f1a8146892dbedc3660783946f420a7b",
+    ".data/sales-benchmark-v3/full-rerun-20261019-v3/results.json": "56d6ff9385bbed3f872f91c80a600747d86bda51e7aba69c8ab7cf11d15b079a",
+    "docs/sales-benchmark-v3/baseline/pilot-summary.json": "f81f4da3a85e7d988b5a1f5bad4fca30f5d495fab7596c88845ec08fee19d9cf",
+    "docs/sales-benchmark-v3/full-rerun/pilot-summary.json": "4934ae6be8b8d964e088801cb34ed22bfd67357432c14ac360303b952e52dd43"
+  },
+  "boundary": "Same known20 development replay, one sample per case/version; two integration fixes jointly tested. No blind generalization, pure-prompt effect, production-sales rate or monetary saving claim. Root CLI tokens may omit native-child usage. Cached input is included in input tokens."
+}
