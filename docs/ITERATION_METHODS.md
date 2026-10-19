@@ -265,3 +265,14 @@
 - Preservation and operation: All1687new+73historicalinputs and recorded original19/20raw result/summaries hashmatch; raw contexts retained. Same source across191and40.60distinct requirements attempted(20dev+40validation),100heldout0,anomalieslive0. Own8093/CLIbatch ended. Verified idle ownedAPI24480 was replaced by27400/session46768 loading promptfix; health/5173 andold3pinnedassets preserved. This is not proof CLIremote connectivity recovered.
 - Remaining issue and next method: Underlying localproxy/network/remote cause not localized. No followupmodel calls or selective-score replacement. Need transport diagnosis/recovery and a separately recorded affected-case recovery; infrastructure circuit breaking/checkpointing remains an unimplemented engineering gap, with no measured savings.100final tasks stay sealed.
 - Evidence: docs/sales-benchmark-v3/stage-validation/协议与边界.md,结果与成本.md,final-evidence.json,failure-attribution.json,negative-check.json,reporting-checks.json,regression-191/ andvalidation-40/; scopedworkflowTX-580556958157 and raw transcripts/source/browser evidence remain local. README/V3-08/V3-09 updated with successes, failures and cost limits.
+
+
+## IT-023: CLI transport recovery and exact failed17 replay
+
+- Goal: Restore real CLI operation before replaying only original failed17; preserve first23/40, original model/budgets/data and heldout100.
+- Failure location: Proxy diagnosis captured Codex outbound unreachable errors; original CLI had WebSocket TLS EOF thenHTTPfallback. Workspace adapter reported unrelated stderr warnings. These observations do not uniquely attribute all historical requests.
+- Failed attempt retained: v5 launched under systemPython rather than original project venv;17terminal,0published, finalChromium aborted due missing1179browser.21rootcalls,4usage,17missing. This was a preflight omission; raw cohort and cost retained.
+- Changes: True stdout failure detail; per-process named officialChatGPT HTTPS/SSE provider with existing auth; original projectPython and actual Chromiumclick plus real CLIread/write readiness; guarded exact17 selection. Business prompts/seller/engine/scorerAST unchanged;23protocolcontrols passed.
+- Observed final v6: 17/17 delivered; original115private journeys planned,115executed,115passed;51exactHTTPassets;0observedpublisheddefects. Finalscore after allterminal, no feedback/manual edits. Original23/40retained; cumulative40/40isnotclean40rerun or intentcausalclaim.
+- Cost: formal49CLI,49usage/0missing,input5697249inclcache4610432,output121461,wall2684.91s. Also6diagnosticcalls and21abortedcalls retained,total76newrootcalls. Missingusage is unknown,notzero; no money/exhaustivechildcost claim.
+- Limits: Joint transport/environment recovery, not isolated switch or prompt effect; no permanent upstream repair claim. No circuitbreaker/checkpoint savings claim;100heldoutunexecuted. Evidence: docs/sales-benchmark-v3/transport-recovery/结果与成本.md andcomparison.json.

@@ -1,0 +1,202 @@
+{
+  "schema_version": "sales-v3-transport-recovery-v1",
+  "created_at": "2026-10-19T11:59:46.123487+00:00",
+  "original_first40": {
+    "delivered": 23,
+    "planned": 40,
+    "percentage": 57.5,
+    "unchanged": true,
+    "summary": {
+      "planned": 40,
+      "terminal": 40,
+      "published": 23,
+      "delivered": 23,
+      "failure_stages": {
+        "core": 2,
+        "intake": 15
+      },
+      "published_functional_defects": 0,
+      "final_browser_paths": {
+        "planned": 258,
+        "executed": 149,
+        "passed": 149
+      },
+      "actual_cli_calls": 90,
+      "intake_calls": 61,
+      "core_calls": 29,
+      "internal_core_repairs": 4,
+      "calls_with_usage": 69,
+      "reported_root_tokens": {
+        "input_tokens": 7897384,
+        "cached_input_tokens": 6445696,
+        "output_tokens": 171147
+      },
+      "median_task_elapsed_seconds": 205.38,
+      "sum_task_elapsed_seconds": 8029.82,
+      "model": "gpt-6.1-sol",
+      "monetary_cost": null,
+      "billing_boundary": "CLI ChatGPT login gives no per-task monetary bill; reported root tokens may not exhaust native-child usage.",
+      "observed_input_flags": 0,
+      "heldout_executed": 0,
+      "execution_split": "validation",
+      "validation_executed": 40,
+      "comparison": "Fixed full-product cohort, not A/B/C method-effect evidence; development regression and validation reported separately, original failures never replaced."
+    }
+  },
+  "same_failed17": {
+    "before": {
+      "tasks": 17,
+      "delivered": 0,
+      "published": 0,
+      "published_defects": 0,
+      "failure_stages": {
+        "core": 2,
+        "intake": 15
+      },
+      "browser_paths": {
+        "planned": 115,
+        "executed": 6,
+        "passed": 6
+      },
+      "exact_http_assets": 0,
+      "calls": 24,
+      "intake": 18,
+      "core": 6,
+      "internal_core_repairs": 4,
+      "usage_complete": 3,
+      "missing_usage": 21,
+      "failed_root_calls": 21,
+      "tokens": {
+        "input_tokens": 74281,
+        "cached_input_tokens": 41856,
+        "output_tokens": 1427
+      },
+      "sum_task_seconds": 2805.04,
+      "monetary_cost": null
+    },
+    "after": {
+      "tasks": 17,
+      "delivered": 17,
+      "published": 17,
+      "published_defects": 0,
+      "failure_stages": {},
+      "browser_paths": {
+        "planned": 115,
+        "executed": 115,
+        "passed": 115
+      },
+      "exact_http_assets": 51,
+      "calls": 49,
+      "intake": 32,
+      "core": 17,
+      "internal_core_repairs": 0,
+      "usage_complete": 49,
+      "missing_usage": 0,
+      "failed_root_calls": 0,
+      "tokens": {
+        "input_tokens": 5697249,
+        "cached_input_tokens": 4610432,
+        "output_tokens": 121461
+      },
+      "sum_task_seconds": 4758.33,
+      "monetary_cost": null
+    },
+    "recovered": 17
+  },
+  "incremental_coverage": {
+    "delivered": 40,
+    "planned": 40,
+    "clean_full40_rerun": false,
+    "caveat": "Original23 retained; only17 rerun, not a clean40 benchmark or intent causal gain."
+  },
+  "diagnostics": {
+    "calls": 6,
+    "calls_with_usage": 6,
+    "elapsed_seconds": 314.45,
+    "tokens": {
+      "input_tokens": 182173,
+      "cached_input_tokens": 129408,
+      "output_tokens": 294
+    }
+  },
+  "aborted_v5": {
+    "tasks": 17,
+    "published": 0,
+    "calls": 21,
+    "calls_with_usage": 4,
+    "missing_usage": 17,
+    "tokens": {
+      "input_tokens": 95532,
+      "cached_input_tokens": 41856,
+      "output_tokens": 1533
+    },
+    "wall_seconds": 1362.2,
+    "final_browser_status": "aborted_missing_browser_in_wrong_system_python",
+    "planned_paths": 115,
+    "executed_paths": 0,
+    "cause": "Initial preflight omitted original Python/browser and short CLI success did not establish sustained transport. All terminal traces and cost retained; never replace with final recovery."
+  },
+  "recovery_wall_seconds": 2684.91,
+  "heartbeat_gaps": [],
+  "recovery_cli_error_events": [
+    {
+      "trace": "sales-core/sessions/a0964e5ef7ca49f7/revision-1/evidence/v2/iteration-0/cli/stdout.jsonl",
+      "type": "error",
+      "message": "Reconnecting... 1/5 (stream disconnected before completion: Transport error: network error: error decoding response body)"
+    }
+  ],
+  "total_new_root_calls": 76,
+  "model_budget_data_unchanged": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "cli_timeout_seconds": 300,
+    "core_call_cap": 3,
+    "intake_call_cap": 3,
+    "max_parallel": 2,
+    "case_deadline_seconds": 2100,
+    "dataset_manifest_sha256": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65"
+  },
+  "business_runtime_boundary": {
+    "status": "passed",
+    "protocol_checks": 23,
+    "ast_unchanged": {
+      "semantics": true,
+      "answers_for": true,
+      "run_cases": true,
+      "summarize": true,
+      "validation_unlock": true
+    },
+    "allowed_runtime_changes": [
+      "backend/src/demopilot/providers/codex_cli.py",
+      "backend/src/demopilot/quotation_cli.py",
+      "scripts/run_sales_benchmark_pilot.py"
+    ]
+  },
+  "protected_original_sha256": {
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/results.json": "2ea694d11c1082ee1b524e108f6989ebe6433f6cfa05cdbda1db9003c2ac6f82",
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/context.json": "f7404775bb14a52633e5a7b956b1b08ae014afd2bd97314b9087824028f2ec2e",
+    "docs/sales-benchmark-v3/stage-validation/failure-attribution.json": "22a1efe888f97b4081f175f52d7cba1743c213b12a61fcb6fc033ff2fa8e7604",
+    ".data/sales-benchmark-v3/pilot-20261019-v1/results.json": "e15813a420917c9d1816e5fbbc7b9538f1a8146892dbedc3660783946f420a7b",
+    ".data/sales-benchmark-v3/full-rerun-20261019-v3/results.json": "56d6ff9385bbed3f872f91c80a600747d86bda51e7aba69c8ab7cf11d15b079a",
+    "docs/sales-benchmark-v3/full-rerun/comparison.json": "db5c1ca1893cf46ec30121fc6a79db4d0244296cbbf98074dc7ecd226f06c67e",
+    "docs/sales-benchmark-v3/full-rerun/pilot-summary.json": "4934ae6be8b8d964e088801cb34ed22bfd67357432c14ac360303b952e52dd43",
+    "evaluation_sets/sales-benchmark-v3/manifest.json": "8837e1723f04fc51550f2f65fc489ba316d0bcae325ef145e3dfc99c077d9e65",
+    "evaluation_sets/quotation-reliability-v2/manifest.json": "d728ba74f3ff2c9acb3afe47dc6ea8751f2073c04c7ce83bff5383963013472f"
+  },
+  "raw_evidence_sha256": {
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/results.json": "2ea694d11c1082ee1b524e108f6989ebe6433f6cfa05cdbda1db9003c2ac6f82",
+    ".data/sales-benchmark-v3/validation-40-20261019-v4/context.json": "f7404775bb14a52633e5a7b956b1b08ae014afd2bd97314b9087824028f2ec2e",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v6/results.json": "4fb1f8da681b6ef089d500bcd8023a4d1889b7e771a98c61e5897c16b422e574",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v6/context.json": "2fff8dc0f61f7b630f725e85a6c96c216064c98270716d853c86f5cbbd50442c",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v6-power.json": "6bec1f4f30efd1623472cdd21c81358e47093a78aaf2ca1aacdff5b69425af7e",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v5/terminal-results.json": "941fa2480cf65c9e09d935bc6e036e5ff1fc29a9f2f4eb335c33de157ab93678",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v5/context.json": "2a48e849a21e53c18eca5c71bc47ab51903f6335956a85e8dd8a8f0afb9924ce",
+    ".data/sales-benchmark-v3/transport-recovery-17-20261019-v5-power.json": "b4578f0db4afe38f154b09d042ba31e7f88fe68580583e73d7ae1b081b924041",
+    ".data/sales-benchmark-v3/transport-readiness-20261019-v5/results.json": "7d882b63bbbaa51eeff1ff15faed7b671dff30c038976292285a047f22b10a04",
+    ".data/sales-benchmark-v3/transport-readiness-final-20261019-v5/results.json": "7da35d1e9dd367a18e82ac6e5bbb17c6a39022811d0658400f432f61cb9251c6",
+    ".data/sales-benchmark-v3/transport-readiness-http-20261019-v6/results.json": "ef0ae3090715a3adfbfb03f7ab06066e8134cea12c84969cbb40de599ec97222"
+  },
+  "heldout_executed": 0,
+  "inference_limit": "Proxy logs locate unreachable outbound gateway; original WebSocket TLS failed then fell backHTTP. Official HTTPS/SSE transport configured locally. No proof of permanent upstream repair; no global proxy/account/model/credential edits.",
+  "cost_limit": "Cached input is included in input. Missingusage is unknown, not zero. RootCLI reports may omit native-child usage; no monetary bill."
+}

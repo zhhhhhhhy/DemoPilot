@@ -1,0 +1,25 @@
+{
+  "case_id": "sales-v3-109",
+  "channel": "CUA in-app browser2 tab10, real localhost8093 accepted app",
+  "actions": [
+    "Set VIP customer and productA quantity8",
+    "Calculate and save",
+    "Sales submit -> PendingManager",
+    "Manager1 approve -> PendingFinance",
+    "Finance1 approve -> Approved",
+    "Customer owner confirm -> Accepted"
+  ],
+  "observed": {
+    "gross": "1415.60",
+    "discount": "113.25",
+    "total": "1302.35",
+    "status": "Accepted",
+    "version": 1,
+    "approved_version": 1,
+    "history_count": 5
+  },
+  "arithmetic": "176.95*8*(1-0.08) rounded HALF_UP =1302.35; VIP8% takes priority over quantity18%",
+  "screenshot": "109-browser-accepted.jpg",
+  "screenshot_sha256": "06a1de6fdfd19abc28ccf6d2a9ee50f81a59c513c6357c59ad30f812101514b4",
+  "boundary": "Additional manual UI illustration; not added to115private paths, not a substitute for final17 scoring. No model calls, source changes or final-score feedback."
+}

@@ -160,6 +160,58 @@ def validation_unlock(evidence, model):
     )
 
 
+def transport_recovery_unlock(evidence, readiness, model):
+    """Only the sealed first40's exact failed17, after real CLI read/write."""
+    evidence = Path(evidence or "").resolve()
+    if not evidence.is_file() or sha(evidence) != "2ea694d11c1082ee1b524e108f6989ebe6433f6cfa05cdbda1db9003c2ac6f82":
+        raise ValueError("Recovery requires unchanged original23/40 results")
+    context_path = evidence.parent / "context.json"
+    if sha(context_path) != "f7404775bb14a52633e5a7b956b1b08ae014afd2bd97314b9087824028f2ec2e":
+        raise ValueError("Recovery baseline context changed")
+    previous, baseline = read(evidence), read(context_path)
+    split = read(DATASET / "split.json")
+    equal = dict(model=model, reasoning_effort="medium", cli_timeout_seconds=300,
+                 core_call_cap=3, intake_call_cap=3, max_parallel=2,
+                 case_deadline_seconds=2100)
+    if any(baseline.get(k) != v for k, v in equal.items()):
+        raise ValueError("Recovery must preserve original model and all budgets")
+    if baseline["dataset_manifest_sha256"] != sha(DATASET / "manifest.json") or baseline["pilot_ids"] != split["validation"]:
+        raise ValueError("Recovery dataset/split changed")
+    allowed_changes = {"backend/src/demopilot/providers/codex_cli.py", "scripts/run_sales_benchmark_pilot.py", "backend/src/demopilot/quotation_cli.py"}
+    current = code_manifest()
+    changed = {p for p, digest in baseline["code_sha256"].items() if current.get(p) != digest}
+    if not changed.issubset(allowed_changes) or set(current) != set(baseline["code_sha256"]):
+        raise ValueError("Recovery changed business/prompt/scorer source outside transport/selection boundary")
+    failed = [r["case_id"] for r in previous["rows"] if not r["delivery_pass"]]
+    if len(failed) != 17 or len(set(failed)) != 17 or not set(failed).issubset(split["validation"]):
+        raise ValueError("Recovery must select exactly original17 failures")
+    readiness = Path(readiness or "").resolve()
+    if not readiness.is_file():
+        raise ValueError("Recovery requires real current read/write CLI readiness")
+    ready = read(readiness)
+    if (Path(sys.executable).resolve() != (ROOT / "backend/.venv/Scripts/python.exe").resolve()
+        or not ready.get("browser_preflight", {}).get("passed")
+        or ready.get("python_executable") != str(Path(sys.executable).resolve())):
+        raise ValueError("Recovery requires original project Python and real Chromium preflight")
+    if (ready.get("status") != "passed" or ready.get("model") != model
+        or ready.get("code_sha256") != current
+        or ready.get("reasoning_effort") != "medium" or ready.get("cli_timeout_seconds") != 300
+        or [r.get("mode") for r in ready.get("rows", [])] != ["read", "write"]
+        or not all(r.get("passed") and r.get("returncode") == 0 for r in ready["rows"])):
+        raise ValueError("Recovery readiness is failed, stale or incomplete")
+    for relative, digest in ready.get("trace_sha256", {}).items():
+        if sha(readiness.parent / relative) != digest:
+            raise ValueError("Readiness trace changed")
+    if len(ready.get("trace_sha256", {})) != 4:
+        raise ValueError("Recovery readiness needs both real CLI stdout/stderr traces")
+    if (datetime.now(UTC) - datetime.fromisoformat(ready["created_at"])).total_seconds() > 1800:
+        raise ValueError("Recovery readiness expired; diagnose before spending case budget")
+    return failed, dict(baseline_results_sha256=sha(evidence), baseline_context_sha256=sha(context_path),
+        evidence=evidence.relative_to(ROOT).as_posix(), readiness=readiness.relative_to(ROOT).as_posix(),
+        readiness_sha256=sha(readiness), changed_source=sorted(changed), source_verified=True,
+        boundary="Separate17-case recovery, never replace first23/40 or call merged coverage a clean40 rerun.")
+
+
 def freeze(output, args):
     if (output / "context.json").exists():
         raise RuntimeError("Use a fresh cohort; never overwrite/relaunch an old pilot")
@@ -175,7 +227,14 @@ def freeze(output, args):
     regression = getattr(args, "regression_ids", None)
     cohort = getattr(args, "cohort", "development")
     unlock = None
-    if cohort == "validation":
+    recovery = None
+    if cohort == "transport-recovery":
+        if regression:
+            raise ValueError("Recovery cannot select arbitrary IDs")
+        pilot, recovery = transport_recovery_unlock(
+            getattr(args, "recovery_evidence", None), getattr(args, "readiness_evidence", None), args.model
+        )
+    elif cohort == "validation":
         if regression:
             raise ValueError("Validation40 cannot select or replace cases")
         pilot = list(split["validation"])
@@ -208,9 +267,11 @@ def freeze(output, args):
         pilot_ids=pilot,
         original_sealed_pilot_ids=original_pilot,
         targeted_regression=bool(regression),
-        execution_split=cohort,
+        execution_split="validation" if recovery else cohort,
+        cohort_kind=cohort,
+        transport_recovery=recovery,
         validation_unlock=unlock,
-        change_boundary="General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution.",
+        change_boundary="Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution.",
         dataset_manifest_sha256=sha(DATASET / "manifest.json"),
         code_sha256=code_manifest(),
         model=args.model,
@@ -732,8 +793,10 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--port", type=int, default=8093)
     parser.add_argument(
-        "--cohort", choices=("development", "validation"), default="development"
+        "--cohort", choices=("development", "validation", "transport-recovery"), default="development"
     )
+    parser.add_argument("--recovery-evidence", type=Path, help="Sealed first23/40 results; exact failed17 only")
+    parser.add_argument("--readiness-evidence", type=Path, help="Fresh real read/write CLI readiness on current source")
     parser.add_argument(
         "--unlock-evidence",
         type=Path,

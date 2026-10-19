@@ -1,0 +1,27 @@
+{
+  "observed_proxy_codex_errors": 138,
+  "samples": [
+    {
+      "time": "2026-10-19 19:06:04.63",
+      "process": "codex.exe",
+      "destination": "chatgpt.com:443",
+      "error": " <redacted-upstream> connect error: connect failed: dial tcp <redacted-upstream>: connectex: A socket operation was attempted to an unreachable host.\""
+    },
+    {
+      "time": "2026-10-19 19:06:04.66",
+      "process": "codex.exe",
+      "destination": "chatgpt.com:443",
+      "error": " <redacted-upstream> connect error: connect failed: dial tcp <redacted-upstream>: connectex: A socket operation was attempted to an unreachable host.\""
+    },
+    {
+      "time": "2026-10-19 19:06:04.74",
+      "process": "codex.exe",
+      "destination": "chatgpt.com:443",
+      "error": " <redacted-upstream> connect error: connect failed: dial tcp <redacted-upstream>: connectex: A socket operation was attempted to an unreachable network.\""
+    }
+  ],
+  "evidence_boundary": "Rotated local proxy logs during diagnosis, not request-correlated root proof for all historical calls; upstream addresses redacted.",
+  "global_proxy_changed": false,
+  "auth_changed": false,
+  "transport_repair": "Per-process named provider uses official ChatGPT HTTPS/SSE and existing login; noWebSocket"
+}

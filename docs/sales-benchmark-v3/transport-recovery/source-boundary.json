@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "protocol_checks": 23,
+  "ast_unchanged": {
+    "semantics": true,
+    "answers_for": true,
+    "run_cases": true,
+    "summarize": true,
+    "validation_unlock": true
+  },
+  "allowed_runtime_changes": [
+    "backend/src/demopilot/providers/codex_cli.py",
+    "backend/src/demopilot/quotation_cli.py",
+    "scripts/run_sales_benchmark_pilot.py"
+  ]
+}

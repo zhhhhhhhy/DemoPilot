@@ -23,6 +23,26 @@ class WorkspaceProcessTimeout(RuntimeError):
         self.stderr_path = stderr_path
 
 
+def _cli_failure_detail(stdout: bytes, stderr: bytes) -> str:
+    """Prefer the failed turn over unrelated analytics/shell stderr warnings."""
+    errors = []
+    for line in stdout.decode("utf-8", errors="replace").splitlines():
+        try:
+            event = json.loads(line)
+        except ValueError:
+            continue
+        if not isinstance(event, dict) or event.get("type") not in {"error", "turn.failed"}:
+            continue
+        nested = event.get("error")
+        message = event.get("message") or (
+            nested.get("message") if isinstance(nested, dict) else None
+        )
+        if isinstance(message, str):
+            errors.append(message.replace("\n", " "))
+    lines = stderr.decode("utf-8", errors="replace").strip().splitlines()
+    return (errors[-1] if errors else lines[-1] if lines else "no diagnostic")[:500]
+
+
 def _json_object(raw: str, agent_id: str) -> dict[str, Any]:
     raw = raw.strip()
     value: object | None = None
@@ -343,10 +363,9 @@ class CodexCliAgentProvider:
             stderr_path.write_bytes(stderr)
         parsed = self._parse_workspace_events(stdout.decode("utf-8", errors="replace"))
         if process.returncode != 0:
-            detail = stderr.decode("utf-8", errors="replace").strip().splitlines()
             raise RuntimeError(
                 f"Codex CLI {purpose} exited with code {process.returncode}: "
-                f"{(detail[-1] if detail else 'no diagnostic')[:500]}"
+                f"{_cli_failure_detail(stdout, stderr)}"
             )
         return {
             "returncode": process.returncode,
@@ -559,25 +578,9 @@ class CodexCliAgentProvider:
                 schema_path.unlink(missing_ok=True)
 
         if process.returncode != 0:
-            stdout_text = stdout.decode("utf-8", errors="replace")
-            cli_errors: list[str] = []
-            for line in stdout_text.splitlines():
-                try:
-                    event = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                if isinstance(event, dict) and event.get("type") in {"error", "turn.failed"}:
-                    error_value = event.get("error")
-                    nested_message = (
-                        error_value.get("message") if isinstance(error_value, dict) else None
-                    )
-                    message = event.get("message") or nested_message
-                    if isinstance(message, str):
-                        cli_errors.append(message.replace("\n", " "))
-            detail = stderr.decode("utf-8", errors="replace").strip().splitlines()
-            suffix = (cli_errors[-1] if cli_errors else detail[-1] if detail else "no diagnostic")[:500]
             raise RuntimeError(
-                f"Codex CLI agent {agent_id} exited with code {process.returncode}: {suffix}"
+                f"Codex CLI agent {agent_id} exited with code {process.returncode}: "
+                f"{_cli_failure_detail(stdout, stderr)}"
             )
         message = _final_message(stdout.decode("utf-8", errors="replace"), agent_id)
         return _json_object(message, agent_id)
