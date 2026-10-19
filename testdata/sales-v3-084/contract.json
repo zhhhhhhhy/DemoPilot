@@ -1,0 +1,76 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-084",
+  "title": "采购批量两级审批·方案4",
+  "version": 1,
+  "workflow": "two_stage",
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "A",
+      "tiers": [
+        {
+          "minimum": 6,
+          "percent": "13"
+        },
+        {
+          "minimum": 11,
+          "percent": "21"
+        }
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "采购批量两级基础包",
+      "unit_price": "161.95"
+    },
+    {
+      "id": "B",
+      "name": "采购批量两级扩展包",
+      "unit_price": "99.50"
+    },
+    {
+      "id": "C",
+      "name": "采购批量两级专业包",
+      "unit_price": "212.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "quantity_tiers": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "5"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "7"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "10"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "12"
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-088",
+  "title": "合作客户两级审批·方案3",
+  "version": 2,
+  "workflow": "two_stage",
+  "profiles": {
+    "customer_scope": {
+      "kind": "customer_scope",
+      "product": "C",
+      "discounts": {
+        "standard": "0",
+        "vip": "11",
+        "partner": "14"
+      }
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "合作客户两级基础包",
+      "unit_price": "157.95"
+    },
+    {
+      "id": "B",
+      "name": "合作客户两级扩展包",
+      "unit_price": "95.50"
+    },
+    {
+      "id": "C",
+      "name": "合作客户两级专业包",
+      "unit_price": "211.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "customer_scope": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "18",
+    "express": "45"
+  }
+}

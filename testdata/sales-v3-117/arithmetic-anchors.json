@@ -1,0 +1,62 @@
+{
+  "method": "Separately authored Decimal implementation; consistency check, not human gold",
+  "samples": [
+    {
+      "inputs": {
+        "product": "A",
+        "quantity": "1",
+        "second_product": "B",
+        "second_quantity": "0",
+        "customer": "standard",
+        "date": "2026-03-15",
+        "shipping": "pickup"
+      },
+      "expected": {
+        "subtotal": "168.95",
+        "discount": "26.54",
+        "tax": "0.00",
+        "total": "142.41",
+        "free_quantity": "0",
+        "freight": "0.00"
+      }
+    },
+    {
+      "inputs": {
+        "product": "A",
+        "quantity": "5",
+        "second_product": "B",
+        "second_quantity": "0",
+        "customer": "standard",
+        "date": "2026-03-15",
+        "shipping": "pickup"
+      },
+      "expected": {
+        "subtotal": "844.75",
+        "discount": "132.72",
+        "tax": "0.00",
+        "total": "712.03",
+        "free_quantity": "0",
+        "freight": "0.00"
+      }
+    },
+    {
+      "inputs": {
+        "product": "A",
+        "quantity": "11",
+        "second_product": "B",
+        "second_quantity": "0",
+        "customer": "standard",
+        "date": "2026-03-15",
+        "shipping": "pickup"
+      },
+      "expected": {
+        "subtotal": "1858.45",
+        "discount": "291.99",
+        "tax": "0.00",
+        "total": "1566.46",
+        "free_quantity": "0",
+        "freight": "0.00"
+      }
+    }
+  ]
+}

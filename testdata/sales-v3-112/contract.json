@@ -1,0 +1,59 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-112",
+  "title": "混合采购金额审批·方案2",
+  "version": 1,
+  "workflow": "threshold",
+  "profiles": {
+    "mixed_threshold": {
+      "kind": "mixed_threshold",
+      "products": [
+        "B",
+        "C"
+      ],
+      "minimum": 7,
+      "percent": "9"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "混合采购金额基础包",
+      "unit_price": "165.95"
+    },
+    {
+      "id": "B",
+      "name": "混合采购金额扩展包",
+      "unit_price": "95.50"
+    },
+    {
+      "id": "C",
+      "name": "混合采购金额专业包",
+      "unit_price": "218.99"
+    }
+  ],
+  "approval_threshold": "933.00",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "mixed_threshold": [
+      {
+        "product": "B",
+        "quantity": "1",
+        "second_product": "C",
+        "second_quantity": "5"
+      },
+      {
+        "product": "B",
+        "quantity": "1",
+        "second_product": "C",
+        "second_quantity": "6"
+      },
+      {
+        "product": "B",
+        "quantity": "1",
+        "second_product": "C",
+        "second_quantity": "7"
+      }
+    ]
+  }
+}

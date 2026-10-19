@@ -1,0 +1,1006 @@
+{
+  "app_id": "sales-v3-177",
+  "version": 2,
+  "private": false,
+  "journeys": [
+    {
+      "profile": "rate_override",
+      "journey": "normal",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "action": "accept"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "action": "accept"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Accepted",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "4"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "action": "calculate",
+            "values": {
+              "quantity": "3"
+            }
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Accepted",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "4"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "edit_regression",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "quantity": "4"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "1036.80",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "906.90",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "4"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "action": "accept"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "1036.80",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "906.90",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "4"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "1036.80",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "906.90",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "5"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "1036.80",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "906.90",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "2",
+            "approved_revision": "2",
+            "history_count": "6"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "invalid_recovery",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "quantity": "0"
+            }
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "quantity": "10"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "intruder",
+            "action": "calculate",
+            "values": {
+              "quantity": "2"
+            }
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "finance",
+            "action": "approve"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "workflow_specific",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "today": "2026-04-01",
+            "action": "accept"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "today": "2026-03-26",
+            "action": "accept"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Accepted",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "4"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "pricing_boundaries",
+      "steps": [
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "product": "B",
+              "second_quantity": "0",
+              "quantity": "6",
+              "customer": "standard"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "651.00",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "651.00",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "product": "B",
+              "second_quantity": "0",
+              "quantity": "6",
+              "customer": "vip"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "651.00",
+            "discount": "389.70",
+            "tax": "0.00",
+            "total": "261.30",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "product": "B",
+              "second_quantity": "0",
+              "quantity": "6",
+              "customer": "partner"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "651.00",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "651.00",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "3",
+            "approved_revision": "-1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "651.00",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "651.00",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "3",
+            "approved_revision": "-1",
+            "history_count": "3"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "record_isolation",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "record": "Q2",
+            "role": "seller",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "3"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "614.85",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "614.85",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "action": "approve"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "614.85",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "614.85",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "record": "Q1"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "action": "accept"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Accepted",
+            "revision": "1",
+            "approved_revision": "1",
+            "history_count": "4"
+          }
+        },
+        {
+          "operation": {
+            "record": "Q2"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "614.85",
+            "discount": "0.00",
+            "tax": "0.00",
+            "total": "614.85",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        }
+      ]
+    },
+    {
+      "profile": "rate_override",
+      "journey": "new_shipping",
+      "steps": [
+        {
+          "operation": {
+            "role": "seller",
+            "actor": "seller1",
+            "action": "calculate",
+            "values": {
+              "profile": "rate_override",
+              "quantity": "10",
+              "second_product": "B",
+              "second_quantity": "2",
+              "customer": "vip",
+              "date": "2026-03-15"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "1",
+            "approved_revision": "-1",
+            "history_count": "1"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate",
+            "values": {
+              "shipping": "standard"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2151.60",
+            "free_quantity": "0",
+            "freight": "15.00",
+            "state": "Draft",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "action": "calculate"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2151.60",
+            "free_quantity": "0",
+            "freight": "15.00",
+            "state": "Draft",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "2"
+          }
+        },
+        {
+          "operation": {
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2151.60",
+            "free_quantity": "0",
+            "freight": "15.00",
+            "state": "PendingManager",
+            "revision": "2",
+            "approved_revision": "-1",
+            "history_count": "3"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2151.60",
+            "free_quantity": "0",
+            "freight": "15.00",
+            "state": "Approved",
+            "revision": "2",
+            "approved_revision": "2",
+            "history_count": "4"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "action": "calculate",
+            "values": {
+              "shipping": "pickup"
+            }
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "3",
+            "approved_revision": "-1",
+            "history_count": "5"
+          }
+        },
+        {
+          "operation": {
+            "role": "customer",
+            "actor": "client1",
+            "action": "accept"
+          },
+          "accepted": false,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Draft",
+            "revision": "3",
+            "approved_revision": "-1",
+            "history_count": "5"
+          }
+        },
+        {
+          "operation": {
+            "role": "seller",
+            "action": "submit"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "PendingManager",
+            "revision": "3",
+            "approved_revision": "-1",
+            "history_count": "6"
+          }
+        },
+        {
+          "operation": {
+            "role": "manager",
+            "actor": "manager1",
+            "action": "approve"
+          },
+          "accepted": true,
+          "expected_visible": {
+            "subtotal": "2266.50",
+            "discount": "129.90",
+            "tax": "0.00",
+            "total": "2136.60",
+            "free_quantity": "0",
+            "freight": "0.00",
+            "state": "Approved",
+            "revision": "3",
+            "approved_revision": "3",
+            "history_count": "7"
+          }
+        }
+      ]
+    }
+  ]
+}

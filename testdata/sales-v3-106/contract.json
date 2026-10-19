@@ -1,0 +1,58 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-106",
+  "title": "VIP优先与金额门槛·方案1",
+  "version": 1,
+  "workflow": "threshold",
+  "profiles": {
+    "overlap_priority": {
+      "kind": "overlap_priority",
+      "product": "A",
+      "vip_percent": "5",
+      "volume_minimum": 5,
+      "volume_percent": "15",
+      "priority": "vip"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "VIP优先与基础包",
+      "unit_price": "155.95"
+    },
+    {
+      "id": "B",
+      "name": "VIP优先与扩展包",
+      "unit_price": "89.50"
+    },
+    {
+      "id": "C",
+      "name": "VIP优先与专业包",
+      "unit_price": "213.99"
+    }
+  ],
+  "approval_threshold": "842.00",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "overlap_priority": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "4",
+        "customer": "standard"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "5",
+        "customer": "standard"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "5",
+        "customer": "vip"
+      }
+    ]
+  }
+}

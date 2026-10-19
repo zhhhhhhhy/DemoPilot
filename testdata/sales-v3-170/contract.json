@@ -1,0 +1,68 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-170",
+  "title": "活动报价取消重开·方案5",
+  "version": 2,
+  "workflow": "cancel_amend",
+  "profiles": {
+    "validity_dates": {
+      "kind": "validity_dates",
+      "product": "B",
+      "start": "2026-03-08",
+      "end": "2026-03-24",
+      "percent": "15"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "活动报价取消基础包",
+      "unit_price": "219.95"
+    },
+    {
+      "id": "B",
+      "name": "活动报价取消扩展包",
+      "unit_price": "121.50"
+    },
+    {
+      "id": "C",
+      "name": "活动报价取消专业包",
+      "unit_price": "249.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "validity_dates": [
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-07",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-08",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-24",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-25",
+        "quantity": "2"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "24",
+    "express": "55"
+  }
+}

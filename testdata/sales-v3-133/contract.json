@@ -1,0 +1,64 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-133",
+  "title": "手工单价与客户类别·方案3",
+  "version": 2,
+  "workflow": "manual_override",
+  "profiles": {
+    "customer_scope": {
+      "kind": "customer_scope",
+      "product": "C",
+      "discounts": {
+        "standard": "0",
+        "vip": "11",
+        "partner": "14"
+      }
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "手工单价与客基础包",
+      "unit_price": "184.95"
+    },
+    {
+      "id": "B",
+      "name": "手工单价与客扩展包",
+      "unit_price": "104.50"
+    },
+    {
+      "id": "C",
+      "name": "手工单价与客专业包",
+      "unit_price": "229.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "customer_scope": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "18",
+    "express": "45"
+  }
+}

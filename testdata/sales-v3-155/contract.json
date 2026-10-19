@@ -1,0 +1,59 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-155",
+  "title": "连续折扣异人会签·方案5",
+  "version": 2,
+  "workflow": "dual_manager",
+  "profiles": {
+    "compound_discounts": {
+      "kind": "compound_discounts",
+      "percents": [
+        "12",
+        "5"
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "连续折扣异人基础包",
+      "unit_price": "210.95"
+    },
+    {
+      "id": "B",
+      "name": "连续折扣异人扩展包",
+      "unit_price": "118.50"
+    },
+    {
+      "id": "C",
+      "name": "连续折扣异人专业包",
+      "unit_price": "243.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "compound_discounts": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "1"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "3"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "24",
+    "express": "55"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-172",
+  "title": "活动日期与确认截止·方案2",
+  "version": 2,
+  "workflow": "expiry",
+  "profiles": {
+    "validity_dates": {
+      "kind": "validity_dates",
+      "product": "B",
+      "start": "2026-03-05",
+      "end": "2026-03-21",
+      "percent": "9"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "活动日期与确基础包",
+      "unit_price": "201.95"
+    },
+    {
+      "id": "B",
+      "name": "活动日期与确扩展包",
+      "unit_price": "107.50"
+    },
+    {
+      "id": "C",
+      "name": "活动日期与确专业包",
+      "unit_price": "242.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2026-03-26",
+  "boundary_vectors": {
+    "validity_dates": [
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-04",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-05",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-21",
+        "quantity": "2"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "date": "2026-03-22",
+        "quantity": "2"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "15",
+    "express": "40"
+  }
+}

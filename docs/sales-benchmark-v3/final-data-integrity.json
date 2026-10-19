@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "new_frozen_files": 1687,
+  "new_drift": [],
+  "historical_frozen_files": 73,
+  "historical_drift": [],
+  "heldout_cases": 100,
+  "heldout_executed": [],
+  "distinct_development_ids_executed": 20,
+  "total_task_trials": 23,
+  "original_score_preserved": true,
+  "anomalies_live_executed": 0
+}

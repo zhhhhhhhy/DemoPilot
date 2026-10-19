@@ -1,0 +1,145 @@
+{
+  "id": "sales-v3-181",
+  "family": "family-37",
+  "family_number": 37,
+  "variant": 1,
+  "title": "优先优惠报价过期保护·方案1",
+  "split": "heldout",
+  "difficulty": "hard",
+  "raw_sales_brief": "给销售做一个优先优惠报价过期保护演示，会员和数量优惠有优先级，需要审批后让客户确认。还需要演示配送计费。",
+  "seller_answers": [
+    {
+      "topic": "catalogue",
+      "aliases": [
+        "商品",
+        "产品",
+        "单价",
+        "价格",
+        "样例",
+        "样品"
+      ],
+      "answer": "三款演示商品为A：优先优惠报价基础包，单价200.95元；B：优先优惠报价扩展包，单价104.50元；C：优先优惠报价专业包，单价243.99元。"
+    },
+    {
+      "topic": "pricing",
+      "aliases": [
+        "优惠",
+        "折扣",
+        "门槛",
+        "税",
+        "赠",
+        "计价",
+        "定价",
+        "协议价",
+        "怎么算"
+      ],
+      "answer": "仅商品A：会员vip固定优惠5%，优先于数量优惠；非vip达到5件优惠15%；即使vip优惠更小也优先用vip，不叠加、不自动挑最便宜。"
+    },
+    {
+      "topic": "workflow",
+      "aliases": [
+        "审批",
+        "经理",
+        "财务",
+        "确认",
+        "流程",
+        "有效期",
+        "截止",
+        "刷新",
+        "改价",
+        "修订"
+      ],
+      "answer": "客户只能在报价有效期内确认；每次有效变更使旧审批失效，重新提交后才可批准。报价最迟在2026-03-25（含当日）由客户确认，次日不能确认；用独立的模拟当前日期判断。"
+    },
+    {
+      "topic": "shipping",
+      "aliases": [
+        "配送",
+        "运费",
+        "运输",
+        "自提",
+        "加急"
+      ],
+      "answer": "需要配送：自提pickup为0元，普通standard为12元，加急express为35元，整单折扣税费后只加一次，切换方式也使审批失效。"
+    }
+  ],
+  "common_conventions": "仅本地离线演示，无其他税费或优惠；数量为整数，所有金额采用十进制计算、独立四舍五入两位，不用显示出来的舍入差额反算总价。",
+  "information_pattern": "underspecified",
+  "source_ids": [
+    "erp-pricing",
+    "erp-workflow",
+    "erp-quote",
+    "ms-pricing",
+    "ms-approval"
+  ],
+  "source_urls": [
+    "https://docs.frappe.io/erpnext/pricing-rule",
+    "https://docs.frappe.io/erpnext/workflows",
+    "https://docs.frappe.io/erpnext/quotation",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-prices-and-discounts",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-how-use-approval-workflows"
+  ],
+  "provenance": "Public-pattern-grounded authored synthetic requirement, not customer-collected or human-gold.",
+  "independence_unit": "family-37",
+  "flow_steps": [
+    "确认商品与完整业务规则",
+    "选择商品、客户和报价日期",
+    "提交计算并核对金额",
+    "销售提交审批",
+    "客户只能在报价有效期内确认",
+    "客户确认",
+    "错误角色操作保持原记录",
+    "修改报价使旧审批失效",
+    "重新审批并验证边界",
+    "切换配送后重新审批",
+    "Q1/Q2记录隔离",
+    "处理当前流程特有的重复/取消/过期/刷新分支"
+  ],
+  "testdata_path": "testdata/sales-v3-181",
+  "expected_plan": {
+    "title": "优先优惠报价过期保护·方案1",
+    "catalogue": [
+      {
+        "id": "A",
+        "name": "优先优惠报价基础包",
+        "unit_price": "200.95"
+      },
+      {
+        "id": "B",
+        "name": "优先优惠报价扩展包",
+        "unit_price": "104.50"
+      },
+      {
+        "id": "C",
+        "name": "优先优惠报价专业包",
+        "unit_price": "243.99"
+      }
+    ],
+    "pricing_rule": {
+      "kind": "overlap_priority",
+      "product": "A",
+      "vip_percent": "5",
+      "volume_minimum": 5,
+      "volume_percent": "15",
+      "priority": "vip"
+    },
+    "workflow": "expiry",
+    "approval_threshold": null,
+    "valid_until": "2026-03-25",
+    "shipping": {
+      "pickup": "0",
+      "standard": "12",
+      "express": "35"
+    }
+  },
+  "expected_intake": "ready after questions acquire actual missing facts; no invented defaults",
+  "acceptance": {
+    "primary": "Confirmed semantic plan matches seller facts, publishes within budget, all mandatory final independent journeys pass, accepted source unchanged.",
+    "monetary": "Exact per-step subtotal, discount, tax, total and gift quantity; cent equality, no tolerance.",
+    "workflow": "Correct actor/order, duplicate/invalid actions preserve committed values/history, edits invalidate approval, records isolated.",
+    "publish": "No user confirmation or failed/cancelled/stale job => no publication; exact accepted artifact bytes only.",
+    "public": "testdata/sales-v3-181/public-tests.json",
+    "private": "evaluation_sets/sales-benchmark-v3/private/sales-v3-181.json",
+    "scoring": "Every mandatory journey must pass. Intermediate Core repair is not final failure. Unpublished or wrong final output fails full delivery."
+  }
+}

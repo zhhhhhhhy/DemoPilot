@@ -1,0 +1,26 @@
+{
+  "case_ids": [
+    "sales-v3-001",
+    "sales-v3-002",
+    "sales-v3-011",
+    "sales-v3-012",
+    "sales-v3-026",
+    "sales-v3-046",
+    "sales-v3-061",
+    "sales-v3-062",
+    "sales-v3-086",
+    "sales-v3-087",
+    "sales-v3-101",
+    "sales-v3-102",
+    "sales-v3-126",
+    "sales-v3-127",
+    "sales-v3-141",
+    "sales-v3-142",
+    "sales-v3-156",
+    "sales-v3-171",
+    "sales-v3-172",
+    "sales-v3-191"
+  ],
+  "arm": "current-product-clarify",
+  "reason": "Frozen stratified development pilot:6simple8medium6hard; no formal A/B/C effect claim."
+}

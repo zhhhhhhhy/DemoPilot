@@ -1,0 +1,59 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-058",
+  "title": "会员客户本人确认报价·方案3",
+  "version": 1,
+  "workflow": "customer_owner",
+  "profiles": {
+    "customer_scope": {
+      "kind": "customer_scope",
+      "product": "C",
+      "discounts": {
+        "standard": "0",
+        "vip": "11",
+        "partner": "14"
+      }
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "会员客户本人基础包",
+      "unit_price": "139.95"
+    },
+    {
+      "id": "B",
+      "name": "会员客户本人扩展包",
+      "unit_price": "89.50"
+    },
+    {
+      "id": "C",
+      "name": "会员客户本人专业包",
+      "unit_price": "199.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "customer_scope": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  }
+}

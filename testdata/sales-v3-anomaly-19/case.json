@@ -1,0 +1,24 @@
+{
+  "id": "sales-v3-anomaly-19",
+  "category": "invalid_input",
+  "title": "未授权手工价格",
+  "testdata_path": "testdata/sales-v3-anomaly-19",
+  "reference_case": "sales-v3-001",
+  "stimulus": "销售手工价为0或负数后计算",
+  "preconditions": "Use a disposable isolated test service/workspace; retain existing source and original accepted bytes.",
+  "acceptance_steps": [
+    "保存操作前会话、发布记录、产物及保护文件哈希",
+    "施加输入或动作：销售手工价为0或负数后计算",
+    "逐项核对预期：拒绝非正单价；不清空已批准版本或改变历史",
+    "核对拒绝动作未更改已提交业务值、未产生未授权发布；保留证据"
+  ],
+  "expected": "拒绝非正单价；不清空已批准版本或改变历史",
+  "failure_definition": "Any mandatory expected condition is false, or evidence is missing; infrastructure inability is recorded separately, never a pass.",
+  "cleanup": "Only owned disposable test resources; preserve raw failure and source hashes.",
+  "source_ids": [
+    "erp-quote"
+  ],
+  "provenance": "Authored product acceptance/risk test; vendor source does not claim this product implements the protection.",
+  "execution_status": "not_run",
+  "automation": "Executable fixture/action recipe; live40-case execution is not part of this20-case pilot."
+}

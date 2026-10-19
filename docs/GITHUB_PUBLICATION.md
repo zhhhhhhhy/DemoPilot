@@ -43,3 +43,7 @@ uv run --directory backend python ../scripts/prepare_quotation_private_plans.py
 - 前端默认测试的 fork worker 在本机启动超时；改为已有单 worker 限制下的线程池，默认测试命令通过 4 项测试，页面生产构建通过。
 - 补充上述仅重建缺失评分计划的脚本，实际重建 20 份计划，全部匹配冻结清单哈希，公开输入不变。
 - 将 201 个指向原电脑的 Markdown 链接转换为指向已提交文件的仓库相对链接。
+
+## 2026-10-19 新需求集补充
+
+新增200条合成需求、40异常配方和原20题/3题回归的公开摘要，详见[本轮结果](sales-benchmark-v3/结果与后续决定.md)。这与上文10-18源码同步的历史口径分开；本次确实执行了新开发试跑，未覆盖旧成绩。新检出目录运行`python scripts/prepare_sales_benchmark_private.py`仅补齐缺失私有计划，必须逐字节符合冻结manifest；原始模型对话、数据库、环境和本机API进程记录仍不上GitHub。

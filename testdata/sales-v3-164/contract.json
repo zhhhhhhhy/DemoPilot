@@ -1,0 +1,81 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-164",
+  "title": "批量报价取消重开·方案4",
+  "version": 2,
+  "workflow": "cancel_amend",
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "A",
+      "tiers": [
+        {
+          "minimum": 6,
+          "percent": "13"
+        },
+        {
+          "minimum": 11,
+          "percent": "21"
+        }
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "批量报价取消基础包",
+      "unit_price": "209.95"
+    },
+    {
+      "id": "B",
+      "name": "批量报价取消扩展包",
+      "unit_price": "115.50"
+    },
+    {
+      "id": "C",
+      "name": "批量报价取消专业包",
+      "unit_price": "244.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "quantity_tiers": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "5"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "7"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "10"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "12"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "21",
+    "express": "50"
+  }
+}

@@ -1,0 +1,324 @@
+{
+  "families": [
+    {
+      "id": "family-01",
+      "title": "办公耗材批量报价",
+      "pricing": "quantity_tiers",
+      "workflow": "single_manager",
+      "split": "development",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-02",
+      "title": "培训客户分层报价",
+      "pricing": "customer_scope",
+      "workflow": "single_manager",
+      "split": "validation",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-03",
+      "title": "展会活动期报价",
+      "pricing": "validity_dates",
+      "workflow": "single_manager",
+      "split": "development",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-04",
+      "title": "服务套餐连续折扣",
+      "pricing": "compound_discounts",
+      "workflow": "single_manager",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-05",
+      "title": "经销客户优惠优先级",
+      "pricing": "overlap_priority",
+      "workflow": "single_manager",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-06",
+      "title": "配件合并数量报价",
+      "pricing": "mixed_threshold",
+      "workflow": "single_manager",
+      "split": "development",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-07",
+      "title": "机构客户协议报价",
+      "pricing": "rate_override",
+      "workflow": "single_manager",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-08",
+      "title": "含税商品报价拆分",
+      "pricing": "tax_inclusive",
+      "workflow": "single_manager",
+      "split": "validation",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-09",
+      "title": "整单减免后计税报价",
+      "pricing": "net_total_discount",
+      "workflow": "single_manager",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-10",
+      "title": "促销赠品报价",
+      "pricing": "free_items",
+      "workflow": "single_manager",
+      "split": "development",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-11",
+      "title": "指定客户确认批量报价",
+      "pricing": "quantity_tiers",
+      "workflow": "customer_owner",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-12",
+      "title": "会员客户本人确认报价",
+      "pricing": "customer_scope",
+      "workflow": "customer_owner",
+      "split": "heldout",
+      "difficulty": "simple"
+    },
+    {
+      "id": "family-13",
+      "title": "批量价格驳回重提",
+      "pricing": "quantity_tiers",
+      "workflow": "rejection_reason",
+      "split": "development",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-14",
+      "title": "活动价格驳回说明",
+      "pricing": "validity_dates",
+      "workflow": "rejection_reason",
+      "split": "validation",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-15",
+      "title": "客户折扣驳回重提",
+      "pricing": "customer_scope",
+      "workflow": "rejection_reason",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-16",
+      "title": "整单减免驳回修订",
+      "pricing": "net_total_discount",
+      "workflow": "rejection_reason",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-17",
+      "title": "采购批量两级审批",
+      "pricing": "quantity_tiers",
+      "workflow": "two_stage",
+      "split": "validation",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-18",
+      "title": "合作客户两级审批",
+      "pricing": "customer_scope",
+      "workflow": "two_stage",
+      "split": "development",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-19",
+      "title": "协议价格财务复核",
+      "pricing": "rate_override",
+      "workflow": "two_stage",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-20",
+      "title": "价内税两级审批",
+      "pricing": "tax_inclusive",
+      "workflow": "two_stage",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-21",
+      "title": "大额数量优惠审批",
+      "pricing": "quantity_tiers",
+      "workflow": "threshold",
+      "split": "development",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-22",
+      "title": "VIP优先与金额门槛",
+      "pricing": "overlap_priority",
+      "workflow": "threshold",
+      "split": "validation",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-23",
+      "title": "混合采购金额审批",
+      "pricing": "mixed_threshold",
+      "workflow": "threshold",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-24",
+      "title": "连续折扣金额审批",
+      "pricing": "compound_discounts",
+      "workflow": "threshold",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-25",
+      "title": "手工改单价及数量优惠",
+      "pricing": "quantity_tiers",
+      "workflow": "manual_override",
+      "split": "validation",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-26",
+      "title": "手工单价与客户协议价",
+      "pricing": "rate_override",
+      "workflow": "manual_override",
+      "split": "development",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-27",
+      "title": "手工单价与客户类别",
+      "pricing": "customer_scope",
+      "workflow": "manual_override",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-28",
+      "title": "手工单价及整单减免",
+      "pricing": "net_total_discount",
+      "workflow": "manual_override",
+      "split": "heldout",
+      "difficulty": "medium"
+    },
+    {
+      "id": "family-29",
+      "title": "数量优惠异人会签",
+      "pricing": "quantity_tiers",
+      "workflow": "dual_manager",
+      "split": "development",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-30",
+      "title": "VIP优先异人会签",
+      "pricing": "overlap_priority",
+      "workflow": "dual_manager",
+      "split": "validation",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-31",
+      "title": "连续折扣异人会签",
+      "pricing": "compound_discounts",
+      "workflow": "dual_manager",
+      "split": "heldout",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-32",
+      "title": "买赠取消后修订",
+      "pricing": "free_items",
+      "workflow": "cancel_amend",
+      "split": "development",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-33",
+      "title": "批量报价取消重开",
+      "pricing": "quantity_tiers",
+      "workflow": "cancel_amend",
+      "split": "heldout",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-34",
+      "title": "活动报价取消重开",
+      "pricing": "validity_dates",
+      "workflow": "cancel_amend",
+      "split": "heldout",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-35",
+      "title": "活动日期与确认截止",
+      "pricing": "validity_dates",
+      "workflow": "expiry",
+      "split": "development",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-36",
+      "title": "协议报价过期禁止确认",
+      "pricing": "rate_override",
+      "workflow": "expiry",
+      "split": "heldout",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-37",
+      "title": "优先优惠报价过期保护",
+      "pricing": "overlap_priority",
+      "workflow": "expiry",
+      "split": "heldout",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-38",
+      "title": "减免税费多报价刷新",
+      "pricing": "net_total_discount",
+      "workflow": "record_persistence",
+      "split": "validation",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-39",
+      "title": "含税金额多报价刷新",
+      "pricing": "tax_inclusive",
+      "workflow": "record_persistence",
+      "split": "development",
+      "difficulty": "hard"
+    },
+    {
+      "id": "family-40",
+      "title": "合并数量多报价刷新",
+      "pricing": "mixed_threshold",
+      "workflow": "record_persistence",
+      "split": "heldout",
+      "difficulty": "hard"
+    }
+  ]
+}

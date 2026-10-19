@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "requirements": 200,
+  "anomalies": 40,
+  "independent_authored_families": 40,
+  "splits": {
+    "development": 60,
+    "validation": 40,
+    "heldout": 100
+  },
+  "difficulty": {
+    "simple": 60,
+    "medium": 80,
+    "hard": 60
+  },
+  "pilot_count": 20,
+  "pilot_difficulty": {
+    "simple": 6,
+    "medium": 8,
+    "hard": 6
+  },
+  "compiled_public_private_steps": 17680,
+  "independent_arithmetic_anchors": 600,
+  "frozen_files": 1687,
+  "drift": [],
+  "heldout_executed": 0,
+  "boundary": "Static construction/contract consistency only. No human-gold or model/browser success claim."
+}

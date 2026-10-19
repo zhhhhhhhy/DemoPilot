@@ -1,0 +1,64 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-199",
+  "title": "合并数量多报价刷新·方案4",
+  "version": 2,
+  "workflow": "record_persistence",
+  "profiles": {
+    "mixed_threshold": {
+      "kind": "mixed_threshold",
+      "products": [
+        "A",
+        "B"
+      ],
+      "minimum": 9,
+      "percent": "13"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "合并数量多报基础包",
+      "unit_price": "230.95"
+    },
+    {
+      "id": "B",
+      "name": "合并数量多报扩展包",
+      "unit_price": "122.50"
+    },
+    {
+      "id": "C",
+      "name": "合并数量多报专业包",
+      "unit_price": "258.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "mixed_threshold": [
+      {
+        "product": "A",
+        "quantity": "1",
+        "second_product": "B",
+        "second_quantity": "7"
+      },
+      {
+        "product": "A",
+        "quantity": "1",
+        "second_product": "B",
+        "second_quantity": "8"
+      },
+      {
+        "product": "A",
+        "quantity": "1",
+        "second_product": "B",
+        "second_quantity": "9"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "21",
+    "express": "50"
+  }
+}

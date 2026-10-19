@@ -1,0 +1,144 @@
+{
+  "id": "sales-v3-190",
+  "family": "family-38",
+  "family_number": 38,
+  "variant": 5,
+  "title": "减免税费多报价刷新·方案5",
+  "split": "validation",
+  "difficulty": "hard",
+  "raw_sales_brief": "给销售做一个减免税费多报价刷新演示，整单减钱再算税，需要审批后让客户确认。细节要问我，不能自行选默认价格或忽略边界。报价记录及审批在刷新后保留；每次有效变更使旧审批失效，重新提交后才可批准。Q1/Q2各自的金额、审批、修订和历史在刷新后保留，刷新选回Q1、销售seller1。还需要演示配送计费。",
+  "seller_answers": [
+    {
+      "topic": "catalogue",
+      "aliases": [
+        "商品",
+        "产品",
+        "单价",
+        "价格",
+        "样例",
+        "样品"
+      ],
+      "answer": "三款演示商品为A：减免税费多报基础包，单价231.95元；B：减免税费多报扩展包，单价125.50元；C：减免税费多报专业包，单价257.99元。"
+    },
+    {
+      "topic": "pricing",
+      "aliases": [
+        "优惠",
+        "折扣",
+        "门槛",
+        "税",
+        "赠",
+        "计价",
+        "定价",
+        "协议价",
+        "怎么算"
+      ],
+      "answer": "整单先减免28.50元，最多减到0；再对减免后金额加7.5%税，税四舍五入两位，不按减免前金额计税。"
+    },
+    {
+      "topic": "workflow",
+      "aliases": [
+        "审批",
+        "经理",
+        "财务",
+        "确认",
+        "流程",
+        "有效期",
+        "截止",
+        "刷新",
+        "改价",
+        "修订"
+      ],
+      "answer": "报价记录及审批在刷新后保留；每次有效变更使旧审批失效，重新提交后才可批准。Q1/Q2各自的金额、审批、修订和历史在刷新后保留，刷新选回Q1、销售seller1。"
+    },
+    {
+      "topic": "shipping",
+      "aliases": [
+        "配送",
+        "运费",
+        "运输",
+        "自提",
+        "加急"
+      ],
+      "answer": "需要配送：自提pickup为0元，普通standard为24元，加急express为55元，整单折扣税费后只加一次，切换方式也使审批失效。"
+    }
+  ],
+  "common_conventions": "仅本地离线演示，无其他税费或优惠；数量为整数，所有金额采用十进制计算、独立四舍五入两位，不用显示出来的舍入差额反算总价。",
+  "information_pattern": "explicit_no_guess",
+  "source_ids": [
+    "erp-pricing",
+    "erp-workflow",
+    "erp-quote",
+    "ms-pricing",
+    "ms-approval",
+    "erp-net"
+  ],
+  "source_urls": [
+    "https://docs.frappe.io/erpnext/pricing-rule",
+    "https://docs.frappe.io/erpnext/workflows",
+    "https://docs.frappe.io/erpnext/quotation",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-prices-and-discounts",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-how-use-approval-workflows",
+    "https://docs.frappe.io/erpnext/applying-discount"
+  ],
+  "provenance": "Public-pattern-grounded authored synthetic requirement, not customer-collected or human-gold.",
+  "independence_unit": "family-38",
+  "flow_steps": [
+    "确认商品与完整业务规则",
+    "选择商品、客户和报价日期",
+    "提交计算并核对金额",
+    "销售提交审批",
+    "报价记录及审批在刷新后保留",
+    "客户确认",
+    "错误角色操作保持原记录",
+    "修改报价使旧审批失效",
+    "重新审批并验证边界",
+    "切换配送后重新审批",
+    "Q1/Q2记录隔离",
+    "处理当前流程特有的重复/取消/过期/刷新分支"
+  ],
+  "testdata_path": "testdata/sales-v3-190",
+  "expected_plan": {
+    "title": "减免税费多报价刷新·方案5",
+    "catalogue": [
+      {
+        "id": "A",
+        "name": "减免税费多报基础包",
+        "unit_price": "231.95"
+      },
+      {
+        "id": "B",
+        "name": "减免税费多报扩展包",
+        "unit_price": "125.50"
+      },
+      {
+        "id": "C",
+        "name": "减免税费多报专业包",
+        "unit_price": "257.99"
+      }
+    ],
+    "pricing_rule": {
+      "kind": "net_total_discount",
+      "amount": "28.50",
+      "tax_percent": "7.5"
+    },
+    "workflow": "record_persistence",
+    "approval_threshold": null,
+    "valid_until": null,
+    "shipping": {
+      "pickup": "0",
+      "standard": "24",
+      "express": "55"
+    }
+  },
+  "expected_intake": "ready after questions acquire actual missing facts; no invented defaults",
+  "acceptance": {
+    "primary": "Confirmed semantic plan matches seller facts, publishes within budget, all mandatory final independent journeys pass, accepted source unchanged.",
+    "monetary": "Exact per-step subtotal, discount, tax, total and gift quantity; cent equality, no tolerance.",
+    "workflow": "Correct actor/order, duplicate/invalid actions preserve committed values/history, edits invalidate approval, records isolated.",
+    "publish": "No user confirmation or failed/cancelled/stale job => no publication; exact accepted artifact bytes only.",
+    "public": "testdata/sales-v3-190/public-tests.json",
+    "private": "evaluation_sets/sales-benchmark-v3/private/sales-v3-190.json",
+    "scoring": "Every mandatory journey must pass. Intermediate Core repair is not final failure. Unpublished or wrong final output fails full delivery."
+  }
+}

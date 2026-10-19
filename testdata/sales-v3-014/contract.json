@@ -1,0 +1,63 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-014",
+  "title": "展会活动期报价·方案4",
+  "version": 1,
+  "workflow": "single_manager",
+  "profiles": {
+    "validity_dates": {
+      "kind": "validity_dates",
+      "product": "A",
+      "start": "2026-03-07",
+      "end": "2026-03-23",
+      "percent": "13"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "展会活动期报基础包",
+      "unit_price": "119.95"
+    },
+    {
+      "id": "B",
+      "name": "展会活动期报扩展包",
+      "unit_price": "85.50"
+    },
+    {
+      "id": "C",
+      "name": "展会活动期报专业包",
+      "unit_price": "184.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "validity_dates": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "date": "2026-03-06",
+        "quantity": "2"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "date": "2026-03-07",
+        "quantity": "2"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "date": "2026-03-23",
+        "quantity": "2"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "date": "2026-03-24",
+        "quantity": "2"
+      }
+    ]
+  }
+}

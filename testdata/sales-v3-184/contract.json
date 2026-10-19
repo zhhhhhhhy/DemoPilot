@@ -1,0 +1,63 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-184",
+  "title": "优先优惠报价过期保护·方案4",
+  "version": 2,
+  "workflow": "expiry",
+  "profiles": {
+    "overlap_priority": {
+      "kind": "overlap_priority",
+      "product": "A",
+      "vip_percent": "8",
+      "volume_minimum": 8,
+      "volume_percent": "18",
+      "priority": "vip"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "优先优惠报价基础包",
+      "unit_price": "221.95"
+    },
+    {
+      "id": "B",
+      "name": "优先优惠报价扩展包",
+      "unit_price": "119.50"
+    },
+    {
+      "id": "C",
+      "name": "优先优惠报价专业包",
+      "unit_price": "252.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2026-03-28",
+  "boundary_vectors": {
+    "overlap_priority": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "7",
+        "customer": "standard"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "8",
+        "customer": "standard"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "8",
+        "customer": "vip"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "21",
+    "express": "50"
+  }
+}

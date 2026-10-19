@@ -1,0 +1,81 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-083",
+  "title": "采购批量两级审批·方案3",
+  "version": 2,
+  "workflow": "two_stage",
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "C",
+      "tiers": [
+        {
+          "minimum": 5,
+          "percent": "11"
+        },
+        {
+          "minimum": 10,
+          "percent": "20"
+        }
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "采购批量两级基础包",
+      "unit_price": "154.95"
+    },
+    {
+      "id": "B",
+      "name": "采购批量两级扩展包",
+      "unit_price": "94.50"
+    },
+    {
+      "id": "C",
+      "name": "采购批量两级专业包",
+      "unit_price": "209.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "quantity_tiers": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "4"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "5"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "9"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "10"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "11"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "18",
+    "express": "45"
+  }
+}

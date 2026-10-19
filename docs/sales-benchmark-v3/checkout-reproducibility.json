@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "public_frozen_index_files_verified": 1487,
+  "public_index_drift": [],
+  "exported_public_files": 1488,
+  "fresh_export_private_plans_created": 200,
+  "fresh_export_private_plans_verified": 200,
+  "original_working_data_drift": [],
+  "original100heldout_changed": false,
+  "scope": "Fresh Git index export without ignored private plans; rebuild200exact original-hash plans. No model calls or final-task debugging.",
+  "fix": "Scoped -text preserves original sealed CRLF bytes, helper reproduces LF or CRLF only if SHA256 matches frozen manifest."
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-010",
+  "title": "培训客户分层报价·方案5",
+  "version": 1,
+  "workflow": "single_manager",
+  "profiles": {
+    "customer_scope": {
+      "kind": "customer_scope",
+      "product": "B",
+      "discounts": {
+        "standard": "0",
+        "vip": "13",
+        "partner": "12"
+      }
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "培训客户分层基础包",
+      "unit_price": "123.95"
+    },
+    {
+      "id": "B",
+      "name": "培训客户分层扩展包",
+      "unit_price": "89.50"
+    },
+    {
+      "id": "C",
+      "name": "培训客户分层专业包",
+      "unit_price": "185.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "customer_scope": [
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  }
+}

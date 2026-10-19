@@ -1,0 +1,145 @@
+{
+  "scope": "Selected3known failed development tasks, original frozen gold unchanged; context and simulator fixes together. Not a new blind effect sample or an update to3/20.",
+  "before_delivered": 0,
+  "after_delivered": 3,
+  "original20_delivered": 3,
+  "original20_denominator": 20,
+  "cases": [
+    {
+      "case_id": "sales-v3-001",
+      "before_stage": "intent_contract",
+      "before_differences": [
+        {
+          "field": "workflow",
+          "actual": "customer_owner",
+          "expected": "single_manager"
+        }
+      ],
+      "before_remaining_questions": [],
+      "before_manager_absent": false,
+      "after_stage": "publication",
+      "after_delivery": true,
+      "after_independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "after_calls": 3
+    },
+    {
+      "case_id": "sales-v3-086",
+      "before_stage": "intake",
+      "before_differences": [],
+      "before_remaining_questions": [
+        "商品价格及优惠已齐全，配送未要求，无需补充。经理→财务审批后的客户确认，以及有效变更后旧审批失效、重新提交才可批准，目前均无法表达；你是否接受将这两项排除在本次演示范围外，客户确认在线下完成？",
+        "当前演示仅支持整单计算后四舍五入两位。你是否接受此规则，替代所要求的各金额独立四舍五入两位？"
+      ],
+      "before_manager_absent": false,
+      "after_stage": "publication",
+      "after_delivery": true,
+      "after_independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "after_calls": 3
+    },
+    {
+      "case_id": "sales-v3-171",
+      "before_stage": "intake",
+      "before_differences": [],
+      "before_remaining_questions": [
+        "报价由谁审批？如有多位审批人，请明确各自角色及审批顺序。"
+      ],
+      "before_manager_absent": true,
+      "after_stage": "publication",
+      "after_delivery": true,
+      "after_independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "after_calls": 3
+    }
+  ],
+  "baseline_cost": {
+    "planned": 20,
+    "delivered": 3,
+    "published": 3,
+    "final_failure_stages": {
+      "意图整理后规则不符，未启动Core": 5,
+      "问询未完成，未启动Core": 12
+    },
+    "published_defects": 0,
+    "root_cli_calls": 55,
+    "intake_calls": 52,
+    "core_calls": 3,
+    "calls_with_reported_usage": 55,
+    "reported_root_tokens": {
+      "input_tokens": 2363188,
+      "cached_input_tokens": 1311360,
+      "output_tokens": 38727
+    },
+    "median_elapsed_seconds": 72.41,
+    "sum_elapsed_seconds": 1924.94,
+    "delivered_task_elapsed_seconds": [
+      255.16,
+      264.17,
+      270.53
+    ],
+    "delivered_median_seconds": 264.17,
+    "final_browser_paths": {
+      "planned": 126,
+      "executed": 19,
+      "passed": 19
+    },
+    "heldout_executed": 0,
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Development current-product calibration, not A/B/C, no human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  },
+  "regression_cost": {
+    "planned": 3,
+    "delivered": 3,
+    "published": 3,
+    "final_failure_stages": {},
+    "published_defects": 0,
+    "root_cli_calls": 9,
+    "intake_calls": 6,
+    "core_calls": 3,
+    "calls_with_reported_usage": 9,
+    "reported_root_tokens": {
+      "input_tokens": 959115,
+      "cached_input_tokens": 751360,
+      "output_tokens": 20640
+    },
+    "median_elapsed_seconds": 226.45,
+    "sum_elapsed_seconds": 699.71,
+    "delivered_task_elapsed_seconds": [
+      224.38,
+      226.45,
+      248.88
+    ],
+    "delivered_median_seconds": 226.45,
+    "final_browser_paths": {
+      "planned": 19,
+      "executed": 19,
+      "passed": 19
+    },
+    "heldout_executed": 0,
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Development current-product calibration, not A/B/C, no human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  }
+}

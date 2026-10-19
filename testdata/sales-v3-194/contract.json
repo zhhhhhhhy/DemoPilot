@@ -1,0 +1,56 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-194",
+  "title": "含税金额多报价刷新·方案4",
+  "version": 2,
+  "workflow": "record_persistence",
+  "profiles": {
+    "tax_inclusive": {
+      "kind": "tax_inclusive",
+      "tax_percent": "3"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "含税金额多报基础包",
+      "unit_price": "227.95"
+    },
+    {
+      "id": "B",
+      "name": "含税金额多报扩展包",
+      "unit_price": "121.50"
+    },
+    {
+      "id": "C",
+      "name": "含税金额多报专业包",
+      "unit_price": "256.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "tax_inclusive": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "1"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "3"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "21",
+    "express": "50"
+  }
+}

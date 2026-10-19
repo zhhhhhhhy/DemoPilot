@@ -1,0 +1,61 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-176",
+  "title": "协议报价过期禁止确认·方案1",
+  "version": 2,
+  "workflow": "expiry",
+  "profiles": {
+    "rate_override": {
+      "kind": "rate_override",
+      "product": "A",
+      "customer": "partner",
+      "rate": "40.55"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "协议报价过期基础包",
+      "unit_price": "197.95"
+    },
+    {
+      "id": "B",
+      "name": "协议报价过期扩展包",
+      "unit_price": "103.50"
+    },
+    {
+      "id": "C",
+      "name": "协议报价过期专业包",
+      "unit_price": "241.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2026-03-25",
+  "boundary_vectors": {
+    "rate_override": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "12",
+    "express": "35"
+  }
+}

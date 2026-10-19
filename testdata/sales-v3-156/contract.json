@@ -1,0 +1,58 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-156",
+  "title": "买赠取消后修订·方案1",
+  "version": 2,
+  "workflow": "cancel_amend",
+  "profiles": {
+    "free_items": {
+      "kind": "free_items",
+      "product": "A",
+      "buy": 3,
+      "free": 1
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "买赠取消后修基础包",
+      "unit_price": "185.95"
+    },
+    {
+      "id": "B",
+      "name": "买赠取消后修扩展包",
+      "unit_price": "99.50"
+    },
+    {
+      "id": "C",
+      "name": "买赠取消后修专业包",
+      "unit_price": "233.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "free_items": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "2"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "3"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "4"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "12",
+    "express": "35"
+  }
+}

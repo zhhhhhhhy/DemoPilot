@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "focused_protocol_tests": 6,
+  "private_plan_recovery_tests": 3,
+  "validation_scope": "9distinct focused tests:6protocol and3recovery/newline checks; no old full-suite rerun.",
+  "modified_path_ruff": "passed",
+  "data_consistency": "construction-validation.json",
+  "data_hash_integrity": "final-data-integrity.json",
+  "private_plan_recovery": {
+    "created": 0,
+    "verified": 200,
+    "existing_files_unchanged": true
+  },
+  "real_development_trials": 20,
+  "additional_targeted_regressions": 3,
+  "heldout_model_trials": 0,
+  "anomalies_live_trials": 0,
+  "raw_results_preserved": true,
+  "model_test_processes_finished": true,
+  "local_api_activation": "server-process-activation.json (local ignored)",
+  "public_artifacts": "Synthetic summaries and one verified accepted-bundle screenshot, no raw conversations/auth/env/db/private plans.",
+  "fresh_checkout_reproducibility": "checkout-reproducibility.json"
+}

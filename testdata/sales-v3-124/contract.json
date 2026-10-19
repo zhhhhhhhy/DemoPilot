@@ -1,0 +1,76 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-124",
+  "title": "手工改单价及数量优惠·方案4",
+  "version": 1,
+  "workflow": "manual_override",
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "A",
+      "tiers": [
+        {
+          "minimum": 6,
+          "percent": "13"
+        },
+        {
+          "minimum": 11,
+          "percent": "21"
+        }
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "手工改单价及基础包",
+      "unit_price": "185.95"
+    },
+    {
+      "id": "B",
+      "name": "手工改单价及扩展包",
+      "unit_price": "107.50"
+    },
+    {
+      "id": "C",
+      "name": "手工改单价及专业包",
+      "unit_price": "228.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "quantity_tiers": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "5"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "6"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "7"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "10"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "12"
+      }
+    ]
+  }
+}

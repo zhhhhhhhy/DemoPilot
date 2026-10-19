@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "source": "Byte-identical already-published immutable bundle rendered in fresh local headless Chromium; separate from visible CUA workbench observation.",
+  "artifact": "7080a669d1afdab78b055d2a56cf0d026d45c1bb2041c6b41518401543662e38",
+  "state": "Accepted",
+  "total": "906.52",
+  "source_unchanged": true
+}

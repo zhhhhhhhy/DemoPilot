@@ -1,0 +1,906 @@
+{
+  "summary": {
+    "planned": 20,
+    "delivered": 3,
+    "published": 3,
+    "final_failure_stages": {
+      "意图整理后规则不符，未启动Core": 5,
+      "问询未完成，未启动Core": 12
+    },
+    "published_defects": 0,
+    "root_cli_calls": 55,
+    "intake_calls": 52,
+    "core_calls": 3,
+    "calls_with_reported_usage": 55,
+    "reported_root_tokens": {
+      "input_tokens": 2363188,
+      "cached_input_tokens": 1311360,
+      "output_tokens": 38727
+    },
+    "median_elapsed_seconds": 72.41,
+    "sum_elapsed_seconds": 1924.94,
+    "delivered_task_elapsed_seconds": [
+      255.16,
+      264.17,
+      270.53
+    ],
+    "delivered_median_seconds": 264.17,
+    "final_browser_paths": {
+      "planned": 126,
+      "executed": 19,
+      "passed": 19
+    },
+    "heldout_executed": 0,
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Development current-product calibration, not A/B/C, no human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  },
+  "cases": [
+    {
+      "case_id": "sales-v3-001",
+      "difficulty": "simple",
+      "family": "family-01",
+      "session_id": "552b9c1ee6e64492",
+      "status": "failed",
+      "stage": "intent_contract",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 51.58,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 2,
+        "intake": 2,
+        "core": 0,
+        "usage_complete": 2,
+        "tokens": {
+          "input_tokens": 48098,
+          "cached_input_tokens": 7296,
+          "output_tokens": 642
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "workflow",
+          "actual": "customer_owner",
+          "expected": "single_manager"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "User-confirmation boundary: model proposal differs from actual seller facts; no automatic rule overwrite or Core launch",
+      "stage_in_chinese": "意图整理后规则不符，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-002",
+      "difficulty": "simple",
+      "family": "family-01",
+      "session_id": "9c37439ebe69494f",
+      "status": "failed",
+      "stage": "intent_contract",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 49.39,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 2,
+        "intake": 2,
+        "core": 0,
+        "usage_complete": 2,
+        "tokens": {
+          "input_tokens": 48108,
+          "cached_input_tokens": 7296,
+          "output_tokens": 636
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "workflow",
+          "actual": "cancel_amend",
+          "expected": "single_manager"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "User-confirmation boundary: model proposal differs from actual seller facts; no automatic rule overwrite or Core launch",
+      "stage_in_chinese": "意图整理后规则不符，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-011",
+      "difficulty": "simple",
+      "family": "family-03",
+      "session_id": "ff23a1388c84432b",
+      "status": "failed",
+      "stage": "intent_contract",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 41.66,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 2,
+        "intake": 2,
+        "core": 0,
+        "usage_complete": 2,
+        "tokens": {
+          "input_tokens": 48055,
+          "cached_input_tokens": 0,
+          "output_tokens": 593
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "workflow",
+          "actual": "cancel_amend",
+          "expected": "single_manager"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "User-confirmation boundary: model proposal differs from actual seller facts; no automatic rule overwrite or Core launch",
+      "stage_in_chinese": "意图整理后规则不符，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-012",
+      "difficulty": "simple",
+      "family": "family-03",
+      "session_id": "8d863f2c11f74dfe",
+      "status": "failed",
+      "stage": "intent_contract",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 43.62,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 2,
+        "intake": 2,
+        "core": 0,
+        "usage_complete": 2,
+        "tokens": {
+          "input_tokens": 48110,
+          "cached_input_tokens": 11520,
+          "output_tokens": 671
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "workflow",
+          "actual": "cancel_amend",
+          "expected": "single_manager"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "User-confirmation boundary: model proposal differs from actual seller facts; no automatic rule overwrite or Core launch",
+      "stage_in_chinese": "意图整理后规则不符，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-026",
+      "difficulty": "simple",
+      "family": "family-06",
+      "session_id": "21d51b3efedf4d21",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 77.48,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72336,
+          "cached_input_tokens": 11520,
+          "output_tokens": 998
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "价格、优惠和经理审批规则已明确，配送未要求。是否同意客户确认在演示外完成，演示内仅保留经理审批、有效变更使旧审批失效及重新提交后才可批准的规则？当前无法同时记录演示内的客户确认。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-046",
+      "difficulty": "simple",
+      "family": "family-10",
+      "session_id": "72a5e0a1637f4ba5",
+      "status": "failed",
+      "stage": "intent_contract",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 48.59,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 2,
+        "intake": 2,
+        "core": 0,
+        "usage_complete": 2,
+        "tokens": {
+          "input_tokens": 48078,
+          "cached_input_tokens": 0,
+          "output_tokens": 641
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "workflow",
+          "actual": "customer_owner",
+          "expected": "single_manager"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "User-confirmation boundary: model proposal differs from actual seller facts; no automatic rule overwrite or Core launch",
+      "stage_in_chinese": "意图整理后规则不符，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-061",
+      "difficulty": "medium",
+      "family": "family-13",
+      "session_id": "7b3db4c6fd174044",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 75.72,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72399,
+          "cached_input_tokens": 18816,
+          "output_tokens": 998
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "由谁负责审批？请说明审批人的角色；如有多人，请明确审批顺序。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-062",
+      "difficulty": "medium",
+      "family": "family-13",
+      "session_id": "398f1e7b49cc4800",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 67.22,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72411,
+          "cached_input_tokens": 18816,
+          "output_tokens": 943
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "由谁审批（请提供审批人的角色或姓名）？如有多位审批人，请明确审批顺序，以及驳回修改并重新提交后是否需要全部审批人重新审批。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-086",
+      "difficulty": "medium",
+      "family": "family-18",
+      "session_id": "d795863cf6594e96",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 71.2,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72402,
+          "cached_input_tokens": 56448,
+          "output_tokens": 1100
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "商品价格及优惠已齐全，配送未要求，无需补充。经理→财务审批后的客户确认，以及有效变更后旧审批失效、重新提交才可批准，目前均无法表达；你是否接受将这两项排除在本次演示范围外，客户确认在线下完成？",
+        "当前演示仅支持整单计算后四舍五入两位。你是否接受此规则，替代所要求的各金额独立四舍五入两位？"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-087",
+      "difficulty": "medium",
+      "family": "family-18",
+      "session_id": "9c4bf889c63c4638",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 67.36,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72430,
+          "cached_input_tokens": 0,
+          "output_tokens": 1156
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "商品价格和优惠已齐全，未要求配送，无需补充。仍需确认审批范围：是否接受本次仅演示经理→财务依次审批，暂不包含客户确认及有效变更后旧审批失效、重新提交的要求？若这些要求必须全部保留，当前单一流程无法支持。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-101",
+      "difficulty": "medium",
+      "family": "family-21",
+      "session_id": "4c90fbc61a4e4ddb",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 264.17,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 384756,
+          "cached_input_tokens": 325376,
+          "output_tokens": 7058
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [
+        {
+          "field": "approval_threshold",
+          "actual": "831.0",
+          "expected": "831.00"
+        }
+      ],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    },
+    {
+      "case_id": "sales-v3-102",
+      "difficulty": "medium",
+      "family": "family-21",
+      "session_id": "b70a405abe4d4805",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 270.53,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 427271,
+          "cached_input_tokens": 346880,
+          "output_tokens": 7303
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    },
+    {
+      "case_id": "sales-v3-126",
+      "difficulty": "medium",
+      "family": "family-26",
+      "session_id": "9ade2cfb2bef43cd",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 89.39,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72532,
+          "cached_input_tokens": 18816,
+          "output_tokens": 1334
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "报价由谁审批？若有多人，请明确审批顺序；审批通过后是否仍要求客户确认？",
+        "已提供的价格和优惠信息齐全，未要求配送，无需补充。当前结构无法完整表达协议差价展示、协议价优先于手工价、逐项独立舍入，以及改价重审与客户确认的组合要求。是否接受简化为“partner 客户购买 A 固定协议价 40.55 元，以手工改价后重新审批为唯一流程，金额整单计算后四舍五入两位”？若这些原要求必须全部保留，当前结构不支持。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-127",
+      "difficulty": "medium",
+      "family": "family-26",
+      "session_id": "45f305dd7d50409d",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 79.3,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72602,
+          "cached_input_tokens": 7296,
+          "output_tokens": 1237
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "销售提交报价或修改商品 A 单价后，由谁审批？若有多位审批人，请说明审批顺序。",
+        "“审批后让客户确认”是指审批通过后在线下联系客户确认，还是要求系统内有独立的客户确认操作？当前支持的流程无法表达独立的客户确认环节。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-141",
+      "difficulty": "hard",
+      "family": "family-29",
+      "session_id": "17576241466c4747",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 73.62,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72572,
+          "cached_input_tokens": 11520,
+          "output_tokens": 1222
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "两位不同经理会签是否无先后顺序、双方均通过即可，还是需要指定审批顺序？若有顺序，请说明。",
+        "会签完成后的客户确认是在系统内操作，还是由销售线下确认？当前流程结构无法同时表达异人会签与系统内客户确认，是否接受客户线下确认？"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-142",
+      "difficulty": "hard",
+      "family": "family-29",
+      "session_id": "813bb5d4fbd940d4",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 255.16,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 440920,
+          "cached_input_tokens": 375680,
+          "output_tokens": 7716
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    },
+    {
+      "case_id": "sales-v3-156",
+      "difficulty": "hard",
+      "family": "family-32",
+      "session_id": "e35294f93cc44571",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 71.08,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72465,
+          "cached_input_tokens": 18816,
+          "output_tokens": 1028
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "商品A每购买3件另赠1件，赠品是否也是商品A？",
+        "由谁审批？若有多人，请明确审批顺序；每次修订重提并重新审批通过后，是否都需要客户确认？"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-171",
+      "difficulty": "hard",
+      "family": "family-35",
+      "session_id": "56dfedd37a194a2e",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 67.16,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72483,
+          "cached_input_tokens": 18816,
+          "output_tokens": 951
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "报价由谁审批？如有多位审批人，请明确各自角色及审批顺序。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-172",
+      "difficulty": "hard",
+      "family": "family-35",
+      "session_id": "088580b001534ea2",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 75.27,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72526,
+          "cached_input_tokens": 37632,
+          "output_tokens": 1056
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "报价由谁审批？若有多位审批人，请明确各自角色及审批顺序。"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    },
+    {
+      "case_id": "sales-v3-191",
+      "difficulty": "hard",
+      "family": "family-39",
+      "session_id": "4a6367d8b3844579",
+      "status": "failed",
+      "stage": "intake",
+      "delivery_pass": false,
+      "final_functional_pass": false,
+      "confirmation_semantics_match": false,
+      "elapsed_seconds": 85.44,
+      "core_calls": null,
+      "internal_core_repairs": null,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "iterations": null,
+      "cost": {
+        "calls": 3,
+        "intake": 3,
+        "core": 0,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 72634,
+          "cached_input_tokens": 18816,
+          "output_tokens": 1444
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [
+        "报价由谁审批？请明确审批角色或人员；若有多人，请说明审批顺序或是否并行。",
+        "客户确认是否必须作为审批通过后的独立流程步骤？当前支持的流程无法表达该步骤，是否接受演示止于审批通过？"
+      ],
+      "manager_actor_absent_from_delivered_sales_facts": true,
+      "failure_reason": "Intake not ready within declared3calls",
+      "stage_in_chinese": "问询未完成，未启动Core"
+    }
+  ]
+}

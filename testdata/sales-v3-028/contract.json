@@ -1,0 +1,59 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-028",
+  "title": "配件合并数量报价·方案3",
+  "version": 1,
+  "workflow": "single_manager",
+  "profiles": {
+    "mixed_threshold": {
+      "kind": "mixed_threshold",
+      "products": [
+        "C",
+        "A"
+      ],
+      "minimum": 8,
+      "percent": "11"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "配件合并数量基础包",
+      "unit_price": "121.95"
+    },
+    {
+      "id": "B",
+      "name": "配件合并数量扩展包",
+      "unit_price": "83.50"
+    },
+    {
+      "id": "C",
+      "name": "配件合并数量专业包",
+      "unit_price": "187.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "mixed_threshold": [
+      {
+        "product": "C",
+        "quantity": "1",
+        "second_product": "A",
+        "second_quantity": "6"
+      },
+      {
+        "product": "C",
+        "quantity": "1",
+        "second_product": "A",
+        "second_quantity": "7"
+      },
+      {
+        "product": "C",
+        "quantity": "1",
+        "second_product": "A",
+        "second_quantity": "8"
+      }
+    ]
+  }
+}

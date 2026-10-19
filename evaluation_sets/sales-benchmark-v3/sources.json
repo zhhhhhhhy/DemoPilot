@@ -1,0 +1,60 @@
+{
+  "reviewed_at": "2026-10-18T16:02:55.584033+00:00",
+  "sources": [
+    {
+      "id": "erp-pricing",
+      "url": "https://docs.frappe.io/erpnext/pricing-rule",
+      "supports": "商品、客户、数量、日期、连续折扣及优先级的业务模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "erp-workflow",
+      "url": "https://docs.frappe.io/erpnext/workflows",
+      "supports": "条件审批、角色与状态转换的业务模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "erp-quote",
+      "url": "https://docs.frappe.io/erpnext/quotation",
+      "supports": "报价及有效期的业务模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "erp-tax",
+      "url": "https://docs.frappe.io/erpnext/tax-inclusive-accounting",
+      "supports": "价内税拆分的计算模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "erp-net",
+      "url": "https://docs.frappe.io/erpnext/applying-discount",
+      "supports": "整单减免及税费的计算模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "erp-free",
+      "url": "https://docs.frappe.io/erpnext/setting-up-buy-1-get-1-free-pricing-rule",
+      "supports": "买赠与付费商品数量分开的业务模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "ms-pricing",
+      "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/across-prices-and-discounts",
+      "supports": "商品、客户、最低数量、日期和整单优惠的模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "ms-approval",
+      "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/across-how-use-approval-workflows",
+      "supports": "申请、拒绝及取消审批的模式",
+      "retrieval": "retrieved full official page"
+    },
+    {
+      "id": "odoo-pricing",
+      "url": "https://www.odoo.com/documentation/17.0/applications/sales/sales/products_prices/prices/pricing.html",
+      "supports": "客户价目表、日期、最低数量及手工改价模式",
+      "retrieval": "official indexed text retrieved; direct page timed out, no full-page receipt"
+    }
+  ],
+  "boundary": "Patterns only. All concrete business rules are authored synthetic. No claim of real users or human gold."
+}

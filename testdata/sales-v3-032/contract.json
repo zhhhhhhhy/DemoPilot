@@ -1,0 +1,56 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-032",
+  "title": "机构客户协议报价·方案2",
+  "version": 1,
+  "workflow": "single_manager",
+  "profiles": {
+    "rate_override": {
+      "kind": "rate_override",
+      "product": "B",
+      "customer": "vip",
+      "rate": "43.55"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "机构客户协议基础包",
+      "unit_price": "117.95"
+    },
+    {
+      "id": "B",
+      "name": "机构客户协议扩展包",
+      "unit_price": "79.50"
+    },
+    {
+      "id": "C",
+      "name": "机构客户协议专业包",
+      "unit_price": "186.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "rate_override": [
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  }
+}

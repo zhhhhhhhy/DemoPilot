@@ -1,0 +1,55 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-119",
+  "title": "连续折扣金额审批·方案4",
+  "version": 1,
+  "workflow": "threshold",
+  "profiles": {
+    "compound_discounts": {
+      "kind": "compound_discounts",
+      "percents": [
+        "11",
+        "5",
+        "2.5"
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "连续折扣金额基础包",
+      "unit_price": "182.95"
+    },
+    {
+      "id": "B",
+      "name": "连续折扣金额扩展包",
+      "unit_price": "106.50"
+    },
+    {
+      "id": "C",
+      "name": "连续折扣金额专业包",
+      "unit_price": "226.99"
+    }
+  ],
+  "approval_threshold": "1104.00",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "compound_discounts": [
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "1"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "3"
+      },
+      {
+        "product": "A",
+        "second_quantity": "0",
+        "quantity": "11"
+      }
+    ]
+  }
+}

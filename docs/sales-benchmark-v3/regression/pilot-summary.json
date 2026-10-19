@@ -1,0 +1,191 @@
+{
+  "summary": {
+    "planned": 3,
+    "delivered": 3,
+    "published": 3,
+    "final_failure_stages": {},
+    "published_defects": 0,
+    "root_cli_calls": 9,
+    "intake_calls": 6,
+    "core_calls": 3,
+    "calls_with_reported_usage": 9,
+    "reported_root_tokens": {
+      "input_tokens": 959115,
+      "cached_input_tokens": 751360,
+      "output_tokens": 20640
+    },
+    "median_elapsed_seconds": 226.45,
+    "sum_elapsed_seconds": 699.71,
+    "delivered_task_elapsed_seconds": [
+      224.38,
+      226.45,
+      248.88
+    ],
+    "delivered_median_seconds": 226.45,
+    "final_browser_paths": {
+      "planned": 19,
+      "executed": 19,
+      "passed": 19
+    },
+    "heldout_executed": 0,
+    "anomalies_live_executed": 0,
+    "monetary_cost": null,
+    "boundary": "Development current-product calibration, not A/B/C, no human-gold or production benefit. Root token report only; cached input is a subset of input, not extra. Original result files retained unchanged.",
+    "measurement_note": "Derived cost audit normalizes Windows path separators; original per-kind counts in runner v1 may be zero due to separator mismatch. Total raw process count/token usage unaffected."
+  },
+  "cases": [
+    {
+      "case_id": "sales-v3-001",
+      "difficulty": "simple",
+      "family": "family-01",
+      "session_id": "f3f9d1c7bf7b4a6e",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 226.45,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 305683,
+          "cached_input_tokens": 224896,
+          "output_tokens": 6262
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    },
+    {
+      "case_id": "sales-v3-086",
+      "difficulty": "medium",
+      "family": "family-18",
+      "session_id": "5d4e4be0a8c649fd",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 224.38,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 345731,
+          "cached_input_tokens": 281344,
+          "output_tokens": 6830
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    },
+    {
+      "case_id": "sales-v3-171",
+      "difficulty": "hard",
+      "family": "family-35",
+      "session_id": "eebd442b6a1d4a6c",
+      "status": "published",
+      "stage": "publication",
+      "delivery_pass": true,
+      "final_functional_pass": true,
+      "confirmation_semantics_match": true,
+      "elapsed_seconds": 248.88,
+      "core_calls": 1,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "iterations": [
+        {
+          "round": 1,
+          "cli_error": null,
+          "engineering": {
+            "status": "passed",
+            "issues": []
+          },
+          "check_status": "passed",
+          "issues": []
+        }
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "tokens": {
+          "input_tokens": 307701,
+          "cached_input_tokens": 245120,
+          "output_tokens": 7548
+        },
+        "monetary_cost": null
+      },
+      "observed_differences": [],
+      "remaining_questions": [],
+      "manager_actor_absent_from_delivered_sales_facts": false,
+      "failure_reason": null,
+      "stage_in_chinese": "已发布，按最终检查评分"
+    }
+  ]
+}

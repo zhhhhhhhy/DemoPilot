@@ -1,0 +1,136 @@
+{
+  "id": "sales-v3-096",
+  "family": "family-20",
+  "family_number": 20,
+  "variant": 1,
+  "title": "价内税两级审批·方案1",
+  "split": "heldout",
+  "difficulty": "medium",
+  "raw_sales_brief": "给销售做一个价内税两级审批演示，标价已含税要拆开显示，需要审批后让客户确认。",
+  "seller_answers": [
+    {
+      "topic": "catalogue",
+      "aliases": [
+        "商品",
+        "产品",
+        "单价",
+        "价格",
+        "样例",
+        "样品"
+      ],
+      "answer": "三款演示商品为A：价内税两级审基础包，单价149.95元；B：价内税两级审扩展包，单价87.50元；C：价内税两级审专业包，单价209.99元。"
+    },
+    {
+      "topic": "pricing",
+      "aliases": [
+        "优惠",
+        "折扣",
+        "门槛",
+        "税",
+        "赠",
+        "计价",
+        "定价",
+        "协议价",
+        "怎么算"
+      ],
+      "answer": "目录单价已含6%税；未税小计=含税金额/(1+税率)，小计先四舍五入到两位，税为含税金额减已显示小计；总价保持含税金额，不重复加税。"
+    },
+    {
+      "topic": "workflow",
+      "aliases": [
+        "审批",
+        "经理",
+        "财务",
+        "确认",
+        "流程",
+        "有效期",
+        "截止",
+        "刷新",
+        "改价",
+        "修订"
+      ],
+      "answer": "经理、财务依次审批后由客户确认；每次有效变更使旧审批失效，重新提交后才可批准。"
+    },
+    {
+      "topic": "shipping",
+      "aliases": [
+        "配送",
+        "运费",
+        "运输",
+        "自提",
+        "加急"
+      ],
+      "answer": "不需要配送，没有额外运费。"
+    }
+  ],
+  "common_conventions": "仅本地离线演示，无其他税费或优惠；数量为整数，所有金额采用十进制计算、独立四舍五入两位，不用显示出来的舍入差额反算总价。",
+  "information_pattern": "underspecified",
+  "source_ids": [
+    "erp-pricing",
+    "erp-workflow",
+    "erp-quote",
+    "ms-pricing",
+    "ms-approval",
+    "erp-tax"
+  ],
+  "source_urls": [
+    "https://docs.frappe.io/erpnext/pricing-rule",
+    "https://docs.frappe.io/erpnext/workflows",
+    "https://docs.frappe.io/erpnext/quotation",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-prices-and-discounts",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-how-use-approval-workflows",
+    "https://docs.frappe.io/erpnext/tax-inclusive-accounting"
+  ],
+  "provenance": "Public-pattern-grounded authored synthetic requirement, not customer-collected or human-gold.",
+  "independence_unit": "family-20",
+  "flow_steps": [
+    "确认商品与完整业务规则",
+    "选择商品、客户和报价日期",
+    "提交计算并核对金额",
+    "销售提交审批",
+    "经理、财务依次审批后由客户确认",
+    "客户确认",
+    "错误角色操作保持原记录",
+    "修改报价使旧审批失效",
+    "重新审批并验证边界"
+  ],
+  "testdata_path": "testdata/sales-v3-096",
+  "expected_plan": {
+    "title": "价内税两级审批·方案1",
+    "catalogue": [
+      {
+        "id": "A",
+        "name": "价内税两级审基础包",
+        "unit_price": "149.95"
+      },
+      {
+        "id": "B",
+        "name": "价内税两级审扩展包",
+        "unit_price": "87.50"
+      },
+      {
+        "id": "C",
+        "name": "价内税两级审专业包",
+        "unit_price": "209.99"
+      }
+    ],
+    "pricing_rule": {
+      "kind": "tax_inclusive",
+      "tax_percent": "6"
+    },
+    "workflow": "two_stage",
+    "approval_threshold": null,
+    "valid_until": null,
+    "shipping": null
+  },
+  "expected_intake": "ready after questions acquire actual missing facts; no invented defaults",
+  "acceptance": {
+    "primary": "Confirmed semantic plan matches seller facts, publishes within budget, all mandatory final independent journeys pass, accepted source unchanged.",
+    "monetary": "Exact per-step subtotal, discount, tax, total and gift quantity; cent equality, no tolerance.",
+    "workflow": "Correct actor/order, duplicate/invalid actions preserve committed values/history, edits invalidate approval, records isolated.",
+    "publish": "No user confirmation or failed/cancelled/stale job => no publication; exact accepted artifact bytes only.",
+    "public": "testdata/sales-v3-096/public-tests.json",
+    "private": "evaluation_sets/sales-benchmark-v3/private/sales-v3-096.json",
+    "scoring": "Every mandatory journey must pass. Intermediate Core repair is not final failure. Unpublished or wrong final output fails full delivery."
+  }
+}

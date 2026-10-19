@@ -1,0 +1,61 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-093",
+  "title": "协议价格财务复核·方案3",
+  "version": 2,
+  "workflow": "two_stage",
+  "profiles": {
+    "rate_override": {
+      "kind": "rate_override",
+      "product": "C",
+      "customer": "partner",
+      "rate": "46.55"
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "协议价格财务基础包",
+      "unit_price": "160.95"
+    },
+    {
+      "id": "B",
+      "name": "协议价格财务扩展包",
+      "unit_price": "96.50"
+    },
+    {
+      "id": "C",
+      "name": "协议价格财务专业包",
+      "unit_price": "213.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "rate_override": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "standard"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "vip"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6",
+        "customer": "partner"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "18",
+    "express": "45"
+  }
+}

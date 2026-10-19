@@ -1,0 +1,143 @@
+{
+  "id": "sales-v3-180",
+  "family": "family-36",
+  "family_number": 36,
+  "variant": 5,
+  "title": "协议报价过期禁止确认·方案5",
+  "split": "heldout",
+  "difficulty": "hard",
+  "raw_sales_brief": "给销售做一个协议报价过期禁止确认演示，部分客户用协议单价，需要审批后让客户确认。细节要问我，不能自行选默认价格或忽略边界。客户只能在报价有效期内确认；每次有效变更使旧审批失效，重新提交后才可批准。报价最迟在2026-03-29（含当日）由客户确认，次日不能确认；用独立的模拟当前日期判断。还需要演示配送计费。",
+  "seller_answers": [
+    {
+      "topic": "catalogue",
+      "aliases": [
+        "商品",
+        "产品",
+        "单价",
+        "价格",
+        "样例",
+        "样品"
+      ],
+      "answer": "三款演示商品为A：协议报价过期基础包，单价225.95元；B：协议报价过期扩展包，单价123.50元；C：协议报价过期专业包，单价253.99元。"
+    },
+    {
+      "topic": "pricing",
+      "aliases": [
+        "优惠",
+        "折扣",
+        "门槛",
+        "税",
+        "赠",
+        "计价",
+        "定价",
+        "协议价",
+        "怎么算"
+      ],
+      "answer": "仅partner客户购买商品B时用协议单价52.55元；其他客户用目录价。小计仍显示目录或手工价格，差价显示在优惠栏；协议价优先于手工价。"
+    },
+    {
+      "topic": "workflow",
+      "aliases": [
+        "审批",
+        "经理",
+        "财务",
+        "确认",
+        "流程",
+        "有效期",
+        "截止",
+        "刷新",
+        "改价",
+        "修订"
+      ],
+      "answer": "客户只能在报价有效期内确认；每次有效变更使旧审批失效，重新提交后才可批准。报价最迟在2026-03-29（含当日）由客户确认，次日不能确认；用独立的模拟当前日期判断。"
+    },
+    {
+      "topic": "shipping",
+      "aliases": [
+        "配送",
+        "运费",
+        "运输",
+        "自提",
+        "加急"
+      ],
+      "answer": "需要配送：自提pickup为0元，普通standard为24元，加急express为55元，整单折扣税费后只加一次，切换方式也使审批失效。"
+    }
+  ],
+  "common_conventions": "仅本地离线演示，无其他税费或优惠；数量为整数，所有金额采用十进制计算、独立四舍五入两位，不用显示出来的舍入差额反算总价。",
+  "information_pattern": "explicit_no_guess",
+  "source_ids": [
+    "erp-pricing",
+    "erp-workflow",
+    "erp-quote",
+    "ms-pricing",
+    "ms-approval"
+  ],
+  "source_urls": [
+    "https://docs.frappe.io/erpnext/pricing-rule",
+    "https://docs.frappe.io/erpnext/workflows",
+    "https://docs.frappe.io/erpnext/quotation",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-prices-and-discounts",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/across-how-use-approval-workflows"
+  ],
+  "provenance": "Public-pattern-grounded authored synthetic requirement, not customer-collected or human-gold.",
+  "independence_unit": "family-36",
+  "flow_steps": [
+    "确认商品与完整业务规则",
+    "选择商品、客户和报价日期",
+    "提交计算并核对金额",
+    "销售提交审批",
+    "客户只能在报价有效期内确认",
+    "客户确认",
+    "错误角色操作保持原记录",
+    "修改报价使旧审批失效",
+    "重新审批并验证边界",
+    "切换配送后重新审批",
+    "Q1/Q2记录隔离",
+    "处理当前流程特有的重复/取消/过期/刷新分支"
+  ],
+  "testdata_path": "testdata/sales-v3-180",
+  "expected_plan": {
+    "title": "协议报价过期禁止确认·方案5",
+    "catalogue": [
+      {
+        "id": "A",
+        "name": "协议报价过期基础包",
+        "unit_price": "225.95"
+      },
+      {
+        "id": "B",
+        "name": "协议报价过期扩展包",
+        "unit_price": "123.50"
+      },
+      {
+        "id": "C",
+        "name": "协议报价过期专业包",
+        "unit_price": "253.99"
+      }
+    ],
+    "pricing_rule": {
+      "kind": "rate_override",
+      "product": "B",
+      "customer": "partner",
+      "rate": "52.55"
+    },
+    "workflow": "expiry",
+    "approval_threshold": null,
+    "valid_until": "2026-03-29",
+    "shipping": {
+      "pickup": "0",
+      "standard": "24",
+      "express": "55"
+    }
+  },
+  "expected_intake": "ready after questions acquire actual missing facts; no invented defaults",
+  "acceptance": {
+    "primary": "Confirmed semantic plan matches seller facts, publishes within budget, all mandatory final independent journeys pass, accepted source unchanged.",
+    "monetary": "Exact per-step subtotal, discount, tax, total and gift quantity; cent equality, no tolerance.",
+    "workflow": "Correct actor/order, duplicate/invalid actions preserve committed values/history, edits invalidate approval, records isolated.",
+    "publish": "No user confirmation or failed/cancelled/stale job => no publication; exact accepted artifact bytes only.",
+    "public": "testdata/sales-v3-180/public-tests.json",
+    "private": "evaluation_sets/sales-benchmark-v3/private/sales-v3-180.json",
+    "scoring": "Every mandatory journey must pass. Intermediate Core repair is not final failure. Unpublished or wrong final output fails full delivery."
+  }
+}

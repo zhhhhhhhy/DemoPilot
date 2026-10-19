@@ -1,0 +1,81 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-145",
+  "title": "数量优惠异人会签·方案5",
+  "version": 2,
+  "workflow": "dual_manager",
+  "profiles": {
+    "quantity_tiers": {
+      "kind": "quantity_tiers",
+      "product": "B",
+      "tiers": [
+        {
+          "minimum": 7,
+          "percent": "15"
+        },
+        {
+          "minimum": 12,
+          "percent": "22"
+        }
+      ]
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "数量优惠异人基础包",
+      "unit_price": "204.95"
+    },
+    {
+      "id": "B",
+      "name": "数量优惠异人扩展包",
+      "unit_price": "116.50"
+    },
+    {
+      "id": "C",
+      "name": "数量优惠异人专业包",
+      "unit_price": "239.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "quantity_tiers": [
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "6"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "7"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "8"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "11"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "12"
+      },
+      {
+        "product": "B",
+        "second_quantity": "0",
+        "quantity": "13"
+      }
+    ]
+  },
+  "shipping": {
+    "pickup": "0",
+    "standard": "24",
+    "express": "55"
+  }
+}

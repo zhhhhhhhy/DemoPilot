@@ -1,0 +1,53 @@
+{
+  "schema_version": "quotation-business-contract-v2",
+  "id": "sales-v3-048",
+  "title": "促销赠品报价·方案3",
+  "version": 1,
+  "workflow": "single_manager",
+  "profiles": {
+    "free_items": {
+      "kind": "free_items",
+      "product": "C",
+      "buy": 5,
+      "free": 1
+    }
+  },
+  "catalogue": [
+    {
+      "id": "A",
+      "name": "促销赠品报价基础包",
+      "unit_price": "133.95"
+    },
+    {
+      "id": "B",
+      "name": "促销赠品报价扩展包",
+      "unit_price": "87.50"
+    },
+    {
+      "id": "C",
+      "name": "促销赠品报价专业包",
+      "unit_price": "195.99"
+    }
+  ],
+  "approval_threshold": "0",
+  "valid_until": "2099-12-31",
+  "boundary_vectors": {
+    "free_items": [
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "4"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "5"
+      },
+      {
+        "product": "C",
+        "second_quantity": "0",
+        "quantity": "6"
+      }
+    ]
+  }
+}

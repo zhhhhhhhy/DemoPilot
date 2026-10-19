@@ -1,0 +1,4 @@
+# These fixtures are frozen by byte hashes, including their original newlines.
+# Preserve the sealed bytes on every platform; do not rewrite historical data.
+/evaluation_sets/sales-benchmark-v3/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/testdata/sales-v3-*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
