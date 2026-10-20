@@ -1,0 +1,21 @@
+{
+  "scope": "Read-only hashes and real next-batch gate; no model, browser rerun, repair or score rewrite.",
+  "plan_sha256": "ff5f27669cda0d4c9652c3ec9fcb71412ef7fd1fa3b87f74e4293bfbf75d7663",
+  "executed_source_revision": "761842b",
+  "frozen_source_files": 131,
+  "frozen_input_files_checked": 1687,
+  "all_input_hashes_match": true,
+  "both_contexts_same_source_and_plan": true,
+  "first_batch_result_hash_matches_second_batch_unlock": true,
+  "original_reliability_checkpoint_product_matches": true,
+  "next_batch_index": 3,
+  "next_batch_gate_rejected": true,
+  "next_batch_reason": "Previous batch failed or needs input-audit review; stop campaign without repair",
+  "remaining_batches_no_output_created": true,
+  "final_attempted": 15,
+  "final_unexecuted": 85,
+  "result_hashes": [
+    "58986bb9e9688f46bb07718e63cad0bb26b9796b82ddc8a78e69240113b639dc",
+    "4cb5c3f4ebf83ea32cfa6edb18416b54b0fe3b56d982be5a7bfae615f6bf737c"
+  ]
+}

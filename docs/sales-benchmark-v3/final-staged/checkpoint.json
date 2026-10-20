@@ -1,0 +1,728 @@
+{
+  "schema_version": "progressive-final100-checkpoint-v1",
+  "updated_at": "2026-10-20T12:41:39.743712+00:00",
+  "plan_sha256": "ff5f27669cda0d4c9652c3ec9fcb71412ef7fd1fa3b87f74e4293bfbf75d7663",
+  "status": "stopped_after_failed_batch",
+  "total_final": 100,
+  "attempted": 15,
+  "terminal": 15,
+  "delivered": 13,
+  "not_executed": 85,
+  "pass_rate": 0.8666666666666667,
+  "stop": {
+    "batch": 2,
+    "reason": "Previous batch failed or needs input-audit review; stop campaign without repair",
+    "failed_ids": [
+      "sales-v3-091",
+      "sales-v3-176"
+    ]
+  },
+  "next_batch": 3,
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "budgets": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "cli_timeout_seconds": 300,
+    "intake_call_cap": 3,
+    "core_call_cap": 3,
+    "max_parallel": 2,
+    "case_deadline_seconds": 2100
+  },
+  "batches": [
+    {
+      "index": 1,
+      "ids": [
+        "sales-v3-016",
+        "sales-v3-071",
+        "sales-v3-151",
+        "sales-v3-076",
+        "sales-v3-021"
+      ],
+      "planned": 5,
+      "terminal": 5,
+      "published": 5,
+      "delivered": 5,
+      "final_browser_paths": {
+        "planned": 31,
+        "executed": 31,
+        "passed": 31
+      },
+      "cli_calls": 15,
+      "calls_with_usage": 15,
+      "calls_without_usage": 0,
+      "tokens": {
+        "input_tokens": 1738519,
+        "cached_input_tokens": 1388288,
+        "output_tokens": 36259
+      },
+      "result_sha256": "58986bb9e9688f46bb07718e63cad0bb26b9796b82ddc8a78e69240113b639dc",
+      "context_sha256": "5d76ed155260d2485bc8f44ddf954a1f1fe229a0ec0ee0b24eab821f2d7da5fa",
+      "sum_task_elapsed_seconds": 1395.9,
+      "published_functional_defects": 0,
+      "observed_input_flags": 0,
+      "elapsed_seconds": 927.01,
+      "power_record_sha256": "7763300853cba26b55b4689163aa3314835b24c25297111b43377462d344cc6a"
+    },
+    {
+      "index": 2,
+      "ids": [
+        "sales-v3-161",
+        "sales-v3-091",
+        "sales-v3-031",
+        "sales-v3-166",
+        "sales-v3-096",
+        "sales-v3-041",
+        "sales-v3-111",
+        "sales-v3-176",
+        "sales-v3-116",
+        "sales-v3-051"
+      ],
+      "planned": 10,
+      "terminal": 10,
+      "published": 8,
+      "delivered": 8,
+      "final_browser_paths": {
+        "planned": 63,
+        "executed": 50,
+        "passed": 50
+      },
+      "cli_calls": 30,
+      "calls_with_usage": 30,
+      "calls_without_usage": 0,
+      "tokens": {
+        "input_tokens": 2632773,
+        "cached_input_tokens": 2059392,
+        "output_tokens": 60987
+      },
+      "result_sha256": "4cb5c3f4ebf83ea32cfa6edb18416b54b0fe3b56d982be5a7bfae615f6bf737c",
+      "context_sha256": "ba7714e23d940b31bf55375240991247155a86e1d1e49d10ca5cd33801c7a273",
+      "sum_task_elapsed_seconds": 2308.4,
+      "published_functional_defects": 0,
+      "observed_input_flags": 0,
+      "elapsed_seconds": 1294.62,
+      "power_record_sha256": "94f93ece8976da2bed0f6d27b7c9d3221b587d7ddf6defc08736222c3aef245f"
+    }
+  ],
+  "rows": [
+    {
+      "batch": 1,
+      "case_id": "sales-v3-016",
+      "difficulty": "simple",
+      "family": "family-04",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 273566,
+          "cached_input_tokens": 213632,
+          "output_tokens": 6086
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 264.23,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-01/case-results/sales-v3-016/scored.json",
+      "scored_sha256": "3d67e8aeb757010c329f62b64c40d960fafbec1fc8f737058c4d74c82123446b"
+    },
+    {
+      "batch": 1,
+      "case_id": "sales-v3-021",
+      "difficulty": "simple",
+      "family": "family-05",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 486093,
+          "cached_input_tokens": 404480,
+          "output_tokens": 9412
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 333.64,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-01/case-results/sales-v3-021/scored.json",
+      "scored_sha256": "07e863651f518d36eb191402282e333c9ec37a9c2da9597adf4eff7380f86d17"
+    },
+    {
+      "batch": 1,
+      "case_id": "sales-v3-071",
+      "difficulty": "medium",
+      "family": "family-15",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 406078,
+          "cached_input_tokens": 331136,
+          "output_tokens": 7502
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 295.03,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-01/case-results/sales-v3-071/scored.json",
+      "scored_sha256": "12e3146e8dbcb1bc7be9be4ed7c5bd869ce35b245bb6e39fce04a876c86d386f"
+    },
+    {
+      "batch": 1,
+      "case_id": "sales-v3-076",
+      "difficulty": "medium",
+      "family": "family-16",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 287139,
+          "cached_input_tokens": 225664,
+          "output_tokens": 6401
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 239.34,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-01/case-results/sales-v3-076/scored.json",
+      "scored_sha256": "d645c121d982fdbb56cd58e9154aa396eb7779ed381f5c9a85f20d31ce25dc64"
+    },
+    {
+      "batch": 1,
+      "case_id": "sales-v3-151",
+      "difficulty": "hard",
+      "family": "family-31",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 285643,
+          "cached_input_tokens": 213376,
+          "output_tokens": 6858
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 263.66,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-01/case-results/sales-v3-151/scored.json",
+      "scored_sha256": "aba04cf9f8848cd3bf3bebde5da7a2e49c08ae6c406f4bcd2a52f67ba8bb4970"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-031",
+      "difficulty": "simple",
+      "family": "family-07",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 233716,
+          "cached_input_tokens": 187648,
+          "output_tokens": 6294
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 234.0,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-031/scored.json",
+      "scored_sha256": "5e66ee0a35fc2812e3a8fc47c1afe6fc63cbd8e7d9852725053ce24f1019c2bb"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-041",
+      "difficulty": "simple",
+      "family": "family-09",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 330405,
+          "cached_input_tokens": 257792,
+          "output_tokens": 7347
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 281.03,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-041/scored.json",
+      "scored_sha256": "d9536d98ac8c0fb6eb45d5e24e556c696b44cfdcd9153a2b9e1419428093cdcb"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-051",
+      "difficulty": "simple",
+      "family": "family-11",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 392385,
+          "cached_input_tokens": 320896,
+          "output_tokens": 7070
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 288.81,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-051/scored.json",
+      "scored_sha256": "aaab550e8fae83921b40e291b198d94412d08e4b77695e47cf348d26be1accb8"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-091",
+      "difficulty": "medium",
+      "family": "family-19",
+      "status": "failed",
+      "stage": "intake",
+      "classification": "意图未在原3次预算内确认，未启动Core",
+      "delivery_pass": false,
+      "confirmation_semantics_match": false,
+      "final_functional_pass": false,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_assets": 0,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 3,
+        "core_calls": 0,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 43645,
+          "cached_input_tokens": 18432,
+          "output_tokens": 608
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 45.73,
+      "failure_reason": "Intake not ready within declared3calls",
+      "remaining_questions": [
+        "协议单价适用于哪款商品（A/B/C）、哪类客户（普通 standard、VIP vip 或合作伙伴 partner），具体协议单价是多少？"
+      ],
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-091/scored.json",
+      "scored_sha256": "5c6c156fe541a9dc8e63130993da39f676149e82141b4102a5ff56a182a080cb"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-096",
+      "difficulty": "medium",
+      "family": "family-20",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 241544,
+          "cached_input_tokens": 185600,
+          "output_tokens": 6805
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 242.36,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-096/scored.json",
+      "scored_sha256": "f2c0a97bdb7638e13e05b9a5a05e84409d06fe5a3f46159bcea007d58000a575"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-111",
+      "difficulty": "medium",
+      "family": "family-23",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 370921,
+          "cached_input_tokens": 294144,
+          "output_tokens": 8638
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 316.23,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-111/scored.json",
+      "scored_sha256": "0e972df88fd6ac6215b5998e339d1d6382c236de95c0a2b135c700f26b4f782f"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-116",
+      "difficulty": "medium",
+      "family": "family-24",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 251661,
+          "cached_input_tokens": 204416,
+          "output_tokens": 6841
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 248.53,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-116/scored.json",
+      "scored_sha256": "8d50d39fa7904bf56fc1ec324cbdb4c63e5ec811687438d027be802478ad95de"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-161",
+      "difficulty": "hard",
+      "family": "family-33",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 436657,
+          "cached_input_tokens": 328832,
+          "output_tokens": 8621
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 323.69,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-161/scored.json",
+      "scored_sha256": "bc9f1d05b3cd79d6e139ff07c4331e865de12dd94cec466c228c4e72c9570980"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-166",
+      "difficulty": "hard",
+      "family": "family-34",
+      "status": "published",
+      "stage": "publication",
+      "classification": "完整交付",
+      "delivery_pass": true,
+      "confirmation_semantics_match": true,
+      "final_functional_pass": true,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_assets": 3,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 2,
+        "core_calls": 1,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 287636,
+          "cached_input_tokens": 231936,
+          "output_tokens": 7870
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 276.69,
+      "failure_reason": null,
+      "remaining_questions": null,
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-166/scored.json",
+      "scored_sha256": "0a6938ec880267f13e0b962dd5b2bd3c0ff43536cbfa8d02e9f53d06604f3021"
+    },
+    {
+      "batch": 2,
+      "case_id": "sales-v3-176",
+      "difficulty": "hard",
+      "family": "family-36",
+      "status": "failed",
+      "stage": "intake",
+      "classification": "意图未在原3次预算内确认，未启动Core",
+      "delivery_pass": false,
+      "confirmation_semantics_match": false,
+      "final_functional_pass": false,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_assets": 0,
+      "cost": {
+        "cli_process_calls": 3,
+        "intake_calls": 3,
+        "core_calls": 0,
+        "calls_with_reported_usage": 3,
+        "calls_without_reported_usage": 0,
+        "reported_root_tokens": {
+          "input_tokens": 44203,
+          "cached_input_tokens": 29696,
+          "output_tokens": 893
+        }
+      },
+      "internal_core_repairs": 0,
+      "elapsed_seconds": 51.33,
+      "failure_reason": "Intake not ready within declared3calls",
+      "remaining_questions": [
+        "现有价格、配送计费与审批规则没有实际冲突，但协议单价仍未提供：请明确适用商品（A/B/C）、客户类型（普通/VIP/合作伙伴）及协议单价。",
+        "独立的模拟当前日期初始设为哪一天？确认截止日保持为2026-03-25（含当日）。"
+      ],
+      "evidence": ".data/sales-benchmark-v3/final-staged-20261020/batch-02/case-results/sales-v3-176/scored.json",
+      "scored_sha256": "04085718d3736d1c35c1078fd902ea7cd397fa7f0e077addbc7bb6a96c1766c6"
+    }
+  ],
+  "cli_calls": 45,
+  "calls_with_usage": 45,
+  "calls_without_usage": 0,
+  "reported_root_tokens": {
+    "input_tokens": 4371292,
+    "cached_input_tokens": 3447680,
+    "output_tokens": 97246
+  },
+  "monetary_cost": null,
+  "sum_batch_wall_seconds": 2221.63,
+  "final_browser_paths": {
+    "planned": 94,
+    "executed": 81,
+    "passed": 81
+  },
+  "published_functional_defects": 0,
+  "pre_model_launch_failure": {
+    "kept": true,
+    "cli_calls": 0,
+    "final_cases_executed": 0,
+    "archive": ".data/sales-benchmark-v3/final-staged-20261020/prelaunch-failed-v1"
+  },
+  "limits": [
+    "Synthetic quotations, no real sales/human-gold or method comparison.",
+    "Same product/inputs/budget; only frozen final campaign execution route added.",
+    "Scored completed batches only; never call partial results100-task accuracy.",
+    "Root usage only, missing is unknown, cached included, no per-task money invoice.",
+    "A failed final batch is not debugged and stitched into this campaign."
+  ],
+  "next_batch_allowed": false,
+  "next_batch_gate_proof": "integrity-and-stop.json",
+  "resume_boundary": "Stopped frozen campaign; remaining85 not launched. No final-derived repair/retest stitching.",
+  "service_restoration": "service-restoration.json"
+}

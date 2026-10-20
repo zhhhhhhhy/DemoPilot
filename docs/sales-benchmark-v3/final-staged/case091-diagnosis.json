@@ -1,0 +1,30 @@
+{
+  "case_id": "sales-v3-091",
+  "stage": "intake",
+  "terminal_sha256": "6079b91b46f535f0d68209ef9cbfb254344b0e607ed58f2dc2695813f1d6ea10",
+  "script_sha256": "41ac3ccd3d67f4af3575b70173882a7e4351314a0b6b894382ad9e8e5d975ace",
+  "question": "协议单价适用于哪款商品、哪类客户（普通 standard、VIP vip 或合作伙伴 partner），具体协议单价是多少？当前演示支持为一种客户类别的一款商品设置协议单价。",
+  "pricing_aliases": [
+    "优惠",
+    "折扣",
+    "门槛",
+    "税",
+    "赠",
+    "计价",
+    "定价",
+    "协议价",
+    "怎么算"
+  ],
+  "pricing_alias_matched": false,
+  "pricing_fact_was_available": true,
+  "pricing_answer_released": false,
+  "observed_questions": [
+    "协议单价适用于哪款商品（A/B/C）、哪类客户（普通 standard、VIP vip 或合作伙伴 partner），具体协议单价是多少？"
+  ],
+  "cli_calls": 3,
+  "core_calls": 0,
+  "status": "retained_final_failure_no_retest",
+  "cause": "Keyword-only scripted-seller reply dispatch misses 协议单价; existing alias 协议价 is not a substring. Model asked for the needed contract price but seller pricing facts were not delivered.",
+  "proposed_followup": "Validate reply coverage semantically using development-only questions; any later repair requires a separate version and score. No repair applied in this campaign.",
+  "boundary": "Full-system simulated-sales non-delivery, not evidence Core failed to generate or model did not ask. Original final result remains failed."
+}

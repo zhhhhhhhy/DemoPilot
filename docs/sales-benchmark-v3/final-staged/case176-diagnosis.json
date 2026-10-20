@@ -1,0 +1,35 @@
+{
+  "case_id": "sales-v3-176",
+  "stage": "intake",
+  "terminal_sha256": "13e76bf101d4fa8c9bd15ae9a0d4190ede1126e3a85b03f431f9843547457f79",
+  "pricing_aliases": [
+    "优惠",
+    "折扣",
+    "门槛",
+    "税",
+    "赠",
+    "计价",
+    "定价",
+    "协议价",
+    "怎么算"
+  ],
+  "pricing_alias_matched": false,
+  "pricing_fact_available": true,
+  "pricing_answer_released": false,
+  "questions": [
+    "请提供三款商品 A/B/C 的名称和单价，或明确同意使用默认演示样例 A=100、B=60、C=200；协议单价适用于哪款商品、哪类客户（普通/VIP/合作伙伴），具体单价是多少？",
+    "报价由谁审批、按什么顺序执行？客户确认截止日是哪一天，演示的模拟当前日期设为哪一天？",
+    "配送如何计费？若按自提、标准配送、加急配送分别收取固定费用，请给出需要的方式及各自金额；若采用其他算法，请说明。"
+  ],
+  "remaining_questions": [
+    "现有价格、配送计费与审批规则没有实际冲突，但协议单价仍未提供：请明确适用商品（A/B/C）、客户类型（普通/VIP/合作伙伴）及协议单价。",
+    "独立的模拟当前日期初始设为哪一天？确认截止日保持为2026-03-25（含当日）。"
+  ],
+  "cli_calls": 3,
+  "core_calls": 0,
+  "status": "retained_final_failure_no_retest",
+  "confirmed_issue": "Same scripted-seller substring mismatch 协议单价 vs 协议价 as091; known pricing fact omitted.",
+  "additional_observation": "Model also keeps asking initial simulated date. Original sales facts define confirmation deadline and independent simulated date, but no initial date; QuotePlan requires valid_until only, no initial date field. This exposes extra clarification without supplied answer.",
+  "causal_limit": "No counterfactual rerun or independent repair during frozen final campaign; cannot claim fixing keywords alone would make176pass.",
+  "followup": "Use development-only cases to validate semantic reply coverage and clarification convergence; separate future version and score. No change applied here."
+}
