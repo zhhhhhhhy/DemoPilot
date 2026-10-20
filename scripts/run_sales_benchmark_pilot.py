@@ -1,4 +1,4 @@
-"""Real product development pilot or gated fixed40 validation; never heldout100.
+"""Real product cohorts, with an explicit frozen final100 campaign gate.
 
 Same production HTTP API, interview, Core and release registry. The scripted
 seller releases facts only in response to matching actual questions. Independent
@@ -116,6 +116,7 @@ def code_manifest():
         Path(__file__),
         ROOT / "scripts/sales_benchmark_data.py",
         ROOT / "scripts/run_with_awake.py",
+        ROOT / "scripts/sales_final_campaign.py",
     ]
     return {p.relative_to(ROOT).as_posix(): sha(p) for p in files}
 
@@ -228,12 +229,19 @@ def freeze(output, args):
     cohort = getattr(args, "cohort", "development")
     unlock = None
     recovery = None
+    final_campaign = None
     if cohort == "transport-recovery":
         if regression:
             raise ValueError("Recovery cannot select arbitrary IDs")
         pilot, recovery = transport_recovery_unlock(
             getattr(args, "recovery_evidence", None), getattr(args, "readiness_evidence", None), args.model
         )
+    elif cohort == "heldout":
+        if regression:
+            raise ValueError("Final batches cannot select arbitrary regression IDs")
+        from sales_final_campaign import unlock
+        pilot, final_campaign = unlock(getattr(args, "campaign_plan", None),
+                                       getattr(args, "batch_index", None), args.model, output)
     elif cohort == "validation":
         if regression:
             raise ValueError("Validation40 cannot select or replace cases")
@@ -270,6 +278,7 @@ def freeze(output, args):
         execution_split="validation" if recovery else cohort,
         cohort_kind=cohort,
         transport_recovery=recovery,
+        final_campaign=final_campaign,
         validation_unlock=unlock,
         change_boundary="Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution.",
         dataset_manifest_sha256=sha(DATASET / "manifest.json"),
@@ -285,7 +294,8 @@ def freeze(output, args):
         information_policy="Scripted seller releases only facts matched by actual questions; ready draft must match seller contract before scripted confirmation.",
         denominator=f"All{len(pilot)}fixed {cohort} tasks, including pre-Core and infrastructure failures; intermediate Core repairs are separate.",
         independent_scoring="After all terminal outcomes, fresh Chromium against frozen expected seller contract; no final-score feedback or manual app edits.",
-        holdout_policy="100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed.",
+        holdout_policy=("User-authorized frozen final100, current fixed batch only; no final-score feedback, tuning, private-gold or other-case reads."
+                        if final_campaign else "100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed."),
         cost_boundary="Configured caps are equal ceilings, not forced consumption. Actual root CLI token reports/counts are retained; billing and exhaustive native-child cost are unavailable.",
         construction_validation=validation,
     )
@@ -299,6 +309,11 @@ def verify_frozen(output):
         raise RuntimeError("Dataset manifest changed")
     if c["code_sha256"] != code_manifest():
         raise RuntimeError("Frozen pilot source changed; stop model launches")
+    if c.get("final_campaign"):
+        from sales_final_campaign import PLAN, read as read_final, sha as sha_final, verify_sources
+        if sha_final(PLAN) != c["final_campaign"]["plan_sha256"]:
+            raise RuntimeError("Frozen final campaign plan changed")
+        verify_sources(read_final(PLAN))
     return c
 
 
@@ -783,7 +798,7 @@ def summarize(rows, context):
         monetary_cost=None,
         billing_boundary="CLI ChatGPT login gives no per-task monetary bill; reported root tokens may not exhaust native-child usage.",
         observed_input_flags=sum(len(c.get("observed_input_flags", [])) for c in costs),
-        heldout_executed=0,
+        heldout_executed=len(rows) if context.get("execution_split") == "heldout" else 0,
         execution_split=context.get("execution_split", "development"),
         validation_executed=len(rows)
         if context.get("execution_split") == "validation"
@@ -798,8 +813,10 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--port", type=int, default=8093)
     parser.add_argument(
-        "--cohort", choices=("development", "validation", "transport-recovery"), default="development"
+        "--cohort", choices=("development", "validation", "transport-recovery", "heldout"), default="development"
     )
+    parser.add_argument("--campaign-plan", type=Path, help="Explicit authorized final100 frozen plan, heldout only")
+    parser.add_argument("--batch-index", type=int, help="Fixed next batch index, heldout only")
     parser.add_argument("--recovery-evidence", type=Path, help="Sealed first23/40 results; exact failed17 only")
     parser.add_argument("--readiness-evidence", type=Path, help="Fresh real read/write CLI readiness on current source")
     parser.add_argument(
