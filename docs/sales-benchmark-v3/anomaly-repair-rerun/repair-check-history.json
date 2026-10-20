@@ -1,0 +1,37 @@
+{
+  "initial_focused_tests": {
+    "passed": 4,
+    "failed": 2,
+    "failed_checks": [
+      "occupied port must cause bounded retry",
+      "all occupied ports must fail after32 attempts"
+    ],
+    "observed_cause": "Windows ThreadingHTTPServer SO_REUSEADDR allowed a second live server on the same bound port; holding a socket alone did not guarantee exclusive ownership.",
+    "repair": "BrowserHTTPServer disables address/port reuse and sets SO_EXCLUSIVEADDRUSE on Windows, without changing Chromium flags or business acceptance.",
+    "model_calls": 0,
+    "result_retained": true
+  },
+  "browser_probe_attempts": [
+    {
+      "run": ".data/sales-benchmark-v3/anomaly-repair-port-probe-20261020-v1",
+      "passed": false,
+      "stage": "probe browser navigation after intentionally rejected10080",
+      "cause": "reused error-page tab had pending chrome-error navigation; no production error",
+      "model_calls": 0,
+      "raw_directory_preserved": true
+    },
+    {
+      "run": ".data/sales-benchmark-v3/anomaly-repair-port-probe-20261020-v2",
+      "passed": true,
+      "stage": "isolated tabs, original10080 rejected; selected53999 actualHTTP200 and click",
+      "model_calls": 0,
+      "production_code_changed_between_probes": false
+    }
+  ],
+  "focused_checks_after_fix": {
+    "passed": 6,
+    "failed": 0,
+    "scope": "startup and actual exclusive-port positive/negative controls",
+    "model_calls": 0
+  }
+}
