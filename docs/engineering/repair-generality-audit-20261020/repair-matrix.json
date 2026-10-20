@@ -1,0 +1,65 @@
+{
+  "scope": "Ten key repair groups examined;24commits inventoried, not every line of all history.",
+  "rows": [
+    {
+      "historical_change": "`fc23a81`：离线fixture与安全DOM约束",
+      "mechanism": "说明数据嵌入JS常量、无运行时fetch、使用DOM API；修复安全改动后重跑完整流程",
+      "assessment": "通用实现约束，未按业务题号放行",
+      "missing_evidence": "原失败恢复说明已见任务能修复；不能外推任意业务都能生成"
+    },
+    {
+      "historical_change": "`fc23a81`：验收解释器、CLI流和进程结束",
+      "mechanism": "项目Python隔离、进程及流生命周期处理",
+      "assessment": "通用运行环境修复",
+      "missing_evidence": "实际运行环境应成为统一启动条件，不能只写在某次运行说明中"
+    },
+    {
+      "historical_change": "`fc23a81`：候选隐藏、双浏览器执行与版本哈希发布",
+      "mechanism": "按候选、功能版本和产物哈希处理发布",
+      "assessment": "通用门禁与事务保护",
+      "missing_evidence": "两次运行使用相同验收口径，不能发现共同遗漏的业务要求"
+    },
+    {
+      "historical_change": "`5c7acb6`：补齐10类审批流程与金额能力说明",
+      "mechanism": "INTAKE_INSTRUCTION增加已有能力的自然语言说明",
+      "assessment": "规则解释合理，未见题号或具体答案条件",
+      "missing_evidence": "能力说明仍需手工与Core接口同步，缺少单一来源及一致性校验"
+    },
+    {
+      "historical_change": "`5c7acb6`：公共经理起点补答",
+      "mechanism": "按有限workflow名称、关键词及一次workflow_common补答",
+      "assessment": "**窄规则补丁，有措辞和轮次依赖**",
+      "missing_evidence": "没有字段级问题与事实对应、重复交付及进展检查"
+    },
+    {
+      "historical_change": "`894690f`：含税说明与重复定价澄清",
+      "mechanism": "修正通用金额语义；已释放topic命中特定词时再复述一次",
+      "assessment": "金额说明本身合理；**补答实现仍是局部补丁**",
+      "missing_evidence": "单题及冲突负例不等于跨表达、多轮次的语义覆盖"
+    },
+    {
+      "historical_change": "`b5ce707`：官方同账号HTTP/SSE及真实环境就绪检查",
+      "mechanism": "修改传输、错误提取、项目Python/浏览器检查",
+      "assessment": "通用传输/环境修复，未改价格或按题号放行",
+      "missing_evidence": "批内连续基础设施失败的通用熔断、恢复治理仍需单独验证"
+    },
+    {
+      "historical_change": "`2629d91`：意图工具能力及发布安全保护",
+      "mechanism": "实际禁用执行能力、拦截违规工具事件和危险浏览器行为",
+      "assessment": "通用能力边界，比仅在提示中要求不调用工具更强",
+      "missing_evidence": "仍限CLI根事件可观测范围，不能升级为完整OS隔离证明"
+    },
+    {
+      "historical_change": "`12c0e90`：启动边界快照与浏览器端口",
+      "mechanism": "比较启动身份；独占绑定允许的高端口范围，保留socket",
+      "assessment": "通用测量/资源修复；不是仅绕过某个失败端口",
+      "missing_evidence": "修复验收工程不代表模型理解能力提升"
+    },
+    {
+      "historical_change": "`914c022` / `761842b`：固定分批入口与序列化",
+      "mechanism": "原集合/源码/预算冻结，失败阻止后批；修导入函数遮蔽",
+      "assessment": "通用实验防覆盖与停止门禁",
+      "missing_evidence": "只证明执行协议受控，不证明题集语言、多轮问答或判分覆盖完整"
+    }
+  ]
+}

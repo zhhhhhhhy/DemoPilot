@@ -1,0 +1,466 @@
+{
+  "commits": 24,
+  "rows": [
+    {
+      "revision": "a32dba2c60097aae904f010763b7995b9fa8cc88",
+      "subject": "docs: preserve progressive final evaluation and failure stop",
+      "changed_files": 10,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "761842b25d392f3ed38a916c0449153c37b7c818",
+      "subject": "Fix final batch receipt serialization before first model launch",
+      "changed_files": 3,
+      "product_files": [],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_final_campaign.py",
+        "scripts/run_sales_benchmark_pilot.py"
+      ]
+    },
+    {
+      "revision": "914c0220842466cd695191902f9dc8ce5ebd84c9",
+      "subject": "Gate authorized final100 evaluation into immutable first5 then10 batches",
+      "changed_files": 5,
+      "product_files": [],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_final_campaign.py",
+        "scripts/run_sales_benchmark_pilot.py",
+        "scripts/sales_final_campaign.py"
+      ]
+    },
+    {
+      "revision": "2907f6237b54a78c55013827218eedafaf898bc3",
+      "subject": "Record targeted2 and same version full40 acceptance with retained history and costs",
+      "changed_files": 12,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "12c0e9029459fe1a6904891feb23e5822a59b69f",
+      "subject": "Preserve recovery startup boundaries and exclusively bind browser compatible ports",
+      "changed_files": 3,
+      "product_files": [
+        "backend/src/demopilot/quotation_browser.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_anomaly_repair_controls.py",
+        "scripts/sales_anomaly_runtime_cases.py"
+      ]
+    },
+    {
+      "revision": "979f23c7c30c5eb431687e0aa63f9b0473632e4b",
+      "subject": "Record frozen full40 anomaly rerun with retained38of40 result and cost comparison",
+      "changed_files": 11,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "2629d918329c31700ca15ea36f00692ab1e7522f",
+      "subject": "Validate all40 anomalies and harden intent and publication guards",
+      "changed_files": 30,
+      "product_files": [
+        "backend/src/demopilot/quotation_browser.py",
+        "backend/src/demopilot/quotation_cli.py",
+        "backend/src/demopilot/sales_contract.py",
+        "backend/src/demopilot/sales_core.py"
+      ],
+      "evaluation_code_files": [
+        "scripts/audit_quotation_observed_inputs.py",
+        "scripts/qualify_sales_anomaly_intent_evidence.py",
+        "scripts/report_sales_anomalies.py",
+        "scripts/run_sales_anomalies.py",
+        "scripts/run_sales_benchmark_pilot.py",
+        "scripts/sales_anomaly_browser_cases.py",
+        "scripts/sales_anomaly_runtime_cases.py"
+      ]
+    },
+    {
+      "revision": "b5ce707a2aba7f54ae234e336623fc94eaaedc88",
+      "subject": "Fix CLI transport and verify recovery of 17 blocked cases",
+      "changed_files": 19,
+      "product_files": [
+        "backend/src/demopilot/providers/codex_cli.py",
+        "backend/src/demopilot/quotation_cli.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_transport_recovery.py",
+        "scripts/check_sales_cli_readiness.py",
+        "scripts/report_sales_transport_recovery.py",
+        "scripts/run_sales_benchmark_pilot.py"
+      ]
+    },
+    {
+      "revision": "894690fd9e35d1eea8fa3cee39392cb63bcdc64d",
+      "subject": "fix: clarify inclusive tax and record gated 40-case validation",
+      "changed_files": 20,
+      "product_files": [
+        "backend/src/demopilot/sales_contract.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_benchmark_protocol.py",
+        "scripts/report_sales_benchmark_pilot.py",
+        "scripts/run_sales_benchmark_pilot.py"
+      ]
+    },
+    {
+      "revision": "dc19cad0423e7c5b89eac74f7680b5783dc45fae",
+      "subject": "eval: replay repaired sales pipeline on all 20 development tasks",
+      "changed_files": 13,
+      "product_files": [],
+      "evaluation_code_files": [
+        "scripts/compare_sales_benchmark_pilots.py",
+        "scripts/report_sales_benchmark_pilot.py"
+      ]
+    },
+    {
+      "revision": "5c7acb6d5f53ef0d9ae73c2687faf32622bfa83e",
+      "subject": "feat: add 200 sales requirements, anomalies and pilot evidence",
+      "changed_files": 1513,
+      "product_files": [
+        "backend/src/demopilot/sales_contract.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_benchmark_private.py",
+        "backend/tests/test_sales_benchmark_protocol.py",
+        "scripts/prepare_sales_benchmark_private.py",
+        "scripts/report_sales_benchmark_pilot.py",
+        "scripts/run_sales_benchmark_pilot.py",
+        "scripts/sales_benchmark_data.py"
+      ]
+    },
+    {
+      "revision": "2124ac44528a3d139a7e3f3e8fe688c4aa6e0a89",
+      "subject": "feat: connect sales workbench to tested quotation Core",
+      "changed_files": 27,
+      "product_files": [
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/quotation_contract.py",
+        "backend/src/demopilot/quotation_loop.py",
+        "backend/src/demopilot/sales_api.py",
+        "backend/src/demopilot/sales_contract.py",
+        "backend/src/demopilot/sales_core.py",
+        "frontend/src/App.spec.ts",
+        "frontend/src/App.vue",
+        "frontend/src/api.ts",
+        "frontend/src/components/SalesWorkbench.spec.ts",
+        "frontend/src/components/SalesWorkbench.vue",
+        "frontend/src/salesTypes.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_sales_core.py",
+        "scripts/serve_sales_core_fault_check.py",
+        "scripts/verify_sales_core_live.py"
+      ]
+    },
+    {
+      "revision": "fc23a813dc08ca128c33ad0114ff1770bea9a81c",
+      "subject": "feat: ship verified quotation Core and repair history",
+      "changed_files": 336,
+      "product_files": [
+        "backend/src/demopilot/core_acceptance.py",
+        "backend/src/demopilot/core_loop.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/models.py",
+        "backend/src/demopilot/prompts.py",
+        "backend/src/demopilot/providers/codex_cli.py",
+        "backend/src/demopilot/quotation_api.py",
+        "backend/src/demopilot/quotation_browser.py",
+        "backend/src/demopilot/quotation_cli.py",
+        "backend/src/demopilot/quotation_contract.py",
+        "backend/src/demopilot/quotation_loop.py",
+        "backend/src/demopilot/quotation_release.py",
+        "backend/src/demopilot/run_metrics.py",
+        "frontend/src/types.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_browser_select_resolution.py",
+        "backend/tests/test_business_gate_coverage.py",
+        "backend/tests/test_codex_cli_lifecycle.py",
+        "backend/tests/test_intent_extraction_prompt.py",
+        "backend/tests/test_intent_profiles.py",
+        "backend/tests/test_paired_terminal_resume.py",
+        "backend/tests/test_prompt_profiles.py",
+        "backend/tests/test_quotation_experiment.py",
+        "backend/tests/test_quotation_full_rules.py",
+        "backend/tests/test_quotation_reliability.py",
+        "backend/tests/test_run_metrics.py",
+        "backend/tests/test_sales_intent_external_audit.py",
+        "backend/tests/test_sales_intent_paired_real.py",
+        "backend/tests/test_sales_intent_runner.py",
+        "scripts/audit_quotation_intent.py",
+        "scripts/audit_quotation_observed_inputs.py",
+        "scripts/audit_sales_intent_paired_results.py",
+        "scripts/calibrate_quotation_reliability.py",
+        "scripts/check_business_gate_rejections.py",
+        "scripts/check_quotation_reference_examples.py",
+        "scripts/classify_quotation_reliability_attempts.py",
+        "scripts/collect_portfolio_evidence.py",
+        "scripts/collect_sales_intent_pilot.py",
+        "scripts/export_quotation_release_desk.py",
+        "scripts/materialize_business_gates.py",
+        "scripts/materialize_hard_eval_v2.py",
+        "scripts/materialize_quotation_intent.py",
+        "scripts/materialize_quotation_reliability.py",
+        "scripts/materialize_sales_intent_v1.py",
+        "scripts/prepare_quotation_private_plans.py",
+        "scripts/quotation_business_probe.py",
+        "scripts/quotation_oracle.py",
+        "scripts/replay_business_gates.py",
+        "scripts/report_quotation_intent.py",
+        "scripts/report_quotation_reliability.py",
+        "scripts/report_quotation_three_arms.py",
+        "scripts/run_business_gate_regression.py",
+        "scripts/run_codex_cli_eval_set.py",
+        "scripts/run_codex_cli_hard_v2.py",
+        "scripts/run_codex_cli_intent_ab.py",
+        "scripts/run_codex_cli_prompt_ab.py",
+        "scripts/run_quotation_full_rules.py",
+        "scripts/run_quotation_intent_ab.py",
+        "scripts/run_quotation_reliability.py",
+        "scripts/run_sales_intent_agent_pilot.py",
+        "scripts/run_sales_intent_paired_real.py",
+        "scripts/run_with_awake.py",
+        "scripts/serve_quotation_reliability.py",
+        "scripts/verify_quotation_bundle_race.py",
+        "scripts/verify_quotation_delivery_fix.py",
+        "scripts/verify_quotation_evidence.py",
+        "scripts/verify_quotation_live_delivery.py",
+        "scripts/verify_quotation_real_repair.py",
+        "scripts/verify_quotation_reliability_delivery.py",
+        "scripts/verify_quotation_reliability_parity.py",
+        "scripts/write_quotation_reliability_portfolio.py"
+      ]
+    },
+    {
+      "revision": "1af6b332dc3058277a8bc782052233f44dcc6462",
+      "subject": "feat: add evidence-driven Core Builder evaluation loop",
+      "changed_files": 97,
+      "product_files": [
+        "backend/src/demopilot/core_acceptance.py",
+        "backend/src/demopilot/core_harness.py",
+        "backend/src/demopilot/core_loop.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/models.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/providers/codex_cli.py",
+        "frontend/src/types.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_codex_cli_provider.py",
+        "scripts/build_core_contracts.py",
+        "scripts/core_acceptance_cli.py",
+        "scripts/materialize_testdata.py",
+        "scripts/run_codex_cli_eval_set.py"
+      ]
+    },
+    {
+      "revision": "55502bf1ca96d8d2577de3d06ef7f39db3469fe5",
+      "subject": "docs: record final core evaluation preflight",
+      "changed_files": 1,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "33f7e85fa05ad6697edd9176936c147e39020c6c",
+      "subject": "feat: finalize core evaluation loop",
+      "changed_files": 20,
+      "product_files": [
+        "backend/src/demopilot/browser_qa.py",
+        "backend/src/demopilot/builder_preflight.py",
+        "backend/src/demopilot/config.py",
+        "backend/src/demopilot/generator.py",
+        "backend/src/demopilot/interaction_contract.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/prompts.py",
+        "backend/src/demopilot/providers/codex_cli.py",
+        "backend/src/demopilot/verifier.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_codex_cli_provider.py",
+        "backend/tests/test_interaction_contract.py",
+        "scripts/run_codex_cli_eval_set.py"
+      ]
+    },
+    {
+      "revision": "78b46815a77c25afd66390f727a63e9aad69b705",
+      "subject": "docs: record Codex evaluation preflight evidence",
+      "changed_files": 1,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "987e8b369e878ee60dd9e8f572c360d96ecde4f0",
+      "subject": "feat: add tiered Codex CLI core evaluation set",
+      "changed_files": 42,
+      "product_files": [
+        "backend/src/demopilot/browser_qa.py",
+        "backend/src/demopilot/builder_preflight.py",
+        "backend/src/demopilot/generator.py",
+        "backend/src/demopilot/harness.py",
+        "backend/src/demopilot/interaction_contract.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/models.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/prompts.py",
+        "backend/src/demopilot/verifier.py"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_codex_cli_provider.py",
+        "backend/tests/test_intent_statement.py",
+        "backend/tests/test_interaction_contract.py",
+        "scripts/build_core_contracts.py",
+        "scripts/collect_invoice_fixtures.py",
+        "scripts/run_codex_cli_eval_set.py"
+      ]
+    },
+    {
+      "revision": "b97fe498b1a813c65c7769f72f884f52d373fe4d",
+      "subject": "feat: add observable real Codex CLI debug path",
+      "changed_files": 15,
+      "product_files": [
+        "backend/src/demopilot/config.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/prompts.py",
+        "backend/src/demopilot/providers/base.py",
+        "backend/src/demopilot/providers/codex_cli.py",
+        "frontend/src/App.vue",
+        "frontend/src/styles.css"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_codex_cli_provider.py"
+      ]
+    },
+    {
+      "revision": "d4651a81b46c649f348135782f0fe2e103f722ee",
+      "subject": "feat: drive demo iteration through Codex CLI",
+      "changed_files": 21,
+      "product_files": [
+        "backend/src/demopilot/config.py",
+        "backend/src/demopilot/generator.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/models.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/providers/__init__.py",
+        "backend/src/demopilot/providers/codex_cli.py",
+        "frontend/src/App.spec.ts",
+        "frontend/src/App.vue",
+        "frontend/src/styles.css",
+        "frontend/src/types.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_api.py",
+        "backend/tests/test_codex_cli_provider.py",
+        "backend/tests/test_intent_statement.py"
+      ]
+    },
+    {
+      "revision": "8199749effca123ed7f79df17da8e1f736533abb",
+      "subject": "feat: expand difficulty-aware demo evaluations",
+      "changed_files": 15,
+      "product_files": [
+        "backend/src/demopilot/evaluation_cases.py",
+        "backend/src/demopilot/evaluation_models.py",
+        "backend/src/demopilot/evaluation_store.py",
+        "backend/src/demopilot/evaluator.py",
+        "backend/src/demopilot/main.py",
+        "frontend/src/App.spec.ts",
+        "frontend/src/components/EvaluationCenter.vue",
+        "frontend/src/styles.css",
+        "frontend/src/types.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_evaluation.py",
+        "scripts/run_expanded_deepseek.py"
+      ]
+    },
+    {
+      "revision": "b0f8fa009dadcf086b81f72e33b9cae81fb36b2d",
+      "subject": "Expand real demo evaluation coverage",
+      "changed_files": 13,
+      "product_files": [
+        "backend/src/demopilot/builder_preflight.py",
+        "backend/src/demopilot/evaluation_cases.py",
+        "backend/src/demopilot/evaluation_models.py",
+        "backend/src/demopilot/prompts.py",
+        "frontend/src/App.spec.ts",
+        "frontend/src/components/EvaluationCenter.vue"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_evaluation.py",
+        "backend/tests/test_interaction_contract.py",
+        "scripts/run_expanded_deepseek.py"
+      ]
+    },
+    {
+      "revision": "c851e8ccb289bfeb6f07be31ce673dbf97c9f392",
+      "subject": "docs: revamp project README",
+      "changed_files": 1,
+      "product_files": [],
+      "evaluation_code_files": []
+    },
+    {
+      "revision": "84320ac192359e9e6194a19bbc4f7430693abf9a",
+      "subject": "Initial DemoPilot release",
+      "changed_files": 73,
+      "product_files": [
+        "backend/src/demopilot/__init__.py",
+        "backend/src/demopilot/browser_qa.py",
+        "backend/src/demopilot/builder_preflight.py",
+        "backend/src/demopilot/config.py",
+        "backend/src/demopilot/evaluation_cases.py",
+        "backend/src/demopilot/evaluation_models.py",
+        "backend/src/demopilot/evaluation_store.py",
+        "backend/src/demopilot/evaluator.py",
+        "backend/src/demopilot/generator.py",
+        "backend/src/demopilot/harness.py",
+        "backend/src/demopilot/interaction_contract.py",
+        "backend/src/demopilot/main.py",
+        "backend/src/demopilot/models.py",
+        "backend/src/demopilot/orchestrator.py",
+        "backend/src/demopilot/prompts.py",
+        "backend/src/demopilot/providers/__init__.py",
+        "backend/src/demopilot/providers/base.py",
+        "backend/src/demopilot/providers/claude.py",
+        "backend/src/demopilot/providers/compatible.py",
+        "backend/src/demopilot/providers/mock.py",
+        "backend/src/demopilot/reviewer.py",
+        "backend/src/demopilot/runtime.py",
+        "backend/src/demopilot/skill_runtime.py",
+        "backend/src/demopilot/skills/SOURCES.md",
+        "backend/src/demopilot/skills/apple-ui-demo-design/SKILL.md",
+        "backend/src/demopilot/skills/manifest.json",
+        "backend/src/demopilot/skills/mock-business-data/SKILL.md",
+        "backend/src/demopilot/skills/playwright-demo-acceptance/SKILL.md",
+        "backend/src/demopilot/skills/requirement-to-demo-spec/SKILL.md",
+        "backend/src/demopilot/skills/targeted-demo-repair/SKILL.md",
+        "backend/src/demopilot/skills/vue-demo-engineering/SKILL.md",
+        "backend/src/demopilot/storage.py",
+        "backend/src/demopilot/verifier.py",
+        "frontend/src/App.spec.ts",
+        "frontend/src/App.vue",
+        "frontend/src/api.ts",
+        "frontend/src/components/AgentTimeline.vue",
+        "frontend/src/components/EvaluationCenter.vue",
+        "frontend/src/main.ts",
+        "frontend/src/styles.css",
+        "frontend/src/test/setup.ts",
+        "frontend/src/types.ts",
+        "frontend/src/vite-env.d.ts"
+      ],
+      "evaluation_code_files": [
+        "backend/tests/test_api.py",
+        "backend/tests/test_compatible_provider.py",
+        "backend/tests/test_evaluation.py",
+        "backend/tests/test_interaction_contract.py",
+        "backend/tests/test_skills.py",
+        "scripts/check_env_apis.py",
+        "scripts/replay_run_artifacts.py",
+        "scripts/run_preflight_ab.py",
+        "scripts/run_skill_ab.py",
+        "scripts/validate_skills.py"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "created_at": "2026-10-20T13:03:17.565552+00:00",
+  "head": "a32dba2c60097aae904f010763b7995b9fa8cc88",
+  "scope": "Hand-constructed semantic robustness probes against existing scripted-seller function;60development facts only;0model/0browser/finalcase reruns; no production fix.",
+  "limitation": "Canonical/paraphrase forms deliberately contrast substring matching. This is not random sampling, natural sales accuracy, or an LLM intent-recognition score. Repeated cases share the same alias definitions and are not independent observations.",
+  "development_cases": 60,
+  "unique_forms": {
+    "canonical": {
+      "questions": 8,
+      "passed": 8
+    },
+    "paraphrase": {
+      "questions": 24,
+      "passed": 0
+    }
+  },
+  "per_topic": [
+    {
+      "topic": "catalogue",
+      "form": "canonical",
+      "checks": 120,
+      "passed": 120,
+      "unique_questions": 2,
+      "cases": 60
+    },
+    {
+      "topic": "catalogue",
+      "form": "paraphrase",
+      "checks": 360,
+      "passed": 0,
+      "unique_questions": 6,
+      "cases": 60
+    },
+    {
+      "topic": "pricing",
+      "form": "canonical",
+      "checks": 120,
+      "passed": 120,
+      "unique_questions": 2,
+      "cases": 60
+    },
+    {
+      "topic": "pricing",
+      "form": "paraphrase",
+      "checks": 360,
+      "passed": 0,
+      "unique_questions": 6,
+      "cases": 60
+    },
+    {
+      "topic": "workflow",
+      "form": "canonical",
+      "checks": 120,
+      "passed": 120,
+      "unique_questions": 2,
+      "cases": 60
+    },
+    {
+      "topic": "workflow",
+      "form": "paraphrase",
+      "checks": 360,
+      "passed": 0,
+      "unique_questions": 6,
+      "cases": 60
+    },
+    {
+      "topic": "shipping",
+      "form": "canonical",
+      "checks": 120,
+      "passed": 120,
+      "unique_questions": 2,
+      "cases": 60
+    },
+    {
+      "topic": "shipping",
+      "form": "paraphrase",
+      "checks": 360,
+      "passed": 0,
+      "unique_questions": 6,
+      "cases": 60
+    }
+  ],
+  "matrix_checks": 1920,
+  "matrix_topic_release": 480,
+  "historical_function_comparison": [
+    {
+      "revision": "5c7acb6",
+      "function_sha256": "bbebf733a1129db2c150505ab08097141d8c35c9fb64b3c43fc5c6f524c689c0",
+      "unique_form_counts": {
+        "canonical": {
+          "questions": 8,
+          "passed": 8
+        },
+        "paraphrase": {
+          "questions": 24,
+          "passed": 0
+        }
+      }
+    },
+    {
+      "revision": "894690f",
+      "function_sha256": "982b19b3d86d153d1474b62497d03fb80c375dab91463a9b3180fdfadacc51c5",
+      "unique_form_counts": {
+        "canonical": {
+          "questions": 8,
+          "passed": 8
+        },
+        "paraphrase": {
+          "questions": 24,
+          "passed": 0
+        }
+      }
+    },
+    {
+      "revision": "HEAD",
+      "function_sha256": "982b19b3d86d153d1474b62497d03fb80c375dab91463a9b3180fdfadacc51c5",
+      "unique_form_counts": {
+        "canonical": {
+          "questions": 8,
+          "passed": 8
+        },
+        "paraphrase": {
+          "questions": 24,
+          "passed": 0
+        }
+      }
+    }
+  ],
+  "repeat_topic_summary": {
+    "development_cases": 60,
+    "counting": "Requested pricing topic, not just any reply;确认 can spuriously release workflow.",
+    "first_reply": 60,
+    "first_explicit_clarification": 60,
+    "second_explicit_clarification": 0,
+    "plain_explanation_followup": 0,
+    "unrelated_workflow_released_in_pricing_confirmation": 60
+  },
+  "reporting_correction": "Original v1 reply-count summary conflated any response with requested pricing reply; retained v1 and corrected target-topic counting. No code/data/model change or external-score rewrite.",
+  "provenance_probe": {
+    "scope": "Synthetic structural probe on one development plan, not a model failure or published app.",
+    "schema_accepts_changed_price_with_only_product_name_quote": true,
+    "host_current_quote_substring_check_passes": true,
+    "proposal_price_was_changed": true,
+    "quote_covers_price": false,
+    "human_confirmation_still_required": true,
+    "benchmark_expected_plan_comparison_would_reject": true
+  },
+  "source_files_unchanged": 131,
+  "frozen_inputs_unchanged": 1687,
+  "all_source_and_data_hashes_match": true,
+  "model_calls": 0,
+  "browser_runs": 0,
+  "final_cases_run": 0
+}
