@@ -1,12 +1,15 @@
 """Final-cohort authorization, immutable selection and progressive stop gates."""
 import copy
+import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 import sales_final_campaign as final
+import run_sales_benchmark_pilot as pilot
 
 
 def fixture():
@@ -68,3 +71,24 @@ def test_incomplete_or_failed_batch_blocks_later_batch():
 def test_heldout_has_no_implicit_authorization(tmp_path):
     with pytest.raises(ValueError, match="exact plan path"):
         final.unlock(None, 1, "gpt-6.1-sol", tmp_path)
+
+
+def test_heldout_freeze_writes_serializable_context_without_shadowing_validation_receipt(tmp_path, monkeypatch):
+    dataset = tmp_path / "data"
+    dataset.mkdir()
+    ids = [f"dev{i}" for i in range(20)]
+    (dataset / "split.json").write_text(json.dumps(dict(development=ids, validation=[], heldout=["final"])))
+    (dataset / "pilot-20.json").write_text(json.dumps(dict(case_ids=ids)))
+    monkeypatch.setattr(pilot, "DATASET", dataset)
+    monkeypatch.setattr(pilot, "validate", lambda: dict(status="passed"))
+    monkeypatch.setattr(pilot, "sha", lambda _p: "fixed")
+    monkeypatch.setattr(pilot, "code_manifest", lambda: {"code": "fixed"})
+    monkeypatch.setattr(final, "unlock", lambda *_a: (["final"], dict(plan_sha256="fixed")))
+    output = tmp_path / "out"
+    output.mkdir()
+    context = pilot.freeze(output, SimpleNamespace(cohort="heldout", model="gpt-6.1-sol", campaign_plan=final.PLAN, batch_index=1))
+    saved = json.loads((output / "context.json").read_text("utf-8"))
+    assert saved == context
+    assert saved["validation_unlock"] is None
+    assert saved["final_campaign"]["plan_sha256"] == "fixed"
+    assert saved["execution_split"] == "heldout" and saved["pilot_ids"] == ["final"]

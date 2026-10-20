@@ -292,7 +292,7 @@
     "scripts/run_quotation_intent_ab.py": "7021849045cd90decd67e04ebda2fc7f52079e9af2df1bd66a75ee2cf6264538",
     "scripts/run_quotation_reliability.py": "99ff75d8b4108584b3d53c54e7bdeb096211cb758122fbfb25c1f2674eda7028",
     "scripts/run_sales_anomalies.py": "226b4fc9907dd0811d86ca2de64eceaa2e9d59fa483c26906b2d94d9c8a091dc",
-    "scripts/run_sales_benchmark_pilot.py": "b8b60616ff25bb03083db7c2f76aa1a7d5d5799fcb64aedd4ef24875a735dcf9",
+    "scripts/run_sales_benchmark_pilot.py": "41ac3ccd3d67f4af3575b70173882a7e4351314a0b6b894382ad9e8e5d975ace",
     "scripts/run_sales_intent_agent_pilot.py": "c5cd1b0ac2634edf14722f596774441a437a8bed0c3a2c0c9f8bdce023686131",
     "scripts/run_sales_intent_paired_real.py": "c4c0621b38e7226a11760c1df101ba861e08eb799e3afae24bdabb2bcef385b5",
     "scripts/run_skill_ab.py": "74441760e2926ff76b1e34570938696a62e1e88fcd42f1589a9a38b2e9d890b1",
@@ -316,5 +316,16 @@
   },
   "product_checkpoint": "12c0e9029459fe1a6904891feb23e5822a59b69f",
   "no_tuning_on_final": true,
-  "stop_policy": "Finish and score current bounded batch; no next batch after any nondelivery, final defect, input-audit flag, quota or connection issue."
+  "stop_policy": "Finish and score current bounded batch; no next batch after any nondelivery, final defect, input-audit flag, quota or connection issue.",
+  "prelaunch_corrections": [
+    {
+      "previous_plan_sha256": "5932bacf3a2c1b0da44b689d7d95bf0e67a8733d0403bf855d781c5b915fec29",
+      "previous_revision": "914c022",
+      "reason": "alias import shadowed validation receipt function, context JSON serialization failed before any model invocation",
+      "model_calls": 0,
+      "final_case_launches": 0,
+      "original_order_and_budget_preserved": true,
+      "archive": "prelaunch-failed-v1/CAMPAIGN-before-launch-fix.json"
+    }
+  ]
 }

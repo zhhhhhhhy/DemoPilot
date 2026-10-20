@@ -239,9 +239,9 @@ def freeze(output, args):
     elif cohort == "heldout":
         if regression:
             raise ValueError("Final batches cannot select arbitrary regression IDs")
-        from sales_final_campaign import unlock
-        pilot, final_campaign = unlock(getattr(args, "campaign_plan", None),
-                                       getattr(args, "batch_index", None), args.model, output)
+        from sales_final_campaign import unlock as unlock_final_campaign
+        pilot, final_campaign = unlock_final_campaign(getattr(args, "campaign_plan", None),
+                                                      getattr(args, "batch_index", None), args.model, output)
     elif cohort == "validation":
         if regression:
             raise ValueError("Validation40 cannot select or replace cases")
