@@ -5,15 +5,14 @@ import time
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-from pydantic import ValidationError
-
 from demopilot.config import Settings
 from demopilot.main import create_app
 from demopilot.quotation_browser import tree_hash
 from demopilot.quotation_contract import compile_acceptance
 from demopilot.sales_contract import QuotePlan
 from demopilot.sales_core import SalesCoreManager, final_object
+from fastapi.testclient import TestClient
+from pydantic import ValidationError
 
 ROOT = Path(__file__).resolve().parents[2]
 ANSWER = "A120、B80、C200；A满3件优惠10%，满8件优惠20%；两位不同经理审批。"
@@ -26,7 +25,10 @@ PLAN = dict(
 
 async def interviewer(_prompt, messages, _transcript):
     if sum(m["role"] == "user" for m in messages) == 1:
-        return dict(status="needs_details", title="报价需求", questions=["三款商品的单价、优惠档位和审批人员分别是什么？"], proposal=None, source_quotes=[])
+        return dict(status="needs_details", title="报价需求", clarifications=[dict(
+            question="三款商品的单价、优惠档位和审批人员分别是什么？",
+            field_ids=["catalogue", "pricing_rule", "workflow"], reason="missing",
+        )], proposal=None, source_quotes=[])
     return dict(status="ready", title=PLAN["title"], questions=[], proposal=PLAN, source_quotes=["A120", "两位不同经理"])
 
 
@@ -156,3 +158,13 @@ def test_parse_retained_cli_final_message_not_sanitized_event_summary(tmp_path):
     path = tmp_path / "stdout.jsonl"
     path.write_text('{"type":"item.completed","item":{"type":"agent_message","text":"{\\\"ok\\\":true}"}}\n')
     assert final_object(dict(events=[dict(type="item.completed", item_type="agent_message")], transcript=dict(stdout=str(path)))) == {"ok": True}
+
+
+def test_changed_capability_version_requires_reconfirmation(tmp_path, monkeypatch):
+    manager, harness, _checks, settings = setup(tmp_path, monkeypatch)
+    with TestClient(create_app(settings, sales_core=manager)) as client:
+        session = ready(client)
+        monkeypatch.setattr("demopilot.sales_core.capability_identity", lambda: dict(version="changed", sha256="0" * 64))
+        response = client.post(f"/api/sales-core/sessions/{session['id']}/confirm", json=dict(draft_hash=session["draft_hash"]))
+        assert response.status_code == 409
+        assert harness.calls == 0 and manager.registry.resolve(session["id"]) is None

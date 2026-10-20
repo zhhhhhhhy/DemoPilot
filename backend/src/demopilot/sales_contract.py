@@ -8,6 +8,9 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from .business_fields import Clarification
+from .quotation_capabilities import BUSINESS_FIELDS, PRICING_FIELDS, WORKFLOWS, render_capabilities
+
 ProductId = Literal["A", "B", "C"]
 Percent = Annotated[Decimal, Field(ge=0, le=100, max_digits=8, decimal_places=4)]
 Amount = Annotated[Decimal, Field(ge=0, le=100000000, max_digits=14, decimal_places=4)]
@@ -114,18 +117,7 @@ PricingRule = Annotated[
     Field(discriminator="kind"),
 ]
 
-WORKFLOWS = {
-    "single_manager": "经理审批后由客户确认",
-    "two_stage": "经理、财务依次审批后由客户确认",
-    "threshold": "经理审批，达到金额门槛时追加财务审批",
-    "dual_manager": "两位不同经理会签后由客户确认",
-    "rejection_reason": "驳回必须填写原因，修改后重新提交",
-    "cancel_amend": "取消后允许销售修订重提",
-    "customer_owner": "仅指定客户可以确认",
-    "expiry": "客户只能在报价有效期内确认",
-    "record_persistence": "报价记录及审批在刷新后保留",
-    "manual_override": "允许销售调整商品 A 单价，修改后重新审批",
-}
+
 
 
 class QuotePlan(ClosedModel):
@@ -272,18 +264,27 @@ class QuotePlan(ClosedModel):
 class IntakeResult(ClosedModel):
     status: Literal["needs_details", "ready", "unsupported"]
     title: str = Field(min_length=1, max_length=100)
-    questions: list[str] = Field(max_length=5)
+    questions: list[str] = Field(default_factory=list, max_length=3)
+    clarifications: list[Clarification] = Field(default_factory=list, max_length=3)
     proposal: QuotePlan | None
     source_quotes: list[str] = Field(max_length=12)
 
     @model_validator(mode="after")
     def ready_has_rules(self):
+        if self.clarifications:
+            rendered = [item.question for item in self.clarifications]
+            if self.questions and self.questions != rendered:
+                raise ValueError("问题文字必须与业务字段问题一一对应")
+            self.questions = rendered
+            fields = [field for item in self.clarifications for field in item.field_ids]
+            if len(fields) != len(set(fields)):
+                raise ValueError("同轮不重复询问同一业务字段")
         if self.status == "ready" and (
-            self.proposal is None or self.questions or not self.source_quotes
+            self.proposal is None or self.questions or self.clarifications or not self.source_quotes
         ):
             raise ValueError("可确认的意图必须包含完整规则、引用来源且没有未解决问题")
         if self.status == "unsupported":
-            if self.proposal is not None:
+            if self.proposal is not None or self.clarifications:
                 raise ValueError("无法支持的需求不能携带可构建方案")
             if not self.questions:
                 # A refusal is a valid terminal decision, not missing output.
@@ -292,35 +293,38 @@ class IntakeResult(ClosedModel):
                     f"{self.title}。当前仅支持 A/B/C 三款商品、一个定价方案及一个审批流程的本地演示，"
                     "不提供真实支付或生产身份鉴权。是否愿意在保留这些限制的前提下调整需求？"
                 ]
-        if self.status == "needs_details" and not self.questions:
-            raise ValueError("信息不足时必须指出需要用户回答的问题")
+        if self.status == "needs_details" and (not self.clarifications or self.proposal is not None):
+            raise ValueError("信息不足时必须提供对应业务字段的问题，不能携带可构建方案")
         return self
 
 
-INTAKE_INSTRUCTION = """你是 DemoPilot 报价需求澄清模块。仅依据用户对话识别规则，不读写文件、不调用工具。
-当前支持本地离线报价演示、三款演示商品 A/B/C、一个定价方案及一个审批流程。不是生产 ERP，也不是其他类型应用。
-用户没有给出的商品单价、优惠门槛、折扣、税率、审批顺序，必须询问，不能从历史评测或常识猜测。
-三款商品可由用户提供；只有用户明确同意默认演示样例时，才可采用 A=100/B=60/C=200。
-缺信息返回 needs_details，每次集中问最多 3 个清晰问题，proposal=null。问商品样例和价格、具体计价规则、审批由谁以何顺序执行。
-不追问无关的页面颜色、人民币币种或账期；本地演示约定人民币、无额外税费/折扣、数量为整数。
-金额默认按完整精度计算、最终独立四舍五入两位；这与整单计价兼容。含税价拆分有已支持的特定顺序：固定原含税总价，未税小计先四舍五入两位，税额为原含税金额减已显示未税小计；这不是用显示字段反算总价，不要误判为超出能力或要求用户换算法。
-区分通用舍入约定与具体方案的拆分步骤；核对当前税率和输入精度下数值是否兼容，不要仅因两种表述不同就反复追问。若用户对同一字段明确要求不相容的金额或两种不等价算法，必须指出具体冲突并询问确认，不能擅改规则或自动替用户选择。
-discount percent 是优惠百分比：9折=优惠10%，8折=优惠20%。数量档位对该商品全部数量生效，不分段。
-用户已给齐足够规则就返回 ready，questions=[]，proposal 给出严格结构，不继续询问已回答内容。
-不要自动增加其他定价方案。workflow 按用户明确审批要求选择；仅说“审批”还不够，要问谁审批。
-“一个审批流程”是以下一个完整模板，不是只允许一次审批动作。所有模板都允许审批后客户确认；有效变更使旧审批失效、重新提交后重批是公共规则：
-- single_manager：销售提交，经理审批，客户确认。一般“经理审批后客户确认”选它。
-- two_stage：销售提交，经理→财务依次审批，最后客户确认，包含变更后重新审批。
-- threshold：经理审批，整单金额达到用户给定门槛时追加财务审批，最后客户确认。
-- dual_manager：两位不同经理会签，禁止同一经理重复充数，最后客户确认。
-- rejection_reason：经理可以批准或填写原因后驳回；销售修改并重提，再由经理审批，最后客户确认。
-- cancel_amend：明确需要取消后可修订重开的流程；销售取消后可重开并重新经理审批，最后客户确认。
-- customer_owner：经理审批后，仅指定的客户可确认。普通的“客户确认”不等于要求专属客户身份限制。
-- expiry：经理审批后，客户只能在用户给定的报价确认截止日内确认；演示使用独立模拟当前日期，不用机器日期代替。
-- record_persistence：经理审批和客户确认的报价记录、修订与历史在刷新后保留；普通多报价互不影响本身不代表必须刷新持久化。
-- manual_override：销售可以手工修改A单价，修改后重走经理审批，最后客户确认；这与已选定价方案按既有公共规则协同。
-不要因为“客户确认”或“修改后重批”就判定成多个不兼容流程。不要把普通重批误认作cancel_amend；未要求取消重开、专属客户、到期或刷新时不要擅加对应限制。
-shipping 未要求就为 null，valid_until/approval_threshold 仅相应流程必须填写。当前无法表达的业务请明确提问澄清或 unsupported，不隐瞒遗漏。
-source_quotes 必须逐字摘自用户消息，覆盖价格、定价和审批的依据。用户确认前不会开始构建。
-最终仅返回符合以下 JSON Schema 的直接 JSON 对象，不使用 Markdown：
-"""
+def validate_capability_schema():
+    """Fail before startup when typed rules and the shared capability drift."""
+    schema = QuotePlan.model_json_schema()
+    mapping = schema["properties"]["pricing_rule"]["discriminator"]["mapping"]
+    if set(mapping) != set(PRICING_FIELDS):
+        raise RuntimeError("Pricing capabilities differ from the typed business contract")
+    for kind, reference in mapping.items():
+        required = set(schema["$defs"][reference.rsplit("/", 1)[-1]]["required"]) - {"kind"}
+        if required != set(PRICING_FIELDS[kind]):
+            raise RuntimeError(f"Pricing capability fields differ for {kind}")
+    if set(schema["properties"]["workflow"]["enum"]) != set(WORKFLOWS):
+        raise RuntimeError("Workflow capabilities differ from the typed business contract")
+    if any(path.split(".")[0] not in QuotePlan.model_fields for path in BUSINESS_FIELDS):
+        raise RuntimeError("Clarification field does not belong to the business contract")
+    return True
+
+
+validate_capability_schema()
+
+
+INTAKE_INSTRUCTION = """你是DemoPilot报价需求澄清模块。仅依据销售对话和下面共用能力说明理解需求，不读写文件、不调用工具。
+能力、默认值、计价与审批语义以这份共用说明为准；Core接收同一版本。产品已有默认值不需要销售选择，销售必须提供的业务事实不能猜测。
+输出needs_details时，proposal=null；clarifications最多3个问题，每个包括question、field_ids和reason（missing或conflict）。field_ids必须来自business_fields，且真正对应该问题要取得或澄清的业务事实；可同时询问一组相关字段。
+自然语言可以自由表达，事实交付依据field_ids，不依据问句关键词。每轮不重复询问同一字段。questions可省略或[]，服务器会按clarifications生成展示文字；不能只输出无字段的questions。
+已给出的信息保留并整合；部分回答后只问仍缺的字段。存在同一字段的实际冲突时reason=conflict，指出具体冲突，不能自动同意新价格或替销售选择规则。
+同一字段的多轮澄清仍引用原事实，不能把已经问过当成已经解决。不得询问共用说明里的产品默认字段或无关外观。
+规则齐全返回ready、clarifications=[]、questions=[]，proposal为完整确认结构。source_quotes逐字摘自销售消息，覆盖价格、计价和审批依据；输出前核对每个业务值及引用，不用共用产品默认值替代未知销售事实。
+无法表达的真实业务返回unsupported、proposal=null、clarifications=[]并在title/questions说明范围，不将规则偷偷改成支持的另一种。用户确认前不开始构建。
+最终只返回以下JSON Schema对应的直接JSON对象，不使用Markdown。
+""" + "\n" + render_capabilities()

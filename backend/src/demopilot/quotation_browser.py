@@ -10,6 +10,7 @@ import os
 import re
 import secrets
 import socket
+from decimal import Decimal, InvalidOperation
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -138,6 +139,67 @@ async def _assert_snapshot(page, expected):
     return actual
 
 
+def _active_fields(contract):
+    fields = dict(FIELDS)
+    if contract.get("version", 1) < 2:
+        fields.pop("shipping")
+    if contract["workflow"] != "manual_override":
+        fields.pop("manual_rate")
+    return fields
+
+
+def _form_mismatches(expected, actual):
+    """Compare committed business values, allowing equivalent numeric display."""
+    mismatches = {}
+    for key, value in expected.items():
+        value, observed = str(value), actual.get(key)
+        equal = value == observed
+        if not equal and key in {"quantity", "second_quantity", "manual_rate"}:
+            try:
+                equal = Decimal(value) == Decimal(observed)
+            except (TypeError, InvalidOperation):
+                pass
+        if not equal:
+            mismatches[key] = dict(expected=value, actual=observed)
+    return mismatches
+
+
+async def _assert_restored_form(page, contract, values):
+    # Observe immediately after selecting a record or reloading, before the
+    # Calculate driver can overwrite stale form fields. Staged invalid edits
+    # between these boundaries are deliberately not compared to committed data.
+    fields = _active_fields(contract)
+    actual = await page.locator("body").evaluate(
+        """(body, fields) => Object.fromEntries(Object.entries(fields).map(
+            ([key,id]) => [key, document.getElementById(id)?.value ?? null]))""",
+        fields,
+    )
+    expected = {key: str(values[key]) for key in fields}
+    mismatches = _form_mismatches(expected, actual)
+    if mismatches:
+        raise AssertionError(
+            "Committed form fields were not restored: "
+            + json.dumps(mismatches, ensure_ascii=False)
+        )
+    return dict(expected=expected, observed=actual)
+
+
+async def _assert_rejection_message(page, *, accepted, action, button_disabled):
+    required = accepted is False and action not in (None, "reload") and not button_disabled
+    observed = dict(required=required, button_disabled=button_disabled)
+    if not required:
+        return observed
+    error = page.locator("#error")
+    visible = await error.is_visible()
+    text = (await error.inner_text()).strip() if visible else ""
+    observed.update(visible=visible, text=text)
+    if not text:
+        raise AssertionError(
+            f"Rejected clickable action {action!r} requires a visible nonempty #error"
+        )
+    return observed
+
+
 def chromium_diagnostic_options(evidence_dir):
     """Keep trusted runtime diagnostics outside the generated application tree."""
     log = (Path(evidence_dir).resolve() / "chromium.log")
@@ -206,18 +268,27 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                         )
                         model = QuoteModel(contract)
                         trace = []
+                        initial_form = None
                         failure = None
                         step = -1
                         try:
                             await page.goto(base_url, wait_until="load", timeout=8000)
+                            initial_form = await _assert_restored_form(
+                                page, contract, model.current["values"]
+                            )
                             initial = model.snapshot()
                             if label == "new_shipping":
                                 initial["_require_freight"] = True
                             await _assert_snapshot(page, initial)
                             for step, op in enumerate(ops):
+                                form_restoration = None
                                 for key in ("record", "role", "actor", "reason", "today"):
                                     if key in op:
                                         await _set(page, key, op[key])
+                                        if key == "record" and op[key] != model.record:
+                                            form_restoration = await _assert_restored_form(
+                                                page, contract, model.records[op[key]]["values"]
+                                            )
                                 # Form editing is staged until Calculate; reset staged invalid values.
                                 next_record = op.get("record", model.record)
                                 if op.get("action") == "calculate":
@@ -246,12 +317,21 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                                             await _set(page, key, value, allow_disabled=read_only)
                                 accepted = model.apply(op)
                                 action = op.get("action")
+                                button_disabled = None
                                 if action == "reload":
                                     await page.reload(wait_until="load")
+                                    form_restoration = await _assert_restored_form(
+                                        page, contract, model.current["values"]
+                                    )
                                 elif action:
                                     button = page.locator("#" + action)
-                                    if not await button.is_disabled():
+                                    button_disabled = await button.is_disabled()
+                                    if not button_disabled:
                                         await button.click()
+                                rejection_message = await _assert_rejection_message(
+                                    page, accepted=accepted, action=action,
+                                    button_disabled=button_disabled,
+                                )
                                 expected = model.snapshot()
                                 if label == "new_shipping":
                                     expected["_require_freight"] = True
@@ -262,6 +342,8 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                                         op=op,
                                         operation_accepted=accepted,
                                         observed=actual,
+                                        form_restoration=form_restoration,
+                                        rejection_message=rejection_message,
                                     )
                                 )
                             if network_attempts:
@@ -286,6 +368,7 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
                             journey=label,
                             passed=failure is None,
                             failure=failure,
+                            initial_form=initial_form,
                             steps=trace,
                             browser_errors=errors,
                             network_attempts=network_attempts,
@@ -306,7 +389,7 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
         len(journeys(contract, profile, private=private)) for profile in contract["profiles"]
     )
     report = dict(
-        schema_version="quotation-business-browser-v2",
+        schema_version="quotation-business-browser-v3",
         private=private,
         version=contract.get("version", 1),
         app_id=contract["id"],

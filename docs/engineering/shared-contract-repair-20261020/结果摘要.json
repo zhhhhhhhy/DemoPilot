@@ -1,0 +1,990 @@
+{
+  "created_at": "2026-10-20T15:19:53.252876+00:00",
+  "baseline_revision": "e6bed15eacb3fa73f97f3a74a9fb9b9f4c17ffa7",
+  "protocol_controls": {
+    "kind": "given-field-id-protocol-controls-not-llm-intent-accuracy",
+    "development_fact_records": 60,
+    "unique_predeclared_wordings": 32,
+    "combinations": 1920,
+    "groups": [
+      {
+        "form": "canonical",
+        "unique_wordings": 8,
+        "fact_record_wording_combinations": 480,
+        "old_target_fact_released": 480,
+        "new_exact_fact_only": 480,
+        "new_repeat_idempotent": 480
+      },
+      {
+        "form": "paraphrase",
+        "unique_wordings": 24,
+        "fact_record_wording_combinations": 1440,
+        "old_target_fact_released": 0,
+        "new_exact_fact_only": 1440,
+        "new_repeat_idempotent": 1440
+      }
+    ],
+    "all_expected": true,
+    "boundary": "The check supplies correct field_ids. It proves wording-independent deterministic delivery and idempotent replay; it does not prove an LLM can map these 32 wordings or estimate accuracy on 1920 independent requirements."
+  },
+  "browser_controls": {
+    "kind": "controlled-development-detector-calibration-not-model-accuracy",
+    "source_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+    "legacy_revision": "e6bed15",
+    "new_browser_sha256": "238ffd33d743ffe04734c41891c0054c682de8f3db95c4de158d2d3a60f1babe",
+    "source_unchanged": true,
+    "all_expected": true,
+    "rows": [
+      {
+        "name": "valid_control",
+        "gate": "old",
+        "expected": "passed",
+        "actual": "passed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "app_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+        "source_unchanged": true,
+        "issues": []
+      },
+      {
+        "name": "valid_control",
+        "gate": "new",
+        "expected": "passed",
+        "actual": "passed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "app_sha256": "3f8c57cd13287d98c7d1f45aeb5a4befdf063eb1ba42203899f808b5a56cfdfe",
+        "source_unchanged": true,
+        "issues": []
+      },
+      {
+        "name": "stale_record_form",
+        "gate": "old",
+        "expected": "passed",
+        "actual": "passed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "app_sha256": "a851d2f8620d3e68c68bd5baf9771fbb5ec9dc4b9ad4641dcdd6b47a8aa925f2",
+        "source_unchanged": true,
+        "issues": []
+      },
+      {
+        "name": "stale_record_form",
+        "gate": "new",
+        "expected": "failed",
+        "actual": "failed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 5,
+        "app_sha256": "a851d2f8620d3e68c68bd5baf9771fbb5ec9dc4b9ad4641dcdd6b47a8aa925f2",
+        "source_unchanged": true,
+        "issues": [
+          "quantity_tiers/record_isolation: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"quantity\": {\"expected\": \"1\", \"actual\": \"10\"}, \"second_quantity\": {\"expected\": \"0\", \"actual\": \"2\"}, \"customer\": {\"expected\": \"standard\", \"actual\": \"vip\"}}', 'step': 3, 'op': {'record': 'Q2', 'role': 'seller', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '3'}}}"
+        ]
+      },
+      {
+        "name": "missing_rejection_message",
+        "gate": "old",
+        "expected": "passed",
+        "actual": "passed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "app_sha256": "e4d8b7d63c1e993ffdba2f77be5ab0ab064a606cdea3bfe264a1fe9fb6512b47",
+        "source_unchanged": true,
+        "issues": []
+      },
+      {
+        "name": "missing_rejection_message",
+        "gate": "new",
+        "expected": "failed",
+        "actual": "failed",
+        "correct": true,
+        "planned": 6,
+        "executed": 6,
+        "passed": 2,
+        "app_sha256": "e4d8b7d63c1e993ffdba2f77be5ab0ab064a606cdea3bfe264a1fe9fb6512b47",
+        "source_unchanged": true,
+        "issues": [
+          "quantity_tiers/normal: {'type': 'AssertionError', 'message': \"Rejected clickable action 'accept' requires a visible nonempty #error\", 'step': 2, 'op': {'role': 'customer', 'actor': 'client1', 'action': 'accept'}}",
+          "quantity_tiers/edit_regression: {'type': 'AssertionError', 'message': \"Rejected clickable action 'accept' requires a visible nonempty #error\", 'step': 4, 'op': {'role': 'customer', 'actor': 'client1', 'action': 'accept'}}",
+          "quantity_tiers/invalid_recovery: {'type': 'AssertionError', 'message': \"Rejected clickable action 'calculate' requires a visible nonempty #error\", 'step': 1, 'op': {'action': 'calculate', 'values': {'quantity': '0'}}}",
+          "quantity_tiers/record_isolation: {'type': 'AssertionError', 'message': \"Rejected clickable action 'approve' requires a visible nonempty #error\", 'step': 4, 'op': {'role': 'manager', 'action': 'approve'}}"
+        ]
+      }
+    ],
+    "boundary": "Copied real CLI development artifact with two seeded UI corruptions; no model trials, no estimated real-world accuracy, no historical score replacement."
+  },
+  "legacy_development_defect": {
+    "source_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+    "source_unchanged": true,
+    "rows": [
+      {
+        "name": "valid_control",
+        "gate": "old",
+        "expected": "passed",
+        "actual": "passed",
+        "correct": true,
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "app_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+        "source_unchanged": true,
+        "issues": []
+      },
+      {
+        "name": "valid_control",
+        "gate": "new",
+        "expected": "passed",
+        "actual": "failed",
+        "correct": false,
+        "planned": 7,
+        "executed": 7,
+        "passed": 0,
+        "app_sha256": "ad3cc038d42280b0b2bb0e3ded063f0305aedea616ac73129ad067fe1eeccff8",
+        "source_unchanged": true,
+        "issues": [
+          "quantity_tiers/normal: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/edit_regression: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/invalid_recovery: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/workflow_specific: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/pricing_boundaries: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/record_isolation: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}",
+          "quantity_tiers/new_shipping: {'type': 'AssertionError', 'message': 'Committed form fields were not restored: {\"second_product\": {\"expected\": \"B\", \"actual\": \"A\"}}', 'step': -1, 'op': None}"
+        ]
+      }
+    ]
+  },
+  "local_regressions": {
+    "previous_paths": 79,
+    "status_read_controls": 6,
+    "total_distinct_checks": 85,
+    "scope": "Targeted controlled tests, not actual model tasks"
+  },
+  "primary": {
+    "planned": 8,
+    "passed": 7,
+    "positive_intent": 6,
+    "full_delivery": 3,
+    "negative_controls": 2,
+    "elapsed_seconds": 805.16,
+    "cost": {
+      "cli_process_calls": 22,
+      "calls_with_reported_usage": 20,
+      "reported_root_tokens": {
+        "input_tokens": 1415641,
+        "cached_input_tokens": 1027456,
+        "output_tokens": 27945
+      },
+      "monetary_cost": null
+    },
+    "rows": [
+      {
+        "id": "sales-v3-012",
+        "status": "ready",
+        "stage": "intake",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": false,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 63.03,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 53556,
+            "cached_input_tokens": 20992,
+            "output_tokens": 1111
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 3,
+        "core_calls": 0,
+        "question_rounds": [
+          {
+            "questions": [
+              "展会优惠适用于哪款商品：A基础包、B扩展包，还是C专业包？",
+              "优惠开始日期和结束日期分别是哪一天？请提供完整年月日。",
+              "活动期间优惠商品在目录单价基础上减免百分之多少？例如减免10%即打九折。"
+            ],
+            "clarifications": [
+              {
+                "question": "展会优惠适用于哪款商品：A基础包、B扩展包，还是C专业包？",
+                "field_ids": [
+                  "pricing_rule.product"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "优惠开始日期和结束日期分别是哪一天？请提供完整年月日。",
+                "field_ids": [
+                  "pricing_rule.start",
+                  "pricing_rule.end"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "活动期间优惠商品在目录单价基础上减免百分之多少？例如减免10%即打九折。",
+                "field_ids": [
+                  "pricing_rule.percent"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product"
+            ]
+          },
+          {
+            "questions": [
+              "B商品的优惠开始日期和结束日期分别是哪一天？请提供完整年月日。",
+              "活动期间，B商品在目录单价75.50元基础上减免百分之多少？例如减免10%即打九折。"
+            ],
+            "clarifications": [
+              {
+                "question": "B商品的优惠开始日期和结束日期分别是哪一天？请提供完整年月日。",
+                "field_ids": [
+                  "pricing_rule.start",
+                  "pricing_rule.end"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "活动期间，B商品在目录单价75.50元基础上减免百分之多少？例如减免10%即打九折。",
+                "field_ids": [
+                  "pricing_rule.percent"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.start",
+              "pricing_rule.end",
+              "pricing_rule.percent"
+            ]
+          }
+        ],
+        "independent_check": null,
+        "source_unchanged": null,
+        "exact_served_assets": [],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "sales-v3-062",
+        "status": "published",
+        "stage": "core",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": true,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 310.58,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 366851,
+            "cached_input_tokens": 286976,
+            "output_tokens": 7508
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 1,
+        "question_rounds": [
+          {
+            "questions": [
+              "数量阶梯折扣适用于哪款商品（A、B或C）？请提供各档起购数量及对应折扣，例如满10件优惠5%、满50件优惠10%；达到档位后，该商品全部计费数量统一采用该档折扣。"
+            ],
+            "clarifications": [
+              {
+                "question": "数量阶梯折扣适用于哪款商品（A、B或C）？请提供各档起购数量及对应折扣，例如满10件优惠5%、满50件优惠10%；达到档位后，该商品全部计费数量统一采用该档折扣。",
+                "field_ids": [
+                  "pricing_rule.product",
+                  "pricing_rule.tiers"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product",
+              "pricing_rule.tiers"
+            ]
+          }
+        ],
+        "independent_check": {
+          "status": "passed",
+          "planned_journeys": 6,
+          "executed_journeys": 6,
+          "passed_journeys": 6,
+          "issues": []
+        },
+        "source_unchanged": true,
+        "exact_served_assets": [
+          "index.html",
+          "app.js",
+          "styles.css"
+        ],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "sales-v3-002",
+        "status": "failed",
+        "stage": "core",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": true,
+        "passed": false,
+        "error": "RemoteProtocolError: Server disconnected without sending a response.",
+        "elapsed_seconds": 377.97,
+        "cost": {
+          "cli_process_calls": 4,
+          "calls_with_reported_usage": 2,
+          "reported_root_tokens": {
+            "input_tokens": 35332,
+            "cached_input_tokens": 0,
+            "output_tokens": 805
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 2,
+        "question_rounds": [
+          {
+            "questions": [
+              "数量优惠适用于哪款商品（A、B或C）？请提供各档的最低购买件数及对应优惠比例（例如打几折或减免百分之几）；达到档位后，该商品全部购买件数按该档优惠计算。"
+            ],
+            "clarifications": [
+              {
+                "question": "数量优惠适用于哪款商品（A、B或C）？请提供各档的最低购买件数及对应优惠比例（例如打几折或减免百分之几）；达到档位后，该商品全部购买件数按该档优惠计算。",
+                "field_ids": [
+                  "pricing_rule.product",
+                  "pricing_rule.tiers"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product",
+              "pricing_rule.tiers"
+            ]
+          }
+        ],
+        "independent_check": {
+          "status": "not_run_no_published_app"
+        },
+        "source_unchanged": null,
+        "exact_served_assets": [],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "sales-v3-127",
+        "status": "ready",
+        "stage": "intake",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": false,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 57.02,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 53426,
+            "cached_input_tokens": 18432,
+            "output_tokens": 1062
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 3,
+        "core_calls": 0,
+        "question_rounds": [
+          {
+            "questions": [
+              "事先谈定的单件金额适用于哪类客户（普通客户、VIP客户或合作伙伴）、哪款商品（A、B或C），约定单价是多少元？"
+            ],
+            "clarifications": [
+              {
+                "question": "事先谈定的单件金额适用于哪类客户（普通客户、VIP客户或合作伙伴）、哪款商品（A、B或C），约定单价是多少元？",
+                "field_ids": [
+                  "pricing_rule.customer",
+                  "pricing_rule.product",
+                  "pricing_rule.rate"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.customer"
+            ]
+          },
+          {
+            "questions": [
+              "已确认协议价适用于VIP客户；该协议价适用于哪款商品（A、B或C），约定的单件金额是多少元？"
+            ],
+            "clarifications": [
+              {
+                "question": "已确认协议价适用于VIP客户；该协议价适用于哪款商品（A、B或C），约定的单件金额是多少元？",
+                "field_ids": [
+                  "pricing_rule.product",
+                  "pricing_rule.rate"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product",
+              "pricing_rule.rate"
+            ]
+          }
+        ],
+        "independent_check": null,
+        "source_unchanged": null,
+        "exact_served_assets": [],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "sales-v3-172",
+        "status": "published",
+        "stage": "core",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": true,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 279.58,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 336544,
+            "cached_input_tokens": 256128,
+            "output_tokens": 7866
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 1,
+        "question_rounds": [
+          {
+            "questions": [
+              "活动优惠适用于哪款商品（A/B/C）？活动开始日和结束日分别是哪天，优惠折让比例是多少（例如九折即减免10%）？",
+              "客户确认截止日是哪天（含当日）？该日期独立于活动日期，超过后客户不能接受报价。",
+              "自提、普通配送、加急配送每份报价分别收取多少元？免费的方式请注明0元。"
+            ],
+            "clarifications": [
+              {
+                "question": "活动优惠适用于哪款商品（A/B/C）？活动开始日和结束日分别是哪天，优惠折让比例是多少（例如九折即减免10%）？",
+                "field_ids": [
+                  "pricing_rule.product",
+                  "pricing_rule.start",
+                  "pricing_rule.end",
+                  "pricing_rule.percent"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "客户确认截止日是哪天（含当日）？该日期独立于活动日期，超过后客户不能接受报价。",
+                "field_ids": [
+                  "valid_until"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "自提、普通配送、加急配送每份报价分别收取多少元？免费的方式请注明0元。",
+                "field_ids": [
+                  "shipping.pickup",
+                  "shipping.standard",
+                  "shipping.express"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product",
+              "pricing_rule.start",
+              "pricing_rule.end",
+              "pricing_rule.percent",
+              "valid_until",
+              "shipping.pickup",
+              "shipping.standard",
+              "shipping.express"
+            ]
+          }
+        ],
+        "independent_check": {
+          "status": "passed",
+          "planned_journeys": 7,
+          "executed_journeys": 7,
+          "passed_journeys": 7,
+          "issues": []
+        },
+        "source_unchanged": true,
+        "exact_served_assets": [
+          "index.html",
+          "app.js",
+          "styles.css"
+        ],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "negative-conflict",
+        "status": "needs_details",
+        "stage": "negative_control",
+        "intake_status": "needs_details",
+        "intent_match": null,
+        "core_requested": false,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 30.83,
+        "cost": {
+          "cli_process_calls": 2,
+          "calls_with_reported_usage": 2,
+          "reported_root_tokens": {
+            "input_tokens": 34992,
+            "cached_input_tokens": 5888,
+            "output_tokens": 408
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 0,
+        "question_rounds": [
+          {
+            "questions": [
+              "你提供的两张价目表同样有效，但A基础包单价分别为100元和120元，且目前尚不能确定采用哪张。请在确认后明确本次报价采用的A目录单价；确认前保留此冲突。"
+            ],
+            "clarifications": [
+              {
+                "question": "你提供的两张价目表同样有效，但A基础包单价分别为100元和120元，且目前尚不能确定采用哪张。请在确认后明确本次报价采用的A目录单价；确认前保留此冲突。",
+                "field_ids": [
+                  "catalogue.A.unit_price"
+                ],
+                "reason": "conflict"
+              }
+            ],
+            "delivered_fields": []
+          },
+          {
+            "questions": [
+              "A基础包的两张有效价目表分别标价100元和120元，你尚未决定采用哪张。请在确定后提供本次采用的A目录单价；确认前继续保留冲突，暂不生成方案。"
+            ],
+            "clarifications": [
+              {
+                "question": "A基础包的两张有效价目表分别标价100元和120元，你尚未决定采用哪张。请在确定后提供本次采用的A目录单价；确认前继续保留冲突，暂不生成方案。",
+                "field_ids": [
+                  "catalogue.A.unit_price"
+                ],
+                "reason": "conflict"
+              }
+            ],
+            "delivered_fields": []
+          }
+        ],
+        "independent_check": null,
+        "source_unchanged": null,
+        "exact_served_assets": [],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "negative-unsupported",
+        "status": "unsupported",
+        "stage": "negative_control",
+        "intake_status": "unsupported",
+        "intent_match": null,
+        "core_requested": false,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 10.27,
+        "cost": {
+          "cli_process_calls": 1,
+          "calls_with_reported_usage": 1,
+          "reported_root_tokens": {
+            "input_tokens": 17395,
+            "cached_input_tokens": 5888,
+            "output_tokens": 131
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 1,
+        "core_calls": 0,
+        "question_rounds": [],
+        "independent_check": null,
+        "source_unchanged": null,
+        "exact_served_assets": [],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      },
+      {
+        "id": "sales-v3-192",
+        "status": "published",
+        "stage": "core",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": true,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 335.17,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 517545,
+            "cached_input_tokens": 433152,
+            "output_tokens": 9054
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 1,
+        "question_rounds": [
+          {
+            "questions": [
+              "已含税价格中的税率是多少？将按该税率拆分未税额与税额，保留原含税总价。",
+              "请提供自提、普通配送、加急配送各自每份报价的费用；免费的方式请填0元。"
+            ],
+            "clarifications": [
+              {
+                "question": "已含税价格中的税率是多少？将按该税率拆分未税额与税额，保留原含税总价。",
+                "field_ids": [
+                  "pricing_rule.tax_percent"
+                ],
+                "reason": "missing"
+              },
+              {
+                "question": "请提供自提、普通配送、加急配送各自每份报价的费用；免费的方式请填0元。",
+                "field_ids": [
+                  "shipping.pickup",
+                  "shipping.standard",
+                  "shipping.express"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.tax_percent",
+              "shipping.pickup",
+              "shipping.standard",
+              "shipping.express"
+            ]
+          }
+        ],
+        "independent_check": {
+          "status": "passed",
+          "planned_journeys": 7,
+          "executed_journeys": 7,
+          "passed_journeys": 7,
+          "issues": []
+        },
+        "source_unchanged": true,
+        "exact_served_assets": [
+          "index.html",
+          "app.js",
+          "styles.css"
+        ],
+        "status_read_retries": [],
+        "injected_status_reads": [],
+        "observed_input_flags": 0,
+        "contaminated": false
+      }
+    ],
+    "capabilities": {
+      "version": "quotation-fields-v1",
+      "sha256": "20b2d0877378f675a71c6855f74bb509c6666882ff4c0be50f6d35bb026a7763"
+    },
+    "source_sha256": {
+      "backend/src/demopilot/__init__.py": "314987143f168ba0e6c9437f3e555cf832e08d660a955bd9e96f655db8e369b3",
+      "backend/src/demopilot/browser_qa.py": "a5bc2cfccfc9b1074ac59a1dd9dab200f1e6c612740c27db4f883ae824b2b309",
+      "backend/src/demopilot/builder_preflight.py": "ee090264278066412cb4c2f5a7fa847df977413ec73294695801968ec887fe1a",
+      "backend/src/demopilot/business_fields.py": "c7b5217176495d619b803325a3a3234f5b61bab515093878f288df8e29c5034c",
+      "backend/src/demopilot/config.py": "ecc3969660e34f87eb6d95c2bd39ee931e16b64c999c2c9fc4ae8688b74aa638",
+      "backend/src/demopilot/core_acceptance.py": "62c7ed2b012f58ecff6869f7322d6de6ec871f86d736ee5d92d2960c0ce43caa",
+      "backend/src/demopilot/core_harness.py": "c1bc5f6efda959efcf612d649a0c788f3bd9165bfc00e34f250a4177cb81e512",
+      "backend/src/demopilot/core_loop.py": "0a8b8ab6470dfa0a0335a065457bdb25afb1bc7df9c599808e790fcb966d9c55",
+      "backend/src/demopilot/evaluation_cases.py": "3813d4f6f736e5dfcd8e66313b1c9b34e35b2e09da400811b9e8eeb05008fc6f",
+      "backend/src/demopilot/evaluation_models.py": "5851bc3e40c3bf1ef1f56f7d7529d6ff1a793a587fac3bced2765402efd13154",
+      "backend/src/demopilot/evaluation_store.py": "b7d088f23cc85f3fa2d58934cb21f34d078cf96007181e10ccefaddf9352e2e3",
+      "backend/src/demopilot/evaluator.py": "363fa5fb83ca36b21e4bd1401bd2dd8ad33e3b0041006c02383487c3d1f29f6f",
+      "backend/src/demopilot/generator.py": "8b2dea657893084aa3b639aca536f21e5c8cd0d5957bc824bd70d23991581ff5",
+      "backend/src/demopilot/harness.py": "8d49dc43d15e62651609384a949cb078aabc4eab480e255305699760c658d0a5",
+      "backend/src/demopilot/interaction_contract.py": "e205617140076cb0841fbbb72df232d3d825040680cb6a7149b123c31af40bc0",
+      "backend/src/demopilot/main.py": "68d35f35a77adc5a7813989de57eddef68de32dbd495c654debe6dd18be1526a",
+      "backend/src/demopilot/models.py": "7219890d9722db006f90da279f4e7618818de7a14dcf9958ee2b2bc35a04ef45",
+      "backend/src/demopilot/orchestrator.py": "580b2dc641d38e82fc42f637097acf93fc5c39f5847889639b8b340a922c5cca",
+      "backend/src/demopilot/prompts.py": "5ce8ba4282df6091c0dcbe107a619b355efd4b4628174380595e98f75fadaddc",
+      "backend/src/demopilot/providers/__init__.py": "adf396a18889159148fc79abd364bdcff8a2e482b6cee0e8039629e30c847b9f",
+      "backend/src/demopilot/providers/base.py": "2e3951c2e43b67dc395b50c76288b747a0bdd18d2760f2665315043b18cf6f25",
+      "backend/src/demopilot/providers/claude.py": "fc8211a1cf2ce04a2d364f17982d84607f956fa7d3a38dead5f3f76cec74f02f",
+      "backend/src/demopilot/providers/codex_cli.py": "c4d0c9d4e7666e8cd1caf7be26ba4b787375b554f593842e06e1a295b50284b9",
+      "backend/src/demopilot/providers/compatible.py": "2a37b1c43053344d3b32af2b247ddc8630baa111c8cf34f9cfd7976d97b8091a",
+      "backend/src/demopilot/providers/mock.py": "5cbd422b752bb891d2f7874633bb9595a6ea9cd139dbae778d3e0026dbffb48e",
+      "backend/src/demopilot/quotation_api.py": "13f5398a3b8fae6b9d3d38677d4acc8d14982d7d8b5c8ea312cc34a13ccb5ecb",
+      "backend/src/demopilot/quotation_browser.py": "238ffd33d743ffe04734c41891c0054c682de8f3db95c4de158d2d3a60f1babe",
+      "backend/src/demopilot/quotation_capabilities.py": "b0075954cee33710fcc4e650f18fb64c92e811f758e4dad93747aeb4a9ef02ae",
+      "backend/src/demopilot/quotation_cli.py": "c678c1574855390d13ad585d1cf811431b58825b157b6ec3c686c02a1af08224",
+      "backend/src/demopilot/quotation_contract.py": "34742e5ecf2c3e1d07a98d2f58a38afdb98041653a447613e340705cb8dce680",
+      "backend/src/demopilot/quotation_loop.py": "7d91fbce426dab646bd0fa9c031232d5a3a923b04b432672357add7ccb767fd5",
+      "backend/src/demopilot/quotation_release.py": "f9e843a7373bf4115e4c00a8d72f28d6635f791a94b681a2f238a02169bd83d5",
+      "backend/src/demopilot/reviewer.py": "c178cd92cbc037fad1d06e86ac678da4109f3ba1250c6c68f8879ab3b7d77f40",
+      "backend/src/demopilot/run_metrics.py": "97e7fd127f7576db52955f58cce7423dad027bfa0db9837fbc582454ca9f757a",
+      "backend/src/demopilot/runtime.py": "bf6bdce61a478d8a85145bdaa2634ebd0d7b52d13fdc2f9ae7ccd7d3621e839f",
+      "backend/src/demopilot/sales_api.py": "23171c2bd645df9c707d38d9414516108443044b37489053eeadc5d90571512a",
+      "backend/src/demopilot/sales_contract.py": "b3666efbb9ab7d06b5dd12b6d4ecbe22a83aac4c7df9836577c4c65795880001",
+      "backend/src/demopilot/sales_core.py": "00176f88c5462ea7cadf5d67a7ab181be1bb0a4d7214cce79b359595ce856eba",
+      "backend/src/demopilot/skill_runtime.py": "43e075049ba803826a181b888bb1d8875e57d8d32861d3ded40fd5de509c4fad",
+      "backend/src/demopilot/storage.py": "d43dd0219e3ae728e8e9e6539b58070b05eed4e06577a1fb8a18c1cbe6383925",
+      "backend/src/demopilot/verifier.py": "327fb8c5e664d3697c04d6acf79d8933695b74d80c0d878b1c19a2d7186e8f2f",
+      "scripts/quotation_business_probe.py": "d8f63cb53914dff804abd3e4ddbc0da6f32a9e170d54fd9567a0295edaad3b0b",
+      "scripts/run_sales_benchmark_pilot.py": "08d272fff8f5607df10903da3ec215fca3eb80576dea64ff9c8e185ddc124445",
+      "scripts/sales_benchmark_data.py": "c16c41eb2993d73943812d018ac6dba9d914c18bef7160489a2c88dda887a2bb",
+      "scripts/run_with_awake.py": "b6815cc3b7e8adc704d671071f8bb4e13cb832c62d4c4910d522142d9c691c36",
+      "scripts/sales_final_campaign.py": "a705d26f0ac593c262d257ab7c9056195ca0392a9c1cacdfbe5e110078fdf61e",
+      "scripts/verify_shared_contract_live.py": "4302f9e5d52b5041d85f768e30bfd6ff1b174a0296babd3859409dc12635b251"
+    },
+    "final_cases_executed": 0,
+    "source_unchanged": true,
+    "results_sha256": "a5b46659fc3bd35f2d0c07dc9a94d3bc971fd4c2c07f3e2897f667d68a2fd431",
+    "context_sha256": "fa083273f4000fa565898a71c1708f289700f0da82dbd3ee78b73f6ee9637c41"
+  },
+  "replay": {
+    "planned": 1,
+    "passed": 1,
+    "positive_intent": 1,
+    "full_delivery": 1,
+    "negative_controls": 0,
+    "elapsed_seconds": 233.31,
+    "cost": {
+      "cli_process_calls": 3,
+      "calls_with_reported_usage": 3,
+      "reported_root_tokens": {
+        "input_tokens": 313107,
+        "cached_input_tokens": 249472,
+        "output_tokens": 6337
+      },
+      "monetary_cost": null
+    },
+    "rows": [
+      {
+        "id": "sales-v3-002",
+        "status": "published",
+        "stage": "core",
+        "intake_status": "ready",
+        "intent_match": true,
+        "core_requested": true,
+        "passed": true,
+        "error": null,
+        "elapsed_seconds": 224.8,
+        "cost": {
+          "cli_process_calls": 3,
+          "calls_with_reported_usage": 3,
+          "reported_root_tokens": {
+            "input_tokens": 313107,
+            "cached_input_tokens": 249472,
+            "output_tokens": 6337
+          },
+          "monetary_cost": null
+        },
+        "intake_calls": 2,
+        "core_calls": 1,
+        "question_rounds": [
+          {
+            "questions": [
+              "数量优惠适用于A、B、C中的哪一款商品？请提供每个优惠档位的起购数量及折扣比例（例如满多少件打几折）；达到档位后，该商品全部计费件数按该档折扣计算。"
+            ],
+            "clarifications": [
+              {
+                "question": "数量优惠适用于A、B、C中的哪一款商品？请提供每个优惠档位的起购数量及折扣比例（例如满多少件打几折）；达到档位后，该商品全部计费件数按该档折扣计算。",
+                "field_ids": [
+                  "pricing_rule.product",
+                  "pricing_rule.tiers"
+                ],
+                "reason": "missing"
+              }
+            ],
+            "delivered_fields": [
+              "pricing_rule.product",
+              "pricing_rule.tiers"
+            ]
+          }
+        ],
+        "independent_check": {
+          "status": "passed",
+          "planned_journeys": 6,
+          "executed_journeys": 6,
+          "passed_journeys": 6,
+          "issues": []
+        },
+        "source_unchanged": true,
+        "exact_served_assets": [
+          "index.html",
+          "app.js",
+          "styles.css"
+        ],
+        "status_read_retries": [
+          {
+            "attempt": 1,
+            "operation": "GET session status",
+            "error": "RemoteProtocolError"
+          }
+        ],
+        "injected_status_reads": [
+          {
+            "status": "building",
+            "iteration": 1
+          }
+        ],
+        "observed_input_flags": 0,
+        "contaminated": false
+      }
+    ],
+    "capabilities": {
+      "version": "quotation-fields-v1",
+      "sha256": "20b2d0877378f675a71c6855f74bb509c6666882ff4c0be50f6d35bb026a7763"
+    },
+    "source_sha256": {
+      "backend/src/demopilot/__init__.py": "314987143f168ba0e6c9437f3e555cf832e08d660a955bd9e96f655db8e369b3",
+      "backend/src/demopilot/browser_qa.py": "a5bc2cfccfc9b1074ac59a1dd9dab200f1e6c612740c27db4f883ae824b2b309",
+      "backend/src/demopilot/builder_preflight.py": "ee090264278066412cb4c2f5a7fa847df977413ec73294695801968ec887fe1a",
+      "backend/src/demopilot/business_fields.py": "c7b5217176495d619b803325a3a3234f5b61bab515093878f288df8e29c5034c",
+      "backend/src/demopilot/config.py": "ecc3969660e34f87eb6d95c2bd39ee931e16b64c999c2c9fc4ae8688b74aa638",
+      "backend/src/demopilot/core_acceptance.py": "62c7ed2b012f58ecff6869f7322d6de6ec871f86d736ee5d92d2960c0ce43caa",
+      "backend/src/demopilot/core_harness.py": "c1bc5f6efda959efcf612d649a0c788f3bd9165bfc00e34f250a4177cb81e512",
+      "backend/src/demopilot/core_loop.py": "0a8b8ab6470dfa0a0335a065457bdb25afb1bc7df9c599808e790fcb966d9c55",
+      "backend/src/demopilot/evaluation_cases.py": "3813d4f6f736e5dfcd8e66313b1c9b34e35b2e09da400811b9e8eeb05008fc6f",
+      "backend/src/demopilot/evaluation_models.py": "5851bc3e40c3bf1ef1f56f7d7529d6ff1a793a587fac3bced2765402efd13154",
+      "backend/src/demopilot/evaluation_store.py": "b7d088f23cc85f3fa2d58934cb21f34d078cf96007181e10ccefaddf9352e2e3",
+      "backend/src/demopilot/evaluator.py": "363fa5fb83ca36b21e4bd1401bd2dd8ad33e3b0041006c02383487c3d1f29f6f",
+      "backend/src/demopilot/generator.py": "8b2dea657893084aa3b639aca536f21e5c8cd0d5957bc824bd70d23991581ff5",
+      "backend/src/demopilot/harness.py": "8d49dc43d15e62651609384a949cb078aabc4eab480e255305699760c658d0a5",
+      "backend/src/demopilot/interaction_contract.py": "e205617140076cb0841fbbb72df232d3d825040680cb6a7149b123c31af40bc0",
+      "backend/src/demopilot/main.py": "68d35f35a77adc5a7813989de57eddef68de32dbd495c654debe6dd18be1526a",
+      "backend/src/demopilot/models.py": "7219890d9722db006f90da279f4e7618818de7a14dcf9958ee2b2bc35a04ef45",
+      "backend/src/demopilot/orchestrator.py": "580b2dc641d38e82fc42f637097acf93fc5c39f5847889639b8b340a922c5cca",
+      "backend/src/demopilot/prompts.py": "5ce8ba4282df6091c0dcbe107a619b355efd4b4628174380595e98f75fadaddc",
+      "backend/src/demopilot/providers/__init__.py": "adf396a18889159148fc79abd364bdcff8a2e482b6cee0e8039629e30c847b9f",
+      "backend/src/demopilot/providers/base.py": "2e3951c2e43b67dc395b50c76288b747a0bdd18d2760f2665315043b18cf6f25",
+      "backend/src/demopilot/providers/claude.py": "fc8211a1cf2ce04a2d364f17982d84607f956fa7d3a38dead5f3f76cec74f02f",
+      "backend/src/demopilot/providers/codex_cli.py": "c4d0c9d4e7666e8cd1caf7be26ba4b787375b554f593842e06e1a295b50284b9",
+      "backend/src/demopilot/providers/compatible.py": "2a37b1c43053344d3b32af2b247ddc8630baa111c8cf34f9cfd7976d97b8091a",
+      "backend/src/demopilot/providers/mock.py": "5cbd422b752bb891d2f7874633bb9595a6ea9cd139dbae778d3e0026dbffb48e",
+      "backend/src/demopilot/quotation_api.py": "13f5398a3b8fae6b9d3d38677d4acc8d14982d7d8b5c8ea312cc34a13ccb5ecb",
+      "backend/src/demopilot/quotation_browser.py": "238ffd33d743ffe04734c41891c0054c682de8f3db95c4de158d2d3a60f1babe",
+      "backend/src/demopilot/quotation_capabilities.py": "b0075954cee33710fcc4e650f18fb64c92e811f758e4dad93747aeb4a9ef02ae",
+      "backend/src/demopilot/quotation_cli.py": "c678c1574855390d13ad585d1cf811431b58825b157b6ec3c686c02a1af08224",
+      "backend/src/demopilot/quotation_contract.py": "34742e5ecf2c3e1d07a98d2f58a38afdb98041653a447613e340705cb8dce680",
+      "backend/src/demopilot/quotation_loop.py": "7d91fbce426dab646bd0fa9c031232d5a3a923b04b432672357add7ccb767fd5",
+      "backend/src/demopilot/quotation_release.py": "f9e843a7373bf4115e4c00a8d72f28d6635f791a94b681a2f238a02169bd83d5",
+      "backend/src/demopilot/reviewer.py": "c178cd92cbc037fad1d06e86ac678da4109f3ba1250c6c68f8879ab3b7d77f40",
+      "backend/src/demopilot/run_metrics.py": "97e7fd127f7576db52955f58cce7423dad027bfa0db9837fbc582454ca9f757a",
+      "backend/src/demopilot/runtime.py": "bf6bdce61a478d8a85145bdaa2634ebd0d7b52d13fdc2f9ae7ccd7d3621e839f",
+      "backend/src/demopilot/sales_api.py": "23171c2bd645df9c707d38d9414516108443044b37489053eeadc5d90571512a",
+      "backend/src/demopilot/sales_contract.py": "b3666efbb9ab7d06b5dd12b6d4ecbe22a83aac4c7df9836577c4c65795880001",
+      "backend/src/demopilot/sales_core.py": "00176f88c5462ea7cadf5d67a7ab181be1bb0a4d7214cce79b359595ce856eba",
+      "backend/src/demopilot/skill_runtime.py": "43e075049ba803826a181b888bb1d8875e57d8d32861d3ded40fd5de509c4fad",
+      "backend/src/demopilot/storage.py": "d43dd0219e3ae728e8e9e6539b58070b05eed4e06577a1fb8a18c1cbe6383925",
+      "backend/src/demopilot/verifier.py": "327fb8c5e664d3697c04d6acf79d8933695b74d80c0d878b1c19a2d7186e8f2f",
+      "scripts/quotation_business_probe.py": "d8f63cb53914dff804abd3e4ddbc0da6f32a9e170d54fd9567a0295edaad3b0b",
+      "scripts/run_sales_benchmark_pilot.py": "f3fe3a59ca13d2fa9ec65a1b254ce6c53e0f9582ab33ec7c8eb527b9a5dac01b",
+      "scripts/sales_benchmark_data.py": "c16c41eb2993d73943812d018ac6dba9d914c18bef7160489a2c88dda887a2bb",
+      "scripts/run_with_awake.py": "b6815cc3b7e8adc704d671071f8bb4e13cb832c62d4c4910d522142d9c691c36",
+      "scripts/sales_final_campaign.py": "a705d26f0ac593c262d257ab7c9056195ca0392a9c1cacdfbe5e110078fdf61e",
+      "scripts/verify_shared_contract_live.py": "578e75ecf747922d261713fe28d063fe8a2a137e61d1b5f0c27cbea323a60e56"
+    },
+    "final_cases_executed": 0,
+    "source_unchanged": true,
+    "results_sha256": "02e329a69ca132a60d36c54e2d0b28199365a8b010b1a4c298a7f520a74139fe",
+    "context_sha256": "ee720f17fc1637493a150e54a123f152f78b85b192b7a2d71ad72a15cd62201e"
+  },
+  "changed_between_runs": [
+    "scripts/run_sales_benchmark_pilot.py",
+    "scripts/verify_shared_contract_live.py"
+  ],
+  "same_production_business_intake_core_and_browser_source": true,
+  "readiness": [
+    {
+      "status": "passed",
+      "model": "gpt-6.1-sol",
+      "elapsed_seconds": 48.73,
+      "cost": {
+        "cli_process_calls": 2,
+        "calls_with_reported_usage": 2,
+        "reported_root_tokens": {
+          "input_tokens": 60685,
+          "cached_input_tokens": 43136,
+          "output_tokens": 94
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "status": "passed",
+      "model": "gpt-6.1-sol",
+      "elapsed_seconds": 33.99,
+      "cost": {
+        "cli_process_calls": 2,
+        "calls_with_reported_usage": 2,
+        "reported_root_tokens": {
+          "input_tokens": 60689,
+          "cached_input_tokens": 20096,
+          "output_tokens": 98
+        },
+        "monetary_cost": null
+      }
+    }
+  ],
+  "total_cli_cost": {
+    "cli_process_calls": 29,
+    "calls_with_reported_usage": 27,
+    "reported_root_tokens": {
+      "input_tokens": 1850122,
+      "cached_input_tokens": 1340160,
+      "output_tokens": 34474
+    },
+    "monetary_cost": null,
+    "calls_without_reported_usage": 2,
+    "sum_run_wall_seconds": 1121.19
+  },
+  "preservation": {
+    "original_final_score": "13/15",
+    "remaining_final_cases_unexecuted": 85,
+    "original_inputs_checked": 1687,
+    "historical_records_checked": 5,
+    "changed": []
+  },
+  "boundaries": [
+    "Primary7/8 and separate recovery are not a clean8/8 run.",
+    "Six authored development requirements are not independent real customer samples.",
+    "Protocol controls supply correct field IDs; model evidence is6positive dialogues plus2negative controls.",
+    "No claims about final100 improvement, currency savings, exhaustive native-child cost or OS read isolation."
+  ]
+}

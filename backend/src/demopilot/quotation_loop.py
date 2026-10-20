@@ -64,6 +64,11 @@ class QuotationGoalLoop:
         shutil.copy2(
             original_data / f"public-tests-v{version}.json", data / f"public-tests-v{version}.json"
         )
+        if goal is not None and goal.get("capabilities") is not None:
+            capabilities = json.loads((original_data / "capabilities.json").read_text("utf-8"))
+            if capabilities.get("identity") != goal["capabilities"]:
+                raise ValueError("Confirmed intent and Core capability versions differ")
+            shutil.copy2(original_data / "capabilities.json", data / "capabilities.json")
         contract_text = (original_data / "CONTRACT.md").read_text("utf-8")
         contract_text = (
             contract_text.split("Subsequent version2 request")[0]
@@ -90,6 +95,7 @@ class QuotationGoalLoop:
         protected_files = [
             *list((self.root / "backend/src/demopilot").rglob("*.py")),
             self.root / "scripts/quotation_business_probe.py",
+            *([original_data / "capabilities.json"] if goal is not None and goal.get("capabilities") is not None else []),
         ]
         protected_hashes = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in protected_files}
         request = DemoRequest(

@@ -55,58 +55,23 @@ def semantics(value):
 
 
 def answers_for(questions, case, released):
-    text = " ".join(questions)
-    all_requested = any(
-        x in text
-        for x in ["完整业务规则", "全部规则", "所有规则", "完整需求", "所有业务信息"]
+    """Deliver only requested seller fields, independently of question wording.
+
+    Historical aliases remain frozen data, but are no longer executable routing
+    rules. A repeated field is delivered again; it is not consumed by a topic.
+    """
+    from demopilot.business_fields import BusinessFacts
+
+    if not questions:
+        raise ValueError("Intake protocol requires mapped business-field questions")
+    store = BusinessFacts(case["expected_plan"], {
+        item["topic"]: item["answer"] for item in case["seller_answers"]
+    })
+    reply = store.reply(questions)
+    reply["previously_delivered_fields"] = sorted(
+        fact["field_id"] for fact in reply["facts"] if fact["field_id"] in released
     )
-    selected = []
-    common_manager = {
-        "single_manager",
-        "rejection_reason",
-        "cancel_amend",
-        "expiry",
-        "record_persistence",
-        "manual_override",
-        "customer_owner",
-    }
-    for answer in case["seller_answers"]:
-        matched = all_requested or any(
-            x.lower() in text.lower() for x in answer["aliases"]
-        )
-        if not matched:
-            continue
-        item = dict(answer)
-        if (
-            item["topic"] == "workflow"
-            and case.get("expected_plan", {}).get("workflow") in common_manager
-        ):
-            # Deliver the existing current-case public CONTRACT.md manager flow;
-            # no new policy, numbers or private acceptance answer is invented.
-            item["answer"] = (
-                "补齐本场景公共接口已定义的审批起点与终点：销售提交，经理审批，最后客户确认。"
-                + item["answer"]
-            )
-            if (
-                item["topic"] in released
-                and any(x in text for x in ("谁", "审批人", "顺序", "角色"))
-                and "workflow_common" not in released
-            ):
-                item["topic"] = "workflow_common"
-        if item["topic"] in released and any(
-            x in text for x in ("确认", "哪种", "哪一种", "冲突", "口径", "再次")
-        ):
-            # Repeat only the already supplied fact for this matched topic.
-            # A request to confirm a proposed change is NOT seller approval.
-            item["topic"] += "_clarification"
-            item["answer"] = (
-                "这不是同意修改规则，请以我此前给出的原始业务事实为准："
-                + item["answer"]
-                + " 如仍存在会改变金额或流程的实际冲突，请指出具体差异继续确认，不要替我选择新规则。"
-            )
-        if item["topic"] not in released:
-            selected.append(item)
-    return selected
+    return reply
 
 
 def code_manifest():
@@ -291,7 +256,7 @@ def freeze(output, args):
         max_parallel=2,
         case_deadline_seconds=2100,
         arm="current-product-clarify-only",
-        information_policy="Scripted seller releases only facts matched by actual questions; ready draft must match seller contract before scripted confirmation.",
+        information_policy="Scripted seller releases/repeats only explicitly requested business field IDs with provenance; question wording does not route facts. Ready draft must match seller facts before confirmation.",
         denominator=f"All{len(pilot)}fixed {cohort} tasks, including pre-Core and infrastructure failures; intermediate Core repairs are separate.",
         independent_scoring="After all terminal outcomes, fresh Chromium against frozen expected seller contract; no final-score feedback or manual app edits.",
         holdout_policy=("User-authorized frozen final100, current fixed batch only; no final-score feedback, tuning, private-gold or other-case reads."
@@ -310,16 +275,31 @@ def verify_frozen(output):
     if c["code_sha256"] != code_manifest():
         raise RuntimeError("Frozen pilot source changed; stop model launches")
     if c.get("final_campaign"):
-        from sales_final_campaign import PLAN, read as read_final, sha as sha_final, verify_sources
+        from sales_final_campaign import PLAN, verify_sources
+        from sales_final_campaign import read as read_final
+        from sales_final_campaign import sha as sha_final
         if sha_final(PLAN) != c["final_campaign"]["plan_sha256"]:
             raise RuntimeError("Frozen final campaign plan changed")
         verify_sources(read_final(PLAN))
     return c
 
 
-async def wait_idle(client, identifier, deadline):
+async def wait_idle(client, identifier, deadline, *, on_read_retry=None):
+    read_retries = 0
     while time.monotonic() < deadline:
-        response = await client.get(f"/api/sales-core/sessions/{identifier}")
+        try:
+            response = await client.get(f"/api/sales-core/sessions/{identifier}")
+        except httpx.TransportError as exc:
+            # GET is idempotent. Never retry creation, answers or confirmation,
+            # and never interpret a lost status response as a failed Builder.
+            if read_retries >= 3:
+                raise
+            read_retries += 1
+            if on_read_retry:
+                on_read_retry(dict(attempt=read_retries, operation="GET session status", error=type(exc).__name__))
+            await asyncio.sleep(.2 * 2 ** (read_retries - 1))
+            continue
+        read_retries = 0
         response.raise_for_status()
         s = response.json()
         if not s["active"]:
@@ -496,31 +476,23 @@ async def run_cases(args):
                     target / "session-link.json",
                     dict(session_id=session_id, case_id=identifier),
                 )
-                released = {
-                    a["topic"]
-                    for a in case["seller_answers"]
-                    if a["answer"] in case["raw_sales_brief"]
-                }
+                released = set()
                 s = await wait_idle(client, session_id, deadline)
                 for _ in range(frozen["intake_call_cap"] - 1):
                     if s["status"] != "needs_details":
                         break
-                    selected = answers_for(s["questions"], case, released)
-                    answer = "\n".join(a["answer"] for a in selected)
-                    if not answer:
-                        answer = (
-                            "请具体询问仍缺少的价格、优惠、审批或配送信息；不要猜测。"
-                        )
-                    else:
-                        answer += "\n" + case["common_conventions"]
+                    selected = answers_for(s.get("clarifications", []), case, released)
+                    answer = json.dumps(selected, ensure_ascii=False) + "\n" + case["common_conventions"]
                     row["question_rounds"].append(
                         dict(
                             questions=s["questions"],
-                            released_topics=[a["topic"] for a in selected],
+                            clarifications=s["clarifications"],
+                            released_fields=[a["field_id"] for a in selected["facts"]],
+                            field_reply=selected,
                             answer=answer,
                         )
                     )
-                    released.update(a["topic"] for a in selected)
+                    released.update(a["field_id"] for a in selected["facts"])
                     response = await client.post(
                         f"/api/sales-core/sessions/{session_id}/answers",
                         json=dict(answer=answer),

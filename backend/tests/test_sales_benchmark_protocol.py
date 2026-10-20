@@ -13,19 +13,22 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import run_sales_benchmark_pilot as pilot  # noqa: E402
 
 
-def test_scripted_seller_releases_only_asked_unreleased_topics():
+def test_scripted_seller_releases_only_requested_fields_and_can_repeat():
     case = dict(
+        expected_plan=dict(shipping=dict(standard="20", express="35", pickup="0")),
         seller_answers=[
             dict(topic="catalogue", aliases=["单价"], answer="A=120"),
             dict(topic="pricing", aliases=["优惠"], answer="满3优惠10%"),
             dict(topic="shipping", aliases=["运费"], answer="普通20"),
         ]
     )
-    assert [a["topic"] for a in pilot.answers_for(["普通运费是多少？"], case, set())] == [
-        "shipping"
-    ]
-    assert pilot.answers_for(["单价是多少？"], case, {"catalogue"}) == []
-    assert pilot.answers_for(["喜欢什么颜色？"], case, set()) == []
+    request = [dict(question="送货要付多少钱？", field_ids=["shipping.standard"], reason="missing")]
+    reply = pilot.answers_for(request, case, set())
+    assert [a["field_id"] for a in reply["facts"]] == ["shipping.standard"]
+    assert reply["facts"][0]["value"] == "20"
+    assert pilot.answers_for(request, case, {"shipping.standard"})["facts"] == reply["facts"]
+    with pytest.raises(ValueError):
+        pilot.answers_for(["无字段对应的自然语言问题"], case, set())
 
 
 def test_semantic_confirmation_does_not_reject_decimal_or_catalogue_order():
@@ -57,10 +60,10 @@ def test_existing_shared_workflow_can_answer_followup_actor_question():
         expected_plan=dict(workflow="expiry"),
         seller_answers=[dict(topic="workflow", aliases=["审批"], answer="有效期内客户确认")],
     )
-    answer = pilot.answers_for(["由谁审批？"], case, {"workflow"})
-    assert answer[0]["topic"] == "workflow_common"
-    assert "经理审批" in answer[0]["answer"]
-    assert pilot.answers_for(["由谁审批？"], case, {"workflow", "workflow_common"}) == []
+    question = [dict(question="报批要经过哪些岗位？", field_ids=["workflow"], reason="missing")]
+    answer = pilot.answers_for(question, case, {"workflow"})
+    assert answer["facts"][0]["value"] == "expiry"
+    assert pilot.answers_for(question, case, {"workflow"})["facts"] == answer["facts"]
 
 
 def test_windows_transcript_paths_classify_cost_without_losing_calls(tmp_path):
@@ -98,17 +101,18 @@ def test_regression_subset_cannot_include_a_final_case(tmp_path, monkeypatch):
 
 def test_followup_repeats_original_pricing_without_accepting_proposed_change():
     case = dict(
+        expected_plan=dict(pricing_rule=dict(kind="tax_inclusive", tax_percent="6")),
         seller_answers=[
             dict(topic="pricing", aliases=["税"], answer="目录已含6%税，含税总价保持不变。"),
             dict(topic="shipping", aliases=["运费"], answer="普通配送12元。"),
         ]
     )
-    question = ["是否确认改成8%税率？"]
+    question = [dict(question="是否确认改成8%税率？", field_ids=["pricing_rule.tax_percent"], reason="conflict")]
     answer = pilot.answers_for(question, case, {"pricing"})
-    assert [a["topic"] for a in answer] == ["pricing_clarification"]
-    assert "目录已含6%税，含税总价保持不变。" in answer[0]["answer"]
-    assert "8%" not in answer[0]["answer"] and "12元" not in answer[0]["answer"]
-    assert pilot.answers_for(question, case, {"pricing", "pricing_clarification"}) == []
+    assert [a["field_id"] for a in answer["facts"]] == ["pricing_rule.tax_percent"]
+    assert answer["facts"][0]["value"] == "6"
+    assert answer["facts"][0]["resolution"] == "original_fact_not_approval_of_proposed_change"
+    assert pilot.answers_for(question, case, {"pricing_rule.tax_percent"})["facts"] == answer["facts"]
 
 
 def test_validation40_does_not_launch_without_passed191(tmp_path, monkeypatch):

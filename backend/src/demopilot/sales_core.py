@@ -12,7 +12,15 @@ import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from .core_harness import CodexCliHarness
+from .quotation_capabilities import (
+    DEFAULT_DAY,
+    capability_identity,
+    capability_manifest,
+    render_capabilities,
+)
 from .quotation_cli import IntentCodexProvider, IsolatedCodexProvider
 from .quotation_contract import compile_acceptance, price
 from .quotation_loop import QuotationGoalLoop, write_json
@@ -22,36 +30,7 @@ from .sales_contract import INTAKE_INSTRUCTION, IntakeResult, QuotePlan
 ACTIVE = {"analyzing", "queued", "building", "testing"}
 IDENTIFIER = re.compile(r"^[a-f0-9]{16}$")
 
-UI_CONTRACT = """# Confirmed quotation application interface
-
-Implement the exact catalogue, pricing profile(s), workflow and optional shipping in JSON. Profile keys and product IDs are selector values; display friendly Chinese labels and the confirmed product names. There are no other discounts or taxes. Prices use full precision then independent half-up two-decimal display rounding. Tax-inclusive subtotal is rounded before residual tax. Quantity tiers apply to all paid units, not progressive bands. Free units do not add charged units.
-
-Required interface:
-- selects #profile (only JSON profiles), #product/#second-product (A/B/C), #customer (standard/vip/partner), #record (Q1/Q2), #role (seller/manager/finance/customer), #actor (seller1/manager1/manager2/finance1/client1/intruder).
-- inputs #quantity initially1, #second-quantity initially0, #date initially2026-03-15, #reason initiallyempty, #today initially2026-03-15 (simulated current day, separate from quote date).
-- Initial profile is the FIRST declared JSON profile; productA, second-productB, customerstandard, recordQ1, roleseller, actorseller1. All amounts reflect initial values; stateDraft, revision0, approved-revision -1, history-count0.
-- buttons #calculate, #submit, #approve, #reject, #accept, #cancel, #amend. Wrong/repeated/out-of-order actions preserve all committed values and history, showing #error; disabled actions are acceptable. No external submission.
-- visible outputs #subtotal, #discount, #tax, #total with EXACT two-decimal money strings and no currency symbols; #free-quantity, #revision, #approved-revision, #history-count integer strings; #state uses exact codes Draft/PendingManager/PendingFinance/Approved/Rejected/Accepted/Cancelled.
-- If contract version2, #shipping select pickup/standard/express initiallypickup and output #freight. Use confirmed charges, once per quote AFTER discounts and tax, include in approval threshold. Otherwise do not add shipping requirements. manual_override alone adds #manual-rate input initiallyempty.
-
-Shared state rules:
-Two independently stored quotes Q1/Q2; form changes are STAGED until Calculate. Switching record restores that quote. Product/quantity/customer/profile/date/manual-rate/shipping changes commit only via Calculate by seller; quantity integers, first>=1/second>=0; invalid or wrong-role commits change nothing. A genuinely changed quote increments revision AND history once, resets Draft, clears all approval, approved-revision=-1. Same-value recalculation does not accumulate discounts or history. Editing Accepted/Cancelled is forbidden.
-Seller Submit from Draft/Rejected ->PendingManager, history+1, clears approvals. Manager Approve PendingManager ->Approved (or workflow's next step); finance cannot substitute for manager. Final approval sets approved-revision=current revision. Manager Reject PendingManager or finance Reject PendingFinance ->Rejected, clears approvals; history+1. Customer Accept only Approved ->Accepted. Seller Cancel except Accepted/Cancelled ->Cancelled and clears approvals. Each successful state transition including a partial manager approval adds exactly1 history; rejection/duplicate actions add0. Same manager actor cannot approve twice. Role/actor/reason/today/selected-record changes alone never alter quote history.
-
-Selected workflow only:
-single_manager: shared manager flow.
-two_stage: manager ->PendingFinance, finance ->Approved.
-threshold: after manager, total>=approval_threshold ->PendingFinance elseApproved.
-dual_manager: manager1 first remainsPendingManager; repeating manager1 denied; manager2 completesApproved.
-rejection_reason: Reject requires a nonempty trimmed reason; fixing/resubmitting clears approvals.
-cancel_amend: seller Amend fromCancelled ->Draft, revision+1/history+1, retain fields and clear approvals.
-customer_owner: Accept requires customer role AND client1 actor; intruder denied.
-expiry: Accept requires today<=valid_until, including boundary; changing today alone does not mutate quote.
-record_persistence: persist each quote's fields, amounts, state, revisions, history, approvers across reload; reload resets selected record/role/actor toQ1/seller/seller1. Other workflows need in-page isolation; persistence optional.
-manual_override: positive manual-rate replaces A unit rate before pricing and persists on later recalculation; configured customer protocol rate takes precedence for rate_override; nonpositive manual rate invalid.
-
-Pricing details are in JSON. For rate_override, Subtotal uses original catalogue/manual prices, the rate difference appears in Discount. Do not change confirmed prices or business rules to satisfy a test. Use only local files, no remote requests. Keep scripts in app.js, styles in styles.css, no inline event handlers. The parent owns trusted tests and publishing; implement and self-test until those checks pass or report the unmet goal.
-"""
+UI_CONTRACT = render_capabilities()
 
 
 def now():
@@ -168,7 +147,8 @@ class SalesCoreManager:
                     return self.public(existing["id"])
         identifier = uuid.uuid4().hex[:16]
         session = dict(id=identifier, title=brief[:60], status="analyzing", stage="正在理解需求", revision=0,
-                       messages=[dict(role="user", content=brief)], questions=[], draft=None, draft_hash=None,
+                       messages=[dict(role="user", content=brief)], questions=[], clarifications=[],
+                       requested_fields=[], capabilities=capability_identity(), draft=None, draft_hash=None,
                        summary=[], examples=[], events=[], versions=[], demo_url=None,
                        iteration=0, checks=None, error=None, request_key=request_key, created_at=now(), updated_at=now())
         add_event(session, "created", "已收到一句话需求，等待模型识别缺失信息")
@@ -192,8 +172,10 @@ class SalesCoreManager:
             raise SessionConflict("任务正在执行，请先取消，再修改需求")
         if len(session["messages"]) >= 30:
             raise SessionConflict("本次需求对话已达上限，请新建任务")
-        session["messages"].append(dict(role="user", content=answer))
-        session.update(status="analyzing", stage="正在核对补充信息", error=None, demo_url=None, questions=[], draft=None, draft_hash=None, summary=[], examples=[])
+        fields = list(session.get("requested_fields", []))
+        session["messages"].append(dict(role="user", content=answer, responding_to_fields=fields))
+        session.update(status="analyzing", stage="正在核对补充信息", error=None, demo_url=None,
+                       questions=[], clarifications=[], draft=None, draft_hash=None, summary=[], examples=[])
         add_event(session, "answer", "已保存补充信息，重新核对需求")
         self.store.save(session)
         self._schedule(identifier, self._analyze(identifier))
@@ -207,6 +189,8 @@ class SalesCoreManager:
             return self.public(identifier)
         if session["status"] != "ready":
             raise SessionConflict("请先回答所有问题并确认完整需求")
+        if session.get("capabilities") != capability_identity():
+            raise SessionConflict("能力说明已更新，请重新核对并确认需求")
         plan = QuotePlan.model_validate(session["draft"])
         session["revision"] += 1
         contract = plan.contract(identifier)
@@ -226,6 +210,9 @@ class SalesCoreManager:
                 transcript = self.store.directory(identifier) / "intent" / f"turn-{len(history)}"
                 workspace = self.store.directory(identifier) / "intent-workspace"
                 workspace.mkdir(parents=True, exist_ok=True)
+                write_json(transcript / "capabilities.json", dict(
+                    identity=capability_identity(), manifest=capability_manifest(),
+                ))
                 prompt = INTAKE_INSTRUCTION + json.dumps(IntakeResult.model_json_schema(), ensure_ascii=False) + "\n用户对话：\n" + json.dumps(history, ensure_ascii=False)
                 if self.interviewer:
                     raw = await self.interviewer(prompt, history, transcript)
@@ -240,9 +227,18 @@ class SalesCoreManager:
                     raise ValueError("需求引用不在用户提供的信息中")
 
                 def apply(current):
+                    fields = [field for item in output.clarifications for field in item.field_ids]
+                    previous = set(current.get("requested_fields", []))
                     current.update(title=output.title, status=output.status,
                                    stage="请确认规则" if output.status == "ready" else "等待补充信息",
-                                   questions=output.questions, error=None)
+                                   questions=output.questions,
+                                   clarifications=[item.model_dump(mode="json") for item in output.clarifications],
+                                   requested_fields=fields, capabilities=capability_identity(),
+                                   failure_category=None, error=None)
+                    if fields:
+                        add_event(current, "clarification_fields", "已记录本轮需要补充或澄清的业务信息",
+                                  fields=fields, repeated_fields=sorted(previous.intersection(fields)),
+                                  no_longer_requested=sorted(previous.difference(fields)))
                     if output.proposal:
                         plan = output.proposal
                         current["draft"] = plan.model_dump(mode="json")
@@ -262,6 +258,10 @@ class SalesCoreManager:
         except asyncio.CancelledError:
             raise
         except Exception as exc:
+            category = "intent_protocol" if isinstance(exc, ValidationError) else "intake_runtime"
+            self.store.change(identifier, lambda current: current.update(
+                failure_category=category,
+            ))
             self._error(identifier, exc, "需求识别未完成，可从页面重试或补充信息")
 
     def _examples(self, plan, identifier):
@@ -269,7 +269,7 @@ class SalesCoreManager:
         profile = next(iter(contract["profiles"]))
         return [dict(label=f"{q} 件 A，普通客户、无第二款商品", quantity=q, total=price(contract, dict(
             profile=profile, product="A", quantity=str(q), second_product="B", second_quantity="0",
-            customer="standard", date="2026-03-15", manual_rate="", shipping="pickup",
+            customer="standard", date=DEFAULT_DAY, manual_rate="", shipping="pickup",
         ))["total"]) for q in (1, 5, 10)]
 
     def _activity(self, identifier, event):
@@ -299,6 +299,9 @@ class SalesCoreManager:
                 write_json(inputs / f"contract-v{version}.json", contract)
                 write_json(inputs / f"public-tests-v{version}.json", compile_acceptance(contract))
                 (inputs / "CONTRACT.md").write_text(UI_CONTRACT, encoding="utf-8")
+                write_json(inputs / "capabilities.json", dict(
+                    identity=capability_identity(), manifest=capability_manifest(),
+                ))
                 workspace = directory / "workspace"
                 workspace.mkdir(exist_ok=True)
                 previous = self.store.get(identifier)["versions"]
@@ -309,7 +312,8 @@ class SalesCoreManager:
                         shutil.copytree(bundle["path"], workspace / "card-web")
                 session = self.store.get(identifier)
                 app = dict(id=identifier, workflow=plan.workflow, split="interactive", testdata_path=str(inputs.resolve()))
-                goal = dict(title=plan.title, revision=revision, contract_version=version, messages=session["messages"])
+                goal = dict(title=plan.title, revision=revision, contract_version=version,
+                            messages=session["messages"], capabilities=session["capabilities"])
                 loop = QuotationGoalLoop(self.harness, self.registry, project_root=self.project_root, call_cap=3)
                 result = await loop.execute_goal(app=app, goal=goal, workspace=workspace, result_dir=directory / "evidence", on_progress=lambda e: self._core_event(identifier, revision, e))
                 write_json(directory / "result.json", result)

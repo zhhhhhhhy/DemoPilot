@@ -9,6 +9,8 @@ from __future__ import annotations
 from copy import deepcopy
 from decimal import ROUND_HALF_UP, Decimal
 
+from .quotation_capabilities import FORM_DEFAULTS, ROLE_DEFAULTS
+
 CENT = Decimal(".01")
 
 
@@ -96,17 +98,7 @@ def price(contract, values):
     )
 
 
-DEFAULTS = dict(
-    profile="quantity_tiers",
-    product="A",
-    quantity="1",
-    second_product="B",
-    second_quantity="0",
-    customer="standard",
-    date="2026-03-15",
-    manual_rate="",
-    shipping="pickup",
-)
+DEFAULTS = deepcopy(FORM_DEFAULTS)
 
 
 class QuoteModel:
@@ -123,14 +115,13 @@ class QuoteModel:
             )
             for k in ("Q1", "Q2")
         }
-        self.record = "Q1"
-        if "quantity_tiers" not in contract["profiles"]:
-            for record in self.records.values():
-                record["values"]["profile"] = next(iter(contract["profiles"]))
-        self.role = "seller"
-        self.actor = "seller1"
-        self.reason = ""
-        self.today = "2026-03-15"
+        self.record = ROLE_DEFAULTS["record"]
+        for record in self.records.values():
+            record["values"]["profile"] = next(iter(contract["profiles"]))
+        self.role = ROLE_DEFAULTS["role"]
+        self.actor = ROLE_DEFAULTS["actor"]
+        self.reason = ROLE_DEFAULTS["reason"]
+        self.today = ROLE_DEFAULTS["today"]
 
     @property
     def current(self):
@@ -154,11 +145,11 @@ class QuoteModel:
         state = r["state"]
         action = op.get("action")
         if action == "reload":
-            self.record = "Q1"
-            self.role = "seller"
-            self.actor = "seller1"
-            self.reason = ""
-            self.today = "2026-03-15"
+            self.record = ROLE_DEFAULTS["record"]
+            self.role = ROLE_DEFAULTS["role"]
+            self.actor = ROLE_DEFAULTS["actor"]
+            self.reason = ROLE_DEFAULTS["reason"]
+            self.today = ROLE_DEFAULTS["today"]
             return False
         if action is None:
             return False
