@@ -19,6 +19,7 @@ import subprocess
 import sys
 import time
 import uuid
+from datetime import UTC, datetime
 from pathlib import Path
 from decimal import Decimal
 
@@ -55,6 +56,12 @@ def _session(env, fixture):
 def _normalized_command_path(value):
     """Normalize both literal and JSON-escaped Windows paths in CLI events."""
     return str(value).replace("\\\\", "/").replace("\\", "/").lower()
+
+
+def _cli_starts(events):
+    """Exact ordered startup identities; ordinary progress is not a new call."""
+    return [dict(pid=e.get("pid"), mode=e.get("mode"))
+            for e in events if e.get("type") == "process.started"]
 
 
 async def _browser(env, identifier=None, name="browser", *, base_url=None):
@@ -529,6 +536,15 @@ async def _case28(env):
         await page.locator(".sc-ack input").check()
         await page.get_by_role("button", name="确认规则并生成 Demo").click()
         events_path = state / "events.json"
+        boundaries = {}
+
+        def snapshot(label):
+            events = json.loads(events_path.read_text("utf-8"))
+            boundaries[label] = dict(observed_at=datetime.now(UTC).isoformat(),
+                                     events=events, cli_starts=_cli_starts(events))
+            write_json(target / "recovery-boundaries.json", boundaries)
+            return events
+
         await _wait_for(
             lambda: (
                 events_path.is_file()
@@ -538,12 +554,17 @@ async def _case28(env):
                 )
             )
         )
-        events_before = json.loads(events_path.read_text("utf-8"))
+        events_before = snapshot("before_service_stop")
         old_revision = (await _request(page, f"/api/sales-core/sessions/{identifier}"))[
             "body"
         ]["revision"]
         owned = _descendants(await _processes(), child.pid)
         await _kill_owned(child)
+        events_stopped = snapshot("after_service_stop")
+        _check(checks, "one_initial_cli_and_no_extra_start_before_stop",
+               len(_cli_starts(events_before)) == 1
+               and _cli_starts(events_stopped) == _cli_starts(events_before),
+               dict(before=_cli_starts(events_before), stopped=_cli_starts(events_stopped)))
         survivors = [
             row for row in owned if row["pid"] in {p["pid"] for p in await _processes()}
         ]
@@ -573,11 +594,13 @@ async def _case28(env):
             )
             # A new process must not automatically start another CLI call.
             await asyncio.sleep(1)
-            events_recovered = json.loads(events_path.read_text("utf-8"))
+            events_recovered = snapshot("after_service_restart")
             _check(
                 checks,
                 "restart_does_not_repeat_cli_automatically",
-                events_recovered == events_before,
+                _cli_starts(events_recovered) == _cli_starts(events_stopped),
+                dict(stopped=_cli_starts(events_stopped), recovered=_cli_starts(events_recovered),
+                     complete_snapshots="recovery-boundaries.json"),
             )
             await page.reload(wait_until="networkidle")
             await page.get_by_role("button", name="恢复任务", exact=True).wait_for(
@@ -586,6 +609,12 @@ async def _case28(env):
             await page.screenshot(
                 path=str(target / "interrupted-recovery-visible.png"), full_page=True
             )
+            events_before_resume = snapshot("before_manual_resume")
+            _check(checks, "no_cli_start_until_manual_resume",
+                   _cli_starts(events_before_resume) == _cli_starts(events_stopped),
+                   _cli_starts(events_before_resume))
+            boundaries["manual_resume_click"] = dict(observed_at=datetime.now(UTC).isoformat())
+            write_json(target / "recovery-boundaries.json", boundaries)
             await page.get_by_role("button", name="恢复任务", exact=True).click()
             # The second controlled CLI is cancelled promptly; completion isn't required here.
             await _wait_for(
@@ -598,6 +627,11 @@ async def _case28(env):
                     >= 2
                 )
             )
+            events_resumed = snapshot("after_manual_resume")
+            _check(checks, "manual_resume_starts_exactly_one_new_cli",
+                   len(_cli_starts(events_resumed)) == len(_cli_starts(events_stopped)) + 1
+                   and _cli_starts(events_resumed)[:-1] == _cli_starts(events_stopped),
+                   _cli_starts(events_resumed))
             after = (await client.get(f"/api/sales-core/sessions/{identifier}")).json()
             _check(
                 checks,
@@ -628,6 +662,7 @@ async def _case28(env):
                 cancelled=cancelled,
                 events=json.loads(events_path.read_text("utf-8")),
                 service_pids=children,
+                boundary_snapshots=boundaries,
             )
     finally:
         await _kill_owned(child)

@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import asyncio
+import errno
 import hashlib
 import json
 import os
 import re
+import secrets
+import socket
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -20,6 +23,36 @@ from .quotation_contract import QuoteModel, journeys
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+
+class BrowserHTTPServer(ThreadingHTTPServer):
+    allow_reuse_address = False
+    allow_reuse_port = False
+
+    def server_bind(self):
+        # Windows SO_REUSEADDR can allow a second live server on the same port.
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
+def browser_http_server(app_dir):
+    """Bind and retain a loopback socket in Chromium's permitted high range.
+
+    An OS-selected port0 may be10080, which Chromium deliberately blocks.
+    Never override browser protections or release a reservation before serving.
+    Retry only bind conflicts/permissions, with a fixed finite budget.
+    """
+    for _ in range(32):
+        port = 49152 + secrets.randbelow(16384)
+        try:
+            return BrowserHTTPServer(
+                ("127.0.0.1", port), partial(QuietHandler, directory=str(app_dir))
+            )
+        except OSError as exc:
+            if exc.errno not in {errno.EADDRINUSE, errno.EACCES}:
+                raise
+    raise OSError("No available browser-compatible loopback port after32 bind attempts")
 
 
 def tree_hash(path):
@@ -120,7 +153,7 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
     evidence_dir.mkdir(parents=True, exist_ok=True)
     before = tree_hash(app_dir)
     rows = []
-    server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(app_dir)))
+    server = browser_http_server(app_dir)
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
     base_url = f"http://127.0.0.1:{server.server_port}/"
@@ -287,6 +320,8 @@ async def audit_application(app_dir, contract, evidence_dir, *, private=False):
         source_sha256=before,
         rows=rows,
         network_attempt_count=sum(r["network_attempt_count"] for r in rows),
+        browser_server=dict(host="127.0.0.1", port=server.server_port,
+                            selection="bound high port49152-65535; browser protections unchanged"),
         issues=[f"{r['profile']}/{r['journey']}: {r['failure']}" for r in rows if not r["passed"]][
             :12
         ],
