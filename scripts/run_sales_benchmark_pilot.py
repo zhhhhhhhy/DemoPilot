@@ -27,13 +27,14 @@ from fastapi.staticfiles import StaticFiles
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend/src"))
 
+from sales_benchmark_data import DATASET, read, sha, validate
+
 from demopilot.config import Settings
 from demopilot.main import create_app
 from demopilot.quotation_browser import audit_application, tree_hash
 from demopilot.quotation_loop import write_json
 from demopilot.sales_contract import QuotePlan
 from demopilot.sales_core import SalesCoreManager
-from sales_benchmark_data import DATASET, read, sha, validate
 
 
 def semantics(value):
@@ -82,6 +83,7 @@ def code_manifest():
         ROOT / "scripts/sales_benchmark_data.py",
         ROOT / "scripts/run_with_awake.py",
         ROOT / "scripts/sales_final_campaign.py",
+        ROOT / "scripts/sales_observed_rerun.py",
     ]
     return {p.relative_to(ROOT).as_posix(): sha(p) for p in files}
 
@@ -195,11 +197,19 @@ def freeze(output, args):
     unlock = None
     recovery = None
     final_campaign = None
+    observed_rerun = None
     if cohort == "transport-recovery":
         if regression:
             raise ValueError("Recovery cannot select arbitrary IDs")
         pilot, recovery = transport_recovery_unlock(
             getattr(args, "recovery_evidence", None), getattr(args, "readiness_evidence", None), args.model
+        )
+    elif cohort == "observed15-rerun":
+        if regression:
+            raise ValueError("Observed15 rerun cannot select or replace cases")
+        from sales_observed_rerun import unlock as unlock_observed_rerun
+        pilot, observed_rerun = unlock_observed_rerun(
+            getattr(args, "rerun_plan", None), args.model, output
         )
     elif cohort == "heldout":
         if regression:
@@ -240,12 +250,13 @@ def freeze(output, args):
         pilot_ids=pilot,
         original_sealed_pilot_ids=original_pilot,
         targeted_regression=bool(regression),
-        execution_split="validation" if recovery else cohort,
+        execution_split="validation" if recovery else "heldout" if observed_rerun else cohort,
         cohort_kind=cohort,
         transport_recovery=recovery,
         final_campaign=final_campaign,
+        observed_rerun=observed_rerun,
         validation_unlock=unlock,
-        change_boundary="Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution.",
+        change_boundary=("Current shared business fields/capabilities and complete original-requirement browser checks; original data/model/budget/business acceptance unchanged. Previously observed15 regression, not unseen final accuracy or isolated intent effect." if observed_rerun else "Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution."),
         dataset_manifest_sha256=sha(DATASET / "manifest.json"),
         code_sha256=code_manifest(),
         model=args.model,
@@ -260,7 +271,7 @@ def freeze(output, args):
         denominator=f"All{len(pilot)}fixed {cohort} tasks, including pre-Core and infrastructure failures; intermediate Core repairs are separate.",
         independent_scoring="After all terminal outcomes, fresh Chromium against frozen expected seller contract; no final-score feedback or manual app edits.",
         holdout_policy=("User-authorized frozen final100, current fixed batch only; no final-score feedback, tuning, private-gold or other-case reads."
-                        if final_campaign else "100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed."),
+                        if final_campaign else "Explicit authorized replay of previously observed15 only; remaining85 stay unstarted. Original13/15 immutable." if observed_rerun else "100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed."),
         cost_boundary="Configured caps are equal ceilings, not forced consumption. Actual root CLI token reports/counts are retained; billing and exhaustive native-child cost are unavailable.",
         construction_validation=validation,
     )
@@ -281,6 +292,12 @@ def verify_frozen(output):
         if sha_final(PLAN) != c["final_campaign"]["plan_sha256"]:
             raise RuntimeError("Frozen final campaign plan changed")
         verify_sources(read_final(PLAN))
+    if c.get("observed_rerun"):
+        from sales_observed_rerun import PLAN as RERUN_PLAN
+        from sales_observed_rerun import verify as verify_rerun
+        if sha(RERUN_PLAN) != c["observed_rerun"]["plan_sha256"]:
+            raise RuntimeError("Frozen observed15 rerun plan changed")
+        verify_rerun(read(RERUN_PLAN))
     return c
 
 
@@ -785,8 +802,9 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--port", type=int, default=8093)
     parser.add_argument(
-        "--cohort", choices=("development", "validation", "transport-recovery", "heldout"), default="development"
+        "--cohort", choices=("development", "validation", "transport-recovery", "heldout", "observed15-rerun"), default="development"
     )
+    parser.add_argument("--rerun-plan", type=Path, help="Explicit separate authorization for all already observed15 only")
     parser.add_argument("--campaign-plan", type=Path, help="Explicit authorized final100 frozen plan, heldout only")
     parser.add_argument("--batch-index", type=int, help="Fixed next batch index, heldout only")
     parser.add_argument("--recovery-evidence", type=Path, help="Sealed first23/40 results; exact failed17 only")

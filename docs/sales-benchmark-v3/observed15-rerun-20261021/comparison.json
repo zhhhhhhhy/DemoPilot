@@ -1,0 +1,895 @@
+{
+  "schema_version": "observed15-rerun-comparison-v1",
+  "completed_at": "2026-10-21T04:48:10.307358+00:00",
+  "original_passed": 13,
+  "current_passed": 7,
+  "denominator": 15,
+  "original_percent": 86.67,
+  "current_percent": 46.67,
+  "percentage_point_gain": -40.0,
+  "gained": [],
+  "regressed": [
+    "sales-v3-166",
+    "sales-v3-096",
+    "sales-v3-041",
+    "sales-v3-111",
+    "sales-v3-116",
+    "sales-v3-051"
+  ],
+  "still_failed": [
+    "sales-v3-091",
+    "sales-v3-166",
+    "sales-v3-096",
+    "sales-v3-041",
+    "sales-v3-111",
+    "sales-v3-176",
+    "sales-v3-116",
+    "sales-v3-051"
+  ],
+  "final_failure_domains": {
+    "cli_transport": 8
+  },
+  "published_defects": 0,
+  "browser_paths": {
+    "planned": 94,
+    "executed": 50,
+    "passed": 50
+  },
+  "original_browser_paths": {
+    "planned": 94,
+    "executed": 81,
+    "passed": 81
+  },
+  "internal_core_repairs": 4,
+  "old_cost": {
+    "cli_calls": 45,
+    "intake_calls": 32,
+    "core_calls": 13,
+    "usage_present": 45,
+    "usage_missing": 0,
+    "reported_root_tokens": {
+      "input_tokens": 4371292,
+      "cached_input_tokens": 3447680,
+      "output_tokens": 97246
+    },
+    "monetary_cost": null
+  },
+  "new_cost": {
+    "cli_calls": 37,
+    "intake_calls": 24,
+    "core_calls": 13,
+    "usage_present": 25,
+    "usage_missing": 12,
+    "reported_root_tokens": {
+      "input_tokens": 2446210,
+      "cached_input_tokens": 1856896,
+      "output_tokens": 50022
+    },
+    "monetary_cost": null
+  },
+  "old_sum_batch_wall_seconds": 2221.63,
+  "new_run_wall_seconds": 2718.33,
+  "readiness": {
+    "cli_calls": 2,
+    "usage_present": 2,
+    "usage_missing": 0,
+    "reported_root_tokens": {
+      "input_tokens": 60462,
+      "cached_input_tokens": 38912,
+      "output_tokens": 98
+    },
+    "elapsed_seconds": 53.3
+  },
+  "original_plan_sha256": "ff5f27669cda0d4c9652c3ec9fcb71412ef7fd1fa3b87f74e4293bfbf75d7663",
+  "rerun_plan_sha256": "3bd79a0384839ae8aaee41908755b0ed03f3c33e2279e8565bec2389321d69ac",
+  "source_unchanged": true,
+  "data_model_budget_and_business_standards_unchanged": true,
+  "scoring_note": "New checker covers additional pre-existing requirements; old/new scoring implementation not identical, original business acceptance unchanged.",
+  "preservation": {
+    "protected_original_files": 1692,
+    "protected_changes": [],
+    "original_main_session_files": 145,
+    "main_file_changes": [],
+    "original_main_assets": 9,
+    "original_assets_preserved": true,
+    "main_registry_preserved": true,
+    "main_sessions_unchanged": true,
+    "main_api": 200,
+    "main_frontend": 200,
+    "env_file_unchanged": true,
+    "original_score": "13/15",
+    "remaining_final_cases_unexecuted": 85
+  },
+  "cases": [
+    {
+      "case_id": "sales-v3-016",
+      "difficulty": "simple",
+      "family": "family-04",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 264.23,
+      "new_elapsed_seconds": 217.25,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 224033,
+          "cached_input_tokens": 160512,
+          "output_tokens": 6249
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-071",
+      "difficulty": "medium",
+      "family": "family-15",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 295.03,
+      "new_elapsed_seconds": 270.28,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 407196,
+          "cached_input_tokens": 336000,
+          "output_tokens": 7360
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-151",
+      "difficulty": "hard",
+      "family": "family-31",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 263.66,
+      "new_elapsed_seconds": 343.25,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 390854,
+          "cached_input_tokens": 301568,
+          "output_tokens": 7665
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-076",
+      "difficulty": "medium",
+      "family": "family-16",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 239.34,
+      "new_elapsed_seconds": 295.88,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 307239,
+          "cached_input_tokens": 226816,
+          "output_tokens": 6430
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-021",
+      "difficulty": "simple",
+      "family": "family-05",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 333.64,
+      "new_elapsed_seconds": 294.23,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 356135,
+          "cached_input_tokens": 279168,
+          "output_tokens": 6710
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-161",
+      "difficulty": "hard",
+      "family": "family-33",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 323.69,
+      "new_elapsed_seconds": 304.42,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 374263,
+          "cached_input_tokens": 299904,
+          "output_tokens": 7154
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-091",
+      "difficulty": "medium",
+      "family": "family-19",
+      "old_pass": false,
+      "new_pass": false,
+      "old_stage": "intake",
+      "new_stage": "core",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "请查看检查结果，补充或修改需求后可从页面重新生成",
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 45.73,
+      "new_elapsed_seconds": 1546.44,
+      "internal_core_repairs": 2,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 5,
+        "intake": 2,
+        "core": 3,
+        "usage_complete": 2,
+        "missing_usage": 3,
+        "failed_root_calls": 3,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 35541,
+          "cached_input_tokens": 5888,
+          "output_tokens": 675
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "Core3calls exhausted with process timeout/routing faults; terminal hidden, not independent post-publication functional defect",
+      "core_process_errors": [
+        {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        {
+          "type": "RuntimeError",
+          "message": "Codex CLI Core Builder exited with code 1: workspace routing discovery failed"
+        }
+      ],
+      "requested_business_fields": [
+        "catalogue",
+        "pricing_rule.product",
+        "pricing_rule.customer",
+        "pricing_rule.rate",
+        "workflow",
+        "approval_threshold"
+      ],
+      "delivered_business_fields": [
+        "catalogue",
+        "pricing_rule.product",
+        "pricing_rule.customer",
+        "pricing_rule.rate",
+        "workflow",
+        "approval_threshold"
+      ]
+    },
+    {
+      "case_id": "sales-v3-031",
+      "difficulty": "simple",
+      "family": "family-07",
+      "old_pass": true,
+      "new_pass": true,
+      "old_stage": "publication",
+      "new_stage": "publication",
+      "status": "published",
+      "failure_domain": null,
+      "failure_reason": null,
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 234.0,
+      "new_elapsed_seconds": 269.3,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "exact_served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 315241,
+          "cached_input_tokens": 231936,
+          "output_tokens": 6888
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-166",
+      "difficulty": "hard",
+      "family": "family-34",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "core",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "请查看检查结果，补充或修改需求后可从页面重新生成",
+      "confirmation_semantics_match": true,
+      "old_elapsed_seconds": 276.69,
+      "new_elapsed_seconds": 1303.5,
+      "internal_core_repairs": 2,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 5,
+        "intake": 2,
+        "core": 3,
+        "usage_complete": 2,
+        "missing_usage": 3,
+        "failed_root_calls": 3,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 35708,
+          "cached_input_tokens": 15104,
+          "output_tokens": 891
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "Core3calls exhausted with process timeout/routing faults; terminal hidden, not independent post-publication functional defect",
+      "core_process_errors": [
+        {
+          "type": "WorkspaceProcessTimeout",
+          "message": "Codex CLI Core Builder timed out"
+        },
+        {
+          "type": "RuntimeError",
+          "message": "Codex CLI Core Builder exited with code 1: workspace routing discovery failed"
+        },
+        {
+          "type": "RuntimeError",
+          "message": "Codex CLI Core Builder exited with code 1: workspace routing discovery failed"
+        }
+      ],
+      "requested_business_fields": [
+        "catalogue",
+        "pricing_rule.product",
+        "pricing_rule.start",
+        "pricing_rule.end",
+        "pricing_rule.percent",
+        "shipping.pickup",
+        "shipping.standard",
+        "shipping.express"
+      ],
+      "delivered_business_fields": [
+        "catalogue",
+        "pricing_rule.product",
+        "pricing_rule.start",
+        "pricing_rule.end",
+        "pricing_rule.percent",
+        "shipping.pickup",
+        "shipping.standard",
+        "shipping.express"
+      ]
+    },
+    {
+      "case_id": "sales-v3-096",
+      "difficulty": "medium",
+      "family": "family-20",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 242.36,
+      "new_elapsed_seconds": 64.61,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    },
+    {
+      "case_id": "sales-v3-041",
+      "difficulty": "simple",
+      "family": "family-09",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 281.03,
+      "new_elapsed_seconds": 66.69,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    },
+    {
+      "case_id": "sales-v3-111",
+      "difficulty": "medium",
+      "family": "family-23",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 316.23,
+      "new_elapsed_seconds": 68.77,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    },
+    {
+      "case_id": "sales-v3-176",
+      "difficulty": "hard",
+      "family": "family-36",
+      "old_pass": false,
+      "new_pass": false,
+      "old_stage": "intake",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 51.33,
+      "new_elapsed_seconds": 64.88,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    },
+    {
+      "case_id": "sales-v3-116",
+      "difficulty": "medium",
+      "family": "family-24",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 248.53,
+      "new_elapsed_seconds": 60.83,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    },
+    {
+      "case_id": "sales-v3-051",
+      "difficulty": "simple",
+      "family": "family-11",
+      "old_pass": true,
+      "new_pass": false,
+      "old_stage": "publication",
+      "new_stage": "intake",
+      "status": "failed",
+      "failure_domain": "cli_transport",
+      "failure_reason": "Intake not ready within declared3calls",
+      "confirmation_semantics_match": false,
+      "old_elapsed_seconds": 288.81,
+      "new_elapsed_seconds": 62.75,
+      "internal_core_repairs": 0,
+      "independent_check": {
+        "status": "not_run_no_generated_app",
+        "planned": 6,
+        "executed": 0,
+        "passed": 0
+      },
+      "exact_served_assets": [],
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [
+          "workspace_routing_discovery_failed"
+        ],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      },
+      "observed_failure_location": "First intake CLI call routing failure,0usable replies and0Core; not3semantic clarification attempts",
+      "core_process_errors": [],
+      "requested_business_fields": [],
+      "delivered_business_fields": []
+    }
+  ],
+  "limits": [
+    "Previously observed15 regression; remaining85 remain unstarted and unique requirement count does not grow.",
+    "Joint pipeline mechanism changes, not isolated intent-prompt causal attribution or real-customer success.",
+    "Core intermediate repair/error is separate from final non-delivery or post-publication defect.",
+    "Original run used5+10 batches; new run15 continuous; elapsed differences are descriptive only.",
+    "Root usage only; cache included in input, unknown billing and exhaustive native-child usage.",
+    "Preparation orchestration incident retained separately; existing2 diagnostic probes reused without replay and included in total costs."
+  ],
+  "published_browser_paths": {
+    "planned": 44,
+    "executed": 44,
+    "passed": 44
+  },
+  "hidden_candidate_browser_paths": {
+    "planned": 6,
+    "executed": 6,
+    "passed": 6
+  },
+  "published_asset_count": 21,
+  "failure_stage_counts": {
+    "intake_cli_routing": 6,
+    "core_timeout_then_routing": 2,
+    "published_functional_defects": 0
+  },
+  "environment_incident": {
+    "windows_sleep_confirmed": true,
+    "sleep_time_utc": "2026-10-21T03:56:54.3565103Z",
+    "wake_time_utc": "2026-10-21T04:14:54.1931600Z",
+    "windows_event_ids": [
+      42,
+      107,
+      1
+    ],
+    "heartbeat_gap_seconds": 1088.836,
+    "sleep_trigger": "unknown",
+    "ordinary_usage_allowed_after": true,
+    "limitation": "091 first Core timeout occurred before sleep; cannot attribute every timeout or all later routing faults solely to sleep. Route fault upstream/local cause unverified.",
+    "automation_gap": "Long-host-gap and shared cross-case transport failure were not circuit-broken; no new pause/circuit breaker or product repair was applied during this fixed rerun."
+  },
+  "improvement_claim": {
+    "status": "not_demonstrated",
+    "operational_result": "7/15 vs13/15, minus40percentagepoints",
+    "reason": "Host sleep and failed CLI calls prevent a clean pipeline-mechanism effect comparison. All failures remain in denominator.",
+    "intent_evidence": "091 now matches original rules after2intake calls vs old3without confirmation;176 first intake transport failed, so its mechanism fix remains unverified in this rerun."
+  },
+  "visible_browser_followup": {
+    "published_sample": "sales-v3-031",
+    "protocol_rate": "40.55",
+    "quantity": 3,
+    "total": "121.65",
+    "customer_before_approval": "rejected with visible message; Draft remains",
+    "final_state": "Accepted",
+    "history": 4,
+    "hidden_sample": "sales-v3-091",
+    "no_open_link": true,
+    "no_rebuild_or_score_change": true,
+    "additional_model_calls": 0,
+    "note": "CUA sample verification supplements full actual50Chromium journeys; does not mean manually operating all15 via visibleUI."
+  },
+  "all_new_calls_including_readiness": {
+    "cli_calls": 39,
+    "usage_present": 27,
+    "usage_missing": 12,
+    "reported_root_tokens": {
+      "input_tokens": 2506672,
+      "cached_input_tokens": 1895808,
+      "output_tokens": 50120
+    },
+    "monetary_cost": null
+  }
+}
