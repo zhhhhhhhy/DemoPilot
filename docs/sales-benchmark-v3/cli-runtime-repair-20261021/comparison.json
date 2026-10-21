@@ -1,0 +1,792 @@
+{
+  "schema": "cli-runtime-repair15-comparison-v1",
+  "completed_at": "2026-10-21T07:18:07.411453+00:00",
+  "denominator": 15,
+  "original13": 13,
+  "previous7": 7,
+  "current": 13,
+  "vs13_pp": 0.0,
+  "vs7_pp": 40.0,
+  "gained_vs13": [
+    "sales-v3-091",
+    "sales-v3-176"
+  ],
+  "regressed_vs13": [
+    "sales-v3-161",
+    "sales-v3-166"
+  ],
+  "gained_vs7": [
+    "sales-v3-091",
+    "sales-v3-096",
+    "sales-v3-041",
+    "sales-v3-111",
+    "sales-v3-176",
+    "sales-v3-116",
+    "sales-v3-051"
+  ],
+  "regressed_vs7": [
+    "sales-v3-161"
+  ],
+  "failures": {
+    "published_functional_defect": 1,
+    "model_capacity": 1
+  },
+  "published_defects": 1,
+  "browser_paths": {
+    "planned": 94,
+    "executed": 87,
+    "passed": 81
+  },
+  "internal_core_repairs": 4,
+  "original_cost": {
+    "cli_calls": 45,
+    "intake_calls": 32,
+    "core_calls": 13,
+    "usage_present": 45,
+    "usage_missing": 0,
+    "reported_root_tokens": {
+      "input_tokens": 4371292,
+      "cached_input_tokens": 3447680,
+      "output_tokens": 97246
+    },
+    "monetary_cost": null
+  },
+  "previous_cost": {
+    "cli_calls": 37,
+    "intake_calls": 24,
+    "core_calls": 13,
+    "usage_present": 25,
+    "usage_missing": 12,
+    "reported_root_tokens": {
+      "input_tokens": 2446210,
+      "cached_input_tokens": 1856896,
+      "output_tokens": 50022
+    },
+    "monetary_cost": null
+  },
+  "current_cost": {
+    "calls": 48,
+    "usage_present": 43,
+    "usage_missing": 5,
+    "tokens": {
+      "input_tokens": 3251657,
+      "cached_input_tokens": 2221568,
+      "output_tokens": 78639
+    },
+    "money": null
+  },
+  "separate_cost": {
+    "preparation": {
+      "calls": 6,
+      "usage_present": 6,
+      "usage_missing": 0,
+      "tokens": {
+        "input_tokens": 139253,
+        "cached_input_tokens": 31488,
+        "output_tokens": 308
+      },
+      "money": null
+    },
+    "development": {
+      "calls": 8,
+      "usage_present": 7,
+      "usage_missing": 1,
+      "tokens": {
+        "input_tokens": 480952,
+        "cached_input_tokens": 346368,
+        "output_tokens": 9184
+      },
+      "money": null
+    },
+    "ui_control": {
+      "calls": 1,
+      "usage_present": 1,
+      "usage_missing": 0,
+      "tokens": {
+        "input_tokens": 17321,
+        "cached_input_tokens": 9216,
+        "output_tokens": 105
+      },
+      "money": null
+    },
+    "all_added": {
+      "calls": 63,
+      "usage_present": 57,
+      "usage_missing": 6,
+      "tokens": {
+        "input_tokens": 3889183,
+        "cached_input_tokens": 2608640,
+        "output_tokens": 88236
+      },
+      "money": null
+    }
+  },
+  "original_wall_seconds": 2221.63,
+  "previous_wall_seconds": 2718.33,
+  "current_wall_seconds": 3045.22,
+  "development_wall_seconds": 893.69,
+  "preparation_seconds": 220.15,
+  "source_frozen": true,
+  "dataset_model_budget_acceptance_unchanged": true,
+  "remaining85_unstarted": true,
+  "plan_sha256": "9db7f7dfb04020941aefc646f5199240740585b281cb53c75c4065f51dea89b4",
+  "context_sha256": "94052f0e31adfa66279c72864d0cbdc05a5e2c78bb83e78308d769902b28ac12",
+  "results_sha256": "e0106dc0a558127c755d1952cf7b7020408307d98ea1a33aa879a31078f1c706",
+  "preservation": {
+    "protected_files": 2379,
+    "protected_changes": [],
+    "main_files": 145,
+    "main_changes": [],
+    "main_assets": 9,
+    "main_assets_preserved": true,
+    "main_registry_preserved": true,
+    "main_sessions_preserved": true,
+    "active": [],
+    "env_unchanged": true,
+    "remaining85_unstarted": true,
+    "api_status": 200,
+    "frontend_status": 200
+  },
+  "cases": [
+    {
+      "case_id": "sales-v3-016",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 384.47,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 257102,
+          "cached_input_tokens": 191360,
+          "output_tokens": 5612
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-071",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 419.66,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 191640,
+          "cached_input_tokens": 122880,
+          "output_tokens": 5992
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-151",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 1,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 310.47,
+      "cost": {
+        "calls": 5,
+        "intake": 3,
+        "core": 2,
+        "usage_complete": 4,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 254195,
+          "cached_input_tokens": 159872,
+          "output_tokens": 6931
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-076",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 245.83,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 222126,
+          "cached_input_tokens": 156928,
+          "output_tokens": 6232
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-021",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 277.98,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 258608,
+          "cached_input_tokens": 190720,
+          "output_tokens": 5582
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-161",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": false,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": "published_functional_defect",
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "failed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 1,
+        "issues": [
+          "quantity_tiers/normal: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}",
+          "quantity_tiers/edit_regression: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}",
+          "quantity_tiers/invalid_recovery: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}",
+          "quantity_tiers/workflow_specific: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}",
+          "quantity_tiers/record_isolation: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}",
+          "quantity_tiers/new_shipping: {'type': 'AssertionError', 'message': '{\"discount\": {\"expected\": \"442.14\", \"actual\": \"374.12\"}, \"total\": {\"expected\": \"2014.21\", \"actual\": \"2082.23\"}}', 'step': 0, 'op': {'role': 'seller', 'actor': 'seller1', 'action': 'calculate', 'values': {'profile': 'quantity_tiers', 'quantity': '11', 'second_product': 'A', 'second_quantity': '2', 'customer': 'vip', 'date': '2026-03-31'}}}"
+        ],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 288.22,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 277768,
+          "cached_input_tokens": 204544,
+          "output_tokens": 6760
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-091",
+      "original13_pass": false,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 278.62,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 188169,
+          "cached_input_tokens": 115200,
+          "output_tokens": 6221
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-031",
+      "original13_pass": true,
+      "previous7_pass": true,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 293.98,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 218055,
+          "cached_input_tokens": 145536,
+          "output_tokens": 5701
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-166",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": false,
+      "status": "failed",
+      "stage": "intake",
+      "failure_domain": "model_capacity",
+      "failure_reason": "Intake not ready within declared3calls",
+      "audited_reason": "Actual trace: model at capacity, 1 intake/0 Core calls; generic not-ready summary is not proof of3 semantic attempts.",
+      "confirmation_match": false,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "not_run_no_generated_app",
+        "planned": 7,
+        "executed": 0,
+        "passed": 0
+      },
+      "served_assets": [],
+      "elapsed_seconds": 42.47,
+      "cost": {
+        "calls": 1,
+        "intake": 1,
+        "core": 0,
+        "usage_complete": 0,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-096",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 338.59,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 236386,
+          "cached_input_tokens": 157824,
+          "output_tokens": 6887
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-041",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 347.06,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 256339,
+          "cached_input_tokens": 156416,
+          "output_tokens": 6276
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-111",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 1,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 620.08,
+      "cost": {
+        "calls": 4,
+        "intake": 2,
+        "core": 2,
+        "usage_complete": 3,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 229052,
+          "cached_input_tokens": 163200,
+          "output_tokens": 2032
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-176",
+      "original13_pass": false,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 0,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 7,
+        "executed": 7,
+        "passed": 7,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 425.06,
+      "cost": {
+        "calls": 3,
+        "intake": 2,
+        "core": 1,
+        "usage_complete": 3,
+        "missing_usage": 0,
+        "failed_root_calls": 0,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 233517,
+          "cached_input_tokens": 162432,
+          "output_tokens": 6766
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-116",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 1,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 478.17,
+      "cost": {
+        "calls": 4,
+        "intake": 2,
+        "core": 2,
+        "usage_complete": 3,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 225877,
+          "cached_input_tokens": 158208,
+          "output_tokens": 5685
+        },
+        "monetary_cost": null
+      }
+    },
+    {
+      "case_id": "sales-v3-051",
+      "original13_pass": true,
+      "previous7_pass": false,
+      "new_pass": true,
+      "status": "published",
+      "stage": "publication",
+      "failure_domain": null,
+      "failure_reason": null,
+      "audited_reason": null,
+      "confirmation_match": true,
+      "internal_repairs": 1,
+      "independent_browser": {
+        "status": "passed",
+        "planned": 6,
+        "executed": 6,
+        "passed": 6,
+        "issues": [],
+        "source_unchanged": true
+      },
+      "served_assets": [
+        "index.html",
+        "app.js",
+        "styles.css"
+      ],
+      "elapsed_seconds": 702.8,
+      "cost": {
+        "calls": 4,
+        "intake": 2,
+        "core": 2,
+        "usage_complete": 3,
+        "missing_usage": 1,
+        "failed_root_calls": 1,
+        "last_failed_cli_transport_signals": [],
+        "tokens": {
+          "input_tokens": 202823,
+          "cached_input_tokens": 136448,
+          "output_tokens": 1962
+        },
+        "monetary_cost": null
+      }
+    }
+  ],
+  "limits": [
+    "Observed15 regression; no unseen85 execution or larger unique sample count.",
+    "Joint runtime/configuration/finish-prompt change; not isolated intent or single-factor causal evidence.",
+    "Independent Chromium uses original business criteria, all terminal before final scoring; hidden candidates do not count as delivery.",
+    "Internal repair is not final failure. An actual turn.completed remains mandatory.",
+    "Root-only usage, incomplete native-child observability and unknown monetary bill. Cache is included in input.",
+    "Controlled development clock gap and UI transport stimuli are labeled synthetic, no claim of real host sleep reproduction.",
+    "Reachability timeouts and zero-model recovery actions are retained; no claim that upstream routing is permanently fixed."
+  ]
+}

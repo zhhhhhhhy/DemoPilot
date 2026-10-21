@@ -18,6 +18,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export const api = {
   salesSessions: () => request<SalesSession[]>('/api/sales-core/sessions'),
   salesSession: (id: string) => request<SalesSession>(`/api/sales-core/sessions/${id}`),
+  checkSalesConnection: () => request<NonNullable<SalesSession['connection']>>('/api/sales-core/runtime/check', { method: 'POST' }),
   createSalesSession: (brief: string, requestKey: string) => request<SalesSession>('/api/sales-core/sessions', {
     method: 'POST', body: JSON.stringify({ brief, request_key: requestKey }),
   }),

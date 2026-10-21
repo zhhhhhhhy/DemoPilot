@@ -87,6 +87,17 @@ async function poll() {
   finally { polling = false }
 }
 
+async function checkConnection() {
+  if (!selected.value || busy.value) return
+  busy.value = true
+  error.value = ''
+  try {
+    await api.checkSalesConnection()
+    accept(await api.salesSession(selected.value.id))
+  } catch (exception) { error.value = exception instanceof Error ? exception.message : '连接检查未完成' }
+  finally { busy.value = false }
+}
+
 function startNew() {
   selected.value = null
   brief.value = ''
@@ -144,6 +155,11 @@ onBeforeUnmount(() => {
       <div class="sc-delivery" aria-label="需求确认与交付">
         <template v-if="selected">
           <h3>从需求到交付</h3>
+          <div v-if="selected.connection && !['ready', 'needs_check'].includes(selected.connection.state)" class="sc-checks" role="status">
+            <b>{{ selected.connection.message }}</b>
+            <p>等待中的任务会保留进度；已结束的任务不会自动重新生成。</p>
+            <button v-if="selected.connection.retry_required" type="button" class="sc-secondary" :disabled="busy" @click="checkConnection">检查连接并继续</button>
+          </div>
           <ol class="sc-steps"><li>理解与追问</li><li>确认业务规则</li><li>构建与测试返工</li><li :class="{ accepted: selected.status === 'published' }">通过后发布</li></ol>
           <div v-if="selected.draft && !selected.active && selected.status === 'ready'" class="sc-confirmation">
             <h4>请核对这次要实现的规则</h4>

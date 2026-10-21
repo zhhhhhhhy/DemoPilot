@@ -115,15 +115,19 @@ class SalesCoreManager:
         self.root = Path(settings.data_dir) / "sales-core"
         self.store = SalesSessions(self.root / "sessions")
         self.registry = ReleaseRegistry(self.root / "registry")
+        from .cli_runtime import CliRuntimeGuard
+        self.runtime = CliRuntimeGuard(on_event=self._runtime_event)
         self.provider = IsolatedCodexProvider(
             command=settings.codex_command, model=settings.codex_model,
             reasoning_effort=settings.codex_reasoning_effort,
             timeout_seconds=settings.codex_timeout_seconds,
+            runtime_guard=self.runtime,
         )
         self.intent_provider = IntentCodexProvider(
             command=settings.codex_command, model=settings.codex_model,
             reasoning_effort=settings.codex_reasoning_effort,
             timeout_seconds=settings.codex_timeout_seconds,
+            runtime_guard=self.runtime,
         )
         self.harness = harness or CodexCliHarness(self.provider)
         self.interviewer = interviewer
@@ -136,7 +140,14 @@ class SalesCoreManager:
         session = self.store.get(identifier)
         session["active"] = session["status"] in ACTIVE
         session["call_cap"] = 3
+        session["connection"] = self.runtime.snapshot()
         return session
+
+    def _runtime_event(self, event):
+        self.root.mkdir(parents=True, exist_ok=True)
+        with (self.root / "runtime-events.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(dict(time=now(), **event), ensure_ascii=False) + "\n")
+        write_json(self.root / "runtime-state.json", self.runtime.snapshot())
 
     def create(self, brief, request_key=None):
         if request_key:

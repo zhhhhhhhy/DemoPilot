@@ -40,6 +40,14 @@ def sales_router(manager: SalesCoreManager):
     async def sessions():
         return [manager.public(s["id"]) for s in manager.store.list()[:100]]
 
+    @router.get("/runtime")
+    async def runtime():
+        return manager.runtime.snapshot()
+
+    @router.post("/runtime/check")
+    async def check_runtime():
+        return await manager.runtime.recheck()
+
     @router.post("/sessions", status_code=202)
     async def create(body: BriefBody):
         if len(body.brief.strip()) < 3:

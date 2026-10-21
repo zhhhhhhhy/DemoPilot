@@ -1,5 +1,6 @@
 """Per-process lean Codex configuration, never edits the desktop config."""
 
+import asyncio
 import json
 import os
 import re
@@ -35,7 +36,26 @@ def isolation_flags(*, include_mcp=True):
 
 class IsolatedCodexProvider(CodexCliAgentProvider):
     def _command_args(self, executable, args):
-        return super()._command_args(executable, [*args[:-1], *isolation_flags(), args[-1]])
+        # Reuse auth, while keeping unrelated desktop tools/hooks/configuration
+        # outside a bounded generation job. No global config file is modified.
+        flags = ["--ignore-user-config", "--ephemeral", "-c", "web_search=disabled"]
+        # Ignoring user config must not silently remove the already configured
+        # native Windows sandbox implementation. Preserve that implementation,
+        # while --sandbox still limits this job to workspace-write/read-only.
+        if os.name == "nt":
+            task_home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
+            config = task_home / "config.toml"
+            values = tomllib.loads(config.read_text("utf-8")) if config.exists() else {}
+            mode = values.get("windows", {}).get("sandbox")
+            if mode in {"elevated", "unelevated"}:
+                flags.extend(["-c", f"windows.sandbox={mode}"])
+        for feature in ("hooks", "memories", "goals", "sleep_tool", "workspace_dependencies"):
+            flags.extend(["--disable", feature])
+        return super()._command_args(executable, [*args[:-1], *flags, *isolation_flags(include_mcp=False), args[-1]])
+
+    async def workspace_environment(self):
+        from .cli_runtime import connection_environment
+        return await asyncio.to_thread(connection_environment)
 
 
 class IntentCodexProvider(IsolatedCodexProvider):

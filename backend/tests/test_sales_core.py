@@ -5,14 +5,15 @@ import time
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
+from pydantic import ValidationError
+
 from demopilot.config import Settings
 from demopilot.main import create_app
 from demopilot.quotation_browser import tree_hash
 from demopilot.quotation_contract import compile_acceptance
 from demopilot.sales_contract import QuotePlan
 from demopilot.sales_core import SalesCoreManager, final_object
-from fastapi.testclient import TestClient
-from pydantic import ValidationError
 
 ROOT = Path(__file__).resolve().parents[2]
 ANSWER = "A120、B80、C200；A满3件优惠10%，满8件优惠20%；两位不同经理审批。"
@@ -168,3 +169,20 @@ def test_changed_capability_version_requires_reconfirmation(tmp_path, monkeypatc
         response = client.post(f"/api/sales-core/sessions/{session['id']}/confirm", json=dict(draft_hash=session["draft_hash"]))
         assert response.status_code == 409
         assert harness.calls == 0 and manager.registry.resolve(session["id"]) is None
+
+
+def test_cli_timeout_never_publishes_even_when_generated_app_checks_pass(tmp_path, monkeypatch):
+    manager, harness, checks, settings = setup(tmp_path, monkeypatch)
+    real_build = harness.build
+
+    async def interrupted(**kwargs):
+        await real_build(**kwargs)
+        raise RuntimeError("Injected CLI process timed out without turn.completed")
+
+    harness.build = interrupted
+    with TestClient(create_app(settings, sales_core=manager)) as client:
+        session = ready(client)
+        client.post(f"/api/sales-core/sessions/{session['id']}/confirm", json=dict(draft_hash=session["draft_hash"]))
+        result = wait_status(client, session["id"], {"failed"})
+        assert harness.calls == len(checks) == 3
+        assert result["demo_url"] is None and manager.registry.resolve(session["id"]) is None

@@ -19,5 +19,6 @@ export interface SalesSession {
   error: string | null
   active: boolean
   call_cap: number
+  connection?: { state: string; message: string; reason: string; retry_required: boolean; consecutive_failures: number }
   updated_at: string
 }

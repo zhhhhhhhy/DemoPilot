@@ -84,6 +84,7 @@ def code_manifest():
         ROOT / "scripts/run_with_awake.py",
         ROOT / "scripts/sales_final_campaign.py",
         ROOT / "scripts/sales_observed_rerun.py",
+        ROOT / "scripts/sales_runtime_campaign.py",
     ]
     return {p.relative_to(ROOT).as_posix(): sha(p) for p in files}
 
@@ -194,16 +195,24 @@ def freeze(output, args):
     original_pilot = list(pilot)
     regression = getattr(args, "regression_ids", None)
     cohort = getattr(args, "cohort", "development")
+    if getattr(args, "runtime_resume_control", False) and cohort != "development":
+        raise ValueError("Injected runtime controls are permitted only on development tasks")
     unlock = None
     recovery = None
     final_campaign = None
     observed_rerun = None
+    runtime_campaign = None
     if cohort == "transport-recovery":
         if regression:
             raise ValueError("Recovery cannot select arbitrary IDs")
         pilot, recovery = transport_recovery_unlock(
             getattr(args, "recovery_evidence", None), getattr(args, "readiness_evidence", None), args.model
         )
+    elif cohort == "runtime-repair15":
+        if regression:
+            raise ValueError("Runtime repair15 cannot select or replace cases")
+        from sales_runtime_campaign import unlock as unlock_runtime
+        pilot, runtime_campaign = unlock_runtime(getattr(args, "runtime_plan", None), args.model, output)
     elif cohort == "observed15-rerun":
         if regression:
             raise ValueError("Observed15 rerun cannot select or replace cases")
@@ -250,13 +259,15 @@ def freeze(output, args):
         pilot_ids=pilot,
         original_sealed_pilot_ids=original_pilot,
         targeted_regression=bool(regression),
-        execution_split="validation" if recovery else "heldout" if observed_rerun else cohort,
+        execution_split="validation" if recovery else "heldout" if observed_rerun or runtime_campaign else cohort,
         cohort_kind=cohort,
         transport_recovery=recovery,
         final_campaign=final_campaign,
         observed_rerun=observed_rerun,
+        runtime_campaign=runtime_campaign,
+        runtime_resume_control=bool(getattr(args, "runtime_resume_control", False)),
         validation_unlock=unlock,
-        change_boundary=("Current shared business fields/capabilities and complete original-requirement browser checks; original data/model/budget/business acceptance unchanged. Previously observed15 regression, not unseen final accuracy or isolated intent effect." if observed_rerun else "Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution."),
+        change_boundary=("Generic CLI runtime supervision, child process isolation/proxy checks and within-budget Core finishing; data/model/budget/business standards unchanged. Separate observed15 replay after same-source development qualification." if runtime_campaign else "Current shared business fields/capabilities and complete original-requirement browser checks; original data/model/budget/business acceptance unchanged. Previously observed15 regression, not unseen final accuracy or isolated intent effect." if observed_rerun else "Official ChatGPT HTTP transport, project Python/browser preflight and true CLI error reporting only; original business prompts, seller answers, pricing engine, data and scorer unchanged." if recovery else "General tax-inclusive capability clarification and replay of already supplied asked facts; dataset, gold and pricing engine unchanged. Joint integration fix, not isolated prompt attribution."),
         dataset_manifest_sha256=sha(DATASET / "manifest.json"),
         code_sha256=code_manifest(),
         model=args.model,
@@ -271,7 +282,7 @@ def freeze(output, args):
         denominator=f"All{len(pilot)}fixed {cohort} tasks, including pre-Core and infrastructure failures; intermediate Core repairs are separate.",
         independent_scoring="After all terminal outcomes, fresh Chromium against frozen expected seller contract; no final-score feedback or manual app edits.",
         holdout_policy=("User-authorized frozen final100, current fixed batch only; no final-score feedback, tuning, private-gold or other-case reads."
-                        if final_campaign else "Explicit authorized replay of previously observed15 only; remaining85 stay unstarted. Original13/15 immutable." if observed_rerun else "100heldout remain unused for model execution/debugging; static construction validation and hash checks are allowed."),
+                        if final_campaign else "Explicit authorized replay of previously observed15 only; remaining85 stay unstarted. Original13/15and7/15 immutable." if observed_rerun or runtime_campaign else "Previously observed15 are not development inputs; remaining85 stay unstarted. Static construction and hashes allowed."),
         cost_boundary="Configured caps are equal ceilings, not forced consumption. Actual root CLI token reports/counts are retained; billing and exhaustive native-child cost are unavailable.",
         construction_validation=validation,
     )
@@ -298,6 +309,12 @@ def verify_frozen(output):
         if sha(RERUN_PLAN) != c["observed_rerun"]["plan_sha256"]:
             raise RuntimeError("Frozen observed15 rerun plan changed")
         verify_rerun(read(RERUN_PLAN))
+    if c.get("runtime_campaign"):
+        from sales_runtime_campaign import PLAN as RUNTIME_PLAN
+        from sales_runtime_campaign import verify as verify_runtime
+        if sha(RUNTIME_PLAN) != c["runtime_campaign"]["plan_sha256"]:
+            raise RuntimeError("Frozen runtime campaign changed")
+        verify_runtime(read(RUNTIME_PLAN))
     return c
 
 
@@ -443,6 +460,12 @@ async def run_cases(args):
     )
     rows = []
     slots = asyncio.Semaphore(2)
+    if getattr(args, "runtime_resume_control", False):
+        if frozen["execution_split"] != "development":
+            raise ValueError("Runtime fault controls are development-only")
+        await manager.runtime.observe_gap(manager.runtime.resume_gap_seconds + 1)
+        write_json(output / "runtime-control.json", dict(injected_host_gap=True,actual_host_sleep=False,
+                   stimulus="Synthetic pre-call clock-gap signal; subsequent HTTP and CLI are real",additional_model_calls=0))
 
     async def one(identifier, client):
         async with slots:
@@ -479,6 +502,9 @@ async def run_cases(args):
                 ),
             )
             try:
+                if manager.runtime.state == "manual_pause":
+                    from demopilot.cli_runtime import RuntimeDispatchPaused
+                    raise RuntimeDispatchPaused("Shared CLI connection paused; task not started and no budget replayed")
                 response = await client.post(
                     "/api/sales-core/sessions",
                     json=dict(
@@ -593,9 +619,10 @@ async def run_cases(args):
                             row["failure_reason"] = s.get("error") or s["stage"]
                 write_json(target / "session-terminal.json", s)
             except Exception as exc:
+                from demopilot.cli_runtime import RuntimeDispatchPaused
                 row.update(
-                    status="failed",
-                    stage=row.get("stage", "infrastructure"),
+                    status="not_run" if isinstance(exc, RuntimeDispatchPaused) else "failed",
+                    stage="runtime_pause" if isinstance(exc, RuntimeDispatchPaused) else row.get("stage", "infrastructure"),
                     failure_reason=type(exc).__name__ + ": " + str(exc),
                 )
                 if session_id:
@@ -802,8 +829,10 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--port", type=int, default=8093)
     parser.add_argument(
-        "--cohort", choices=("development", "validation", "transport-recovery", "heldout", "observed15-rerun"), default="development"
+        "--cohort", choices=("development", "validation", "transport-recovery", "heldout", "observed15-rerun", "runtime-repair15"), default="development"
     )
+    parser.add_argument("--runtime-plan", type=Path, help="Development-qualified explicit runtime-repair15 plan")
+    parser.add_argument("--runtime-resume-control", action="store_true", help="Development-only clock-gap signal before actual calls")
     parser.add_argument("--rerun-plan", type=Path, help="Explicit separate authorization for all already observed15 only")
     parser.add_argument("--campaign-plan", type=Path, help="Explicit authorized final100 frozen plan, heldout only")
     parser.add_argument("--batch-index", type=int, help="Fixed next batch index, heldout only")

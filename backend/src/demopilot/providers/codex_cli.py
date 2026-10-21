@@ -167,6 +167,7 @@ class CodexCliAgentProvider:
     reasoning_effort: str = "medium"
     timeout_seconds: float = 300.0
     cwd: Path | None = None
+    runtime_guard: Any = field(default=None, repr=False)
     _gate: asyncio.Semaphore | None = field(default=None, init=False, repr=False)
 
     name = "codex_cli"
@@ -225,8 +226,17 @@ class CodexCliAgentProvider:
         persisted by the caller for replayable evidence.
         """
 
+        finish_budget = (
+            f"\nExecution time budget: this CLI invocation has a HARD {self.timeout_seconds:g} second limit; "
+            "it will not be extended. Prioritize implementation, then one complete trusted public probe. "
+            "Reserve the final20% of this limit for fixing failed public checks and returning a concise final response. "
+            "After every required public path passes, record the real command/result in a short card/acceptance.md "
+            "and FINISH immediately. Do not start a redundant passing test campaign, optional screenshot/report "
+            "or extra agent workflow after success. All required business and negative-path checks remain mandatory. "
+            "A partially written app or an unreturned turn is not completion.\n"
+        )
         return await self._run_workspace_cli(
-            prompt=prompt,
+            prompt=prompt + finish_budget,
             workspace=workspace,
             transcript_dir=transcript_dir,
             allowed_roots=allowed_roots,
@@ -267,7 +277,23 @@ class CodexCliAgentProvider:
             on_event=on_event,
         )
 
-    async def _run_workspace_cli(
+    async def workspace_environment(self):
+        return None
+
+    async def _run_workspace_cli(self, **kwargs):
+        guard = self.runtime_guard
+        lease = await guard.before_call(kwargs.get("on_event")) if guard else None
+        try:
+            result = await self._run_workspace_cli_process(**kwargs)
+        except BaseException as exc:
+            if guard:
+                await guard.after_call(lease, exc)
+            raise
+        if guard:
+            await guard.after_call(lease)
+        return result
+
+    async def _run_workspace_cli_process(
         self,
         *,
         prompt: str,
@@ -331,6 +357,7 @@ class CodexCliAgentProvider:
                 stdin=asyncio.subprocess.PIPE,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
+                env=await self.workspace_environment(),
             )
             stdout, stderr = await self._communicate_workspace_process(
                 process,
@@ -367,6 +394,8 @@ class CodexCliAgentProvider:
                 f"Codex CLI {purpose} exited with code {process.returncode}: "
                 f"{_cli_failure_detail(stdout, stderr)}"
             )
+        if not any(event["type"] == "turn.completed" for event in parsed["events"]):
+            raise RuntimeError(f"Codex CLI {purpose} did not emit turn.completed")
         return {
             "returncode": process.returncode,
             "thread_id": parsed["thread_id"],
@@ -465,6 +494,22 @@ class CodexCliAgentProvider:
         stdout_task = asyncio.create_task(read_stream(process.stdout, is_stdout=True))
         stderr_task = asyncio.create_task(read_stream(process.stderr, is_stdout=False))
         completion = asyncio.gather(process.wait(), stdout_task, stderr_task)
+        watcher = None
+        if self.runtime_guard:
+            async def watch_host():
+                from ..cli_runtime import HostResumeInterrupted
+
+                previous = asyncio.get_running_loop().time()
+                while True:
+                    await asyncio.sleep(5)
+                    current = asyncio.get_running_loop().time()
+                    gap = current - previous
+                    previous = current
+                    await self.runtime_guard.observe_gap(gap)
+                    if gap > self.runtime_guard.resume_gap_seconds:
+                        on_event(dict(type="process.host_resume", gap_seconds=round(gap, 3)))
+                        raise HostResumeInterrupted("Host/scheduler pause interrupted this CLI call; check connectivity before the next budgeted attempt")
+            watcher = asyncio.create_task(watch_host())
         try:
             # The deadline includes output EOF: an exited Windows wrapper
             # can leave descendants holding its inherited pipes open.
@@ -473,6 +518,10 @@ class CodexCliAgentProvider:
                     process.stdin.write(prompt)
                     await process.stdin.drain()
                     process.stdin.close()
+                if watcher:
+                    done, _pending = await asyncio.wait({completion, watcher}, return_when=asyncio.FIRST_COMPLETED)
+                    if watcher in done:
+                        await watcher
                 await asyncio.shield(completion)
         except BaseException as exc:
             await _terminate_process_tree(process)
@@ -484,6 +533,10 @@ class CodexCliAgentProvider:
             event_type = "process.timeout" if isinstance(exc, TimeoutError) else "process.cancelled" if isinstance(exc, asyncio.CancelledError) else "process.failed"
             on_event({"type": event_type, "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
             raise
+        finally:
+            if watcher:
+                watcher.cancel()
+                await asyncio.gather(watcher, return_exceptions=True)
         on_event({"type": "process.exited", "returncode": process.returncode, "stdout_bytes": len(stdout_buffer), "elapsed_seconds": round(asyncio.get_running_loop().time() - started, 1)})
         return bytes(stdout_buffer), bytes(stderr_buffer)
 
