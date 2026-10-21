@@ -1,0 +1,362 @@
+{
+  "status": "passed",
+  "code_revision": "755aff0067216002dc752fa1ae63d07272317240",
+  "positive_case_id": "sales-v3-192",
+  "positive_session": "2b536b9dfbe5424a",
+  "positive_status": "published",
+  "positive_demo_url": "http://127.0.0.1:5173/api/sales-core/accepted/2b536b9dfbe5424a/1/ce13c29f4bc4166d9f0065707f9e1cdee57d9ce6de4f8c83286006d5562334f5/index.html",
+  "question_field_ids": [
+    [
+      "pricing_rule.tax_percent"
+    ],
+    [
+      "shipping.pickup",
+      "shipping.standard",
+      "shipping.express"
+    ]
+  ],
+  "capabilities": {
+    "version": "quotation-fields-v1",
+    "sha256": "20b2d0877378f675a71c6855f74bb509c6666882ff4c0be50f6d35bb026a7763"
+  },
+  "equal_capability_snapshots": 4,
+  "semantic_match": true,
+  "negative_status": "unsupported",
+  "negative_core_calls": 0,
+  "independent": {
+    "status": "passed",
+    "planned_journeys": 7,
+    "executed_journeys": 7,
+    "passed_journeys": 7,
+    "issues": []
+  },
+  "artifact_sha256": "ce13c29f4bc4166d9f0065707f9e1cdee57d9ce6de4f8c83286006d5562334f5",
+  "source_unchanged": true,
+  "assets": [
+    {
+      "name": "index.html",
+      "direct_and_proxy_exact": true,
+      "sha256": "c5901dd47873bd7f1e6f91b15bf551972f4b1217c373ab5e529bcb35d2fc4d08"
+    },
+    {
+      "name": "app.js",
+      "direct_and_proxy_exact": true,
+      "sha256": "bcf0b8089146116034ac1bc82e135a30e775a6fbf8eb61c03a490142ff7f5f44"
+    },
+    {
+      "name": "styles.css",
+      "direct_and_proxy_exact": true,
+      "sha256": "0f30ec6193cdbf74a042f52ef651a875dfd6497e8fca0056fcf60db348d38b19"
+    }
+  ],
+  "core_calls": 1,
+  "internal_repair_rounds": 0,
+  "core_elapsed_seconds": 294.469,
+  "ui_session_elapsed_seconds": 492.61,
+  "cost": {
+    "cli_process_calls": 4,
+    "intake_calls": 3,
+    "core_calls": 1,
+    "calls_with_reported_usage": 4,
+    "calls_without_reported_usage": 0,
+    "reported_root_tokens": {
+      "input_tokens": 541722,
+      "cached_input_tokens": 454272,
+      "output_tokens": 9022
+    },
+    "monetary_cost": null
+  },
+  "process_runtime": {
+    "model_gpt_6_1_sol": true,
+    "owned_workspace": true,
+    "reasoning_medium": true
+  },
+  "env_file_unchanged": true,
+  "source_and_fixtures_unchanged": true,
+  "original_final_score": "13/15",
+  "remaining_final_cases_unexecuted": 85,
+  "original_service_restart_calls": 0,
+  "final_cases_executed": 0,
+  "acceptance_channel": "Original main8091 via original5173 visible CUA UI; fresh local Chromium functional audit after publication",
+  "contamination_flags": [],
+  "boundary": "One reused development case and one negative control; not a new final score. Root tokens may not cover native children. UI duration includes reading and answering time.",
+  "old_preservation": {
+    "stage": "after-acceptance",
+    "api_health": 200,
+    "frontend": 200,
+    "old_session_file_count": 83,
+    "old_session_changes": [],
+    "assets": [
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/1/47aa00546ee07302b9873e519416bb4f0031b773e6083091e2423c0106501dde/index.html",
+        "direct_and_proxy_preserved": true
+      },
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/1/47aa00546ee07302b9873e519416bb4f0031b773e6083091e2423c0106501dde/app.js",
+        "direct_and_proxy_preserved": true
+      },
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/1/47aa00546ee07302b9873e519416bb4f0031b773e6083091e2423c0106501dde/styles.css",
+        "direct_and_proxy_preserved": true
+      },
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/2/5912dba57cea5f9132e6dad9149d6cc6976ae7b18e6d78930d82bd0b3de38321/index.html",
+        "direct_and_proxy_preserved": true
+      },
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/2/5912dba57cea5f9132e6dad9149d6cc6976ae7b18e6d78930d82bd0b3de38321/app.js",
+        "direct_and_proxy_preserved": true
+      },
+      {
+        "url": "/api/sales-core/accepted/9c0bc147a5d3429c/2/5912dba57cea5f9132e6dad9149d6cc6976ae7b18e6d78930d82bd0b3de38321/styles.css",
+        "direct_and_proxy_preserved": true
+      }
+    ],
+    "old_registry_rows_preserved": true,
+    "original_input_count": 1687,
+    "protected_changes": [],
+    "original_score": "13/15",
+    "final_remaining_unexecuted": 85,
+    "new_session_ids": [
+      "2b536b9dfbe5424a",
+      "b332ebdb7e3a404d"
+    ],
+    "active_sessions": []
+  },
+  "old_database": {
+    "all_original_rows_preserved": true,
+    "checked_rows": 17,
+    "tables": [
+      {
+        "table": "policy",
+        "original_rows": 1,
+        "changed": 0
+      },
+      {
+        "table": "intents",
+        "original_rows": 1,
+        "changed": 0
+      },
+      {
+        "table": "jobs",
+        "original_rows": 2,
+        "changed": 0
+      },
+      {
+        "table": "checks",
+        "original_rows": 2,
+        "changed": 0
+      },
+      {
+        "table": "releases",
+        "original_rows": 1,
+        "changed": 0
+      },
+      {
+        "table": "release_history",
+        "original_rows": 2,
+        "changed": 0
+      },
+      {
+        "table": "events",
+        "original_rows": 8,
+        "changed": 0
+      }
+    ],
+    "boundary": "New verification session/job/check/release/event rows allowed; compare every original primary key/value without exposing lease tokens or reports."
+  },
+  "visible_manual_observations": [
+    {
+      "stage": "Q1-calculated",
+      "dom": {
+        "actor": "seller1",
+        "approved-revision": "-1",
+        "error": "",
+        "freight": "15.00",
+        "history-count": "1",
+        "product": "B",
+        "quantity": "2",
+        "record": "Q1",
+        "revision": "1",
+        "role": "seller",
+        "shipping": "standard",
+        "state": "Draft",
+        "subtotal": "204.59",
+        "tax": "18.41",
+        "total": "238.00"
+      }
+    },
+    {
+      "stage": "Q1-invalid-accept",
+      "dom": {
+        "actor": "client1",
+        "approved-revision": "-1",
+        "error": "当前角色或报价状态不允许此操作，请按销售提交、经理批准、客户确认的顺序操作。",
+        "freight": "15.00",
+        "history-count": "2",
+        "product": "B",
+        "quantity": "2",
+        "record": "Q1",
+        "revision": "1",
+        "role": "customer",
+        "shipping": "standard",
+        "state": "PendingManager",
+        "subtotal": "204.59",
+        "tax": "18.41",
+        "total": "238.00"
+      }
+    },
+    {
+      "stage": "Q1-approved",
+      "dom": {
+        "actor": "manager1",
+        "approved-revision": "1",
+        "error": "",
+        "freight": "15.00",
+        "history-count": "3",
+        "product": "B",
+        "quantity": "2",
+        "record": "Q1",
+        "revision": "1",
+        "role": "manager",
+        "shipping": "standard",
+        "state": "Approved",
+        "subtotal": "204.59",
+        "tax": "18.41",
+        "total": "238.00"
+      }
+    },
+    {
+      "stage": "Q2-isolated-initial",
+      "dom": {
+        "actor": "seller1",
+        "approved-revision": "-1",
+        "error": "",
+        "freight": "0.00",
+        "history-count": "0",
+        "product": "A",
+        "quantity": "1",
+        "record": "Q2",
+        "revision": "0",
+        "role": "seller",
+        "shipping": "pickup",
+        "state": "Draft",
+        "subtotal": "196.28",
+        "tax": "17.67",
+        "total": "213.95"
+      }
+    },
+    {
+      "stage": "Q2-express-saved",
+      "dom": {
+        "actor": "seller1",
+        "approved-revision": "-1",
+        "error": "",
+        "freight": "40.00",
+        "history-count": "1",
+        "product": "C",
+        "quantity": "1",
+        "record": "Q2",
+        "revision": "1",
+        "role": "seller",
+        "shipping": "express",
+        "state": "Draft",
+        "subtotal": "230.27",
+        "tax": "20.72",
+        "total": "290.99"
+      }
+    },
+    {
+      "stage": "reload-restores-Q1",
+      "dom": {
+        "actor": "seller1",
+        "approved-revision": "1",
+        "error": "",
+        "freight": "15.00",
+        "history-count": "3",
+        "product": "B",
+        "quantity": "2",
+        "record": "Q1",
+        "revision": "1",
+        "role": "seller",
+        "shipping": "standard",
+        "state": "Approved",
+        "subtotal": "204.59",
+        "tax": "18.41",
+        "total": "238.00"
+      }
+    },
+    {
+      "stage": "reload-Q2-preserved",
+      "dom": {
+        "actor": "seller1",
+        "approved-revision": "-1",
+        "error": "",
+        "freight": "40.00",
+        "history-count": "1",
+        "product": "C",
+        "quantity": "1",
+        "record": "Q2",
+        "revision": "1",
+        "role": "seller",
+        "shipping": "express",
+        "state": "Draft",
+        "subtotal": "230.27",
+        "tax": "20.72",
+        "total": "290.99"
+      }
+    },
+    {
+      "stage": "Q1-customer-accepted",
+      "dom": {
+        "actor": "client1",
+        "approved-revision": "1",
+        "error": "",
+        "freight": "15.00",
+        "history-count": "4",
+        "product": "B",
+        "quantity": "2",
+        "record": "Q1",
+        "revision": "1",
+        "role": "customer",
+        "shipping": "standard",
+        "state": "Accepted",
+        "subtotal": "204.59",
+        "tax": "18.41",
+        "total": "238.00"
+      }
+    }
+  ],
+  "old_links_visible_browser": [
+    {
+      "revision": 1,
+      "total": "120.00",
+      "state": "Draft"
+    },
+    {
+      "revision": 2,
+      "total": "150.00",
+      "state": "Draft"
+    }
+  ],
+  "completed_at": "2026-10-21T02:59:04.773842+00:00",
+  "original_main_activated": true,
+  "main_api_health": 200,
+  "main_frontend_health": 200,
+  "effective_model": "gpt-6.1-sol",
+  "effective_reasoning": "medium",
+  "effective_timeout_seconds": 300,
+  "config_issue": "Pre-model freeze caught inherited model/900s discrepancy. Restarted with explicit process overrides; existing environment file unchanged. No case/model call spent before correction.",
+  "screenshots_retained_locally": [
+    "01-workbench-before.png",
+    "02-real-questions.png",
+    "03-unsupported.png",
+    "04-confirmed-rules.png",
+    "05-building-after-refresh.png",
+    "06-workbench-published.png",
+    "07-published-demo-accepted.png",
+    "08-published-demo-full.png",
+    "09-old-v1.png",
+    "10-old-v2.png"
+  ]
+}
